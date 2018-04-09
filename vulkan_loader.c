@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 70
+#if VK_HEADER_VERSION != 72
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2300,6 +2300,24 @@ VKAPI_ATTR void vkSubmitDebugUtilsMessageEXT(VkInstance instance, VkDebugUtilsMe
 
 #endif // defined(VK_EXT_debug_utils)
 
+#if defined(VK_ANDROID_external_memory_android_hardware_buffer)
+
+static PFN_vkGetAndroidHardwareBufferPropertiesANDROID pfn_vkGetAndroidHardwareBufferPropertiesANDROID;
+VKAPI_ATTR VkResult vkGetAndroidHardwareBufferPropertiesANDROID(VkDevice device, const struct AHardwareBuffer * buffer, VkAndroidHardwareBufferPropertiesANDROID * pProperties)
+{
+	assert(pfn_vkGetAndroidHardwareBufferPropertiesANDROID);
+	return pfn_vkGetAndroidHardwareBufferPropertiesANDROID(device, buffer, pProperties);
+}
+
+static PFN_vkGetMemoryAndroidHardwareBufferANDROID pfn_vkGetMemoryAndroidHardwareBufferANDROID;
+VKAPI_ATTR VkResult vkGetMemoryAndroidHardwareBufferANDROID(VkDevice device, const VkMemoryGetAndroidHardwareBufferInfoANDROID * pInfo, struct AHardwareBuffer ** pBuffer)
+{
+	assert(pfn_vkGetMemoryAndroidHardwareBufferANDROID);
+	return pfn_vkGetMemoryAndroidHardwareBufferANDROID(device, pInfo, pBuffer);
+}
+
+#endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+
 #if defined(VK_EXT_sample_locations)
 
 static PFN_vkCmdSetSampleLocationsEXT pfn_vkCmdSetSampleLocationsEXT;
@@ -2887,6 +2905,11 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkSubmitDebugUtilsMessageEXT = (PFN_vkSubmitDebugUtilsMessageEXT)vkGetInstanceProcAddr(vulkan, "vkSubmitDebugUtilsMessageEXT");
 #endif // defined(VK_EXT_debug_utils)
 
+#if defined(VK_ANDROID_external_memory_android_hardware_buffer)
+	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetInstanceProcAddr(vulkan, "vkGetAndroidHardwareBufferPropertiesANDROID");
+	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetInstanceProcAddr(vulkan, "vkGetMemoryAndroidHardwareBufferANDROID");
+#endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+
 #if defined(VK_EXT_sample_locations)
 	pfn_vkCmdSetSampleLocationsEXT = (PFN_vkCmdSetSampleLocationsEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetSampleLocationsEXT");
 	pfn_vkGetPhysicalDeviceMultisamplePropertiesEXT = (PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceMultisamplePropertiesEXT");
@@ -3067,6 +3090,11 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 	pfn_vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vkGetDeviceProcAddr(device, "vkGetFenceFdKHR");
 #endif // defined(VK_KHR_external_fence_fd)
+
+#if defined(VK_ANDROID_external_memory_android_hardware_buffer)
+	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
+	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
+#endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
 
 #if defined(VK_EXT_sample_locations)
 	pfn_vkCmdSetSampleLocationsEXT = (PFN_vkCmdSetSampleLocationsEXT)vkGetDeviceProcAddr(device, "vkCmdSetSampleLocationsEXT");
