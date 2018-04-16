@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 72
+#if VK_HEADER_VERSION != 73
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2965,6 +2965,12 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_KHR_display_swapchain)
 	pfn_vkCreateSharedSwapchainsKHR = (PFN_vkCreateSharedSwapchainsKHR)vkGetDeviceProcAddr(device, "vkCreateSharedSwapchainsKHR");
 #endif // defined(VK_KHR_display_swapchain)
+
+#if defined(VK_ANDROID_native_buffer)
+	pfn_vkGetSwapchainGrallocUsageANDROID = (PFN_vkGetSwapchainGrallocUsageANDROID)vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsageANDROID");
+	pfn_vkAcquireImageANDROID = (PFN_vkAcquireImageANDROID)vkGetDeviceProcAddr(device, "vkAcquireImageANDROID");
+	pfn_vkQueueSignalReleaseImageANDROID = (PFN_vkQueueSignalReleaseImageANDROID)vkGetDeviceProcAddr(device, "vkQueueSignalReleaseImageANDROID");
+#endif // defined(VK_ANDROID_native_buffer)
 
 #if defined(VK_EXT_debug_marker)
 	pfn_vkDebugMarkerSetObjectTagEXT = (PFN_vkDebugMarkerSetObjectTagEXT)vkGetDeviceProcAddr(device, "vkDebugMarkerSetObjectTagEXT");
