@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 73
+#if VK_HEADER_VERSION != 78
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2197,6 +2197,38 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceSurfaceFormats2KHR(VkPhysicalDevice physi
 
 #endif // defined(VK_KHR_get_surface_capabilities2)
 
+#if defined(VK_KHR_get_display_properties2)
+
+static PFN_vkGetPhysicalDeviceDisplayProperties2KHR pfn_vkGetPhysicalDeviceDisplayProperties2KHR;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceDisplayProperties2KHR(VkPhysicalDevice physicalDevice, uint32_t * pPropertyCount, VkDisplayProperties2KHR * pProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceDisplayProperties2KHR);
+	return pfn_vkGetPhysicalDeviceDisplayProperties2KHR(physicalDevice, pPropertyCount, pProperties);
+}
+
+static PFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR pfn_vkGetPhysicalDeviceDisplayPlaneProperties2KHR;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceDisplayPlaneProperties2KHR(VkPhysicalDevice physicalDevice, uint32_t * pPropertyCount, VkDisplayPlaneProperties2KHR * pProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceDisplayPlaneProperties2KHR);
+	return pfn_vkGetPhysicalDeviceDisplayPlaneProperties2KHR(physicalDevice, pPropertyCount, pProperties);
+}
+
+static PFN_vkGetDisplayModeProperties2KHR pfn_vkGetDisplayModeProperties2KHR;
+VKAPI_ATTR VkResult vkGetDisplayModeProperties2KHR(VkPhysicalDevice physicalDevice, VkDisplayKHR display, uint32_t * pPropertyCount, VkDisplayModeProperties2KHR * pProperties)
+{
+	assert(pfn_vkGetDisplayModeProperties2KHR);
+	return pfn_vkGetDisplayModeProperties2KHR(physicalDevice, display, pPropertyCount, pProperties);
+}
+
+static PFN_vkGetDisplayPlaneCapabilities2KHR pfn_vkGetDisplayPlaneCapabilities2KHR;
+VKAPI_ATTR VkResult vkGetDisplayPlaneCapabilities2KHR(VkPhysicalDevice physicalDevice, const VkDisplayPlaneInfo2KHR * pDisplayPlaneInfo, VkDisplayPlaneCapabilities2KHR * pCapabilities)
+{
+	assert(pfn_vkGetDisplayPlaneCapabilities2KHR);
+	return pfn_vkGetDisplayPlaneCapabilities2KHR(physicalDevice, pDisplayPlaneInfo, pCapabilities);
+}
+
+#endif // defined(VK_KHR_get_display_properties2)
+
 #if defined(VK_MVK_ios_surface)
 
 static PFN_vkCreateIOSSurfaceMVK pfn_vkCreateIOSSurfaceMVK;
@@ -2439,6 +2471,24 @@ VKAPI_ATTR void vkGetDescriptorSetLayoutSupportKHR(VkDevice device, const VkDesc
 }
 
 #endif // defined(VK_KHR_maintenance3)
+
+#if defined(VK_KHR_draw_indirect_count)
+
+static PFN_vkCmdDrawIndirectCountKHR pfn_vkCmdDrawIndirectCountKHR;
+VKAPI_ATTR void vkCmdDrawIndirectCountKHR(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawIndirectCountKHR);
+	return pfn_vkCmdDrawIndirectCountKHR(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+}
+
+static PFN_vkCmdDrawIndexedIndirectCountKHR pfn_vkCmdDrawIndexedIndirectCountKHR;
+VKAPI_ATTR void vkCmdDrawIndexedIndirectCountKHR(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawIndexedIndirectCountKHR);
+	return pfn_vkCmdDrawIndexedIndirectCountKHR(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+}
+
+#endif // defined(VK_KHR_draw_indirect_count)
 
 #if defined(VK_EXT_external_memory_host)
 
@@ -2883,6 +2933,13 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetPhysicalDeviceSurfaceFormats2KHR = (PFN_vkGetPhysicalDeviceSurfaceFormats2KHR)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceSurfaceFormats2KHR");
 #endif // defined(VK_KHR_get_surface_capabilities2)
 
+#if defined(VK_KHR_get_display_properties2)
+	pfn_vkGetPhysicalDeviceDisplayProperties2KHR = (PFN_vkGetPhysicalDeviceDisplayProperties2KHR)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceDisplayProperties2KHR");
+	pfn_vkGetPhysicalDeviceDisplayPlaneProperties2KHR = (PFN_vkGetPhysicalDeviceDisplayPlaneProperties2KHR)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceDisplayPlaneProperties2KHR");
+	pfn_vkGetDisplayModeProperties2KHR = (PFN_vkGetDisplayModeProperties2KHR)vkGetInstanceProcAddr(vulkan, "vkGetDisplayModeProperties2KHR");
+	pfn_vkGetDisplayPlaneCapabilities2KHR = (PFN_vkGetDisplayPlaneCapabilities2KHR)vkGetInstanceProcAddr(vulkan, "vkGetDisplayPlaneCapabilities2KHR");
+#endif // defined(VK_KHR_get_display_properties2)
+
 #if defined(VK_MVK_ios_surface)
 	pfn_vkCreateIOSSurfaceMVK = (PFN_vkCreateIOSSurfaceMVK)vkGetInstanceProcAddr(vulkan, "vkCreateIOSSurfaceMVK");
 #endif // defined(VK_MVK_ios_surface)
@@ -2941,6 +2998,11 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_KHR_maintenance3)
 	pfn_vkGetDescriptorSetLayoutSupportKHR = (PFN_vkGetDescriptorSetLayoutSupportKHR)vkGetInstanceProcAddr(vulkan, "vkGetDescriptorSetLayoutSupportKHR");
 #endif // defined(VK_KHR_maintenance3)
+
+#if defined(VK_KHR_draw_indirect_count)
+	pfn_vkCmdDrawIndirectCountKHR = (PFN_vkCmdDrawIndirectCountKHR)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndirectCountKHR");
+	pfn_vkCmdDrawIndexedIndirectCountKHR = (PFN_vkCmdDrawIndexedIndirectCountKHR)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndexedIndirectCountKHR");
+#endif // defined(VK_KHR_draw_indirect_count)
 
 #if defined(VK_EXT_external_memory_host)
 	pfn_vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vkGetInstanceProcAddr(vulkan, "vkGetMemoryHostPointerPropertiesEXT");
@@ -3133,6 +3195,11 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_KHR_maintenance3)
 	pfn_vkGetDescriptorSetLayoutSupportKHR = (PFN_vkGetDescriptorSetLayoutSupportKHR)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSupportKHR");
 #endif // defined(VK_KHR_maintenance3)
+
+#if defined(VK_KHR_draw_indirect_count)
+	pfn_vkCmdDrawIndirectCountKHR = (PFN_vkCmdDrawIndirectCountKHR)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCountKHR");
+	pfn_vkCmdDrawIndexedIndirectCountKHR = (PFN_vkCmdDrawIndexedIndirectCountKHR)vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCountKHR");
+#endif // defined(VK_KHR_draw_indirect_count)
 
 #if defined(VK_EXT_external_memory_host)
 	pfn_vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetMemoryHostPointerPropertiesEXT");
