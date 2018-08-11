@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 78
+#if VK_HEADER_VERSION != 82
 	#error "Vulkan header version does not match"
 #endif
 
@@ -1895,6 +1895,24 @@ VKAPI_ATTR void vkCmdPushDescriptorSetKHR(VkCommandBuffer commandBuffer, VkPipel
 
 #endif // defined(VK_KHR_push_descriptor)
 
+#if defined(VK_EXT_conditional_rendering)
+
+static PFN_vkCmdBeginConditionalRenderingEXT pfn_vkCmdBeginConditionalRenderingEXT;
+VKAPI_ATTR void vkCmdBeginConditionalRenderingEXT(VkCommandBuffer commandBuffer, const VkConditionalRenderingBeginInfoEXT * pConditionalRenderingBegin)
+{
+	assert(pfn_vkCmdBeginConditionalRenderingEXT);
+	return pfn_vkCmdBeginConditionalRenderingEXT(commandBuffer, pConditionalRenderingBegin);
+}
+
+static PFN_vkCmdEndConditionalRenderingEXT pfn_vkCmdEndConditionalRenderingEXT;
+VKAPI_ATTR void vkCmdEndConditionalRenderingEXT(VkCommandBuffer commandBuffer)
+{
+	assert(pfn_vkCmdEndConditionalRenderingEXT);
+	return pfn_vkCmdEndConditionalRenderingEXT(commandBuffer);
+}
+
+#endif // defined(VK_EXT_conditional_rendering)
+
 #if defined(VK_KHR_descriptor_update_template)
 
 static PFN_vkCreateDescriptorUpdateTemplateKHR pfn_vkCreateDescriptorUpdateTemplateKHR;
@@ -2120,6 +2138,38 @@ VKAPI_ATTR void vkSetHdrMetadataEXT(VkDevice device, uint32_t swapchainCount, co
 }
 
 #endif // defined(VK_EXT_hdr_metadata)
+
+#if defined(VK_KHR_create_renderpass2)
+
+static PFN_vkCreateRenderPass2KHR pfn_vkCreateRenderPass2KHR;
+VKAPI_ATTR VkResult vkCreateRenderPass2KHR(VkDevice device, const VkRenderPassCreateInfo2KHR * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkRenderPass * pRenderPass)
+{
+	assert(pfn_vkCreateRenderPass2KHR);
+	return pfn_vkCreateRenderPass2KHR(device, pCreateInfo, pAllocator, pRenderPass);
+}
+
+static PFN_vkCmdBeginRenderPass2KHR pfn_vkCmdBeginRenderPass2KHR;
+VKAPI_ATTR void vkCmdBeginRenderPass2KHR(VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo * pRenderPassBegin, const VkSubpassBeginInfoKHR * pSubpassBeginInfo)
+{
+	assert(pfn_vkCmdBeginRenderPass2KHR);
+	return pfn_vkCmdBeginRenderPass2KHR(commandBuffer, pRenderPassBegin, pSubpassBeginInfo);
+}
+
+static PFN_vkCmdNextSubpass2KHR pfn_vkCmdNextSubpass2KHR;
+VKAPI_ATTR void vkCmdNextSubpass2KHR(VkCommandBuffer commandBuffer, const VkSubpassBeginInfoKHR * pSubpassBeginInfo, const VkSubpassEndInfoKHR * pSubpassEndInfo)
+{
+	assert(pfn_vkCmdNextSubpass2KHR);
+	return pfn_vkCmdNextSubpass2KHR(commandBuffer, pSubpassBeginInfo, pSubpassEndInfo);
+}
+
+static PFN_vkCmdEndRenderPass2KHR pfn_vkCmdEndRenderPass2KHR;
+VKAPI_ATTR void vkCmdEndRenderPass2KHR(VkCommandBuffer commandBuffer, const VkSubpassEndInfoKHR * pSubpassEndInfo)
+{
+	assert(pfn_vkCmdEndRenderPass2KHR);
+	return pfn_vkCmdEndRenderPass2KHR(commandBuffer, pSubpassEndInfo);
+}
+
+#endif // defined(VK_KHR_create_renderpass2)
 
 #if defined(VK_KHR_shared_presentable_image)
 
@@ -2512,6 +2562,24 @@ VKAPI_ATTR void vkCmdWriteBufferMarkerAMD(VkCommandBuffer commandBuffer, VkPipel
 
 #endif // defined(VK_AMD_buffer_marker)
 
+#if defined(VK_NV_device_diagnostic_checkpoints)
+
+static PFN_vkCmdSetCheckpointNV pfn_vkCmdSetCheckpointNV;
+VKAPI_ATTR void vkCmdSetCheckpointNV(VkCommandBuffer commandBuffer, const void * pCheckpointMarker)
+{
+	assert(pfn_vkCmdSetCheckpointNV);
+	return pfn_vkCmdSetCheckpointNV(commandBuffer, pCheckpointMarker);
+}
+
+static PFN_vkGetQueueCheckpointDataNV pfn_vkGetQueueCheckpointDataNV;
+VKAPI_ATTR void vkGetQueueCheckpointDataNV(VkQueue queue, uint32_t * pCheckpointDataCount, VkCheckpointDataNV * pCheckpointData)
+{
+	assert(pfn_vkGetQueueCheckpointDataNV);
+	return pfn_vkGetQueueCheckpointDataNV(queue, pCheckpointDataCount, pCheckpointData);
+}
+
+#endif // defined(VK_NV_device_diagnostic_checkpoints)
+
 void vulkan_loader_init(PFN_vkGetInstanceProcAddr get_address)
 {
 	pfn_vkGetInstanceProcAddr = get_address;
@@ -2851,6 +2919,11 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetInstanceProcAddr(vulkan, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
 
+#if defined(VK_EXT_conditional_rendering)
+	pfn_vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vkGetInstanceProcAddr(vulkan, "vkCmdBeginConditionalRenderingEXT");
+	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetInstanceProcAddr(vulkan, "vkCmdEndConditionalRenderingEXT");
+#endif // defined(VK_EXT_conditional_rendering)
+
 #if defined(VK_KHR_descriptor_update_template)
 	pfn_vkCreateDescriptorUpdateTemplateKHR = (PFN_vkCreateDescriptorUpdateTemplateKHR)vkGetInstanceProcAddr(vulkan, "vkCreateDescriptorUpdateTemplateKHR");
 	pfn_vkDestroyDescriptorUpdateTemplateKHR = (PFN_vkDestroyDescriptorUpdateTemplateKHR)vkGetInstanceProcAddr(vulkan, "vkDestroyDescriptorUpdateTemplateKHR");
@@ -2909,6 +2982,13 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_EXT_hdr_metadata)
 	pfn_vkSetHdrMetadataEXT = (PFN_vkSetHdrMetadataEXT)vkGetInstanceProcAddr(vulkan, "vkSetHdrMetadataEXT");
 #endif // defined(VK_EXT_hdr_metadata)
+
+#if defined(VK_KHR_create_renderpass2)
+	pfn_vkCreateRenderPass2KHR = (PFN_vkCreateRenderPass2KHR)vkGetInstanceProcAddr(vulkan, "vkCreateRenderPass2KHR");
+	pfn_vkCmdBeginRenderPass2KHR = (PFN_vkCmdBeginRenderPass2KHR)vkGetInstanceProcAddr(vulkan, "vkCmdBeginRenderPass2KHR");
+	pfn_vkCmdNextSubpass2KHR = (PFN_vkCmdNextSubpass2KHR)vkGetInstanceProcAddr(vulkan, "vkCmdNextSubpass2KHR");
+	pfn_vkCmdEndRenderPass2KHR = (PFN_vkCmdEndRenderPass2KHR)vkGetInstanceProcAddr(vulkan, "vkCmdEndRenderPass2KHR");
+#endif // defined(VK_KHR_create_renderpass2)
 
 #if defined(VK_KHR_shared_presentable_image)
 	pfn_vkGetSwapchainStatusKHR = (PFN_vkGetSwapchainStatusKHR)vkGetInstanceProcAddr(vulkan, "vkGetSwapchainStatusKHR");
@@ -3011,6 +3091,11 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetInstanceProcAddr(vulkan, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+
+#if defined(VK_NV_device_diagnostic_checkpoints)
+	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetInstanceProcAddr(vulkan, "vkCmdSetCheckpointNV");
+	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(vulkan, "vkGetQueueCheckpointDataNV");
+#endif // defined(VK_NV_device_diagnostic_checkpoints)
 }
 
 void vulkan_load_device_procs(VkDevice device)
@@ -3099,6 +3184,11 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
 
+#if defined(VK_EXT_conditional_rendering)
+	pfn_vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vkGetDeviceProcAddr(device, "vkCmdBeginConditionalRenderingEXT");
+	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetDeviceProcAddr(device, "vkCmdEndConditionalRenderingEXT");
+#endif // defined(VK_EXT_conditional_rendering)
+
 #if defined(VK_KHR_descriptor_update_template)
 	pfn_vkCreateDescriptorUpdateTemplateKHR = (PFN_vkCreateDescriptorUpdateTemplateKHR)vkGetDeviceProcAddr(device, "vkCreateDescriptorUpdateTemplateKHR");
 	pfn_vkDestroyDescriptorUpdateTemplateKHR = (PFN_vkDestroyDescriptorUpdateTemplateKHR)vkGetDeviceProcAddr(device, "vkDestroyDescriptorUpdateTemplateKHR");
@@ -3144,6 +3234,13 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_EXT_hdr_metadata)
 	pfn_vkSetHdrMetadataEXT = (PFN_vkSetHdrMetadataEXT)vkGetDeviceProcAddr(device, "vkSetHdrMetadataEXT");
 #endif // defined(VK_EXT_hdr_metadata)
+
+#if defined(VK_KHR_create_renderpass2)
+	pfn_vkCreateRenderPass2KHR = (PFN_vkCreateRenderPass2KHR)vkGetDeviceProcAddr(device, "vkCreateRenderPass2KHR");
+	pfn_vkCmdBeginRenderPass2KHR = (PFN_vkCmdBeginRenderPass2KHR)vkGetDeviceProcAddr(device, "vkCmdBeginRenderPass2KHR");
+	pfn_vkCmdNextSubpass2KHR = (PFN_vkCmdNextSubpass2KHR)vkGetDeviceProcAddr(device, "vkCmdNextSubpass2KHR");
+	pfn_vkCmdEndRenderPass2KHR = (PFN_vkCmdEndRenderPass2KHR)vkGetDeviceProcAddr(device, "vkCmdEndRenderPass2KHR");
+#endif // defined(VK_KHR_create_renderpass2)
 
 #if defined(VK_KHR_shared_presentable_image)
 	pfn_vkGetSwapchainStatusKHR = (PFN_vkGetSwapchainStatusKHR)vkGetDeviceProcAddr(device, "vkGetSwapchainStatusKHR");
@@ -3208,5 +3305,10 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+
+#if defined(VK_NV_device_diagnostic_checkpoints)
+	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
+	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
+#endif // defined(VK_NV_device_diagnostic_checkpoints)
 }
 
