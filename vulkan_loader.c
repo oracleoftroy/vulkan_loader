@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 83
+#if VK_HEADER_VERSION != 84
 	#error "Vulkan header version does not match"
 #endif
 
