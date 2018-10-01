@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 84
+#if VK_HEADER_VERSION != 85
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2511,6 +2511,126 @@ VKAPI_ATTR VkResult vkGetValidationCacheDataEXT(VkDevice device, VkValidationCac
 
 #endif // defined(VK_EXT_validation_cache)
 
+#if defined(VK_NV_shading_rate_image)
+
+static PFN_vkCmdBindShadingRateImageNV pfn_vkCmdBindShadingRateImageNV;
+VKAPI_ATTR void vkCmdBindShadingRateImageNV(VkCommandBuffer commandBuffer, VkImageView imageView, VkImageLayout imageLayout)
+{
+	assert(pfn_vkCmdBindShadingRateImageNV);
+	return pfn_vkCmdBindShadingRateImageNV(commandBuffer, imageView, imageLayout);
+}
+
+static PFN_vkCmdSetViewportShadingRatePaletteNV pfn_vkCmdSetViewportShadingRatePaletteNV;
+VKAPI_ATTR void vkCmdSetViewportShadingRatePaletteNV(VkCommandBuffer commandBuffer, uint32_t firstViewport, uint32_t viewportCount, const VkShadingRatePaletteNV * pShadingRatePalettes)
+{
+	assert(pfn_vkCmdSetViewportShadingRatePaletteNV);
+	return pfn_vkCmdSetViewportShadingRatePaletteNV(commandBuffer, firstViewport, viewportCount, pShadingRatePalettes);
+}
+
+static PFN_vkCmdSetCoarseSampleOrderNV pfn_vkCmdSetCoarseSampleOrderNV;
+VKAPI_ATTR void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, VkCoarseSampleOrderTypeNV sampleOrderType, uint32_t customSampleOrderCount, const VkCoarseSampleOrderCustomNV * pCustomSampleOrders)
+{
+	assert(pfn_vkCmdSetCoarseSampleOrderNV);
+	return pfn_vkCmdSetCoarseSampleOrderNV(commandBuffer, sampleOrderType, customSampleOrderCount, pCustomSampleOrders);
+}
+
+#endif // defined(VK_NV_shading_rate_image)
+
+#if defined(VK_NVX_raytracing)
+
+static PFN_vkCreateAccelerationStructureNVX pfn_vkCreateAccelerationStructureNVX;
+VKAPI_ATTR VkResult vkCreateAccelerationStructureNVX(VkDevice device, const VkAccelerationStructureCreateInfoNVX * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkAccelerationStructureNVX * pAccelerationStructure)
+{
+	assert(pfn_vkCreateAccelerationStructureNVX);
+	return pfn_vkCreateAccelerationStructureNVX(device, pCreateInfo, pAllocator, pAccelerationStructure);
+}
+
+static PFN_vkDestroyAccelerationStructureNVX pfn_vkDestroyAccelerationStructureNVX;
+VKAPI_ATTR void vkDestroyAccelerationStructureNVX(VkDevice device, VkAccelerationStructureNVX accelerationStructure, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyAccelerationStructureNVX);
+	return pfn_vkDestroyAccelerationStructureNVX(device, accelerationStructure, pAllocator);
+}
+
+static PFN_vkGetAccelerationStructureMemoryRequirementsNVX pfn_vkGetAccelerationStructureMemoryRequirementsNVX;
+VKAPI_ATTR void vkGetAccelerationStructureMemoryRequirementsNVX(VkDevice device, const VkAccelerationStructureMemoryRequirementsInfoNVX * pInfo, VkMemoryRequirements2KHR * pMemoryRequirements)
+{
+	assert(pfn_vkGetAccelerationStructureMemoryRequirementsNVX);
+	return pfn_vkGetAccelerationStructureMemoryRequirementsNVX(device, pInfo, pMemoryRequirements);
+}
+
+static PFN_vkGetAccelerationStructureScratchMemoryRequirementsNVX pfn_vkGetAccelerationStructureScratchMemoryRequirementsNVX;
+VKAPI_ATTR void vkGetAccelerationStructureScratchMemoryRequirementsNVX(VkDevice device, const VkAccelerationStructureMemoryRequirementsInfoNVX * pInfo, VkMemoryRequirements2KHR * pMemoryRequirements)
+{
+	assert(pfn_vkGetAccelerationStructureScratchMemoryRequirementsNVX);
+	return pfn_vkGetAccelerationStructureScratchMemoryRequirementsNVX(device, pInfo, pMemoryRequirements);
+}
+
+static PFN_vkBindAccelerationStructureMemoryNVX pfn_vkBindAccelerationStructureMemoryNVX;
+VKAPI_ATTR VkResult vkBindAccelerationStructureMemoryNVX(VkDevice device, uint32_t bindInfoCount, const VkBindAccelerationStructureMemoryInfoNVX * pBindInfos)
+{
+	assert(pfn_vkBindAccelerationStructureMemoryNVX);
+	return pfn_vkBindAccelerationStructureMemoryNVX(device, bindInfoCount, pBindInfos);
+}
+
+static PFN_vkCmdBuildAccelerationStructureNVX pfn_vkCmdBuildAccelerationStructureNVX;
+VKAPI_ATTR void vkCmdBuildAccelerationStructureNVX(VkCommandBuffer cmdBuf, VkAccelerationStructureTypeNVX type, uint32_t instanceCount, VkBuffer instanceData, VkDeviceSize instanceOffset, uint32_t geometryCount, const VkGeometryNVX * pGeometries, VkBuildAccelerationStructureFlagsNVX flags, VkBool32 update, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkBuffer scratch, VkDeviceSize scratchOffset)
+{
+	assert(pfn_vkCmdBuildAccelerationStructureNVX);
+	return pfn_vkCmdBuildAccelerationStructureNVX(cmdBuf, type, instanceCount, instanceData, instanceOffset, geometryCount, pGeometries, flags, update, dst, src, scratch, scratchOffset);
+}
+
+static PFN_vkCmdCopyAccelerationStructureNVX pfn_vkCmdCopyAccelerationStructureNVX;
+VKAPI_ATTR void vkCmdCopyAccelerationStructureNVX(VkCommandBuffer cmdBuf, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkCopyAccelerationStructureModeNVX mode)
+{
+	assert(pfn_vkCmdCopyAccelerationStructureNVX);
+	return pfn_vkCmdCopyAccelerationStructureNVX(cmdBuf, dst, src, mode);
+}
+
+static PFN_vkCmdTraceRaysNVX pfn_vkCmdTraceRaysNVX;
+VKAPI_ATTR void vkCmdTraceRaysNVX(VkCommandBuffer cmdBuf, VkBuffer raygenShaderBindingTableBuffer, VkDeviceSize raygenShaderBindingOffset, VkBuffer missShaderBindingTableBuffer, VkDeviceSize missShaderBindingOffset, VkDeviceSize missShaderBindingStride, VkBuffer hitShaderBindingTableBuffer, VkDeviceSize hitShaderBindingOffset, VkDeviceSize hitShaderBindingStride, uint32_t width, uint32_t height)
+{
+	assert(pfn_vkCmdTraceRaysNVX);
+	return pfn_vkCmdTraceRaysNVX(cmdBuf, raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, width, height);
+}
+
+static PFN_vkCreateRaytracingPipelinesNVX pfn_vkCreateRaytracingPipelinesNVX;
+VKAPI_ATTR VkResult vkCreateRaytracingPipelinesNVX(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, const VkRaytracingPipelineCreateInfoNVX * pCreateInfos, const VkAllocationCallbacks * pAllocator, VkPipeline * pPipelines)
+{
+	assert(pfn_vkCreateRaytracingPipelinesNVX);
+	return pfn_vkCreateRaytracingPipelinesNVX(device, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+}
+
+static PFN_vkGetRaytracingShaderHandlesNVX pfn_vkGetRaytracingShaderHandlesNVX;
+VKAPI_ATTR VkResult vkGetRaytracingShaderHandlesNVX(VkDevice device, VkPipeline pipeline, uint32_t firstGroup, uint32_t groupCount, size_t dataSize, void * pData)
+{
+	assert(pfn_vkGetRaytracingShaderHandlesNVX);
+	return pfn_vkGetRaytracingShaderHandlesNVX(device, pipeline, firstGroup, groupCount, dataSize, pData);
+}
+
+static PFN_vkGetAccelerationStructureHandleNVX pfn_vkGetAccelerationStructureHandleNVX;
+VKAPI_ATTR VkResult vkGetAccelerationStructureHandleNVX(VkDevice device, VkAccelerationStructureNVX accelerationStructure, size_t dataSize, void * pData)
+{
+	assert(pfn_vkGetAccelerationStructureHandleNVX);
+	return pfn_vkGetAccelerationStructureHandleNVX(device, accelerationStructure, dataSize, pData);
+}
+
+static PFN_vkCmdWriteAccelerationStructurePropertiesNVX pfn_vkCmdWriteAccelerationStructurePropertiesNVX;
+VKAPI_ATTR void vkCmdWriteAccelerationStructurePropertiesNVX(VkCommandBuffer cmdBuf, VkAccelerationStructureNVX accelerationStructure, VkQueryType queryType, VkQueryPool queryPool, uint32_t query)
+{
+	assert(pfn_vkCmdWriteAccelerationStructurePropertiesNVX);
+	return pfn_vkCmdWriteAccelerationStructurePropertiesNVX(cmdBuf, accelerationStructure, queryType, queryPool, query);
+}
+
+static PFN_vkCompileDeferredNVX pfn_vkCompileDeferredNVX;
+VKAPI_ATTR VkResult vkCompileDeferredNVX(VkDevice device, VkPipeline pipeline, uint32_t shader)
+{
+	assert(pfn_vkCompileDeferredNVX);
+	return pfn_vkCompileDeferredNVX(device, pipeline, shader);
+}
+
+#endif // defined(VK_NVX_raytracing)
+
 #if defined(VK_KHR_maintenance3)
 
 static PFN_vkGetDescriptorSetLayoutSupportKHR pfn_vkGetDescriptorSetLayoutSupportKHR;
@@ -2561,6 +2681,42 @@ VKAPI_ATTR void vkCmdWriteBufferMarkerAMD(VkCommandBuffer commandBuffer, VkPipel
 }
 
 #endif // defined(VK_AMD_buffer_marker)
+
+#if defined(VK_NV_mesh_shader)
+
+static PFN_vkCmdDrawMeshTasksNV pfn_vkCmdDrawMeshTasksNV;
+VKAPI_ATTR void vkCmdDrawMeshTasksNV(VkCommandBuffer commandBuffer, uint32_t taskCount, uint32_t firstTask)
+{
+	assert(pfn_vkCmdDrawMeshTasksNV);
+	return pfn_vkCmdDrawMeshTasksNV(commandBuffer, taskCount, firstTask);
+}
+
+static PFN_vkCmdDrawMeshTasksIndirectNV pfn_vkCmdDrawMeshTasksIndirectNV;
+VKAPI_ATTR void vkCmdDrawMeshTasksIndirectNV(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, uint32_t drawCount, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawMeshTasksIndirectNV);
+	return pfn_vkCmdDrawMeshTasksIndirectNV(commandBuffer, buffer, offset, drawCount, stride);
+}
+
+static PFN_vkCmdDrawMeshTasksIndirectCountNV pfn_vkCmdDrawMeshTasksIndirectCountNV;
+VKAPI_ATTR void vkCmdDrawMeshTasksIndirectCountNV(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawMeshTasksIndirectCountNV);
+	return pfn_vkCmdDrawMeshTasksIndirectCountNV(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+}
+
+#endif // defined(VK_NV_mesh_shader)
+
+#if defined(VK_NV_scissor_exclusive)
+
+static PFN_vkCmdSetExclusiveScissorNV pfn_vkCmdSetExclusiveScissorNV;
+VKAPI_ATTR void vkCmdSetExclusiveScissorNV(VkCommandBuffer commandBuffer, uint32_t firstExclusiveScissor, uint32_t exclusiveScissorCount, const VkRect2D * pExclusiveScissors)
+{
+	assert(pfn_vkCmdSetExclusiveScissorNV);
+	return pfn_vkCmdSetExclusiveScissorNV(commandBuffer, firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissors);
+}
+
+#endif // defined(VK_NV_scissor_exclusive)
 
 #if defined(VK_NV_device_diagnostic_checkpoints)
 
@@ -3075,6 +3231,28 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vkGetInstanceProcAddr(vulkan, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
 
+#if defined(VK_NV_shading_rate_image)
+	pfn_vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vkGetInstanceProcAddr(vulkan, "vkCmdBindShadingRateImageNV");
+	pfn_vkCmdSetViewportShadingRatePaletteNV = (PFN_vkCmdSetViewportShadingRatePaletteNV)vkGetInstanceProcAddr(vulkan, "vkCmdSetViewportShadingRatePaletteNV");
+	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetInstanceProcAddr(vulkan, "vkCmdSetCoarseSampleOrderNV");
+#endif // defined(VK_NV_shading_rate_image)
+
+#if defined(VK_NVX_raytracing)
+	pfn_vkCreateAccelerationStructureNVX = (PFN_vkCreateAccelerationStructureNVX)vkGetInstanceProcAddr(vulkan, "vkCreateAccelerationStructureNVX");
+	pfn_vkDestroyAccelerationStructureNVX = (PFN_vkDestroyAccelerationStructureNVX)vkGetInstanceProcAddr(vulkan, "vkDestroyAccelerationStructureNVX");
+	pfn_vkGetAccelerationStructureMemoryRequirementsNVX = (PFN_vkGetAccelerationStructureMemoryRequirementsNVX)vkGetInstanceProcAddr(vulkan, "vkGetAccelerationStructureMemoryRequirementsNVX");
+	pfn_vkGetAccelerationStructureScratchMemoryRequirementsNVX = (PFN_vkGetAccelerationStructureScratchMemoryRequirementsNVX)vkGetInstanceProcAddr(vulkan, "vkGetAccelerationStructureScratchMemoryRequirementsNVX");
+	pfn_vkBindAccelerationStructureMemoryNVX = (PFN_vkBindAccelerationStructureMemoryNVX)vkGetInstanceProcAddr(vulkan, "vkBindAccelerationStructureMemoryNVX");
+	pfn_vkCmdBuildAccelerationStructureNVX = (PFN_vkCmdBuildAccelerationStructureNVX)vkGetInstanceProcAddr(vulkan, "vkCmdBuildAccelerationStructureNVX");
+	pfn_vkCmdCopyAccelerationStructureNVX = (PFN_vkCmdCopyAccelerationStructureNVX)vkGetInstanceProcAddr(vulkan, "vkCmdCopyAccelerationStructureNVX");
+	pfn_vkCmdTraceRaysNVX = (PFN_vkCmdTraceRaysNVX)vkGetInstanceProcAddr(vulkan, "vkCmdTraceRaysNVX");
+	pfn_vkCreateRaytracingPipelinesNVX = (PFN_vkCreateRaytracingPipelinesNVX)vkGetInstanceProcAddr(vulkan, "vkCreateRaytracingPipelinesNVX");
+	pfn_vkGetRaytracingShaderHandlesNVX = (PFN_vkGetRaytracingShaderHandlesNVX)vkGetInstanceProcAddr(vulkan, "vkGetRaytracingShaderHandlesNVX");
+	pfn_vkGetAccelerationStructureHandleNVX = (PFN_vkGetAccelerationStructureHandleNVX)vkGetInstanceProcAddr(vulkan, "vkGetAccelerationStructureHandleNVX");
+	pfn_vkCmdWriteAccelerationStructurePropertiesNVX = (PFN_vkCmdWriteAccelerationStructurePropertiesNVX)vkGetInstanceProcAddr(vulkan, "vkCmdWriteAccelerationStructurePropertiesNVX");
+	pfn_vkCompileDeferredNVX = (PFN_vkCompileDeferredNVX)vkGetInstanceProcAddr(vulkan, "vkCompileDeferredNVX");
+#endif // defined(VK_NVX_raytracing)
+
 #if defined(VK_KHR_maintenance3)
 	pfn_vkGetDescriptorSetLayoutSupportKHR = (PFN_vkGetDescriptorSetLayoutSupportKHR)vkGetInstanceProcAddr(vulkan, "vkGetDescriptorSetLayoutSupportKHR");
 #endif // defined(VK_KHR_maintenance3)
@@ -3091,6 +3269,16 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetInstanceProcAddr(vulkan, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+
+#if defined(VK_NV_mesh_shader)
+	pfn_vkCmdDrawMeshTasksNV = (PFN_vkCmdDrawMeshTasksNV)vkGetInstanceProcAddr(vulkan, "vkCmdDrawMeshTasksNV");
+	pfn_vkCmdDrawMeshTasksIndirectNV = (PFN_vkCmdDrawMeshTasksIndirectNV)vkGetInstanceProcAddr(vulkan, "vkCmdDrawMeshTasksIndirectNV");
+	pfn_vkCmdDrawMeshTasksIndirectCountNV = (PFN_vkCmdDrawMeshTasksIndirectCountNV)vkGetInstanceProcAddr(vulkan, "vkCmdDrawMeshTasksIndirectCountNV");
+#endif // defined(VK_NV_mesh_shader)
+
+#if defined(VK_NV_scissor_exclusive)
+	pfn_vkCmdSetExclusiveScissorNV = (PFN_vkCmdSetExclusiveScissorNV)vkGetInstanceProcAddr(vulkan, "vkCmdSetExclusiveScissorNV");
+#endif // defined(VK_NV_scissor_exclusive)
 
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetInstanceProcAddr(vulkan, "vkCmdSetCheckpointNV");
@@ -3289,6 +3477,28 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vkGetDeviceProcAddr(device, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
 
+#if defined(VK_NV_shading_rate_image)
+	pfn_vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vkGetDeviceProcAddr(device, "vkCmdBindShadingRateImageNV");
+	pfn_vkCmdSetViewportShadingRatePaletteNV = (PFN_vkCmdSetViewportShadingRatePaletteNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportShadingRatePaletteNV");
+	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetDeviceProcAddr(device, "vkCmdSetCoarseSampleOrderNV");
+#endif // defined(VK_NV_shading_rate_image)
+
+#if defined(VK_NVX_raytracing)
+	pfn_vkCreateAccelerationStructureNVX = (PFN_vkCreateAccelerationStructureNVX)vkGetDeviceProcAddr(device, "vkCreateAccelerationStructureNVX");
+	pfn_vkDestroyAccelerationStructureNVX = (PFN_vkDestroyAccelerationStructureNVX)vkGetDeviceProcAddr(device, "vkDestroyAccelerationStructureNVX");
+	pfn_vkGetAccelerationStructureMemoryRequirementsNVX = (PFN_vkGetAccelerationStructureMemoryRequirementsNVX)vkGetDeviceProcAddr(device, "vkGetAccelerationStructureMemoryRequirementsNVX");
+	pfn_vkGetAccelerationStructureScratchMemoryRequirementsNVX = (PFN_vkGetAccelerationStructureScratchMemoryRequirementsNVX)vkGetDeviceProcAddr(device, "vkGetAccelerationStructureScratchMemoryRequirementsNVX");
+	pfn_vkBindAccelerationStructureMemoryNVX = (PFN_vkBindAccelerationStructureMemoryNVX)vkGetDeviceProcAddr(device, "vkBindAccelerationStructureMemoryNVX");
+	pfn_vkCmdBuildAccelerationStructureNVX = (PFN_vkCmdBuildAccelerationStructureNVX)vkGetDeviceProcAddr(device, "vkCmdBuildAccelerationStructureNVX");
+	pfn_vkCmdCopyAccelerationStructureNVX = (PFN_vkCmdCopyAccelerationStructureNVX)vkGetDeviceProcAddr(device, "vkCmdCopyAccelerationStructureNVX");
+	pfn_vkCmdTraceRaysNVX = (PFN_vkCmdTraceRaysNVX)vkGetDeviceProcAddr(device, "vkCmdTraceRaysNVX");
+	pfn_vkCreateRaytracingPipelinesNVX = (PFN_vkCreateRaytracingPipelinesNVX)vkGetDeviceProcAddr(device, "vkCreateRaytracingPipelinesNVX");
+	pfn_vkGetRaytracingShaderHandlesNVX = (PFN_vkGetRaytracingShaderHandlesNVX)vkGetDeviceProcAddr(device, "vkGetRaytracingShaderHandlesNVX");
+	pfn_vkGetAccelerationStructureHandleNVX = (PFN_vkGetAccelerationStructureHandleNVX)vkGetDeviceProcAddr(device, "vkGetAccelerationStructureHandleNVX");
+	pfn_vkCmdWriteAccelerationStructurePropertiesNVX = (PFN_vkCmdWriteAccelerationStructurePropertiesNVX)vkGetDeviceProcAddr(device, "vkCmdWriteAccelerationStructurePropertiesNVX");
+	pfn_vkCompileDeferredNVX = (PFN_vkCompileDeferredNVX)vkGetDeviceProcAddr(device, "vkCompileDeferredNVX");
+#endif // defined(VK_NVX_raytracing)
+
 #if defined(VK_KHR_maintenance3)
 	pfn_vkGetDescriptorSetLayoutSupportKHR = (PFN_vkGetDescriptorSetLayoutSupportKHR)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSupportKHR");
 #endif // defined(VK_KHR_maintenance3)
@@ -3305,6 +3515,16 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+
+#if defined(VK_NV_mesh_shader)
+	pfn_vkCmdDrawMeshTasksNV = (PFN_vkCmdDrawMeshTasksNV)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksNV");
+	pfn_vkCmdDrawMeshTasksIndirectNV = (PFN_vkCmdDrawMeshTasksIndirectNV)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectNV");
+	pfn_vkCmdDrawMeshTasksIndirectCountNV = (PFN_vkCmdDrawMeshTasksIndirectCountNV)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectCountNV");
+#endif // defined(VK_NV_mesh_shader)
+
+#if defined(VK_NV_scissor_exclusive)
+	pfn_vkCmdSetExclusiveScissorNV = (PFN_vkCmdSetExclusiveScissorNV)vkGetDeviceProcAddr(device, "vkCmdSetExclusiveScissorNV");
+#endif // defined(VK_NV_scissor_exclusive)
 
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
