@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 85
+#if VK_HEADER_VERSION != 89
 	#error "Vulkan header version does not match"
 #endif
 
@@ -1592,6 +1592,52 @@ VKAPI_ATTR void vkCmdDebugMarkerInsertEXT(VkCommandBuffer commandBuffer, const V
 
 #endif // defined(VK_EXT_debug_marker)
 
+#if defined(VK_EXT_transform_feedback)
+
+static PFN_vkCmdBindTransformFeedbackBuffersEXT pfn_vkCmdBindTransformFeedbackBuffersEXT;
+VKAPI_ATTR void vkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, const VkBuffer * pBuffers, const VkDeviceSize * pOffsets, const VkDeviceSize * pSizes)
+{
+	assert(pfn_vkCmdBindTransformFeedbackBuffersEXT);
+	return pfn_vkCmdBindTransformFeedbackBuffersEXT(commandBuffer, firstBinding, bindingCount, pBuffers, pOffsets, pSizes);
+}
+
+static PFN_vkCmdBeginTransformFeedbackEXT pfn_vkCmdBeginTransformFeedbackEXT;
+VKAPI_ATTR void vkCmdBeginTransformFeedbackEXT(VkCommandBuffer commandBuffer, uint32_t firstCounterBuffer, uint32_t counterBufferCount, const VkBuffer * pCounterBuffers, const VkDeviceSize * pCounterBufferOffsets)
+{
+	assert(pfn_vkCmdBeginTransformFeedbackEXT);
+	return pfn_vkCmdBeginTransformFeedbackEXT(commandBuffer, firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets);
+}
+
+static PFN_vkCmdEndTransformFeedbackEXT pfn_vkCmdEndTransformFeedbackEXT;
+VKAPI_ATTR void vkCmdEndTransformFeedbackEXT(VkCommandBuffer commandBuffer, uint32_t firstCounterBuffer, uint32_t counterBufferCount, const VkBuffer * pCounterBuffers, const VkDeviceSize * pCounterBufferOffsets)
+{
+	assert(pfn_vkCmdEndTransformFeedbackEXT);
+	return pfn_vkCmdEndTransformFeedbackEXT(commandBuffer, firstCounterBuffer, counterBufferCount, pCounterBuffers, pCounterBufferOffsets);
+}
+
+static PFN_vkCmdBeginQueryIndexedEXT pfn_vkCmdBeginQueryIndexedEXT;
+VKAPI_ATTR void vkCmdBeginQueryIndexedEXT(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t query, VkQueryControlFlags flags, uint32_t index)
+{
+	assert(pfn_vkCmdBeginQueryIndexedEXT);
+	return pfn_vkCmdBeginQueryIndexedEXT(commandBuffer, queryPool, query, flags, index);
+}
+
+static PFN_vkCmdEndQueryIndexedEXT pfn_vkCmdEndQueryIndexedEXT;
+VKAPI_ATTR void vkCmdEndQueryIndexedEXT(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t query, uint32_t index)
+{
+	assert(pfn_vkCmdEndQueryIndexedEXT);
+	return pfn_vkCmdEndQueryIndexedEXT(commandBuffer, queryPool, query, index);
+}
+
+static PFN_vkCmdDrawIndirectByteCountEXT pfn_vkCmdDrawIndirectByteCountEXT;
+VKAPI_ATTR void vkCmdDrawIndirectByteCountEXT(VkCommandBuffer commandBuffer, uint32_t instanceCount, uint32_t firstInstance, VkBuffer counterBuffer, VkDeviceSize counterBufferOffset, uint32_t counterOffset, uint32_t vertexStride)
+{
+	assert(pfn_vkCmdDrawIndirectByteCountEXT);
+	return pfn_vkCmdDrawIndirectByteCountEXT(commandBuffer, instanceCount, firstInstance, counterBuffer, counterBufferOffset, counterOffset, vertexStride);
+}
+
+#endif // defined(VK_EXT_transform_feedback)
+
 #if defined(VK_AMD_draw_indirect_count)
 
 static PFN_vkCmdDrawIndirectCountAMD pfn_vkCmdDrawIndirectCountAMD;
@@ -2479,6 +2525,17 @@ VKAPI_ATTR VkResult vkBindImageMemory2KHR(VkDevice device, uint32_t bindInfoCoun
 
 #endif // defined(VK_KHR_bind_memory2)
 
+#if defined(VK_EXT_image_drm_format_modifier)
+
+static PFN_vkGetImageDrmFormatModifierPropertiesEXT pfn_vkGetImageDrmFormatModifierPropertiesEXT;
+VKAPI_ATTR VkResult vkGetImageDrmFormatModifierPropertiesEXT(VkDevice device, VkImage image, VkImageDrmFormatModifierPropertiesEXT * pProperties)
+{
+	assert(pfn_vkGetImageDrmFormatModifierPropertiesEXT);
+	return pfn_vkGetImageDrmFormatModifierPropertiesEXT(device, image, pProperties);
+}
+
+#endif // defined(VK_EXT_image_drm_format_modifier)
+
 #if defined(VK_EXT_validation_cache)
 
 static PFN_vkCreateValidationCacheEXT pfn_vkCreateValidationCacheEXT;
@@ -2574,24 +2631,24 @@ VKAPI_ATTR VkResult vkBindAccelerationStructureMemoryNVX(VkDevice device, uint32
 }
 
 static PFN_vkCmdBuildAccelerationStructureNVX pfn_vkCmdBuildAccelerationStructureNVX;
-VKAPI_ATTR void vkCmdBuildAccelerationStructureNVX(VkCommandBuffer cmdBuf, VkAccelerationStructureTypeNVX type, uint32_t instanceCount, VkBuffer instanceData, VkDeviceSize instanceOffset, uint32_t geometryCount, const VkGeometryNVX * pGeometries, VkBuildAccelerationStructureFlagsNVX flags, VkBool32 update, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkBuffer scratch, VkDeviceSize scratchOffset)
+VKAPI_ATTR void vkCmdBuildAccelerationStructureNVX(VkCommandBuffer commandBuffer, VkAccelerationStructureTypeNVX type, uint32_t instanceCount, VkBuffer instanceData, VkDeviceSize instanceOffset, uint32_t geometryCount, const VkGeometryNVX * pGeometries, VkBuildAccelerationStructureFlagsNVX flags, VkBool32 update, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkBuffer scratch, VkDeviceSize scratchOffset)
 {
 	assert(pfn_vkCmdBuildAccelerationStructureNVX);
-	return pfn_vkCmdBuildAccelerationStructureNVX(cmdBuf, type, instanceCount, instanceData, instanceOffset, geometryCount, pGeometries, flags, update, dst, src, scratch, scratchOffset);
+	return pfn_vkCmdBuildAccelerationStructureNVX(commandBuffer, type, instanceCount, instanceData, instanceOffset, geometryCount, pGeometries, flags, update, dst, src, scratch, scratchOffset);
 }
 
 static PFN_vkCmdCopyAccelerationStructureNVX pfn_vkCmdCopyAccelerationStructureNVX;
-VKAPI_ATTR void vkCmdCopyAccelerationStructureNVX(VkCommandBuffer cmdBuf, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkCopyAccelerationStructureModeNVX mode)
+VKAPI_ATTR void vkCmdCopyAccelerationStructureNVX(VkCommandBuffer commandBuffer, VkAccelerationStructureNVX dst, VkAccelerationStructureNVX src, VkCopyAccelerationStructureModeNVX mode)
 {
 	assert(pfn_vkCmdCopyAccelerationStructureNVX);
-	return pfn_vkCmdCopyAccelerationStructureNVX(cmdBuf, dst, src, mode);
+	return pfn_vkCmdCopyAccelerationStructureNVX(commandBuffer, dst, src, mode);
 }
 
 static PFN_vkCmdTraceRaysNVX pfn_vkCmdTraceRaysNVX;
-VKAPI_ATTR void vkCmdTraceRaysNVX(VkCommandBuffer cmdBuf, VkBuffer raygenShaderBindingTableBuffer, VkDeviceSize raygenShaderBindingOffset, VkBuffer missShaderBindingTableBuffer, VkDeviceSize missShaderBindingOffset, VkDeviceSize missShaderBindingStride, VkBuffer hitShaderBindingTableBuffer, VkDeviceSize hitShaderBindingOffset, VkDeviceSize hitShaderBindingStride, uint32_t width, uint32_t height)
+VKAPI_ATTR void vkCmdTraceRaysNVX(VkCommandBuffer commandBuffer, VkBuffer raygenShaderBindingTableBuffer, VkDeviceSize raygenShaderBindingOffset, VkBuffer missShaderBindingTableBuffer, VkDeviceSize missShaderBindingOffset, VkDeviceSize missShaderBindingStride, VkBuffer hitShaderBindingTableBuffer, VkDeviceSize hitShaderBindingOffset, VkDeviceSize hitShaderBindingStride, uint32_t width, uint32_t height)
 {
 	assert(pfn_vkCmdTraceRaysNVX);
-	return pfn_vkCmdTraceRaysNVX(cmdBuf, raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, width, height);
+	return pfn_vkCmdTraceRaysNVX(commandBuffer, raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, width, height);
 }
 
 static PFN_vkCreateRaytracingPipelinesNVX pfn_vkCreateRaytracingPipelinesNVX;
@@ -2616,10 +2673,10 @@ VKAPI_ATTR VkResult vkGetAccelerationStructureHandleNVX(VkDevice device, VkAccel
 }
 
 static PFN_vkCmdWriteAccelerationStructurePropertiesNVX pfn_vkCmdWriteAccelerationStructurePropertiesNVX;
-VKAPI_ATTR void vkCmdWriteAccelerationStructurePropertiesNVX(VkCommandBuffer cmdBuf, VkAccelerationStructureNVX accelerationStructure, VkQueryType queryType, VkQueryPool queryPool, uint32_t query)
+VKAPI_ATTR void vkCmdWriteAccelerationStructurePropertiesNVX(VkCommandBuffer commandBuffer, VkAccelerationStructureNVX accelerationStructure, VkQueryType queryType, VkQueryPool queryPool, uint32_t query)
 {
 	assert(pfn_vkCmdWriteAccelerationStructurePropertiesNVX);
-	return pfn_vkCmdWriteAccelerationStructurePropertiesNVX(cmdBuf, accelerationStructure, queryType, queryPool, query);
+	return pfn_vkCmdWriteAccelerationStructurePropertiesNVX(commandBuffer, accelerationStructure, queryType, queryPool, query);
 }
 
 static PFN_vkCompileDeferredNVX pfn_vkCompileDeferredNVX;
@@ -2682,6 +2739,24 @@ VKAPI_ATTR void vkCmdWriteBufferMarkerAMD(VkCommandBuffer commandBuffer, VkPipel
 
 #endif // defined(VK_AMD_buffer_marker)
 
+#if defined(VK_EXT_calibrated_timestamps)
+
+static PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT pfn_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceCalibrateableTimeDomainsEXT(VkPhysicalDevice physicalDevice, uint32_t * pTimeDomainCount, VkTimeDomainEXT * pTimeDomains)
+{
+	assert(pfn_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT);
+	return pfn_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT(physicalDevice, pTimeDomainCount, pTimeDomains);
+}
+
+static PFN_vkGetCalibratedTimestampsEXT pfn_vkGetCalibratedTimestampsEXT;
+VKAPI_ATTR VkResult vkGetCalibratedTimestampsEXT(VkDevice device, uint32_t timestampCount, const VkCalibratedTimestampInfoEXT * pTimestampInfos, uint64_t * pTimestamps, uint64_t * pMaxDeviation)
+{
+	assert(pfn_vkGetCalibratedTimestampsEXT);
+	return pfn_vkGetCalibratedTimestampsEXT(device, timestampCount, pTimestampInfos, pTimestamps, pMaxDeviation);
+}
+
+#endif // defined(VK_EXT_calibrated_timestamps)
+
 #if defined(VK_NV_mesh_shader)
 
 static PFN_vkCmdDrawMeshTasksNV pfn_vkCmdDrawMeshTasksNV;
@@ -2735,6 +2810,17 @@ VKAPI_ATTR void vkGetQueueCheckpointDataNV(VkQueue queue, uint32_t * pCheckpoint
 }
 
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
+
+#if defined(VK_FUCHSIA_imagepipe_surface)
+
+static PFN_vkCreateImagePipeSurfaceFUCHSIA pfn_vkCreateImagePipeSurfaceFUCHSIA;
+VKAPI_ATTR VkResult vkCreateImagePipeSurfaceFUCHSIA(VkInstance instance, const VkImagePipeSurfaceCreateInfoFUCHSIA * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
+{
+	assert(pfn_vkCreateImagePipeSurfaceFUCHSIA);
+	return pfn_vkCreateImagePipeSurfaceFUCHSIA(instance, pCreateInfo, pAllocator, pSurface);
+}
+
+#endif // defined(VK_FUCHSIA_imagepipe_surface)
 
 void vulkan_loader_init(PFN_vkGetInstanceProcAddr get_address)
 {
@@ -2988,6 +3074,15 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkCmdDebugMarkerInsertEXT = (PFN_vkCmdDebugMarkerInsertEXT)vkGetInstanceProcAddr(vulkan, "vkCmdDebugMarkerInsertEXT");
 #endif // defined(VK_EXT_debug_marker)
 
+#if defined(VK_EXT_transform_feedback)
+	pfn_vkCmdBindTransformFeedbackBuffersEXT = (PFN_vkCmdBindTransformFeedbackBuffersEXT)vkGetInstanceProcAddr(vulkan, "vkCmdBindTransformFeedbackBuffersEXT");
+	pfn_vkCmdBeginTransformFeedbackEXT = (PFN_vkCmdBeginTransformFeedbackEXT)vkGetInstanceProcAddr(vulkan, "vkCmdBeginTransformFeedbackEXT");
+	pfn_vkCmdEndTransformFeedbackEXT = (PFN_vkCmdEndTransformFeedbackEXT)vkGetInstanceProcAddr(vulkan, "vkCmdEndTransformFeedbackEXT");
+	pfn_vkCmdBeginQueryIndexedEXT = (PFN_vkCmdBeginQueryIndexedEXT)vkGetInstanceProcAddr(vulkan, "vkCmdBeginQueryIndexedEXT");
+	pfn_vkCmdEndQueryIndexedEXT = (PFN_vkCmdEndQueryIndexedEXT)vkGetInstanceProcAddr(vulkan, "vkCmdEndQueryIndexedEXT");
+	pfn_vkCmdDrawIndirectByteCountEXT = (PFN_vkCmdDrawIndirectByteCountEXT)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndirectByteCountEXT");
+#endif // defined(VK_EXT_transform_feedback)
+
 #if defined(VK_AMD_draw_indirect_count)
 	pfn_vkCmdDrawIndirectCountAMD = (PFN_vkCmdDrawIndirectCountAMD)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndirectCountAMD");
 	pfn_vkCmdDrawIndexedIndirectCountAMD = (PFN_vkCmdDrawIndexedIndirectCountAMD)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndexedIndirectCountAMD");
@@ -3224,6 +3319,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkBindImageMemory2KHR = (PFN_vkBindImageMemory2KHR)vkGetInstanceProcAddr(vulkan, "vkBindImageMemory2KHR");
 #endif // defined(VK_KHR_bind_memory2)
 
+#if defined(VK_EXT_image_drm_format_modifier)
+	pfn_vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vkGetInstanceProcAddr(vulkan, "vkGetImageDrmFormatModifierPropertiesEXT");
+#endif // defined(VK_EXT_image_drm_format_modifier)
+
 #if defined(VK_EXT_validation_cache)
 	pfn_vkCreateValidationCacheEXT = (PFN_vkCreateValidationCacheEXT)vkGetInstanceProcAddr(vulkan, "vkCreateValidationCacheEXT");
 	pfn_vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vkGetInstanceProcAddr(vulkan, "vkDestroyValidationCacheEXT");
@@ -3270,6 +3369,11 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetInstanceProcAddr(vulkan, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
 
+#if defined(VK_EXT_calibrated_timestamps)
+	pfn_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = (PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT");
+	pfn_vkGetCalibratedTimestampsEXT = (PFN_vkGetCalibratedTimestampsEXT)vkGetInstanceProcAddr(vulkan, "vkGetCalibratedTimestampsEXT");
+#endif // defined(VK_EXT_calibrated_timestamps)
+
 #if defined(VK_NV_mesh_shader)
 	pfn_vkCmdDrawMeshTasksNV = (PFN_vkCmdDrawMeshTasksNV)vkGetInstanceProcAddr(vulkan, "vkCmdDrawMeshTasksNV");
 	pfn_vkCmdDrawMeshTasksIndirectNV = (PFN_vkCmdDrawMeshTasksIndirectNV)vkGetInstanceProcAddr(vulkan, "vkCmdDrawMeshTasksIndirectNV");
@@ -3284,6 +3388,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetInstanceProcAddr(vulkan, "vkCmdSetCheckpointNV");
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(vulkan, "vkGetQueueCheckpointDataNV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
+
+#if defined(VK_FUCHSIA_imagepipe_surface)
+	pfn_vkCreateImagePipeSurfaceFUCHSIA = (PFN_vkCreateImagePipeSurfaceFUCHSIA)vkGetInstanceProcAddr(vulkan, "vkCreateImagePipeSurfaceFUCHSIA");
+#endif // defined(VK_FUCHSIA_imagepipe_surface)
 }
 
 void vulkan_load_device_procs(VkDevice device)
@@ -3314,6 +3422,15 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vkGetDeviceProcAddr(device, "vkCmdDebugMarkerEndEXT");
 	pfn_vkCmdDebugMarkerInsertEXT = (PFN_vkCmdDebugMarkerInsertEXT)vkGetDeviceProcAddr(device, "vkCmdDebugMarkerInsertEXT");
 #endif // defined(VK_EXT_debug_marker)
+
+#if defined(VK_EXT_transform_feedback)
+	pfn_vkCmdBindTransformFeedbackBuffersEXT = (PFN_vkCmdBindTransformFeedbackBuffersEXT)vkGetDeviceProcAddr(device, "vkCmdBindTransformFeedbackBuffersEXT");
+	pfn_vkCmdBeginTransformFeedbackEXT = (PFN_vkCmdBeginTransformFeedbackEXT)vkGetDeviceProcAddr(device, "vkCmdBeginTransformFeedbackEXT");
+	pfn_vkCmdEndTransformFeedbackEXT = (PFN_vkCmdEndTransformFeedbackEXT)vkGetDeviceProcAddr(device, "vkCmdEndTransformFeedbackEXT");
+	pfn_vkCmdBeginQueryIndexedEXT = (PFN_vkCmdBeginQueryIndexedEXT)vkGetDeviceProcAddr(device, "vkCmdBeginQueryIndexedEXT");
+	pfn_vkCmdEndQueryIndexedEXT = (PFN_vkCmdEndQueryIndexedEXT)vkGetDeviceProcAddr(device, "vkCmdEndQueryIndexedEXT");
+	pfn_vkCmdDrawIndirectByteCountEXT = (PFN_vkCmdDrawIndirectByteCountEXT)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectByteCountEXT");
+#endif // defined(VK_EXT_transform_feedback)
 
 #if defined(VK_AMD_draw_indirect_count)
 	pfn_vkCmdDrawIndirectCountAMD = (PFN_vkCmdDrawIndirectCountAMD)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCountAMD");
@@ -3470,6 +3587,10 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkBindImageMemory2KHR = (PFN_vkBindImageMemory2KHR)vkGetDeviceProcAddr(device, "vkBindImageMemory2KHR");
 #endif // defined(VK_KHR_bind_memory2)
 
+#if defined(VK_EXT_image_drm_format_modifier)
+	pfn_vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetImageDrmFormatModifierPropertiesEXT");
+#endif // defined(VK_EXT_image_drm_format_modifier)
+
 #if defined(VK_EXT_validation_cache)
 	pfn_vkCreateValidationCacheEXT = (PFN_vkCreateValidationCacheEXT)vkGetDeviceProcAddr(device, "vkCreateValidationCacheEXT");
 	pfn_vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vkGetDeviceProcAddr(device, "vkDestroyValidationCacheEXT");
@@ -3515,6 +3636,11 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+
+#if defined(VK_EXT_calibrated_timestamps)
+	pfn_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT = (PFN_vkGetPhysicalDeviceCalibrateableTimeDomainsEXT)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT");
+	pfn_vkGetCalibratedTimestampsEXT = (PFN_vkGetCalibratedTimestampsEXT)vkGetDeviceProcAddr(device, "vkGetCalibratedTimestampsEXT");
+#endif // defined(VK_EXT_calibrated_timestamps)
 
 #if defined(VK_NV_mesh_shader)
 	pfn_vkCmdDrawMeshTasksNV = (PFN_vkCmdDrawMeshTasksNV)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksNV");
