@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 96
+#if VK_HEADER_VERSION != 97
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2797,6 +2797,17 @@ VKAPI_ATTR VkResult vkCreateImagePipeSurfaceFUCHSIA(VkInstance instance, const V
 
 #endif // defined(VK_FUCHSIA_imagepipe_surface)
 
+#if defined(VK_EXT_buffer_device_address)
+
+static PFN_vkGetBufferDeviceAddressEXT pfn_vkGetBufferDeviceAddressEXT;
+VKAPI_ATTR VkDeviceAddress vkGetBufferDeviceAddressEXT(VkDevice device, const VkBufferDeviceAddressInfoEXT * pInfo)
+{
+	assert(pfn_vkGetBufferDeviceAddressEXT);
+	return pfn_vkGetBufferDeviceAddressEXT(device, pInfo);
+}
+
+#endif // defined(VK_EXT_buffer_device_address)
+
 void vulkan_loader_init(PFN_vkGetInstanceProcAddr get_address)
 {
 	pfn_vkGetInstanceProcAddr = get_address;
@@ -3361,6 +3372,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_FUCHSIA_imagepipe_surface)
 	pfn_vkCreateImagePipeSurfaceFUCHSIA = (PFN_vkCreateImagePipeSurfaceFUCHSIA)vkGetInstanceProcAddr(vulkan, "vkCreateImagePipeSurfaceFUCHSIA");
 #endif // defined(VK_FUCHSIA_imagepipe_surface)
+
+#if defined(VK_EXT_buffer_device_address)
+	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetInstanceProcAddr(vulkan, "vkGetBufferDeviceAddressEXT");
+#endif // defined(VK_EXT_buffer_device_address)
 }
 
 void vulkan_load_device_procs(VkDevice device)
@@ -3624,5 +3639,9 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
+
+#if defined(VK_EXT_buffer_device_address)
+	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressEXT");
+#endif // defined(VK_EXT_buffer_device_address)
 }
 
