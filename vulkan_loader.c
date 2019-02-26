@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 97
+#if VK_HEADER_VERSION != 101
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2808,6 +2808,17 @@ VKAPI_ATTR VkDeviceAddress vkGetBufferDeviceAddressEXT(VkDevice device, const Vk
 
 #endif // defined(VK_EXT_buffer_device_address)
 
+#if defined(VK_NV_cooperative_matrix)
+
+static PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(VkPhysicalDevice physicalDevice, uint32_t * pPropertyCount, VkCooperativeMatrixPropertiesNV * pProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV);
+	return pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(physicalDevice, pPropertyCount, pProperties);
+}
+
+#endif // defined(VK_NV_cooperative_matrix)
+
 void vulkan_loader_init(PFN_vkGetInstanceProcAddr get_address)
 {
 	pfn_vkGetInstanceProcAddr = get_address;
@@ -3376,6 +3387,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_EXT_buffer_device_address)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetInstanceProcAddr(vulkan, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
+
+#if defined(VK_NV_cooperative_matrix)
+	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
+#endif // defined(VK_NV_cooperative_matrix)
 }
 
 void vulkan_load_device_procs(VkDevice device)
@@ -3643,5 +3658,9 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_EXT_buffer_device_address)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
+
+#if defined(VK_NV_cooperative_matrix)
+	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
+#endif // defined(VK_NV_cooperative_matrix)
 }
 
