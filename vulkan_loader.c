@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 101
+#if VK_HEADER_VERSION != 107
 	#error "Vulkan header version does not match"
 #endif
 
@@ -1620,6 +1620,17 @@ VKAPI_ATTR void vkCmdDrawIndirectByteCountEXT(VkCommandBuffer commandBuffer, uin
 
 #endif // defined(VK_EXT_transform_feedback)
 
+#if defined(VK_NVX_image_view_handle)
+
+static PFN_vkGetImageViewHandleNVX pfn_vkGetImageViewHandleNVX;
+VKAPI_ATTR uint32_t vkGetImageViewHandleNVX(VkDevice device, const VkImageViewHandleInfoNVX * pInfo)
+{
+	assert(pfn_vkGetImageViewHandleNVX);
+	return pfn_vkGetImageViewHandleNVX(device, pInfo);
+}
+
+#endif // defined(VK_NVX_image_view_handle)
+
 #if defined(VK_AMD_draw_indirect_count)
 
 static PFN_vkCmdDrawIndirectCountAMD pfn_vkCmdDrawIndirectCountAMD;
@@ -1648,6 +1659,17 @@ VKAPI_ATTR VkResult vkGetShaderInfoAMD(VkDevice device, VkPipeline pipeline, VkS
 }
 
 #endif // defined(VK_AMD_shader_info)
+
+#if defined(VK_GGP_stream_descriptor_surface)
+
+static PFN_vkCreateStreamDescriptorSurfaceGGP pfn_vkCreateStreamDescriptorSurfaceGGP;
+VKAPI_ATTR VkResult vkCreateStreamDescriptorSurfaceGGP(VkInstance instance, const VkStreamDescriptorSurfaceCreateInfoGGP * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
+{
+	assert(pfn_vkCreateStreamDescriptorSurfaceGGP);
+	return pfn_vkCreateStreamDescriptorSurfaceGGP(instance, pCreateInfo, pAllocator, pSurface);
+}
+
+#endif // defined(VK_GGP_stream_descriptor_surface)
 
 #if defined(VK_NV_external_memory_capabilities)
 
@@ -1782,6 +1804,17 @@ VKAPI_ATTR VkResult vkAcquireNextImage2KHR(VkDevice device, const VkAcquireNextI
 }
 
 #endif // defined(VK_KHR_swapchain)
+
+#if defined(VK_EXT_full_screen_exclusive)
+
+static PFN_vkGetDeviceGroupSurfacePresentModes2EXT pfn_vkGetDeviceGroupSurfacePresentModes2EXT;
+VKAPI_ATTR VkResult vkGetDeviceGroupSurfacePresentModes2EXT(VkDevice device, const VkPhysicalDeviceSurfaceInfo2KHR * pSurfaceInfo, VkDeviceGroupPresentModeFlagsKHR * pModes)
+{
+	assert(pfn_vkGetDeviceGroupSurfacePresentModes2EXT);
+	return pfn_vkGetDeviceGroupSurfacePresentModes2EXT(device, pSurfaceInfo, pModes);
+}
+
+#endif // defined(VK_EXT_full_screen_exclusive)
 
 #endif // defined(VK_KHR_device_group)
 
@@ -2786,6 +2819,17 @@ VKAPI_ATTR void vkGetQueueCheckpointDataNV(VkQueue queue, uint32_t * pCheckpoint
 
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 
+#if defined(VK_AMD_display_native_hdr)
+
+static PFN_vkSetLocalDimmingAMD pfn_vkSetLocalDimmingAMD;
+VKAPI_ATTR void vkSetLocalDimmingAMD(VkDevice device, VkSwapchainKHR swapChain, VkBool32 localDimmingEnable)
+{
+	assert(pfn_vkSetLocalDimmingAMD);
+	return pfn_vkSetLocalDimmingAMD(device, swapChain, localDimmingEnable);
+}
+
+#endif // defined(VK_AMD_display_native_hdr)
+
 #if defined(VK_FUCHSIA_imagepipe_surface)
 
 static PFN_vkCreateImagePipeSurfaceFUCHSIA pfn_vkCreateImagePipeSurfaceFUCHSIA;
@@ -2796,6 +2840,17 @@ VKAPI_ATTR VkResult vkCreateImagePipeSurfaceFUCHSIA(VkInstance instance, const V
 }
 
 #endif // defined(VK_FUCHSIA_imagepipe_surface)
+
+#if defined(VK_EXT_metal_surface)
+
+static PFN_vkCreateMetalSurfaceEXT pfn_vkCreateMetalSurfaceEXT;
+VKAPI_ATTR VkResult vkCreateMetalSurfaceEXT(VkInstance instance, const VkMetalSurfaceCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
+{
+	assert(pfn_vkCreateMetalSurfaceEXT);
+	return pfn_vkCreateMetalSurfaceEXT(instance, pCreateInfo, pAllocator, pSurface);
+}
+
+#endif // defined(VK_EXT_metal_surface)
 
 #if defined(VK_EXT_buffer_device_address)
 
@@ -2818,6 +2873,53 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(VkPhysicalD
 }
 
 #endif // defined(VK_NV_cooperative_matrix)
+
+#if defined(VK_EXT_full_screen_exclusive)
+
+static PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceSurfacePresentModes2EXT(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceSurfaceInfo2KHR * pSurfaceInfo, uint32_t * pPresentModeCount, VkPresentModeKHR * pPresentModes)
+{
+	assert(pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT);
+	return pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT(physicalDevice, pSurfaceInfo, pPresentModeCount, pPresentModes);
+}
+
+static PFN_vkAcquireFullScreenExclusiveModeEXT pfn_vkAcquireFullScreenExclusiveModeEXT;
+VKAPI_ATTR VkResult vkAcquireFullScreenExclusiveModeEXT(VkDevice device, VkSwapchainKHR swapchain)
+{
+	assert(pfn_vkAcquireFullScreenExclusiveModeEXT);
+	return pfn_vkAcquireFullScreenExclusiveModeEXT(device, swapchain);
+}
+
+static PFN_vkReleaseFullScreenExclusiveModeEXT pfn_vkReleaseFullScreenExclusiveModeEXT;
+VKAPI_ATTR VkResult vkReleaseFullScreenExclusiveModeEXT(VkDevice device, VkSwapchainKHR swapchain)
+{
+	assert(pfn_vkReleaseFullScreenExclusiveModeEXT);
+	return pfn_vkReleaseFullScreenExclusiveModeEXT(device, swapchain);
+}
+
+#endif // defined(VK_EXT_full_screen_exclusive)
+
+#if defined(VK_EXT_headless_surface)
+
+static PFN_vkCreateHeadlessSurfaceEXT pfn_vkCreateHeadlessSurfaceEXT;
+VKAPI_ATTR VkResult vkCreateHeadlessSurfaceEXT(VkInstance instance, const VkHeadlessSurfaceCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
+{
+	assert(pfn_vkCreateHeadlessSurfaceEXT);
+	return pfn_vkCreateHeadlessSurfaceEXT(instance, pCreateInfo, pAllocator, pSurface);
+}
+
+#endif // defined(VK_EXT_headless_surface)
+
+#if defined(VK_EXT_host_query_reset)
+
+static PFN_vkResetQueryPoolEXT pfn_vkResetQueryPoolEXT;
+VKAPI_ATTR void vkResetQueryPoolEXT(VkDevice device, VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount)
+{
+	assert(pfn_vkResetQueryPoolEXT);
+	return pfn_vkResetQueryPoolEXT(device, queryPool, firstQuery, queryCount);
+}
+
+#endif // defined(VK_EXT_host_query_reset)
 
 void vulkan_loader_init(PFN_vkGetInstanceProcAddr get_address)
 {
@@ -3075,6 +3177,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkCmdDrawIndirectByteCountEXT = (PFN_vkCmdDrawIndirectByteCountEXT)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndirectByteCountEXT");
 #endif // defined(VK_EXT_transform_feedback)
 
+#if defined(VK_NVX_image_view_handle)
+	pfn_vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vkGetInstanceProcAddr(vulkan, "vkGetImageViewHandleNVX");
+#endif // defined(VK_NVX_image_view_handle)
+
 #if defined(VK_AMD_draw_indirect_count)
 	pfn_vkCmdDrawIndirectCountAMD = (PFN_vkCmdDrawIndirectCountAMD)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndirectCountAMD");
 	pfn_vkCmdDrawIndexedIndirectCountAMD = (PFN_vkCmdDrawIndexedIndirectCountAMD)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndexedIndirectCountAMD");
@@ -3083,6 +3189,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_AMD_shader_info)
 	pfn_vkGetShaderInfoAMD = (PFN_vkGetShaderInfoAMD)vkGetInstanceProcAddr(vulkan, "vkGetShaderInfoAMD");
 #endif // defined(VK_AMD_shader_info)
+
+#if defined(VK_GGP_stream_descriptor_surface)
+	pfn_vkCreateStreamDescriptorSurfaceGGP = (PFN_vkCreateStreamDescriptorSurfaceGGP)vkGetInstanceProcAddr(vulkan, "vkCreateStreamDescriptorSurfaceGGP");
+#endif // defined(VK_GGP_stream_descriptor_surface)
 
 #if defined(VK_NV_external_memory_capabilities)
 	pfn_vkGetPhysicalDeviceExternalImageFormatPropertiesNV = (PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV");
@@ -3116,6 +3226,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_KHR_swapchain)
 	pfn_vkAcquireNextImage2KHR = (PFN_vkAcquireNextImage2KHR)vkGetInstanceProcAddr(vulkan, "vkAcquireNextImage2KHR");
 #endif // defined(VK_KHR_swapchain)
+
+#if defined(VK_EXT_full_screen_exclusive)
+	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetInstanceProcAddr(vulkan, "vkGetDeviceGroupSurfacePresentModes2EXT");
+#endif // defined(VK_EXT_full_screen_exclusive)
 #endif // defined(VK_KHR_device_group)
 
 #if defined(VK_NN_vi_surface)
@@ -3380,9 +3494,17 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(vulkan, "vkGetQueueCheckpointDataNV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 
+#if defined(VK_AMD_display_native_hdr)
+	pfn_vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vkGetInstanceProcAddr(vulkan, "vkSetLocalDimmingAMD");
+#endif // defined(VK_AMD_display_native_hdr)
+
 #if defined(VK_FUCHSIA_imagepipe_surface)
 	pfn_vkCreateImagePipeSurfaceFUCHSIA = (PFN_vkCreateImagePipeSurfaceFUCHSIA)vkGetInstanceProcAddr(vulkan, "vkCreateImagePipeSurfaceFUCHSIA");
 #endif // defined(VK_FUCHSIA_imagepipe_surface)
+
+#if defined(VK_EXT_metal_surface)
+	pfn_vkCreateMetalSurfaceEXT = (PFN_vkCreateMetalSurfaceEXT)vkGetInstanceProcAddr(vulkan, "vkCreateMetalSurfaceEXT");
+#endif // defined(VK_EXT_metal_surface)
 
 #if defined(VK_EXT_buffer_device_address)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetInstanceProcAddr(vulkan, "vkGetBufferDeviceAddressEXT");
@@ -3391,6 +3513,20 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_NV_cooperative_matrix)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
+
+#if defined(VK_EXT_full_screen_exclusive)
+	pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT = (PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
+	pfn_vkAcquireFullScreenExclusiveModeEXT = (PFN_vkAcquireFullScreenExclusiveModeEXT)vkGetInstanceProcAddr(vulkan, "vkAcquireFullScreenExclusiveModeEXT");
+	pfn_vkReleaseFullScreenExclusiveModeEXT = (PFN_vkReleaseFullScreenExclusiveModeEXT)vkGetInstanceProcAddr(vulkan, "vkReleaseFullScreenExclusiveModeEXT");
+#endif // defined(VK_EXT_full_screen_exclusive)
+
+#if defined(VK_EXT_headless_surface)
+	pfn_vkCreateHeadlessSurfaceEXT = (PFN_vkCreateHeadlessSurfaceEXT)vkGetInstanceProcAddr(vulkan, "vkCreateHeadlessSurfaceEXT");
+#endif // defined(VK_EXT_headless_surface)
+
+#if defined(VK_EXT_host_query_reset)
+	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetInstanceProcAddr(vulkan, "vkResetQueryPoolEXT");
+#endif // defined(VK_EXT_host_query_reset)
 }
 
 void vulkan_load_device_procs(VkDevice device)
@@ -3431,6 +3567,10 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkCmdDrawIndirectByteCountEXT = (PFN_vkCmdDrawIndirectByteCountEXT)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectByteCountEXT");
 #endif // defined(VK_EXT_transform_feedback)
 
+#if defined(VK_NVX_image_view_handle)
+	pfn_vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vkGetDeviceProcAddr(device, "vkGetImageViewHandleNVX");
+#endif // defined(VK_NVX_image_view_handle)
+
 #if defined(VK_AMD_draw_indirect_count)
 	pfn_vkCmdDrawIndirectCountAMD = (PFN_vkCmdDrawIndirectCountAMD)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCountAMD");
 	pfn_vkCmdDrawIndexedIndirectCountAMD = (PFN_vkCmdDrawIndexedIndirectCountAMD)vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCountAMD");
@@ -3458,6 +3598,10 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_KHR_swapchain)
 	pfn_vkAcquireNextImage2KHR = (PFN_vkAcquireNextImage2KHR)vkGetDeviceProcAddr(device, "vkAcquireNextImage2KHR");
 #endif // defined(VK_KHR_swapchain)
+
+#if defined(VK_EXT_full_screen_exclusive)
+	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModes2EXT");
+#endif // defined(VK_EXT_full_screen_exclusive)
 #endif // defined(VK_KHR_device_group)
 
 #if defined(VK_KHR_maintenance1)
@@ -3655,6 +3799,10 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 
+#if defined(VK_AMD_display_native_hdr)
+	pfn_vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vkGetDeviceProcAddr(device, "vkSetLocalDimmingAMD");
+#endif // defined(VK_AMD_display_native_hdr)
+
 #if defined(VK_EXT_buffer_device_address)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
@@ -3662,5 +3810,15 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_NV_cooperative_matrix)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
+
+#if defined(VK_EXT_full_screen_exclusive)
+	pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT = (PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
+	pfn_vkAcquireFullScreenExclusiveModeEXT = (PFN_vkAcquireFullScreenExclusiveModeEXT)vkGetDeviceProcAddr(device, "vkAcquireFullScreenExclusiveModeEXT");
+	pfn_vkReleaseFullScreenExclusiveModeEXT = (PFN_vkReleaseFullScreenExclusiveModeEXT)vkGetDeviceProcAddr(device, "vkReleaseFullScreenExclusiveModeEXT");
+#endif // defined(VK_EXT_full_screen_exclusive)
+
+#if defined(VK_EXT_host_query_reset)
+	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetDeviceProcAddr(device, "vkResetQueryPoolEXT");
+#endif // defined(VK_EXT_host_query_reset)
 }
 
