@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 107
+#if VK_HEADER_VERSION != 108
 	#error "Vulkan header version does not match"
 #endif
 
@@ -1805,17 +1805,6 @@ VKAPI_ATTR VkResult vkAcquireNextImage2KHR(VkDevice device, const VkAcquireNextI
 
 #endif // defined(VK_KHR_swapchain)
 
-#if defined(VK_EXT_full_screen_exclusive)
-
-static PFN_vkGetDeviceGroupSurfacePresentModes2EXT pfn_vkGetDeviceGroupSurfacePresentModes2EXT;
-VKAPI_ATTR VkResult vkGetDeviceGroupSurfacePresentModes2EXT(VkDevice device, const VkPhysicalDeviceSurfaceInfo2KHR * pSurfaceInfo, VkDeviceGroupPresentModeFlagsKHR * pModes)
-{
-	assert(pfn_vkGetDeviceGroupSurfacePresentModes2EXT);
-	return pfn_vkGetDeviceGroupSurfacePresentModes2EXT(device, pSurfaceInfo, pModes);
-}
-
-#endif // defined(VK_EXT_full_screen_exclusive)
-
 #endif // defined(VK_KHR_device_group)
 
 #if defined(VK_NN_vi_surface)
@@ -2874,6 +2863,17 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(VkPhysicalD
 
 #endif // defined(VK_NV_cooperative_matrix)
 
+#if defined(VK_NV_coverage_reduction_mode)
+
+static PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(VkPhysicalDevice physicalDevice, uint32_t * pCombinationCount, VkFramebufferMixedSamplesCombinationNV * pCombinations)
+{
+	assert(pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV);
+	return pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(physicalDevice, pCombinationCount, pCombinations);
+}
+
+#endif // defined(VK_NV_coverage_reduction_mode)
+
 #if defined(VK_EXT_full_screen_exclusive)
 
 static PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT;
@@ -2896,6 +2896,17 @@ VKAPI_ATTR VkResult vkReleaseFullScreenExclusiveModeEXT(VkDevice device, VkSwapc
 	assert(pfn_vkReleaseFullScreenExclusiveModeEXT);
 	return pfn_vkReleaseFullScreenExclusiveModeEXT(device, swapchain);
 }
+
+#if defined(VK_KHR_device_group)
+
+static PFN_vkGetDeviceGroupSurfacePresentModes2EXT pfn_vkGetDeviceGroupSurfacePresentModes2EXT;
+VKAPI_ATTR VkResult vkGetDeviceGroupSurfacePresentModes2EXT(VkDevice device, const VkPhysicalDeviceSurfaceInfo2KHR * pSurfaceInfo, VkDeviceGroupPresentModeFlagsKHR * pModes)
+{
+	assert(pfn_vkGetDeviceGroupSurfacePresentModes2EXT);
+	return pfn_vkGetDeviceGroupSurfacePresentModes2EXT(device, pSurfaceInfo, pModes);
+}
+
+#endif // defined(VK_KHR_device_group)
 
 #endif // defined(VK_EXT_full_screen_exclusive)
 
@@ -3226,10 +3237,6 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_KHR_swapchain)
 	pfn_vkAcquireNextImage2KHR = (PFN_vkAcquireNextImage2KHR)vkGetInstanceProcAddr(vulkan, "vkAcquireNextImage2KHR");
 #endif // defined(VK_KHR_swapchain)
-
-#if defined(VK_EXT_full_screen_exclusive)
-	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetInstanceProcAddr(vulkan, "vkGetDeviceGroupSurfacePresentModes2EXT");
-#endif // defined(VK_EXT_full_screen_exclusive)
 #endif // defined(VK_KHR_device_group)
 
 #if defined(VK_NN_vi_surface)
@@ -3514,10 +3521,18 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
 
+#if defined(VK_NV_coverage_reduction_mode)
+	pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
+#endif // defined(VK_NV_coverage_reduction_mode)
+
 #if defined(VK_EXT_full_screen_exclusive)
 	pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT = (PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
 	pfn_vkAcquireFullScreenExclusiveModeEXT = (PFN_vkAcquireFullScreenExclusiveModeEXT)vkGetInstanceProcAddr(vulkan, "vkAcquireFullScreenExclusiveModeEXT");
 	pfn_vkReleaseFullScreenExclusiveModeEXT = (PFN_vkReleaseFullScreenExclusiveModeEXT)vkGetInstanceProcAddr(vulkan, "vkReleaseFullScreenExclusiveModeEXT");
+
+#if defined(VK_KHR_device_group)
+	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetInstanceProcAddr(vulkan, "vkGetDeviceGroupSurfacePresentModes2EXT");
+#endif // defined(VK_KHR_device_group)
 #endif // defined(VK_EXT_full_screen_exclusive)
 
 #if defined(VK_EXT_headless_surface)
@@ -3598,10 +3613,6 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_KHR_swapchain)
 	pfn_vkAcquireNextImage2KHR = (PFN_vkAcquireNextImage2KHR)vkGetDeviceProcAddr(device, "vkAcquireNextImage2KHR");
 #endif // defined(VK_KHR_swapchain)
-
-#if defined(VK_EXT_full_screen_exclusive)
-	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModes2EXT");
-#endif // defined(VK_EXT_full_screen_exclusive)
 #endif // defined(VK_KHR_device_group)
 
 #if defined(VK_KHR_maintenance1)
@@ -3811,10 +3822,18 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
 
+#if defined(VK_NV_coverage_reduction_mode)
+	pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
+#endif // defined(VK_NV_coverage_reduction_mode)
+
 #if defined(VK_EXT_full_screen_exclusive)
 	pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT = (PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
 	pfn_vkAcquireFullScreenExclusiveModeEXT = (PFN_vkAcquireFullScreenExclusiveModeEXT)vkGetDeviceProcAddr(device, "vkAcquireFullScreenExclusiveModeEXT");
 	pfn_vkReleaseFullScreenExclusiveModeEXT = (PFN_vkReleaseFullScreenExclusiveModeEXT)vkGetDeviceProcAddr(device, "vkReleaseFullScreenExclusiveModeEXT");
+
+#if defined(VK_KHR_device_group)
+	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModes2EXT");
+#endif // defined(VK_KHR_device_group)
 #endif // defined(VK_EXT_full_screen_exclusive)
 
 #if defined(VK_EXT_host_query_reset)
