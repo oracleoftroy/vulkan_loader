@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 108
+#if VK_HEADER_VERSION != 113
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2808,6 +2808,73 @@ VKAPI_ATTR void vkGetQueueCheckpointDataNV(VkQueue queue, uint32_t * pCheckpoint
 
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 
+#if defined(VK_INTEL_performance_query)
+
+static PFN_vkInitializePerformanceApiINTEL pfn_vkInitializePerformanceApiINTEL;
+VKAPI_ATTR VkResult vkInitializePerformanceApiINTEL(VkDevice device, const VkInitializePerformanceApiInfoINTEL * pInitializeInfo)
+{
+	assert(pfn_vkInitializePerformanceApiINTEL);
+	return pfn_vkInitializePerformanceApiINTEL(device, pInitializeInfo);
+}
+
+static PFN_vkUninitializePerformanceApiINTEL pfn_vkUninitializePerformanceApiINTEL;
+VKAPI_ATTR void vkUninitializePerformanceApiINTEL(VkDevice device)
+{
+	assert(pfn_vkUninitializePerformanceApiINTEL);
+	return pfn_vkUninitializePerformanceApiINTEL(device);
+}
+
+static PFN_vkCmdSetPerformanceMarkerINTEL pfn_vkCmdSetPerformanceMarkerINTEL;
+VKAPI_ATTR VkResult vkCmdSetPerformanceMarkerINTEL(VkCommandBuffer commandBuffer, const VkPerformanceMarkerInfoINTEL * pMarkerInfo)
+{
+	assert(pfn_vkCmdSetPerformanceMarkerINTEL);
+	return pfn_vkCmdSetPerformanceMarkerINTEL(commandBuffer, pMarkerInfo);
+}
+
+static PFN_vkCmdSetPerformanceStreamMarkerINTEL pfn_vkCmdSetPerformanceStreamMarkerINTEL;
+VKAPI_ATTR VkResult vkCmdSetPerformanceStreamMarkerINTEL(VkCommandBuffer commandBuffer, const VkPerformanceStreamMarkerInfoINTEL * pMarkerInfo)
+{
+	assert(pfn_vkCmdSetPerformanceStreamMarkerINTEL);
+	return pfn_vkCmdSetPerformanceStreamMarkerINTEL(commandBuffer, pMarkerInfo);
+}
+
+static PFN_vkCmdSetPerformanceOverrideINTEL pfn_vkCmdSetPerformanceOverrideINTEL;
+VKAPI_ATTR VkResult vkCmdSetPerformanceOverrideINTEL(VkCommandBuffer commandBuffer, const VkPerformanceOverrideInfoINTEL * pOverrideInfo)
+{
+	assert(pfn_vkCmdSetPerformanceOverrideINTEL);
+	return pfn_vkCmdSetPerformanceOverrideINTEL(commandBuffer, pOverrideInfo);
+}
+
+static PFN_vkAcquirePerformanceConfigurationINTEL pfn_vkAcquirePerformanceConfigurationINTEL;
+VKAPI_ATTR VkResult vkAcquirePerformanceConfigurationINTEL(VkDevice device, const VkPerformanceConfigurationAcquireInfoINTEL * pAcquireInfo, VkPerformanceConfigurationINTEL * pConfiguration)
+{
+	assert(pfn_vkAcquirePerformanceConfigurationINTEL);
+	return pfn_vkAcquirePerformanceConfigurationINTEL(device, pAcquireInfo, pConfiguration);
+}
+
+static PFN_vkReleasePerformanceConfigurationINTEL pfn_vkReleasePerformanceConfigurationINTEL;
+VKAPI_ATTR VkResult vkReleasePerformanceConfigurationINTEL(VkDevice device, VkPerformanceConfigurationINTEL configuration)
+{
+	assert(pfn_vkReleasePerformanceConfigurationINTEL);
+	return pfn_vkReleasePerformanceConfigurationINTEL(device, configuration);
+}
+
+static PFN_vkQueueSetPerformanceConfigurationINTEL pfn_vkQueueSetPerformanceConfigurationINTEL;
+VKAPI_ATTR VkResult vkQueueSetPerformanceConfigurationINTEL(VkQueue queue, VkPerformanceConfigurationINTEL configuration)
+{
+	assert(pfn_vkQueueSetPerformanceConfigurationINTEL);
+	return pfn_vkQueueSetPerformanceConfigurationINTEL(queue, configuration);
+}
+
+static PFN_vkGetPerformanceParameterINTEL pfn_vkGetPerformanceParameterINTEL;
+VKAPI_ATTR VkResult vkGetPerformanceParameterINTEL(VkDevice device, VkPerformanceParameterTypeINTEL parameter, VkPerformanceValueINTEL * pValue)
+{
+	assert(pfn_vkGetPerformanceParameterINTEL);
+	return pfn_vkGetPerformanceParameterINTEL(device, parameter, pValue);
+}
+
+#endif // defined(VK_INTEL_performance_query)
+
 #if defined(VK_AMD_display_native_hdr)
 
 static PFN_vkSetLocalDimmingAMD pfn_vkSetLocalDimmingAMD;
@@ -3501,6 +3568,18 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(vulkan, "vkGetQueueCheckpointDataNV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 
+#if defined(VK_INTEL_performance_query)
+	pfn_vkInitializePerformanceApiINTEL = (PFN_vkInitializePerformanceApiINTEL)vkGetInstanceProcAddr(vulkan, "vkInitializePerformanceApiINTEL");
+	pfn_vkUninitializePerformanceApiINTEL = (PFN_vkUninitializePerformanceApiINTEL)vkGetInstanceProcAddr(vulkan, "vkUninitializePerformanceApiINTEL");
+	pfn_vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vkGetInstanceProcAddr(vulkan, "vkCmdSetPerformanceMarkerINTEL");
+	pfn_vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vkGetInstanceProcAddr(vulkan, "vkCmdSetPerformanceStreamMarkerINTEL");
+	pfn_vkCmdSetPerformanceOverrideINTEL = (PFN_vkCmdSetPerformanceOverrideINTEL)vkGetInstanceProcAddr(vulkan, "vkCmdSetPerformanceOverrideINTEL");
+	pfn_vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vkGetInstanceProcAddr(vulkan, "vkAcquirePerformanceConfigurationINTEL");
+	pfn_vkReleasePerformanceConfigurationINTEL = (PFN_vkReleasePerformanceConfigurationINTEL)vkGetInstanceProcAddr(vulkan, "vkReleasePerformanceConfigurationINTEL");
+	pfn_vkQueueSetPerformanceConfigurationINTEL = (PFN_vkQueueSetPerformanceConfigurationINTEL)vkGetInstanceProcAddr(vulkan, "vkQueueSetPerformanceConfigurationINTEL");
+	pfn_vkGetPerformanceParameterINTEL = (PFN_vkGetPerformanceParameterINTEL)vkGetInstanceProcAddr(vulkan, "vkGetPerformanceParameterINTEL");
+#endif // defined(VK_INTEL_performance_query)
+
 #if defined(VK_AMD_display_native_hdr)
 	pfn_vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vkGetInstanceProcAddr(vulkan, "vkSetLocalDimmingAMD");
 #endif // defined(VK_AMD_display_native_hdr)
@@ -3809,6 +3888,18 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
+
+#if defined(VK_INTEL_performance_query)
+	pfn_vkInitializePerformanceApiINTEL = (PFN_vkInitializePerformanceApiINTEL)vkGetDeviceProcAddr(device, "vkInitializePerformanceApiINTEL");
+	pfn_vkUninitializePerformanceApiINTEL = (PFN_vkUninitializePerformanceApiINTEL)vkGetDeviceProcAddr(device, "vkUninitializePerformanceApiINTEL");
+	pfn_vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vkGetDeviceProcAddr(device, "vkCmdSetPerformanceMarkerINTEL");
+	pfn_vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vkGetDeviceProcAddr(device, "vkCmdSetPerformanceStreamMarkerINTEL");
+	pfn_vkCmdSetPerformanceOverrideINTEL = (PFN_vkCmdSetPerformanceOverrideINTEL)vkGetDeviceProcAddr(device, "vkCmdSetPerformanceOverrideINTEL");
+	pfn_vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vkGetDeviceProcAddr(device, "vkAcquirePerformanceConfigurationINTEL");
+	pfn_vkReleasePerformanceConfigurationINTEL = (PFN_vkReleasePerformanceConfigurationINTEL)vkGetDeviceProcAddr(device, "vkReleasePerformanceConfigurationINTEL");
+	pfn_vkQueueSetPerformanceConfigurationINTEL = (PFN_vkQueueSetPerformanceConfigurationINTEL)vkGetDeviceProcAddr(device, "vkQueueSetPerformanceConfigurationINTEL");
+	pfn_vkGetPerformanceParameterINTEL = (PFN_vkGetPerformanceParameterINTEL)vkGetDeviceProcAddr(device, "vkGetPerformanceParameterINTEL");
+#endif // defined(VK_INTEL_performance_query)
 
 #if defined(VK_AMD_display_native_hdr)
 	pfn_vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vkGetDeviceProcAddr(device, "vkSetLocalDimmingAMD");
