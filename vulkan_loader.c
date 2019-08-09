@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 116
+#if VK_HEADER_VERSION != 117
 	#error "Vulkan header version does not match"
 #endif
 
@@ -1508,6 +1508,13 @@ VKAPI_ATTR VkResult vkQueueSignalReleaseImageANDROID(VkQueue queue, uint32_t wai
 	return pfn_vkQueueSignalReleaseImageANDROID(queue, waitSemaphoreCount, pWaitSemaphores, image, pNativeFenceFd);
 }
 
+static PFN_vkGetSwapchainGrallocUsage2ANDROID pfn_vkGetSwapchainGrallocUsage2ANDROID;
+VKAPI_ATTR VkResult vkGetSwapchainGrallocUsage2ANDROID(VkDevice device, VkFormat format, VkImageUsageFlags imageUsage, VkSwapchainImageUsageFlagsANDROID swapchainImageUsage, uint64_t * grallocConsumerUsage, uint64_t * grallocProducerUsage)
+{
+	assert(pfn_vkGetSwapchainGrallocUsage2ANDROID);
+	return pfn_vkGetSwapchainGrallocUsage2ANDROID(device, format, imageUsage, swapchainImageUsage, grallocConsumerUsage, grallocProducerUsage);
+}
+
 #endif // defined(VK_ANDROID_native_buffer)
 
 #if defined(VK_EXT_debug_report)
@@ -2988,6 +2995,17 @@ VKAPI_ATTR VkResult vkCreateHeadlessSurfaceEXT(VkInstance instance, const VkHead
 
 #endif // defined(VK_EXT_headless_surface)
 
+#if defined(VK_EXT_line_rasterization)
+
+static PFN_vkCmdSetLineStippleEXT pfn_vkCmdSetLineStippleEXT;
+VKAPI_ATTR void vkCmdSetLineStippleEXT(VkCommandBuffer commandBuffer, uint32_t lineStippleFactor, uint16_t lineStipplePattern)
+{
+	assert(pfn_vkCmdSetLineStippleEXT);
+	return pfn_vkCmdSetLineStippleEXT(commandBuffer, lineStippleFactor, lineStipplePattern);
+}
+
+#endif // defined(VK_EXT_line_rasterization)
+
 #if defined(VK_EXT_host_query_reset)
 
 static PFN_vkResetQueryPoolEXT pfn_vkResetQueryPoolEXT;
@@ -3230,6 +3248,7 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetSwapchainGrallocUsageANDROID = (PFN_vkGetSwapchainGrallocUsageANDROID)vkGetInstanceProcAddr(vulkan, "vkGetSwapchainGrallocUsageANDROID");
 	pfn_vkAcquireImageANDROID = (PFN_vkAcquireImageANDROID)vkGetInstanceProcAddr(vulkan, "vkAcquireImageANDROID");
 	pfn_vkQueueSignalReleaseImageANDROID = (PFN_vkQueueSignalReleaseImageANDROID)vkGetInstanceProcAddr(vulkan, "vkQueueSignalReleaseImageANDROID");
+	pfn_vkGetSwapchainGrallocUsage2ANDROID = (PFN_vkGetSwapchainGrallocUsage2ANDROID)vkGetInstanceProcAddr(vulkan, "vkGetSwapchainGrallocUsage2ANDROID");
 #endif // defined(VK_ANDROID_native_buffer)
 
 #if defined(VK_EXT_debug_report)
@@ -3618,6 +3637,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkCreateHeadlessSurfaceEXT = (PFN_vkCreateHeadlessSurfaceEXT)vkGetInstanceProcAddr(vulkan, "vkCreateHeadlessSurfaceEXT");
 #endif // defined(VK_EXT_headless_surface)
 
+#if defined(VK_EXT_line_rasterization)
+	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetLineStippleEXT");
+#endif // defined(VK_EXT_line_rasterization)
+
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetInstanceProcAddr(vulkan, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
@@ -3642,6 +3665,7 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkGetSwapchainGrallocUsageANDROID = (PFN_vkGetSwapchainGrallocUsageANDROID)vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsageANDROID");
 	pfn_vkAcquireImageANDROID = (PFN_vkAcquireImageANDROID)vkGetDeviceProcAddr(device, "vkAcquireImageANDROID");
 	pfn_vkQueueSignalReleaseImageANDROID = (PFN_vkQueueSignalReleaseImageANDROID)vkGetDeviceProcAddr(device, "vkQueueSignalReleaseImageANDROID");
+	pfn_vkGetSwapchainGrallocUsage2ANDROID = (PFN_vkGetSwapchainGrallocUsage2ANDROID)vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsage2ANDROID");
 #endif // defined(VK_ANDROID_native_buffer)
 
 #if defined(VK_EXT_debug_marker)
@@ -3926,6 +3950,10 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModes2EXT");
 #endif // defined(VK_KHR_device_group)
 #endif // defined(VK_EXT_full_screen_exclusive)
+
+#if defined(VK_EXT_line_rasterization)
+	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
+#endif // defined(VK_EXT_line_rasterization)
 
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetDeviceProcAddr(device, "vkResetQueryPoolEXT");
