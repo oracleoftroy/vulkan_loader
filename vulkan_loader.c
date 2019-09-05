@@ -8,7 +8,7 @@
 #pragma warning(disable: 4098)
 #endif
 
-#if VK_HEADER_VERSION != 117
+#if VK_HEADER_VERSION != 121
 	#error "Vulkan header version does not match"
 #endif
 
@@ -3017,6 +3017,31 @@ VKAPI_ATTR void vkResetQueryPoolEXT(VkDevice device, VkQueryPool queryPool, uint
 
 #endif // defined(VK_EXT_host_query_reset)
 
+#if defined(VK_KHR_pipeline_executable_properties)
+
+static PFN_vkGetPipelineExecutablePropertiesKHR pfn_vkGetPipelineExecutablePropertiesKHR;
+VKAPI_ATTR VkResult vkGetPipelineExecutablePropertiesKHR(VkDevice device, const VkPipelineInfoKHR * pPipelineInfo, uint32_t * pExecutableCount, VkPipelineExecutablePropertiesKHR * pProperties)
+{
+	assert(pfn_vkGetPipelineExecutablePropertiesKHR);
+	return pfn_vkGetPipelineExecutablePropertiesKHR(device, pPipelineInfo, pExecutableCount, pProperties);
+}
+
+static PFN_vkGetPipelineExecutableStatisticsKHR pfn_vkGetPipelineExecutableStatisticsKHR;
+VKAPI_ATTR VkResult vkGetPipelineExecutableStatisticsKHR(VkDevice device, const VkPipelineExecutableInfoKHR * pExecutableInfo, uint32_t * pStatisticCount, VkPipelineExecutableStatisticKHR * pStatistics)
+{
+	assert(pfn_vkGetPipelineExecutableStatisticsKHR);
+	return pfn_vkGetPipelineExecutableStatisticsKHR(device, pExecutableInfo, pStatisticCount, pStatistics);
+}
+
+static PFN_vkGetPipelineExecutableInternalRepresentationsKHR pfn_vkGetPipelineExecutableInternalRepresentationsKHR;
+VKAPI_ATTR VkResult vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice device, const VkPipelineExecutableInfoKHR * pExecutableInfo, uint32_t * pInternalRepresentationCount, VkPipelineExecutableInternalRepresentationKHR * pInternalRepresentations)
+{
+	assert(pfn_vkGetPipelineExecutableInternalRepresentationsKHR);
+	return pfn_vkGetPipelineExecutableInternalRepresentationsKHR(device, pExecutableInfo, pInternalRepresentationCount, pInternalRepresentations);
+}
+
+#endif // defined(VK_KHR_pipeline_executable_properties)
+
 void vulkan_loader_init(PFN_vkGetInstanceProcAddr get_address)
 {
 	pfn_vkGetInstanceProcAddr = get_address;
@@ -3644,6 +3669,12 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetInstanceProcAddr(vulkan, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
+
+#if defined(VK_KHR_pipeline_executable_properties)
+	pfn_vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vkGetInstanceProcAddr(vulkan, "vkGetPipelineExecutablePropertiesKHR");
+	pfn_vkGetPipelineExecutableStatisticsKHR = (PFN_vkGetPipelineExecutableStatisticsKHR)vkGetInstanceProcAddr(vulkan, "vkGetPipelineExecutableStatisticsKHR");
+	pfn_vkGetPipelineExecutableInternalRepresentationsKHR = (PFN_vkGetPipelineExecutableInternalRepresentationsKHR)vkGetInstanceProcAddr(vulkan, "vkGetPipelineExecutableInternalRepresentationsKHR");
+#endif // defined(VK_KHR_pipeline_executable_properties)
 }
 
 void vulkan_load_device_procs(VkDevice device)
@@ -3958,5 +3989,11 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetDeviceProcAddr(device, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
+
+#if defined(VK_KHR_pipeline_executable_properties)
+	pfn_vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vkGetDeviceProcAddr(device, "vkGetPipelineExecutablePropertiesKHR");
+	pfn_vkGetPipelineExecutableStatisticsKHR = (PFN_vkGetPipelineExecutableStatisticsKHR)vkGetDeviceProcAddr(device, "vkGetPipelineExecutableStatisticsKHR");
+	pfn_vkGetPipelineExecutableInternalRepresentationsKHR = (PFN_vkGetPipelineExecutableInternalRepresentationsKHR)vkGetDeviceProcAddr(device, "vkGetPipelineExecutableInternalRepresentationsKHR");
+#endif // defined(VK_KHR_pipeline_executable_properties)
 }
 
