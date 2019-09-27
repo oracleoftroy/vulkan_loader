@@ -1,13 +1,6 @@
 #include <vulkan/vulkan.h>
 #include <assert.h>
 
-#if defined(_MSC_VER)
-// disable warning: 'void' function returning a value
-// Wrapper functions return whatever their function pointer returns, and the types should always match.
-// MSC warns on void f() { return p_f(); } where p_f() is also returning void
-#pragma warning(disable: 4098)
-#endif
-
 #if VK_HEADER_VERSION != 123
 	#error "Vulkan header version does not match"
 #endif
