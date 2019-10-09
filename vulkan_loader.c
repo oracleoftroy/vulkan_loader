@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
 #include <assert.h>
 
-#if VK_HEADER_VERSION != 123
+#if VK_HEADER_VERSION != 124
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2808,6 +2808,31 @@ VKAPI_ATTR void vkGetQueueCheckpointDataNV(VkQueue queue, uint32_t * pCheckpoint
 
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 
+#if defined(VK_KHR_timeline_semaphore)
+
+static PFN_vkGetSemaphoreCounterValueKHR pfn_vkGetSemaphoreCounterValueKHR;
+VKAPI_ATTR VkResult vkGetSemaphoreCounterValueKHR(VkDevice device, VkSemaphore semaphore, uint64_t * pValue)
+{
+	assert(pfn_vkGetSemaphoreCounterValueKHR);
+	return pfn_vkGetSemaphoreCounterValueKHR(device, semaphore, pValue);
+}
+
+static PFN_vkWaitSemaphoresKHR pfn_vkWaitSemaphoresKHR;
+VKAPI_ATTR VkResult vkWaitSemaphoresKHR(VkDevice device, const VkSemaphoreWaitInfoKHR * pWaitInfo, uint64_t timeout)
+{
+	assert(pfn_vkWaitSemaphoresKHR);
+	return pfn_vkWaitSemaphoresKHR(device, pWaitInfo, timeout);
+}
+
+static PFN_vkSignalSemaphoreKHR pfn_vkSignalSemaphoreKHR;
+VKAPI_ATTR VkResult vkSignalSemaphoreKHR(VkDevice device, const VkSemaphoreSignalInfoKHR * pSignalInfo)
+{
+	assert(pfn_vkSignalSemaphoreKHR);
+	return pfn_vkSignalSemaphoreKHR(device, pSignalInfo);
+}
+
+#endif // defined(VK_KHR_timeline_semaphore)
+
 #if defined(VK_INTEL_performance_query)
 
 static PFN_vkInitializePerformanceApiINTEL pfn_vkInitializePerformanceApiINTEL;
@@ -3605,6 +3630,12 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(vulkan, "vkGetQueueCheckpointDataNV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 
+#if defined(VK_KHR_timeline_semaphore)
+	pfn_vkGetSemaphoreCounterValueKHR = (PFN_vkGetSemaphoreCounterValueKHR)vkGetInstanceProcAddr(vulkan, "vkGetSemaphoreCounterValueKHR");
+	pfn_vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vkGetInstanceProcAddr(vulkan, "vkWaitSemaphoresKHR");
+	pfn_vkSignalSemaphoreKHR = (PFN_vkSignalSemaphoreKHR)vkGetInstanceProcAddr(vulkan, "vkSignalSemaphoreKHR");
+#endif // defined(VK_KHR_timeline_semaphore)
+
 #if defined(VK_INTEL_performance_query)
 	pfn_vkInitializePerformanceApiINTEL = (PFN_vkInitializePerformanceApiINTEL)vkGetInstanceProcAddr(vulkan, "vkInitializePerformanceApiINTEL");
 	pfn_vkUninitializePerformanceApiINTEL = (PFN_vkUninitializePerformanceApiINTEL)vkGetInstanceProcAddr(vulkan, "vkUninitializePerformanceApiINTEL");
@@ -3936,6 +3967,12 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
+
+#if defined(VK_KHR_timeline_semaphore)
+	pfn_vkGetSemaphoreCounterValueKHR = (PFN_vkGetSemaphoreCounterValueKHR)vkGetDeviceProcAddr(device, "vkGetSemaphoreCounterValueKHR");
+	pfn_vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vkGetDeviceProcAddr(device, "vkWaitSemaphoresKHR");
+	pfn_vkSignalSemaphoreKHR = (PFN_vkSignalSemaphoreKHR)vkGetDeviceProcAddr(device, "vkSignalSemaphoreKHR");
+#endif // defined(VK_KHR_timeline_semaphore)
 
 #if defined(VK_INTEL_performance_query)
 	pfn_vkInitializePerformanceApiINTEL = (PFN_vkInitializePerformanceApiINTEL)vkGetDeviceProcAddr(device, "vkInitializePerformanceApiINTEL");
