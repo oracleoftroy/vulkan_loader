@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
 #include <assert.h>
 
-#if VK_HEADER_VERSION != 126
+#if VK_HEADER_VERSION != 128
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2279,6 +2279,38 @@ VKAPI_ATTR VkResult vkGetFenceFdKHR(VkDevice device, const VkFenceGetFdInfoKHR *
 
 #endif // defined(VK_KHR_external_fence_fd)
 
+#if defined(VK_KHR_performance_query)
+
+static PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR;
+VKAPI_ATTR VkResult vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, uint32_t * pCounterCount, VkPerformanceCounterKHR * pCounters, VkPerformanceCounterDescriptionKHR * pCounterDescriptions)
+{
+	assert(pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR);
+	return pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR(physicalDevice, queueFamilyIndex, pCounterCount, pCounters, pCounterDescriptions);
+}
+
+static PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR pfn_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR;
+VKAPI_ATTR void vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR(VkPhysicalDevice physicalDevice, const VkQueryPoolPerformanceCreateInfoKHR * pPerformanceQueryCreateInfo, uint32_t * pNumPasses)
+{
+	assert(pfn_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR);
+	pfn_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR(physicalDevice, pPerformanceQueryCreateInfo, pNumPasses);
+}
+
+static PFN_vkAcquireProfilingLockKHR pfn_vkAcquireProfilingLockKHR;
+VKAPI_ATTR VkResult vkAcquireProfilingLockKHR(VkDevice device, const VkAcquireProfilingLockInfoKHR * pInfo)
+{
+	assert(pfn_vkAcquireProfilingLockKHR);
+	return pfn_vkAcquireProfilingLockKHR(device, pInfo);
+}
+
+static PFN_vkReleaseProfilingLockKHR pfn_vkReleaseProfilingLockKHR;
+VKAPI_ATTR void vkReleaseProfilingLockKHR(VkDevice device)
+{
+	assert(pfn_vkReleaseProfilingLockKHR);
+	pfn_vkReleaseProfilingLockKHR(device);
+}
+
+#endif // defined(VK_KHR_performance_query)
+
 #if defined(VK_KHR_get_surface_capabilities2)
 
 static PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR pfn_vkGetPhysicalDeviceSurfaceCapabilities2KHR;
@@ -3501,6 +3533,13 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vkGetInstanceProcAddr(vulkan, "vkGetFenceFdKHR");
 #endif // defined(VK_KHR_external_fence_fd)
 
+#if defined(VK_KHR_performance_query)
+	pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR)vkGetInstanceProcAddr(vulkan, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR");
+	pfn_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = (PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR");
+	pfn_vkAcquireProfilingLockKHR = (PFN_vkAcquireProfilingLockKHR)vkGetInstanceProcAddr(vulkan, "vkAcquireProfilingLockKHR");
+	pfn_vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vkGetInstanceProcAddr(vulkan, "vkReleaseProfilingLockKHR");
+#endif // defined(VK_KHR_performance_query)
+
 #if defined(VK_KHR_get_surface_capabilities2)
 	pfn_vkGetPhysicalDeviceSurfaceCapabilities2KHR = (PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceSurfaceCapabilities2KHR");
 	pfn_vkGetPhysicalDeviceSurfaceFormats2KHR = (PFN_vkGetPhysicalDeviceSurfaceFormats2KHR)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceSurfaceFormats2KHR");
@@ -3872,6 +3911,13 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 	pfn_vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vkGetDeviceProcAddr(device, "vkGetFenceFdKHR");
 #endif // defined(VK_KHR_external_fence_fd)
+
+#if defined(VK_KHR_performance_query)
+	pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR)vkGetDeviceProcAddr(device, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR");
+	pfn_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = (PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR");
+	pfn_vkAcquireProfilingLockKHR = (PFN_vkAcquireProfilingLockKHR)vkGetDeviceProcAddr(device, "vkAcquireProfilingLockKHR");
+	pfn_vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vkGetDeviceProcAddr(device, "vkReleaseProfilingLockKHR");
+#endif // defined(VK_KHR_performance_query)
 
 #if defined(VK_ANDROID_external_memory_android_hardware_buffer)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
