@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
 #include <assert.h>
 
-#if VK_HEADER_VERSION != 128
+#if VK_HEADER_VERSION != 132
 	#error "Vulkan header version does not match"
 #endif
 
@@ -1253,6 +1253,113 @@ VKAPI_ATTR void vkGetDescriptorSetLayoutSupport(VkDevice device, const VkDescrip
 
 #endif // defined(VK_VERSION_1_1)
 
+#if defined(VK_VERSION_1_2)
+
+// Vulkan 1.2 core API interface definitions.
+
+// Promoted from VK_KHR_draw_indirect_count (extension 170)
+
+static PFN_vkCmdDrawIndirectCount pfn_vkCmdDrawIndirectCount;
+VKAPI_ATTR void vkCmdDrawIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawIndirectCount);
+	pfn_vkCmdDrawIndirectCount(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+}
+
+static PFN_vkCmdDrawIndexedIndirectCount pfn_vkCmdDrawIndexedIndirectCount;
+VKAPI_ATTR void vkCmdDrawIndexedIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawIndexedIndirectCount);
+	pfn_vkCmdDrawIndexedIndirectCount(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+}
+
+// Promoted from VK_KHR_create_renderpass2 (extension 110)
+
+static PFN_vkCreateRenderPass2 pfn_vkCreateRenderPass2;
+VKAPI_ATTR VkResult vkCreateRenderPass2(VkDevice device, const VkRenderPassCreateInfo2 * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkRenderPass * pRenderPass)
+{
+	assert(pfn_vkCreateRenderPass2);
+	return pfn_vkCreateRenderPass2(device, pCreateInfo, pAllocator, pRenderPass);
+}
+
+static PFN_vkCmdBeginRenderPass2 pfn_vkCmdBeginRenderPass2;
+VKAPI_ATTR void vkCmdBeginRenderPass2(VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo * pRenderPassBegin, const VkSubpassBeginInfo * pSubpassBeginInfo)
+{
+	assert(pfn_vkCmdBeginRenderPass2);
+	pfn_vkCmdBeginRenderPass2(commandBuffer, pRenderPassBegin, pSubpassBeginInfo);
+}
+
+static PFN_vkCmdNextSubpass2 pfn_vkCmdNextSubpass2;
+VKAPI_ATTR void vkCmdNextSubpass2(VkCommandBuffer commandBuffer, const VkSubpassBeginInfo * pSubpassBeginInfo, const VkSubpassEndInfo * pSubpassEndInfo)
+{
+	assert(pfn_vkCmdNextSubpass2);
+	pfn_vkCmdNextSubpass2(commandBuffer, pSubpassBeginInfo, pSubpassEndInfo);
+}
+
+static PFN_vkCmdEndRenderPass2 pfn_vkCmdEndRenderPass2;
+VKAPI_ATTR void vkCmdEndRenderPass2(VkCommandBuffer commandBuffer, const VkSubpassEndInfo * pSubpassEndInfo)
+{
+	assert(pfn_vkCmdEndRenderPass2);
+	pfn_vkCmdEndRenderPass2(commandBuffer, pSubpassEndInfo);
+}
+
+// Promoted from VK_EXT_host_query_reset (extension 262)
+
+static PFN_vkResetQueryPool pfn_vkResetQueryPool;
+VKAPI_ATTR void vkResetQueryPool(VkDevice device, VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount)
+{
+	assert(pfn_vkResetQueryPool);
+	pfn_vkResetQueryPool(device, queryPool, firstQuery, queryCount);
+}
+
+// Promoted from VK_KHR_timeline_semaphore (extension 208)
+
+static PFN_vkGetSemaphoreCounterValue pfn_vkGetSemaphoreCounterValue;
+VKAPI_ATTR VkResult vkGetSemaphoreCounterValue(VkDevice device, VkSemaphore semaphore, uint64_t * pValue)
+{
+	assert(pfn_vkGetSemaphoreCounterValue);
+	return pfn_vkGetSemaphoreCounterValue(device, semaphore, pValue);
+}
+
+static PFN_vkWaitSemaphores pfn_vkWaitSemaphores;
+VKAPI_ATTR VkResult vkWaitSemaphores(VkDevice device, const VkSemaphoreWaitInfo * pWaitInfo, uint64_t timeout)
+{
+	assert(pfn_vkWaitSemaphores);
+	return pfn_vkWaitSemaphores(device, pWaitInfo, timeout);
+}
+
+static PFN_vkSignalSemaphore pfn_vkSignalSemaphore;
+VKAPI_ATTR VkResult vkSignalSemaphore(VkDevice device, const VkSemaphoreSignalInfo * pSignalInfo)
+{
+	assert(pfn_vkSignalSemaphore);
+	return pfn_vkSignalSemaphore(device, pSignalInfo);
+}
+
+// Promoted from VK_KHR_buffer_device_address (extension 258)
+
+static PFN_vkGetBufferDeviceAddress pfn_vkGetBufferDeviceAddress;
+VKAPI_ATTR VkDeviceAddress vkGetBufferDeviceAddress(VkDevice device, const VkBufferDeviceAddressInfo * pInfo)
+{
+	assert(pfn_vkGetBufferDeviceAddress);
+	return pfn_vkGetBufferDeviceAddress(device, pInfo);
+}
+
+static PFN_vkGetBufferOpaqueCaptureAddress pfn_vkGetBufferOpaqueCaptureAddress;
+VKAPI_ATTR uint64_t vkGetBufferOpaqueCaptureAddress(VkDevice device, const VkBufferDeviceAddressInfo * pInfo)
+{
+	assert(pfn_vkGetBufferOpaqueCaptureAddress);
+	return pfn_vkGetBufferOpaqueCaptureAddress(device, pInfo);
+}
+
+static PFN_vkGetDeviceMemoryOpaqueCaptureAddress pfn_vkGetDeviceMemoryOpaqueCaptureAddress;
+VKAPI_ATTR uint64_t vkGetDeviceMemoryOpaqueCaptureAddress(VkDevice device, const VkDeviceMemoryOpaqueCaptureAddressInfo * pInfo)
+{
+	assert(pfn_vkGetDeviceMemoryOpaqueCaptureAddress);
+	return pfn_vkGetDeviceMemoryOpaqueCaptureAddress(device, pInfo);
+}
+
+#endif // defined(VK_VERSION_1_2)
+
 #if defined(VK_KHR_surface)
 
 static PFN_vkDestroySurfaceKHR pfn_vkDestroySurfaceKHR;
@@ -2192,28 +2299,28 @@ VKAPI_ATTR void vkSetHdrMetadataEXT(VkDevice device, uint32_t swapchainCount, co
 #if defined(VK_KHR_create_renderpass2)
 
 static PFN_vkCreateRenderPass2KHR pfn_vkCreateRenderPass2KHR;
-VKAPI_ATTR VkResult vkCreateRenderPass2KHR(VkDevice device, const VkRenderPassCreateInfo2KHR * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkRenderPass * pRenderPass)
+VKAPI_ATTR VkResult vkCreateRenderPass2KHR(VkDevice device, const VkRenderPassCreateInfo2 * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkRenderPass * pRenderPass)
 {
 	assert(pfn_vkCreateRenderPass2KHR);
 	return pfn_vkCreateRenderPass2KHR(device, pCreateInfo, pAllocator, pRenderPass);
 }
 
 static PFN_vkCmdBeginRenderPass2KHR pfn_vkCmdBeginRenderPass2KHR;
-VKAPI_ATTR void vkCmdBeginRenderPass2KHR(VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo * pRenderPassBegin, const VkSubpassBeginInfoKHR * pSubpassBeginInfo)
+VKAPI_ATTR void vkCmdBeginRenderPass2KHR(VkCommandBuffer commandBuffer, const VkRenderPassBeginInfo * pRenderPassBegin, const VkSubpassBeginInfo * pSubpassBeginInfo)
 {
 	assert(pfn_vkCmdBeginRenderPass2KHR);
 	pfn_vkCmdBeginRenderPass2KHR(commandBuffer, pRenderPassBegin, pSubpassBeginInfo);
 }
 
 static PFN_vkCmdNextSubpass2KHR pfn_vkCmdNextSubpass2KHR;
-VKAPI_ATTR void vkCmdNextSubpass2KHR(VkCommandBuffer commandBuffer, const VkSubpassBeginInfoKHR * pSubpassBeginInfo, const VkSubpassEndInfoKHR * pSubpassEndInfo)
+VKAPI_ATTR void vkCmdNextSubpass2KHR(VkCommandBuffer commandBuffer, const VkSubpassBeginInfo * pSubpassBeginInfo, const VkSubpassEndInfo * pSubpassEndInfo)
 {
 	assert(pfn_vkCmdNextSubpass2KHR);
 	pfn_vkCmdNextSubpass2KHR(commandBuffer, pSubpassBeginInfo, pSubpassEndInfo);
 }
 
 static PFN_vkCmdEndRenderPass2KHR pfn_vkCmdEndRenderPass2KHR;
-VKAPI_ATTR void vkCmdEndRenderPass2KHR(VkCommandBuffer commandBuffer, const VkSubpassEndInfoKHR * pSubpassEndInfo)
+VKAPI_ATTR void vkCmdEndRenderPass2KHR(VkCommandBuffer commandBuffer, const VkSubpassEndInfo * pSubpassEndInfo)
 {
 	assert(pfn_vkCmdEndRenderPass2KHR);
 	pfn_vkCmdEndRenderPass2KHR(commandBuffer, pSubpassEndInfo);
@@ -2850,14 +2957,14 @@ VKAPI_ATTR VkResult vkGetSemaphoreCounterValueKHR(VkDevice device, VkSemaphore s
 }
 
 static PFN_vkWaitSemaphoresKHR pfn_vkWaitSemaphoresKHR;
-VKAPI_ATTR VkResult vkWaitSemaphoresKHR(VkDevice device, const VkSemaphoreWaitInfoKHR * pWaitInfo, uint64_t timeout)
+VKAPI_ATTR VkResult vkWaitSemaphoresKHR(VkDevice device, const VkSemaphoreWaitInfo * pWaitInfo, uint64_t timeout)
 {
 	assert(pfn_vkWaitSemaphoresKHR);
 	return pfn_vkWaitSemaphoresKHR(device, pWaitInfo, timeout);
 }
 
 static PFN_vkSignalSemaphoreKHR pfn_vkSignalSemaphoreKHR;
-VKAPI_ATTR VkResult vkSignalSemaphoreKHR(VkDevice device, const VkSemaphoreSignalInfoKHR * pSignalInfo)
+VKAPI_ATTR VkResult vkSignalSemaphoreKHR(VkDevice device, const VkSemaphoreSignalInfo * pSignalInfo)
 {
 	assert(pfn_vkSignalSemaphoreKHR);
 	return pfn_vkSignalSemaphoreKHR(device, pSignalInfo);
@@ -2968,13 +3075,24 @@ VKAPI_ATTR VkResult vkCreateMetalSurfaceEXT(VkInstance instance, const VkMetalSu
 #if defined(VK_EXT_buffer_device_address)
 
 static PFN_vkGetBufferDeviceAddressEXT pfn_vkGetBufferDeviceAddressEXT;
-VKAPI_ATTR VkDeviceAddress vkGetBufferDeviceAddressEXT(VkDevice device, const VkBufferDeviceAddressInfoEXT * pInfo)
+VKAPI_ATTR VkDeviceAddress vkGetBufferDeviceAddressEXT(VkDevice device, const VkBufferDeviceAddressInfo * pInfo)
 {
 	assert(pfn_vkGetBufferDeviceAddressEXT);
 	return pfn_vkGetBufferDeviceAddressEXT(device, pInfo);
 }
 
 #endif // defined(VK_EXT_buffer_device_address)
+
+#if defined(VK_EXT_tooling_info)
+
+static PFN_vkGetPhysicalDeviceToolPropertiesEXT pfn_vkGetPhysicalDeviceToolPropertiesEXT;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceToolPropertiesEXT(VkPhysicalDevice physicalDevice, uint32_t * pToolCount, VkPhysicalDeviceToolPropertiesEXT * pToolProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceToolPropertiesEXT);
+	return pfn_vkGetPhysicalDeviceToolPropertiesEXT(physicalDevice, pToolCount, pToolProperties);
+}
+
+#endif // defined(VK_EXT_tooling_info)
 
 #if defined(VK_NV_cooperative_matrix)
 
@@ -3044,6 +3162,31 @@ VKAPI_ATTR VkResult vkCreateHeadlessSurfaceEXT(VkInstance instance, const VkHead
 }
 
 #endif // defined(VK_EXT_headless_surface)
+
+#if defined(VK_KHR_buffer_device_address)
+
+static PFN_vkGetBufferDeviceAddressKHR pfn_vkGetBufferDeviceAddressKHR;
+VKAPI_ATTR VkDeviceAddress vkGetBufferDeviceAddressKHR(VkDevice device, const VkBufferDeviceAddressInfo * pInfo)
+{
+	assert(pfn_vkGetBufferDeviceAddressKHR);
+	return pfn_vkGetBufferDeviceAddressKHR(device, pInfo);
+}
+
+static PFN_vkGetBufferOpaqueCaptureAddressKHR pfn_vkGetBufferOpaqueCaptureAddressKHR;
+VKAPI_ATTR uint64_t vkGetBufferOpaqueCaptureAddressKHR(VkDevice device, const VkBufferDeviceAddressInfo * pInfo)
+{
+	assert(pfn_vkGetBufferOpaqueCaptureAddressKHR);
+	return pfn_vkGetBufferOpaqueCaptureAddressKHR(device, pInfo);
+}
+
+static PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR pfn_vkGetDeviceMemoryOpaqueCaptureAddressKHR;
+VKAPI_ATTR uint64_t vkGetDeviceMemoryOpaqueCaptureAddressKHR(VkDevice device, const VkDeviceMemoryOpaqueCaptureAddressInfo * pInfo)
+{
+	assert(pfn_vkGetDeviceMemoryOpaqueCaptureAddressKHR);
+	return pfn_vkGetDeviceMemoryOpaqueCaptureAddressKHR(device, pInfo);
+}
+
+#endif // defined(VK_KHR_buffer_device_address)
 
 #if defined(VK_EXT_line_rasterization)
 
@@ -3264,6 +3407,19 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetPhysicalDeviceExternalFenceProperties = (PFN_vkGetPhysicalDeviceExternalFenceProperties)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceExternalFenceProperties");
 	pfn_vkGetPhysicalDeviceExternalSemaphoreProperties = (PFN_vkGetPhysicalDeviceExternalSemaphoreProperties)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceExternalSemaphoreProperties");
 	pfn_vkGetDescriptorSetLayoutSupport = (PFN_vkGetDescriptorSetLayoutSupport)vkGetInstanceProcAddr(vulkan, "vkGetDescriptorSetLayoutSupport");
+	pfn_vkCmdDrawIndirectCount = (PFN_vkCmdDrawIndirectCount)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndirectCount");
+	pfn_vkCmdDrawIndexedIndirectCount = (PFN_vkCmdDrawIndexedIndirectCount)vkGetInstanceProcAddr(vulkan, "vkCmdDrawIndexedIndirectCount");
+	pfn_vkCreateRenderPass2 = (PFN_vkCreateRenderPass2)vkGetInstanceProcAddr(vulkan, "vkCreateRenderPass2");
+	pfn_vkCmdBeginRenderPass2 = (PFN_vkCmdBeginRenderPass2)vkGetInstanceProcAddr(vulkan, "vkCmdBeginRenderPass2");
+	pfn_vkCmdNextSubpass2 = (PFN_vkCmdNextSubpass2)vkGetInstanceProcAddr(vulkan, "vkCmdNextSubpass2");
+	pfn_vkCmdEndRenderPass2 = (PFN_vkCmdEndRenderPass2)vkGetInstanceProcAddr(vulkan, "vkCmdEndRenderPass2");
+	pfn_vkResetQueryPool = (PFN_vkResetQueryPool)vkGetInstanceProcAddr(vulkan, "vkResetQueryPool");
+	pfn_vkGetSemaphoreCounterValue = (PFN_vkGetSemaphoreCounterValue)vkGetInstanceProcAddr(vulkan, "vkGetSemaphoreCounterValue");
+	pfn_vkWaitSemaphores = (PFN_vkWaitSemaphores)vkGetInstanceProcAddr(vulkan, "vkWaitSemaphores");
+	pfn_vkSignalSemaphore = (PFN_vkSignalSemaphore)vkGetInstanceProcAddr(vulkan, "vkSignalSemaphore");
+	pfn_vkGetBufferDeviceAddress = (PFN_vkGetBufferDeviceAddress)vkGetInstanceProcAddr(vulkan, "vkGetBufferDeviceAddress");
+	pfn_vkGetBufferOpaqueCaptureAddress = (PFN_vkGetBufferOpaqueCaptureAddress)vkGetInstanceProcAddr(vulkan, "vkGetBufferOpaqueCaptureAddress");
+	pfn_vkGetDeviceMemoryOpaqueCaptureAddress = (PFN_vkGetDeviceMemoryOpaqueCaptureAddress)vkGetInstanceProcAddr(vulkan, "vkGetDeviceMemoryOpaqueCaptureAddress");
 
 #if defined(VK_KHR_surface)
 	pfn_vkDestroySurfaceKHR = (PFN_vkDestroySurfaceKHR)vkGetInstanceProcAddr(vulkan, "vkDestroySurfaceKHR");
@@ -3703,6 +3859,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetInstanceProcAddr(vulkan, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
 
+#if defined(VK_EXT_tooling_info)
+	pfn_vkGetPhysicalDeviceToolPropertiesEXT = (PFN_vkGetPhysicalDeviceToolPropertiesEXT)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceToolPropertiesEXT");
+#endif // defined(VK_EXT_tooling_info)
+
 #if defined(VK_NV_cooperative_matrix)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
@@ -3724,6 +3884,12 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 #if defined(VK_EXT_headless_surface)
 	pfn_vkCreateHeadlessSurfaceEXT = (PFN_vkCreateHeadlessSurfaceEXT)vkGetInstanceProcAddr(vulkan, "vkCreateHeadlessSurfaceEXT");
 #endif // defined(VK_EXT_headless_surface)
+
+#if defined(VK_KHR_buffer_device_address)
+	pfn_vkGetBufferDeviceAddressKHR = (PFN_vkGetBufferDeviceAddressKHR)vkGetInstanceProcAddr(vulkan, "vkGetBufferDeviceAddressKHR");
+	pfn_vkGetBufferOpaqueCaptureAddressKHR = (PFN_vkGetBufferOpaqueCaptureAddressKHR)vkGetInstanceProcAddr(vulkan, "vkGetBufferOpaqueCaptureAddressKHR");
+	pfn_vkGetDeviceMemoryOpaqueCaptureAddressKHR = (PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR)vkGetInstanceProcAddr(vulkan, "vkGetDeviceMemoryOpaqueCaptureAddressKHR");
+#endif // defined(VK_KHR_buffer_device_address)
 
 #if defined(VK_EXT_line_rasterization)
 	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetLineStippleEXT");
@@ -4040,6 +4206,10 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
 
+#if defined(VK_EXT_tooling_info)
+	pfn_vkGetPhysicalDeviceToolPropertiesEXT = (PFN_vkGetPhysicalDeviceToolPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceToolPropertiesEXT");
+#endif // defined(VK_EXT_tooling_info)
+
 #if defined(VK_NV_cooperative_matrix)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetDeviceProcAddr(device, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
@@ -4057,6 +4227,12 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModes2EXT");
 #endif // defined(VK_KHR_device_group)
 #endif // defined(VK_EXT_full_screen_exclusive)
+
+#if defined(VK_KHR_buffer_device_address)
+	pfn_vkGetBufferDeviceAddressKHR = (PFN_vkGetBufferDeviceAddressKHR)vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressKHR");
+	pfn_vkGetBufferOpaqueCaptureAddressKHR = (PFN_vkGetBufferOpaqueCaptureAddressKHR)vkGetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureAddressKHR");
+	pfn_vkGetDeviceMemoryOpaqueCaptureAddressKHR = (PFN_vkGetDeviceMemoryOpaqueCaptureAddressKHR)vkGetDeviceProcAddr(device, "vkGetDeviceMemoryOpaqueCaptureAddressKHR");
+#endif // defined(VK_KHR_buffer_device_address)
 
 #if defined(VK_EXT_line_rasterization)
 	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
