@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
 #include <assert.h>
 
-#if VK_HEADER_VERSION != 137
+#if VK_HEADER_VERSION != 140
 	#error "Vulkan header version does not match"
 #endif
 
@@ -2057,6 +2057,17 @@ VKAPI_ATTR void vkCmdPushDescriptorSetKHR(VkCommandBuffer commandBuffer, VkPipel
 	pfn_vkCmdPushDescriptorSetKHR(commandBuffer, pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites);
 }
 
+#if defined(VK_KHR_descriptor_update_template)
+
+static PFN_vkCmdPushDescriptorSetWithTemplateKHR pfn_vkCmdPushDescriptorSetWithTemplateKHR;
+VKAPI_ATTR void vkCmdPushDescriptorSetWithTemplateKHR(VkCommandBuffer commandBuffer, VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint32_t set, const void * pData)
+{
+	assert(pfn_vkCmdPushDescriptorSetWithTemplateKHR);
+	pfn_vkCmdPushDescriptorSetWithTemplateKHR(commandBuffer, descriptorUpdateTemplate, layout, set, pData);
+}
+
+#endif // defined(VK_KHR_descriptor_update_template)
+
 #endif // defined(VK_KHR_push_descriptor)
 
 #if defined(VK_EXT_conditional_rendering)
@@ -3418,6 +3429,38 @@ VKAPI_ATTR void vkDestroyIndirectCommandsLayoutNV(VkDevice device, VkIndirectCom
 
 #endif // defined(VK_NV_device_generated_commands)
 
+#if defined(VK_EXT_private_data)
+
+static PFN_vkCreatePrivateDataSlotEXT pfn_vkCreatePrivateDataSlotEXT;
+VKAPI_ATTR VkResult vkCreatePrivateDataSlotEXT(VkDevice device, const VkPrivateDataSlotCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkPrivateDataSlotEXT * pPrivateDataSlot)
+{
+	assert(pfn_vkCreatePrivateDataSlotEXT);
+	return pfn_vkCreatePrivateDataSlotEXT(device, pCreateInfo, pAllocator, pPrivateDataSlot);
+}
+
+static PFN_vkDestroyPrivateDataSlotEXT pfn_vkDestroyPrivateDataSlotEXT;
+VKAPI_ATTR void vkDestroyPrivateDataSlotEXT(VkDevice device, VkPrivateDataSlotEXT privateDataSlot, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyPrivateDataSlotEXT);
+	pfn_vkDestroyPrivateDataSlotEXT(device, privateDataSlot, pAllocator);
+}
+
+static PFN_vkSetPrivateDataEXT pfn_vkSetPrivateDataEXT;
+VKAPI_ATTR VkResult vkSetPrivateDataEXT(VkDevice device, VkObjectType objectType, uint64_t objectHandle, VkPrivateDataSlotEXT privateDataSlot, uint64_t data)
+{
+	assert(pfn_vkSetPrivateDataEXT);
+	return pfn_vkSetPrivateDataEXT(device, objectType, objectHandle, privateDataSlot, data);
+}
+
+static PFN_vkGetPrivateDataEXT pfn_vkGetPrivateDataEXT;
+VKAPI_ATTR void vkGetPrivateDataEXT(VkDevice device, VkObjectType objectType, uint64_t objectHandle, VkPrivateDataSlotEXT privateDataSlot, uint64_t * pData)
+{
+	assert(pfn_vkGetPrivateDataEXT);
+	pfn_vkGetPrivateDataEXT(device, objectType, objectHandle, privateDataSlot, pData);
+}
+
+#endif // defined(VK_EXT_private_data)
+
 void vulkan_loader_init(PFN_vkGetInstanceProcAddr get_address)
 {
 	pfn_vkGetInstanceProcAddr = get_address;
@@ -3782,6 +3825,10 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 
 #if defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetInstanceProcAddr(vulkan, "vkCmdPushDescriptorSetKHR");
+
+#if defined(VK_KHR_descriptor_update_template)
+	pfn_vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vkGetInstanceProcAddr(vulkan, "vkCmdPushDescriptorSetWithTemplateKHR");
+#endif // defined(VK_KHR_descriptor_update_template)
 #endif // defined(VK_KHR_push_descriptor)
 
 #if defined(VK_EXT_conditional_rendering)
@@ -4118,6 +4165,13 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkCreateIndirectCommandsLayoutNV = (PFN_vkCreateIndirectCommandsLayoutNV)vkGetInstanceProcAddr(vulkan, "vkCreateIndirectCommandsLayoutNV");
 	pfn_vkDestroyIndirectCommandsLayoutNV = (PFN_vkDestroyIndirectCommandsLayoutNV)vkGetInstanceProcAddr(vulkan, "vkDestroyIndirectCommandsLayoutNV");
 #endif // defined(VK_NV_device_generated_commands)
+
+#if defined(VK_EXT_private_data)
+	pfn_vkCreatePrivateDataSlotEXT = (PFN_vkCreatePrivateDataSlotEXT)vkGetInstanceProcAddr(vulkan, "vkCreatePrivateDataSlotEXT");
+	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetInstanceProcAddr(vulkan, "vkDestroyPrivateDataSlotEXT");
+	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetInstanceProcAddr(vulkan, "vkSetPrivateDataEXT");
+	pfn_vkGetPrivateDataEXT = (PFN_vkGetPrivateDataEXT)vkGetInstanceProcAddr(vulkan, "vkGetPrivateDataEXT");
+#endif // defined(VK_EXT_private_data)
 }
 
 void vulkan_load_device_procs(VkDevice device)
@@ -4219,6 +4273,10 @@ void vulkan_load_device_procs(VkDevice device)
 
 #if defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
+
+#if defined(VK_KHR_descriptor_update_template)
+	pfn_vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplateKHR");
+#endif // defined(VK_KHR_descriptor_update_template)
 #endif // defined(VK_KHR_push_descriptor)
 
 #if defined(VK_EXT_conditional_rendering)
@@ -4492,5 +4550,12 @@ void vulkan_load_device_procs(VkDevice device)
 	pfn_vkCreateIndirectCommandsLayoutNV = (PFN_vkCreateIndirectCommandsLayoutNV)vkGetDeviceProcAddr(device, "vkCreateIndirectCommandsLayoutNV");
 	pfn_vkDestroyIndirectCommandsLayoutNV = (PFN_vkDestroyIndirectCommandsLayoutNV)vkGetDeviceProcAddr(device, "vkDestroyIndirectCommandsLayoutNV");
 #endif // defined(VK_NV_device_generated_commands)
+
+#if defined(VK_EXT_private_data)
+	pfn_vkCreatePrivateDataSlotEXT = (PFN_vkCreatePrivateDataSlotEXT)vkGetDeviceProcAddr(device, "vkCreatePrivateDataSlotEXT");
+	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
+	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
+	pfn_vkGetPrivateDataEXT = (PFN_vkGetPrivateDataEXT)vkGetDeviceProcAddr(device, "vkGetPrivateDataEXT");
+#endif // defined(VK_EXT_private_data)
 }
 
