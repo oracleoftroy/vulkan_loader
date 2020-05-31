@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
 #include <assert.h>
 
-#if VK_HEADER_VERSION != 140
+#if VK_HEADER_VERSION != 141
 	#error "Vulkan header version does not match"
 #endif
 
