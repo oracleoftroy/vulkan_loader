@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
 #include <assert.h>
 
-#if VK_HEADER_VERSION != 141
+#if VK_HEADER_VERSION != 145
 	#error "Vulkan header version does not match"
 #endif
 
@@ -136,7 +136,7 @@ VKAPI_ATTR VkResult vkEnumerateDeviceLayerProperties(VkPhysicalDevice physicalDe
 	return pfn_vkEnumerateDeviceLayerProperties(physicalDevice, pPropertyCount, pProperties);
 }
 
-// queue commands
+// Queue commands
 
 static PFN_vkGetDeviceQueue pfn_vkGetDeviceQueue;
 VKAPI_ATTR void vkGetDeviceQueue(VkDevice device, uint32_t queueFamilyIndex, uint32_t queueIndex, VkQueue * pQueue)
@@ -3319,6 +3319,94 @@ VKAPI_ATTR void vkResetQueryPoolEXT(VkDevice device, VkQueryPool queryPool, uint
 
 #endif // defined(VK_EXT_host_query_reset)
 
+#if defined(VK_EXT_extended_dynamic_state)
+
+static PFN_vkCmdSetCullModeEXT pfn_vkCmdSetCullModeEXT;
+VKAPI_ATTR void vkCmdSetCullModeEXT(VkCommandBuffer commandBuffer, VkCullModeFlags cullMode)
+{
+	assert(pfn_vkCmdSetCullModeEXT);
+	pfn_vkCmdSetCullModeEXT(commandBuffer, cullMode);
+}
+
+static PFN_vkCmdSetFrontFaceEXT pfn_vkCmdSetFrontFaceEXT;
+VKAPI_ATTR void vkCmdSetFrontFaceEXT(VkCommandBuffer commandBuffer, VkFrontFace frontFace)
+{
+	assert(pfn_vkCmdSetFrontFaceEXT);
+	pfn_vkCmdSetFrontFaceEXT(commandBuffer, frontFace);
+}
+
+static PFN_vkCmdSetPrimitiveTopologyEXT pfn_vkCmdSetPrimitiveTopologyEXT;
+VKAPI_ATTR void vkCmdSetPrimitiveTopologyEXT(VkCommandBuffer commandBuffer, VkPrimitiveTopology primitiveTopology)
+{
+	assert(pfn_vkCmdSetPrimitiveTopologyEXT);
+	pfn_vkCmdSetPrimitiveTopologyEXT(commandBuffer, primitiveTopology);
+}
+
+static PFN_vkCmdSetViewportWithCountEXT pfn_vkCmdSetViewportWithCountEXT;
+VKAPI_ATTR void vkCmdSetViewportWithCountEXT(VkCommandBuffer commandBuffer, uint32_t viewportCount, const VkViewport * pViewports)
+{
+	assert(pfn_vkCmdSetViewportWithCountEXT);
+	pfn_vkCmdSetViewportWithCountEXT(commandBuffer, viewportCount, pViewports);
+}
+
+static PFN_vkCmdSetScissorWithCountEXT pfn_vkCmdSetScissorWithCountEXT;
+VKAPI_ATTR void vkCmdSetScissorWithCountEXT(VkCommandBuffer commandBuffer, uint32_t scissorCount, const VkRect2D * pScissors)
+{
+	assert(pfn_vkCmdSetScissorWithCountEXT);
+	pfn_vkCmdSetScissorWithCountEXT(commandBuffer, scissorCount, pScissors);
+}
+
+static PFN_vkCmdBindVertexBuffers2EXT pfn_vkCmdBindVertexBuffers2EXT;
+VKAPI_ATTR void vkCmdBindVertexBuffers2EXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, const VkBuffer * pBuffers, const VkDeviceSize * pOffsets, const VkDeviceSize * pSizes, const VkDeviceSize * pStrides)
+{
+	assert(pfn_vkCmdBindVertexBuffers2EXT);
+	pfn_vkCmdBindVertexBuffers2EXT(commandBuffer, firstBinding, bindingCount, pBuffers, pOffsets, pSizes, pStrides);
+}
+
+static PFN_vkCmdSetDepthTestEnableEXT pfn_vkCmdSetDepthTestEnableEXT;
+VKAPI_ATTR void vkCmdSetDepthTestEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthTestEnable)
+{
+	assert(pfn_vkCmdSetDepthTestEnableEXT);
+	pfn_vkCmdSetDepthTestEnableEXT(commandBuffer, depthTestEnable);
+}
+
+static PFN_vkCmdSetDepthWriteEnableEXT pfn_vkCmdSetDepthWriteEnableEXT;
+VKAPI_ATTR void vkCmdSetDepthWriteEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthWriteEnable)
+{
+	assert(pfn_vkCmdSetDepthWriteEnableEXT);
+	pfn_vkCmdSetDepthWriteEnableEXT(commandBuffer, depthWriteEnable);
+}
+
+static PFN_vkCmdSetDepthCompareOpEXT pfn_vkCmdSetDepthCompareOpEXT;
+VKAPI_ATTR void vkCmdSetDepthCompareOpEXT(VkCommandBuffer commandBuffer, VkCompareOp depthCompareOp)
+{
+	assert(pfn_vkCmdSetDepthCompareOpEXT);
+	pfn_vkCmdSetDepthCompareOpEXT(commandBuffer, depthCompareOp);
+}
+
+static PFN_vkCmdSetDepthBoundsTestEnableEXT pfn_vkCmdSetDepthBoundsTestEnableEXT;
+VKAPI_ATTR void vkCmdSetDepthBoundsTestEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthBoundsTestEnable)
+{
+	assert(pfn_vkCmdSetDepthBoundsTestEnableEXT);
+	pfn_vkCmdSetDepthBoundsTestEnableEXT(commandBuffer, depthBoundsTestEnable);
+}
+
+static PFN_vkCmdSetStencilTestEnableEXT pfn_vkCmdSetStencilTestEnableEXT;
+VKAPI_ATTR void vkCmdSetStencilTestEnableEXT(VkCommandBuffer commandBuffer, VkBool32 stencilTestEnable)
+{
+	assert(pfn_vkCmdSetStencilTestEnableEXT);
+	pfn_vkCmdSetStencilTestEnableEXT(commandBuffer, stencilTestEnable);
+}
+
+static PFN_vkCmdSetStencilOpEXT pfn_vkCmdSetStencilOpEXT;
+VKAPI_ATTR void vkCmdSetStencilOpEXT(VkCommandBuffer commandBuffer, VkStencilFaceFlags faceMask, VkStencilOp failOp, VkStencilOp passOp, VkStencilOp depthFailOp, VkCompareOp compareOp)
+{
+	assert(pfn_vkCmdSetStencilOpEXT);
+	pfn_vkCmdSetStencilOpEXT(commandBuffer, faceMask, failOp, passOp, depthFailOp, compareOp);
+}
+
+#endif // defined(VK_EXT_extended_dynamic_state)
+
 #if defined(VK_KHR_deferred_host_operations)
 
 static PFN_vkCreateDeferredOperationKHR pfn_vkCreateDeferredOperationKHR;
@@ -4143,6 +4231,21 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetInstanceProcAddr(vulkan, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
 
+#if defined(VK_EXT_extended_dynamic_state)
+	pfn_vkCmdSetCullModeEXT = (PFN_vkCmdSetCullModeEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetCullModeEXT");
+	pfn_vkCmdSetFrontFaceEXT = (PFN_vkCmdSetFrontFaceEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetFrontFaceEXT");
+	pfn_vkCmdSetPrimitiveTopologyEXT = (PFN_vkCmdSetPrimitiveTopologyEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetPrimitiveTopologyEXT");
+	pfn_vkCmdSetViewportWithCountEXT = (PFN_vkCmdSetViewportWithCountEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetViewportWithCountEXT");
+	pfn_vkCmdSetScissorWithCountEXT = (PFN_vkCmdSetScissorWithCountEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetScissorWithCountEXT");
+	pfn_vkCmdBindVertexBuffers2EXT = (PFN_vkCmdBindVertexBuffers2EXT)vkGetInstanceProcAddr(vulkan, "vkCmdBindVertexBuffers2EXT");
+	pfn_vkCmdSetDepthTestEnableEXT = (PFN_vkCmdSetDepthTestEnableEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetDepthTestEnableEXT");
+	pfn_vkCmdSetDepthWriteEnableEXT = (PFN_vkCmdSetDepthWriteEnableEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetDepthWriteEnableEXT");
+	pfn_vkCmdSetDepthCompareOpEXT = (PFN_vkCmdSetDepthCompareOpEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetDepthCompareOpEXT");
+	pfn_vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetDepthBoundsTestEnableEXT");
+	pfn_vkCmdSetStencilTestEnableEXT = (PFN_vkCmdSetStencilTestEnableEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetStencilTestEnableEXT");
+	pfn_vkCmdSetStencilOpEXT = (PFN_vkCmdSetStencilOpEXT)vkGetInstanceProcAddr(vulkan, "vkCmdSetStencilOpEXT");
+#endif // defined(VK_EXT_extended_dynamic_state)
+
 #if defined(VK_KHR_deferred_host_operations)
 	pfn_vkCreateDeferredOperationKHR = (PFN_vkCreateDeferredOperationKHR)vkGetInstanceProcAddr(vulkan, "vkCreateDeferredOperationKHR");
 	pfn_vkDestroyDeferredOperationKHR = (PFN_vkDestroyDeferredOperationKHR)vkGetInstanceProcAddr(vulkan, "vkDestroyDeferredOperationKHR");
@@ -4527,6 +4630,21 @@ void vulkan_load_device_procs(VkDevice device)
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetDeviceProcAddr(device, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
+
+#if defined(VK_EXT_extended_dynamic_state)
+	pfn_vkCmdSetCullModeEXT = (PFN_vkCmdSetCullModeEXT)vkGetDeviceProcAddr(device, "vkCmdSetCullModeEXT");
+	pfn_vkCmdSetFrontFaceEXT = (PFN_vkCmdSetFrontFaceEXT)vkGetDeviceProcAddr(device, "vkCmdSetFrontFaceEXT");
+	pfn_vkCmdSetPrimitiveTopologyEXT = (PFN_vkCmdSetPrimitiveTopologyEXT)vkGetDeviceProcAddr(device, "vkCmdSetPrimitiveTopologyEXT");
+	pfn_vkCmdSetViewportWithCountEXT = (PFN_vkCmdSetViewportWithCountEXT)vkGetDeviceProcAddr(device, "vkCmdSetViewportWithCountEXT");
+	pfn_vkCmdSetScissorWithCountEXT = (PFN_vkCmdSetScissorWithCountEXT)vkGetDeviceProcAddr(device, "vkCmdSetScissorWithCountEXT");
+	pfn_vkCmdBindVertexBuffers2EXT = (PFN_vkCmdBindVertexBuffers2EXT)vkGetDeviceProcAddr(device, "vkCmdBindVertexBuffers2EXT");
+	pfn_vkCmdSetDepthTestEnableEXT = (PFN_vkCmdSetDepthTestEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthTestEnableEXT");
+	pfn_vkCmdSetDepthWriteEnableEXT = (PFN_vkCmdSetDepthWriteEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthWriteEnableEXT");
+	pfn_vkCmdSetDepthCompareOpEXT = (PFN_vkCmdSetDepthCompareOpEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthCompareOpEXT");
+	pfn_vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthBoundsTestEnableEXT");
+	pfn_vkCmdSetStencilTestEnableEXT = (PFN_vkCmdSetStencilTestEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetStencilTestEnableEXT");
+	pfn_vkCmdSetStencilOpEXT = (PFN_vkCmdSetStencilOpEXT)vkGetDeviceProcAddr(device, "vkCmdSetStencilOpEXT");
+#endif // defined(VK_EXT_extended_dynamic_state)
 
 #if defined(VK_KHR_deferred_host_operations)
 	pfn_vkCreateDeferredOperationKHR = (PFN_vkCreateDeferredOperationKHR)vkGetDeviceProcAddr(device, "vkCreateDeferredOperationKHR");
