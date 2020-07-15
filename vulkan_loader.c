@@ -1,7 +1,7 @@
 #include <vulkan/vulkan.h>
 #include <assert.h>
 
-#if VK_HEADER_VERSION != 145
+#if VK_HEADER_VERSION != 147
 	#error "Vulkan header version does not match"
 #endif
 
@@ -3549,6 +3549,24 @@ VKAPI_ATTR void vkGetPrivateDataEXT(VkDevice device, VkObjectType objectType, ui
 
 #endif // defined(VK_EXT_private_data)
 
+#if defined(VK_EXT_directfb_surface)
+
+static PFN_vkCreateDirectFBSurfaceEXT pfn_vkCreateDirectFBSurfaceEXT;
+VKAPI_ATTR VkResult vkCreateDirectFBSurfaceEXT(VkInstance instance, const VkDirectFBSurfaceCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
+{
+	assert(pfn_vkCreateDirectFBSurfaceEXT);
+	return pfn_vkCreateDirectFBSurfaceEXT(instance, pCreateInfo, pAllocator, pSurface);
+}
+
+static PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT pfn_vkGetPhysicalDeviceDirectFBPresentationSupportEXT;
+VKAPI_ATTR VkBool32 vkGetPhysicalDeviceDirectFBPresentationSupportEXT(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, IDirectFB * dfb)
+{
+	assert(pfn_vkGetPhysicalDeviceDirectFBPresentationSupportEXT);
+	return pfn_vkGetPhysicalDeviceDirectFBPresentationSupportEXT(physicalDevice, queueFamilyIndex, dfb);
+}
+
+#endif // defined(VK_EXT_directfb_surface)
+
 void vulkan_loader_init(PFN_vkGetInstanceProcAddr get_address)
 {
 	pfn_vkGetInstanceProcAddr = get_address;
@@ -4275,6 +4293,11 @@ void vulkan_load_instance_procs(VkInstance vulkan)
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetInstanceProcAddr(vulkan, "vkSetPrivateDataEXT");
 	pfn_vkGetPrivateDataEXT = (PFN_vkGetPrivateDataEXT)vkGetInstanceProcAddr(vulkan, "vkGetPrivateDataEXT");
 #endif // defined(VK_EXT_private_data)
+
+#if defined(VK_EXT_directfb_surface)
+	pfn_vkCreateDirectFBSurfaceEXT = (PFN_vkCreateDirectFBSurfaceEXT)vkGetInstanceProcAddr(vulkan, "vkCreateDirectFBSurfaceEXT");
+	pfn_vkGetPhysicalDeviceDirectFBPresentationSupportEXT = (PFN_vkGetPhysicalDeviceDirectFBPresentationSupportEXT)vkGetInstanceProcAddr(vulkan, "vkGetPhysicalDeviceDirectFBPresentationSupportEXT");
+#endif // defined(VK_EXT_directfb_surface)
 }
 
 void vulkan_load_device_procs(VkDevice device)
