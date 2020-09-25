@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 153 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 154 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -441,6 +441,14 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetBufferDeviceAddressKHR = (PFN_vkGetBufferDeviceAddressKHR)vk->vkGetInstanceProcAddr(instance, "vkGetBufferDeviceAddressKHR");
 	vk->vkGetBufferOpaqueCaptureAddressKHR = (PFN_vkGetBufferOpaqueCaptureAddressKHR)vk->vkGetInstanceProcAddr(instance, "vkGetBufferOpaqueCaptureAddressKHR");
 #endif // defined(VK_KHR_buffer_device_address)
+#if defined(VK_KHR_copy_commands2)
+	vk->vkCmdCopyImageToBuffer2KHR = (PFN_vkCmdCopyImageToBuffer2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyImageToBuffer2KHR");
+	vk->vkCmdCopyBuffer2KHR = (PFN_vkCmdCopyBuffer2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyBuffer2KHR");
+	vk->vkCmdCopyImage2KHR = (PFN_vkCmdCopyImage2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyImage2KHR");
+	vk->vkCmdCopyBufferToImage2KHR = (PFN_vkCmdCopyBufferToImage2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyBufferToImage2KHR");
+	vk->vkCmdBlitImage2KHR = (PFN_vkCmdBlitImage2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBlitImage2KHR");
+	vk->vkCmdResolveImage2KHR = (PFN_vkCmdResolveImage2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdResolveImage2KHR");
+#endif // defined(VK_KHR_copy_commands2)
 #if defined(VK_KHR_create_renderpass2)
 	vk->vkCreateRenderPass2KHR = (PFN_vkCreateRenderPass2KHR)vk->vkGetInstanceProcAddr(instance, "vkCreateRenderPass2KHR");
 	vk->vkCmdBeginRenderPass2KHR = (PFN_vkCmdBeginRenderPass2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginRenderPass2KHR");
@@ -1056,6 +1064,14 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetBufferDeviceAddressKHR = (PFN_vkGetBufferDeviceAddressKHR)vk->vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressKHR");
 	vk->vkGetBufferOpaqueCaptureAddressKHR = (PFN_vkGetBufferOpaqueCaptureAddressKHR)vk->vkGetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureAddressKHR");
 #endif // defined(VK_KHR_buffer_device_address)
+#if defined(VK_KHR_copy_commands2)
+	vk->vkCmdCopyImageToBuffer2KHR = (PFN_vkCmdCopyImageToBuffer2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyImageToBuffer2KHR");
+	vk->vkCmdCopyBuffer2KHR = (PFN_vkCmdCopyBuffer2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyBuffer2KHR");
+	vk->vkCmdCopyImage2KHR = (PFN_vkCmdCopyImage2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyImage2KHR");
+	vk->vkCmdCopyBufferToImage2KHR = (PFN_vkCmdCopyBufferToImage2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyBufferToImage2KHR");
+	vk->vkCmdBlitImage2KHR = (PFN_vkCmdBlitImage2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdBlitImage2KHR");
+	vk->vkCmdResolveImage2KHR = (PFN_vkCmdResolveImage2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdResolveImage2KHR");
+#endif // defined(VK_KHR_copy_commands2)
 #if defined(VK_KHR_create_renderpass2)
 	vk->vkCreateRenderPass2KHR = (PFN_vkCreateRenderPass2KHR)vk->vkGetDeviceProcAddr(device, "vkCreateRenderPass2KHR");
 	vk->vkCmdBeginRenderPass2KHR = (PFN_vkCmdBeginRenderPass2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdBeginRenderPass2KHR");
@@ -3405,6 +3421,50 @@ VKAPI_ATTR uint64_t vkGetBufferOpaqueCaptureAddressKHR(VkDevice device, const Vk
 	return pfn_vkGetBufferOpaqueCaptureAddressKHR(device, pInfo);
 }
 #endif // defined(VK_KHR_buffer_device_address)
+#if defined(VK_KHR_copy_commands2)
+
+static PFN_vkCmdCopyImageToBuffer2KHR pfn_vkCmdCopyImageToBuffer2KHR;
+VKAPI_ATTR void vkCmdCopyImageToBuffer2KHR(VkCommandBuffer commandBuffer, const VkCopyImageToBufferInfo2KHR * pCopyImageToBufferInfo)
+{
+	assert(pfn_vkCmdCopyImageToBuffer2KHR);
+	pfn_vkCmdCopyImageToBuffer2KHR(commandBuffer, pCopyImageToBufferInfo);
+}
+
+static PFN_vkCmdCopyBuffer2KHR pfn_vkCmdCopyBuffer2KHR;
+VKAPI_ATTR void vkCmdCopyBuffer2KHR(VkCommandBuffer commandBuffer, const VkCopyBufferInfo2KHR * pCopyBufferInfo)
+{
+	assert(pfn_vkCmdCopyBuffer2KHR);
+	pfn_vkCmdCopyBuffer2KHR(commandBuffer, pCopyBufferInfo);
+}
+
+static PFN_vkCmdCopyImage2KHR pfn_vkCmdCopyImage2KHR;
+VKAPI_ATTR void vkCmdCopyImage2KHR(VkCommandBuffer commandBuffer, const VkCopyImageInfo2KHR * pCopyImageInfo)
+{
+	assert(pfn_vkCmdCopyImage2KHR);
+	pfn_vkCmdCopyImage2KHR(commandBuffer, pCopyImageInfo);
+}
+
+static PFN_vkCmdCopyBufferToImage2KHR pfn_vkCmdCopyBufferToImage2KHR;
+VKAPI_ATTR void vkCmdCopyBufferToImage2KHR(VkCommandBuffer commandBuffer, const VkCopyBufferToImageInfo2KHR * pCopyBufferToImageInfo)
+{
+	assert(pfn_vkCmdCopyBufferToImage2KHR);
+	pfn_vkCmdCopyBufferToImage2KHR(commandBuffer, pCopyBufferToImageInfo);
+}
+
+static PFN_vkCmdBlitImage2KHR pfn_vkCmdBlitImage2KHR;
+VKAPI_ATTR void vkCmdBlitImage2KHR(VkCommandBuffer commandBuffer, const VkBlitImageInfo2KHR * pBlitImageInfo)
+{
+	assert(pfn_vkCmdBlitImage2KHR);
+	pfn_vkCmdBlitImage2KHR(commandBuffer, pBlitImageInfo);
+}
+
+static PFN_vkCmdResolveImage2KHR pfn_vkCmdResolveImage2KHR;
+VKAPI_ATTR void vkCmdResolveImage2KHR(VkCommandBuffer commandBuffer, const VkResolveImageInfo2KHR * pResolveImageInfo)
+{
+	assert(pfn_vkCmdResolveImage2KHR);
+	pfn_vkCmdResolveImage2KHR(commandBuffer, pResolveImageInfo);
+}
+#endif // defined(VK_KHR_copy_commands2)
 #if defined(VK_KHR_create_renderpass2)
 
 static PFN_vkCreateRenderPass2KHR pfn_vkCreateRenderPass2KHR;
@@ -5026,6 +5086,14 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetBufferDeviceAddressKHR = (PFN_vkGetBufferDeviceAddressKHR)vkGetInstanceProcAddr(instance, "vkGetBufferDeviceAddressKHR");
 	pfn_vkGetBufferOpaqueCaptureAddressKHR = (PFN_vkGetBufferOpaqueCaptureAddressKHR)vkGetInstanceProcAddr(instance, "vkGetBufferOpaqueCaptureAddressKHR");
 #endif // defined(VK_KHR_buffer_device_address)
+#if defined(VK_KHR_copy_commands2)
+	pfn_vkCmdCopyImageToBuffer2KHR = (PFN_vkCmdCopyImageToBuffer2KHR)vkGetInstanceProcAddr(instance, "vkCmdCopyImageToBuffer2KHR");
+	pfn_vkCmdCopyBuffer2KHR = (PFN_vkCmdCopyBuffer2KHR)vkGetInstanceProcAddr(instance, "vkCmdCopyBuffer2KHR");
+	pfn_vkCmdCopyImage2KHR = (PFN_vkCmdCopyImage2KHR)vkGetInstanceProcAddr(instance, "vkCmdCopyImage2KHR");
+	pfn_vkCmdCopyBufferToImage2KHR = (PFN_vkCmdCopyBufferToImage2KHR)vkGetInstanceProcAddr(instance, "vkCmdCopyBufferToImage2KHR");
+	pfn_vkCmdBlitImage2KHR = (PFN_vkCmdBlitImage2KHR)vkGetInstanceProcAddr(instance, "vkCmdBlitImage2KHR");
+	pfn_vkCmdResolveImage2KHR = (PFN_vkCmdResolveImage2KHR)vkGetInstanceProcAddr(instance, "vkCmdResolveImage2KHR");
+#endif // defined(VK_KHR_copy_commands2)
 #if defined(VK_KHR_create_renderpass2)
 	pfn_vkCreateRenderPass2KHR = (PFN_vkCreateRenderPass2KHR)vkGetInstanceProcAddr(instance, "vkCreateRenderPass2KHR");
 	pfn_vkCmdBeginRenderPass2KHR = (PFN_vkCmdBeginRenderPass2KHR)vkGetInstanceProcAddr(instance, "vkCmdBeginRenderPass2KHR");
@@ -5641,6 +5709,14 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetBufferDeviceAddressKHR = (PFN_vkGetBufferDeviceAddressKHR)vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressKHR");
 	pfn_vkGetBufferOpaqueCaptureAddressKHR = (PFN_vkGetBufferOpaqueCaptureAddressKHR)vkGetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureAddressKHR");
 #endif // defined(VK_KHR_buffer_device_address)
+#if defined(VK_KHR_copy_commands2)
+	pfn_vkCmdCopyImageToBuffer2KHR = (PFN_vkCmdCopyImageToBuffer2KHR)vkGetDeviceProcAddr(device, "vkCmdCopyImageToBuffer2KHR");
+	pfn_vkCmdCopyBuffer2KHR = (PFN_vkCmdCopyBuffer2KHR)vkGetDeviceProcAddr(device, "vkCmdCopyBuffer2KHR");
+	pfn_vkCmdCopyImage2KHR = (PFN_vkCmdCopyImage2KHR)vkGetDeviceProcAddr(device, "vkCmdCopyImage2KHR");
+	pfn_vkCmdCopyBufferToImage2KHR = (PFN_vkCmdCopyBufferToImage2KHR)vkGetDeviceProcAddr(device, "vkCmdCopyBufferToImage2KHR");
+	pfn_vkCmdBlitImage2KHR = (PFN_vkCmdBlitImage2KHR)vkGetDeviceProcAddr(device, "vkCmdBlitImage2KHR");
+	pfn_vkCmdResolveImage2KHR = (PFN_vkCmdResolveImage2KHR)vkGetDeviceProcAddr(device, "vkCmdResolveImage2KHR");
+#endif // defined(VK_KHR_copy_commands2)
 #if defined(VK_KHR_create_renderpass2)
 	pfn_vkCreateRenderPass2KHR = (PFN_vkCreateRenderPass2KHR)vkGetDeviceProcAddr(device, "vkCreateRenderPass2KHR");
 	pfn_vkCmdBeginRenderPass2KHR = (PFN_vkCmdBeginRenderPass2KHR)vkGetDeviceProcAddr(device, "vkCmdBeginRenderPass2KHR");
