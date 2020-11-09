@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 159 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 160 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -689,6 +689,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_external_memory_win32)
 	vk->vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryWin32HandleNV");
 #endif // defined(VK_NV_external_memory_win32)
+#if defined(VK_NV_fragment_shading_rate_enums)
+	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
+#endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_mesh_shader)
 	vk->vkCmdDrawMeshTasksNV = (PFN_vkCmdDrawMeshTasksNV)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksNV");
 	vk->vkCmdDrawMeshTasksIndirectNV = (PFN_vkCmdDrawMeshTasksIndirectNV)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirectNV");
@@ -1231,6 +1234,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_external_memory_win32)
 	vk->vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)vk->vkGetDeviceProcAddr(device, "vkGetMemoryWin32HandleNV");
 #endif // defined(VK_NV_external_memory_win32)
+#if defined(VK_NV_fragment_shading_rate_enums)
+	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
+#endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_mesh_shader)
 	vk->vkCmdDrawMeshTasksNV = (PFN_vkCmdDrawMeshTasksNV)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksNV");
 	vk->vkCmdDrawMeshTasksIndirectNV = (PFN_vkCmdDrawMeshTasksIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectNV");
@@ -4540,6 +4546,15 @@ VKAPI_ATTR VkResult vkGetMemoryWin32HandleNV(VkDevice device, VkDeviceMemory mem
 	return pfn_vkGetMemoryWin32HandleNV(device, memory, handleType, pHandle);
 }
 #endif // defined(VK_NV_external_memory_win32)
+#if defined(VK_NV_fragment_shading_rate_enums)
+
+static PFN_vkCmdSetFragmentShadingRateEnumNV pfn_vkCmdSetFragmentShadingRateEnumNV;
+VKAPI_ATTR void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer, VkFragmentShadingRateNV shadingRate, const VkFragmentShadingRateCombinerOpKHR combinerOps [2])
+{
+	assert(pfn_vkCmdSetFragmentShadingRateEnumNV);
+	pfn_vkCmdSetFragmentShadingRateEnumNV(commandBuffer, shadingRate, combinerOps);
+}
+#endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_mesh_shader)
 
 static PFN_vkCmdDrawMeshTasksNV pfn_vkCmdDrawMeshTasksNV;
@@ -5357,6 +5372,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NV_external_memory_win32)
 	pfn_vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)vkGetInstanceProcAddr(instance, "vkGetMemoryWin32HandleNV");
 #endif // defined(VK_NV_external_memory_win32)
+#if defined(VK_NV_fragment_shading_rate_enums)
+	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
+#endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_mesh_shader)
 	pfn_vkCmdDrawMeshTasksNV = (PFN_vkCmdDrawMeshTasksNV)vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksNV");
 	pfn_vkCmdDrawMeshTasksIndirectNV = (PFN_vkCmdDrawMeshTasksIndirectNV)vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirectNV");
@@ -5899,6 +5917,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_NV_external_memory_win32)
 	pfn_vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)vkGetDeviceProcAddr(device, "vkGetMemoryWin32HandleNV");
 #endif // defined(VK_NV_external_memory_win32)
+#if defined(VK_NV_fragment_shading_rate_enums)
+	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
+#endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_mesh_shader)
 	pfn_vkCmdDrawMeshTasksNV = (PFN_vkCmdDrawMeshTasksNV)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksNV");
 	pfn_vkCmdDrawMeshTasksIndirectNV = (PFN_vkCmdDrawMeshTasksIndirectNV)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectNV");
