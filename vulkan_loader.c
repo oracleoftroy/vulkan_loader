@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 166 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 167 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -273,12 +273,6 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	vk->vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
-#if defined(VK_ANDROID_native_buffer)
-	vk->vkGetSwapchainGrallocUsage2ANDROID = (PFN_vkGetSwapchainGrallocUsage2ANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainGrallocUsage2ANDROID");
-	vk->vkGetSwapchainGrallocUsageANDROID = (PFN_vkGetSwapchainGrallocUsageANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainGrallocUsageANDROID");
-	vk->vkAcquireImageANDROID = (PFN_vkAcquireImageANDROID)vk->vkGetInstanceProcAddr(instance, "vkAcquireImageANDROID");
-	vk->vkQueueSignalReleaseImageANDROID = (PFN_vkQueueSignalReleaseImageANDROID)vk->vkGetInstanceProcAddr(instance, "vkQueueSignalReleaseImageANDROID");
-#endif // defined(VK_ANDROID_native_buffer)
 #if defined(VK_EXT_acquire_xlib_display)
 	vk->vkAcquireXlibDisplayEXT = (PFN_vkAcquireXlibDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkAcquireXlibDisplayEXT");
 	vk->vkGetRandROutputDisplayEXT = (PFN_vkGetRandROutputDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkGetRandROutputDisplayEXT");
@@ -291,8 +285,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetCalibratedTimestampsEXT = (PFN_vkGetCalibratedTimestampsEXT)vk->vkGetInstanceProcAddr(instance, "vkGetCalibratedTimestampsEXT");
 #endif // defined(VK_EXT_calibrated_timestamps)
 #if defined(VK_EXT_conditional_rendering)
-	vk->vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdEndConditionalRenderingEXT");
 	vk->vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginConditionalRenderingEXT");
+	vk->vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
 #if defined(VK_EXT_debug_marker)
 	vk->vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDebugMarkerEndEXT");
@@ -309,8 +303,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_debug_utils)
 	vk->vkCmdInsertDebugUtilsLabelEXT = (PFN_vkCmdInsertDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdInsertDebugUtilsLabelEXT");
 	vk->vkCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdEndDebugUtilsLabelEXT");
-	vk->vkSetDebugUtilsObjectTagEXT = (PFN_vkSetDebugUtilsObjectTagEXT)vk->vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
 	vk->vkSubmitDebugUtilsMessageEXT = (PFN_vkSubmitDebugUtilsMessageEXT)vk->vkGetInstanceProcAddr(instance, "vkSubmitDebugUtilsMessageEXT");
+	vk->vkSetDebugUtilsObjectTagEXT = (PFN_vkSetDebugUtilsObjectTagEXT)vk->vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
 	vk->vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkQueueInsertDebugUtilsLabelEXT");
 	vk->vkSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vk->vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectNameEXT");
 	vk->vkQueueBeginDebugUtilsLabelEXT = (PFN_vkQueueBeginDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkQueueBeginDebugUtilsLabelEXT");
@@ -489,8 +483,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplateKHR");
 #endif // defined(VK_KHR_descriptor_update_template) && defined(VK_KHR_push_descriptor) || defined(VK_KHR_push_descriptor) && defined(VK_VERSION_1_1)
 #if defined(VK_KHR_device_group)
-	vk->vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	vk->vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDeviceMaskKHR");
+	vk->vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	vk->vkCmdDispatchBaseKHR = (PFN_vkCmdDispatchBaseKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchBaseKHR");
 #endif // defined(VK_KHR_device_group)
 #if defined(VK_KHR_device_group) && defined(VK_KHR_surface) || defined(VK_KHR_swapchain) && defined(VK_VERSION_1_1)
@@ -953,12 +947,6 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vk->vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	vk->vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vk->vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
-#if defined(VK_ANDROID_native_buffer)
-	vk->vkGetSwapchainGrallocUsage2ANDROID = (PFN_vkGetSwapchainGrallocUsage2ANDROID)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsage2ANDROID");
-	vk->vkGetSwapchainGrallocUsageANDROID = (PFN_vkGetSwapchainGrallocUsageANDROID)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsageANDROID");
-	vk->vkAcquireImageANDROID = (PFN_vkAcquireImageANDROID)vk->vkGetDeviceProcAddr(device, "vkAcquireImageANDROID");
-	vk->vkQueueSignalReleaseImageANDROID = (PFN_vkQueueSignalReleaseImageANDROID)vk->vkGetDeviceProcAddr(device, "vkQueueSignalReleaseImageANDROID");
-#endif // defined(VK_ANDROID_native_buffer)
 #if defined(VK_EXT_buffer_device_address)
 	vk->vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vk->vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
@@ -966,8 +954,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetCalibratedTimestampsEXT = (PFN_vkGetCalibratedTimestampsEXT)vk->vkGetDeviceProcAddr(device, "vkGetCalibratedTimestampsEXT");
 #endif // defined(VK_EXT_calibrated_timestamps)
 #if defined(VK_EXT_conditional_rendering)
-	vk->vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vk->vkGetDeviceProcAddr(device, "vkCmdEndConditionalRenderingEXT");
 	vk->vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginConditionalRenderingEXT");
+	vk->vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vk->vkGetDeviceProcAddr(device, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
 #if defined(VK_EXT_debug_marker)
 	vk->vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDebugMarkerEndEXT");
@@ -1126,8 +1114,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplateKHR");
 #endif // defined(VK_KHR_descriptor_update_template) && defined(VK_KHR_push_descriptor) || defined(VK_KHR_push_descriptor) && defined(VK_VERSION_1_1)
 #if defined(VK_KHR_device_group)
-	vk->vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	vk->vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetDeviceMaskKHR");
+	vk->vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	vk->vkCmdDispatchBaseKHR = (PFN_vkCmdDispatchBaseKHR)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchBaseKHR");
 #endif // defined(VK_KHR_device_group)
 #if defined(VK_KHR_device_group) && defined(VK_KHR_surface) || defined(VK_KHR_swapchain) && defined(VK_VERSION_1_1)
@@ -2688,36 +2676,6 @@ VKAPI_ATTR VkResult vkGetMemoryAndroidHardwareBufferANDROID(VkDevice device, con
 	return pfn_vkGetMemoryAndroidHardwareBufferANDROID(device, pInfo, pBuffer);
 }
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
-#if defined(VK_ANDROID_native_buffer)
-
-static PFN_vkGetSwapchainGrallocUsage2ANDROID pfn_vkGetSwapchainGrallocUsage2ANDROID;
-VKAPI_ATTR VkResult vkGetSwapchainGrallocUsage2ANDROID(VkDevice device, VkFormat format, VkImageUsageFlags imageUsage, VkSwapchainImageUsageFlagsANDROID swapchainImageUsage, uint64_t * grallocConsumerUsage, uint64_t * grallocProducerUsage)
-{
-	assert(pfn_vkGetSwapchainGrallocUsage2ANDROID);
-	return pfn_vkGetSwapchainGrallocUsage2ANDROID(device, format, imageUsage, swapchainImageUsage, grallocConsumerUsage, grallocProducerUsage);
-}
-
-static PFN_vkGetSwapchainGrallocUsageANDROID pfn_vkGetSwapchainGrallocUsageANDROID;
-VKAPI_ATTR VkResult vkGetSwapchainGrallocUsageANDROID(VkDevice device, VkFormat format, VkImageUsageFlags imageUsage, int * grallocUsage)
-{
-	assert(pfn_vkGetSwapchainGrallocUsageANDROID);
-	return pfn_vkGetSwapchainGrallocUsageANDROID(device, format, imageUsage, grallocUsage);
-}
-
-static PFN_vkAcquireImageANDROID pfn_vkAcquireImageANDROID;
-VKAPI_ATTR VkResult vkAcquireImageANDROID(VkDevice device, VkImage image, int nativeFenceFd, VkSemaphore semaphore, VkFence fence)
-{
-	assert(pfn_vkAcquireImageANDROID);
-	return pfn_vkAcquireImageANDROID(device, image, nativeFenceFd, semaphore, fence);
-}
-
-static PFN_vkQueueSignalReleaseImageANDROID pfn_vkQueueSignalReleaseImageANDROID;
-VKAPI_ATTR VkResult vkQueueSignalReleaseImageANDROID(VkQueue queue, uint32_t waitSemaphoreCount, const VkSemaphore * pWaitSemaphores, VkImage image, int * pNativeFenceFd)
-{
-	assert(pfn_vkQueueSignalReleaseImageANDROID);
-	return pfn_vkQueueSignalReleaseImageANDROID(queue, waitSemaphoreCount, pWaitSemaphores, image, pNativeFenceFd);
-}
-#endif // defined(VK_ANDROID_native_buffer)
 #if defined(VK_EXT_acquire_xlib_display)
 
 static PFN_vkAcquireXlibDisplayEXT pfn_vkAcquireXlibDisplayEXT;
@@ -2761,18 +2719,18 @@ VKAPI_ATTR VkResult vkGetCalibratedTimestampsEXT(VkDevice device, uint32_t times
 #endif // defined(VK_EXT_calibrated_timestamps)
 #if defined(VK_EXT_conditional_rendering)
 
-static PFN_vkCmdEndConditionalRenderingEXT pfn_vkCmdEndConditionalRenderingEXT;
-VKAPI_ATTR void vkCmdEndConditionalRenderingEXT(VkCommandBuffer commandBuffer)
-{
-	assert(pfn_vkCmdEndConditionalRenderingEXT);
-	pfn_vkCmdEndConditionalRenderingEXT(commandBuffer);
-}
-
 static PFN_vkCmdBeginConditionalRenderingEXT pfn_vkCmdBeginConditionalRenderingEXT;
 VKAPI_ATTR void vkCmdBeginConditionalRenderingEXT(VkCommandBuffer commandBuffer, const VkConditionalRenderingBeginInfoEXT * pConditionalRenderingBegin)
 {
 	assert(pfn_vkCmdBeginConditionalRenderingEXT);
 	pfn_vkCmdBeginConditionalRenderingEXT(commandBuffer, pConditionalRenderingBegin);
+}
+
+static PFN_vkCmdEndConditionalRenderingEXT pfn_vkCmdEndConditionalRenderingEXT;
+VKAPI_ATTR void vkCmdEndConditionalRenderingEXT(VkCommandBuffer commandBuffer)
+{
+	assert(pfn_vkCmdEndConditionalRenderingEXT);
+	pfn_vkCmdEndConditionalRenderingEXT(commandBuffer);
 }
 #endif // defined(VK_EXT_conditional_rendering)
 #if defined(VK_EXT_debug_marker)
@@ -2851,18 +2809,18 @@ VKAPI_ATTR void vkCmdEndDebugUtilsLabelEXT(VkCommandBuffer commandBuffer)
 	pfn_vkCmdEndDebugUtilsLabelEXT(commandBuffer);
 }
 
-static PFN_vkSetDebugUtilsObjectTagEXT pfn_vkSetDebugUtilsObjectTagEXT;
-VKAPI_ATTR VkResult vkSetDebugUtilsObjectTagEXT(VkDevice device, const VkDebugUtilsObjectTagInfoEXT * pTagInfo)
-{
-	assert(pfn_vkSetDebugUtilsObjectTagEXT);
-	return pfn_vkSetDebugUtilsObjectTagEXT(device, pTagInfo);
-}
-
 static PFN_vkSubmitDebugUtilsMessageEXT pfn_vkSubmitDebugUtilsMessageEXT;
 VKAPI_ATTR void vkSubmitDebugUtilsMessageEXT(VkInstance instance, VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageTypes, const VkDebugUtilsMessengerCallbackDataEXT * pCallbackData)
 {
 	assert(pfn_vkSubmitDebugUtilsMessageEXT);
 	pfn_vkSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, pCallbackData);
+}
+
+static PFN_vkSetDebugUtilsObjectTagEXT pfn_vkSetDebugUtilsObjectTagEXT;
+VKAPI_ATTR VkResult vkSetDebugUtilsObjectTagEXT(VkDevice device, const VkDebugUtilsObjectTagInfoEXT * pTagInfo)
+{
+	assert(pfn_vkSetDebugUtilsObjectTagEXT);
+	return pfn_vkSetDebugUtilsObjectTagEXT(device, pTagInfo);
 }
 
 static PFN_vkQueueInsertDebugUtilsLabelEXT pfn_vkQueueInsertDebugUtilsLabelEXT;
@@ -3703,18 +3661,18 @@ VKAPI_ATTR void vkCmdPushDescriptorSetWithTemplateKHR(VkCommandBuffer commandBuf
 #endif // defined(VK_KHR_descriptor_update_template) && defined(VK_KHR_push_descriptor) || defined(VK_KHR_push_descriptor) && defined(VK_VERSION_1_1)
 #if defined(VK_KHR_device_group)
 
-static PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR;
-VKAPI_ATTR void vkGetDeviceGroupPeerMemoryFeaturesKHR(VkDevice device, uint32_t heapIndex, uint32_t localDeviceIndex, uint32_t remoteDeviceIndex, VkPeerMemoryFeatureFlags * pPeerMemoryFeatures)
-{
-	assert(pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR);
-	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR(device, heapIndex, localDeviceIndex, remoteDeviceIndex, pPeerMemoryFeatures);
-}
-
 static PFN_vkCmdSetDeviceMaskKHR pfn_vkCmdSetDeviceMaskKHR;
 VKAPI_ATTR void vkCmdSetDeviceMaskKHR(VkCommandBuffer commandBuffer, uint32_t deviceMask)
 {
 	assert(pfn_vkCmdSetDeviceMaskKHR);
 	pfn_vkCmdSetDeviceMaskKHR(commandBuffer, deviceMask);
+}
+
+static PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR;
+VKAPI_ATTR void vkGetDeviceGroupPeerMemoryFeaturesKHR(VkDevice device, uint32_t heapIndex, uint32_t localDeviceIndex, uint32_t remoteDeviceIndex, VkPeerMemoryFeatureFlags * pPeerMemoryFeatures)
+{
+	assert(pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR);
+	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR(device, heapIndex, localDeviceIndex, remoteDeviceIndex, pPeerMemoryFeatures);
 }
 
 static PFN_vkCmdDispatchBaseKHR pfn_vkCmdDispatchBaseKHR;
@@ -4991,12 +4949,6 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetInstanceProcAddr(instance, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetInstanceProcAddr(instance, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
-#if defined(VK_ANDROID_native_buffer)
-	pfn_vkGetSwapchainGrallocUsage2ANDROID = (PFN_vkGetSwapchainGrallocUsage2ANDROID)vkGetInstanceProcAddr(instance, "vkGetSwapchainGrallocUsage2ANDROID");
-	pfn_vkGetSwapchainGrallocUsageANDROID = (PFN_vkGetSwapchainGrallocUsageANDROID)vkGetInstanceProcAddr(instance, "vkGetSwapchainGrallocUsageANDROID");
-	pfn_vkAcquireImageANDROID = (PFN_vkAcquireImageANDROID)vkGetInstanceProcAddr(instance, "vkAcquireImageANDROID");
-	pfn_vkQueueSignalReleaseImageANDROID = (PFN_vkQueueSignalReleaseImageANDROID)vkGetInstanceProcAddr(instance, "vkQueueSignalReleaseImageANDROID");
-#endif // defined(VK_ANDROID_native_buffer)
 #if defined(VK_EXT_acquire_xlib_display)
 	pfn_vkAcquireXlibDisplayEXT = (PFN_vkAcquireXlibDisplayEXT)vkGetInstanceProcAddr(instance, "vkAcquireXlibDisplayEXT");
 	pfn_vkGetRandROutputDisplayEXT = (PFN_vkGetRandROutputDisplayEXT)vkGetInstanceProcAddr(instance, "vkGetRandROutputDisplayEXT");
@@ -5009,8 +4961,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetCalibratedTimestampsEXT = (PFN_vkGetCalibratedTimestampsEXT)vkGetInstanceProcAddr(instance, "vkGetCalibratedTimestampsEXT");
 #endif // defined(VK_EXT_calibrated_timestamps)
 #if defined(VK_EXT_conditional_rendering)
-	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetInstanceProcAddr(instance, "vkCmdEndConditionalRenderingEXT");
 	pfn_vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginConditionalRenderingEXT");
+	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetInstanceProcAddr(instance, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
 #if defined(VK_EXT_debug_marker)
 	pfn_vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vkGetInstanceProcAddr(instance, "vkCmdDebugMarkerEndEXT");
@@ -5027,8 +4979,8 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_debug_utils)
 	pfn_vkCmdInsertDebugUtilsLabelEXT = (PFN_vkCmdInsertDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdInsertDebugUtilsLabelEXT");
 	pfn_vkCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdEndDebugUtilsLabelEXT");
-	pfn_vkSetDebugUtilsObjectTagEXT = (PFN_vkSetDebugUtilsObjectTagEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
 	pfn_vkSubmitDebugUtilsMessageEXT = (PFN_vkSubmitDebugUtilsMessageEXT)vkGetInstanceProcAddr(instance, "vkSubmitDebugUtilsMessageEXT");
+	pfn_vkSetDebugUtilsObjectTagEXT = (PFN_vkSetDebugUtilsObjectTagEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
 	pfn_vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueInsertDebugUtilsLabelEXT");
 	pfn_vkSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectNameEXT");
 	pfn_vkQueueBeginDebugUtilsLabelEXT = (PFN_vkQueueBeginDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueBeginDebugUtilsLabelEXT");
@@ -5207,8 +5159,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplateKHR");
 #endif // defined(VK_KHR_descriptor_update_template) && defined(VK_KHR_push_descriptor) || defined(VK_KHR_push_descriptor) && defined(VK_VERSION_1_1)
 #if defined(VK_KHR_device_group)
-	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	pfn_vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vkGetInstanceProcAddr(instance, "vkCmdSetDeviceMaskKHR");
+	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	pfn_vkCmdDispatchBaseKHR = (PFN_vkCmdDispatchBaseKHR)vkGetInstanceProcAddr(instance, "vkCmdDispatchBaseKHR");
 #endif // defined(VK_KHR_device_group)
 #if defined(VK_KHR_device_group) && defined(VK_KHR_surface) || defined(VK_KHR_swapchain) && defined(VK_VERSION_1_1)
@@ -5671,12 +5623,6 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
-#if defined(VK_ANDROID_native_buffer)
-	pfn_vkGetSwapchainGrallocUsage2ANDROID = (PFN_vkGetSwapchainGrallocUsage2ANDROID)vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsage2ANDROID");
-	pfn_vkGetSwapchainGrallocUsageANDROID = (PFN_vkGetSwapchainGrallocUsageANDROID)vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsageANDROID");
-	pfn_vkAcquireImageANDROID = (PFN_vkAcquireImageANDROID)vkGetDeviceProcAddr(device, "vkAcquireImageANDROID");
-	pfn_vkQueueSignalReleaseImageANDROID = (PFN_vkQueueSignalReleaseImageANDROID)vkGetDeviceProcAddr(device, "vkQueueSignalReleaseImageANDROID");
-#endif // defined(VK_ANDROID_native_buffer)
 #if defined(VK_EXT_buffer_device_address)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
@@ -5684,8 +5630,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetCalibratedTimestampsEXT = (PFN_vkGetCalibratedTimestampsEXT)vkGetDeviceProcAddr(device, "vkGetCalibratedTimestampsEXT");
 #endif // defined(VK_EXT_calibrated_timestamps)
 #if defined(VK_EXT_conditional_rendering)
-	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetDeviceProcAddr(device, "vkCmdEndConditionalRenderingEXT");
 	pfn_vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vkGetDeviceProcAddr(device, "vkCmdBeginConditionalRenderingEXT");
+	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetDeviceProcAddr(device, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
 #if defined(VK_EXT_debug_marker)
 	pfn_vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vkGetDeviceProcAddr(device, "vkCmdDebugMarkerEndEXT");
@@ -5844,8 +5790,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplateKHR");
 #endif // defined(VK_KHR_descriptor_update_template) && defined(VK_KHR_push_descriptor) || defined(VK_KHR_push_descriptor) && defined(VK_VERSION_1_1)
 #if defined(VK_KHR_device_group)
-	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vkGetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	pfn_vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vkGetDeviceProcAddr(device, "vkCmdSetDeviceMaskKHR");
+	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vkGetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	pfn_vkCmdDispatchBaseKHR = (PFN_vkCmdDispatchBaseKHR)vkGetDeviceProcAddr(device, "vkCmdDispatchBaseKHR");
 #endif // defined(VK_KHR_device_group)
 #if defined(VK_KHR_device_group) && defined(VK_KHR_surface) || defined(VK_KHR_swapchain) && defined(VK_VERSION_1_1)
