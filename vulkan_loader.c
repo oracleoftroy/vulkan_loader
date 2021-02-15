@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 169 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 170 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -259,6 +259,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_AMD_buffer_marker)
 	vk->vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+#if defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
+	vk->vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarker2AMD");
+#endif // defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
 #if defined(VK_AMD_display_native_hdr)
 	vk->vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vk->vkGetInstanceProcAddr(instance, "vkSetLocalDimmingAMD");
 #endif // defined(VK_AMD_display_native_hdr)
@@ -625,6 +628,17 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vk->vkGetInstanceProcAddr(instance, "vkAcquireNextImageKHR");
 	vk->vkQueuePresentKHR = (PFN_vkQueuePresentKHR)vk->vkGetInstanceProcAddr(instance, "vkQueuePresentKHR");
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_synchronization2)
+	vk->vkCmdWriteTimestamp2KHR = (PFN_vkCmdWriteTimestamp2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteTimestamp2KHR");
+	vk->vkCmdWaitEvents2KHR = (PFN_vkCmdWaitEvents2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdWaitEvents2KHR");
+	vk->vkCmdPipelineBarrier2KHR = (PFN_vkCmdPipelineBarrier2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPipelineBarrier2KHR");
+	vk->vkCmdSetEvent2KHR = (PFN_vkCmdSetEvent2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdSetEvent2KHR");
+	vk->vkCmdResetEvent2KHR = (PFN_vkCmdResetEvent2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdResetEvent2KHR");
+	vk->vkQueueSubmit2KHR = (PFN_vkQueueSubmit2KHR)vk->vkGetInstanceProcAddr(instance, "vkQueueSubmit2KHR");
+#endif // defined(VK_KHR_synchronization2)
+#if defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
+	vk->vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointData2NV");
+#endif // defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_KHR_timeline_semaphore)
 	vk->vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vk->vkGetInstanceProcAddr(instance, "vkWaitSemaphoresKHR");
 	vk->vkGetSemaphoreCounterValueKHR = (PFN_vkGetSemaphoreCounterValueKHR)vk->vkGetInstanceProcAddr(instance, "vkGetSemaphoreCounterValueKHR");
@@ -933,6 +947,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_AMD_buffer_marker)
 	vk->vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+#if defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
+	vk->vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarker2AMD");
+#endif // defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
 #if defined(VK_AMD_display_native_hdr)
 	vk->vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vk->vkGetDeviceProcAddr(device, "vkSetLocalDimmingAMD");
 #endif // defined(VK_AMD_display_native_hdr)
@@ -1205,6 +1222,17 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vk->vkGetDeviceProcAddr(device, "vkAcquireNextImageKHR");
 	vk->vkQueuePresentKHR = (PFN_vkQueuePresentKHR)vk->vkGetDeviceProcAddr(device, "vkQueuePresentKHR");
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_synchronization2)
+	vk->vkCmdWriteTimestamp2KHR = (PFN_vkCmdWriteTimestamp2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdWriteTimestamp2KHR");
+	vk->vkCmdWaitEvents2KHR = (PFN_vkCmdWaitEvents2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdWaitEvents2KHR");
+	vk->vkCmdPipelineBarrier2KHR = (PFN_vkCmdPipelineBarrier2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPipelineBarrier2KHR");
+	vk->vkCmdSetEvent2KHR = (PFN_vkCmdSetEvent2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetEvent2KHR");
+	vk->vkCmdResetEvent2KHR = (PFN_vkCmdResetEvent2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdResetEvent2KHR");
+	vk->vkQueueSubmit2KHR = (PFN_vkQueueSubmit2KHR)vk->vkGetDeviceProcAddr(device, "vkQueueSubmit2KHR");
+#endif // defined(VK_KHR_synchronization2)
+#if defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
+	vk->vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vk->vkGetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
+#endif // defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_KHR_timeline_semaphore)
 	vk->vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vk->vkGetDeviceProcAddr(device, "vkWaitSemaphoresKHR");
 	vk->vkGetSemaphoreCounterValueKHR = (PFN_vkGetSemaphoreCounterValueKHR)vk->vkGetDeviceProcAddr(device, "vkGetSemaphoreCounterValueKHR");
@@ -2626,6 +2654,15 @@ VKAPI_ATTR void vkCmdWriteBufferMarkerAMD(VkCommandBuffer commandBuffer, VkPipel
 	pfn_vkCmdWriteBufferMarkerAMD(commandBuffer, pipelineStage, dstBuffer, dstOffset, marker);
 }
 #endif // defined(VK_AMD_buffer_marker)
+#if defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
+
+static PFN_vkCmdWriteBufferMarker2AMD pfn_vkCmdWriteBufferMarker2AMD;
+VKAPI_ATTR void vkCmdWriteBufferMarker2AMD(VkCommandBuffer commandBuffer, VkPipelineStageFlags2KHR stage, VkBuffer dstBuffer, VkDeviceSize dstOffset, uint32_t marker)
+{
+	assert(pfn_vkCmdWriteBufferMarker2AMD);
+	pfn_vkCmdWriteBufferMarker2AMD(commandBuffer, stage, dstBuffer, dstOffset, marker);
+}
+#endif // defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
 #if defined(VK_AMD_display_native_hdr)
 
 static PFN_vkSetLocalDimmingAMD pfn_vkSetLocalDimmingAMD;
@@ -4288,6 +4325,59 @@ VKAPI_ATTR VkResult vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR * pP
 	return pfn_vkQueuePresentKHR(queue, pPresentInfo);
 }
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_synchronization2)
+
+static PFN_vkCmdWriteTimestamp2KHR pfn_vkCmdWriteTimestamp2KHR;
+VKAPI_ATTR void vkCmdWriteTimestamp2KHR(VkCommandBuffer commandBuffer, VkPipelineStageFlags2KHR stage, VkQueryPool queryPool, uint32_t query)
+{
+	assert(pfn_vkCmdWriteTimestamp2KHR);
+	pfn_vkCmdWriteTimestamp2KHR(commandBuffer, stage, queryPool, query);
+}
+
+static PFN_vkCmdWaitEvents2KHR pfn_vkCmdWaitEvents2KHR;
+VKAPI_ATTR void vkCmdWaitEvents2KHR(VkCommandBuffer commandBuffer, uint32_t eventCount, const VkEvent * pEvents, const VkDependencyInfoKHR * pDependencyInfos)
+{
+	assert(pfn_vkCmdWaitEvents2KHR);
+	pfn_vkCmdWaitEvents2KHR(commandBuffer, eventCount, pEvents, pDependencyInfos);
+}
+
+static PFN_vkCmdPipelineBarrier2KHR pfn_vkCmdPipelineBarrier2KHR;
+VKAPI_ATTR void vkCmdPipelineBarrier2KHR(VkCommandBuffer commandBuffer, const VkDependencyInfoKHR * pDependencyInfo)
+{
+	assert(pfn_vkCmdPipelineBarrier2KHR);
+	pfn_vkCmdPipelineBarrier2KHR(commandBuffer, pDependencyInfo);
+}
+
+static PFN_vkCmdSetEvent2KHR pfn_vkCmdSetEvent2KHR;
+VKAPI_ATTR void vkCmdSetEvent2KHR(VkCommandBuffer commandBuffer, VkEvent event, const VkDependencyInfoKHR * pDependencyInfo)
+{
+	assert(pfn_vkCmdSetEvent2KHR);
+	pfn_vkCmdSetEvent2KHR(commandBuffer, event, pDependencyInfo);
+}
+
+static PFN_vkCmdResetEvent2KHR pfn_vkCmdResetEvent2KHR;
+VKAPI_ATTR void vkCmdResetEvent2KHR(VkCommandBuffer commandBuffer, VkEvent event, VkPipelineStageFlags2KHR stageMask)
+{
+	assert(pfn_vkCmdResetEvent2KHR);
+	pfn_vkCmdResetEvent2KHR(commandBuffer, event, stageMask);
+}
+
+static PFN_vkQueueSubmit2KHR pfn_vkQueueSubmit2KHR;
+VKAPI_ATTR VkResult vkQueueSubmit2KHR(VkQueue queue, uint32_t submitCount, const VkSubmitInfo2KHR * pSubmits, VkFence fence)
+{
+	assert(pfn_vkQueueSubmit2KHR);
+	return pfn_vkQueueSubmit2KHR(queue, submitCount, pSubmits, fence);
+}
+#endif // defined(VK_KHR_synchronization2)
+#if defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
+
+static PFN_vkGetQueueCheckpointData2NV pfn_vkGetQueueCheckpointData2NV;
+VKAPI_ATTR void vkGetQueueCheckpointData2NV(VkQueue queue, uint32_t * pCheckpointDataCount, VkCheckpointData2NV * pCheckpointData)
+{
+	assert(pfn_vkGetQueueCheckpointData2NV);
+	pfn_vkGetQueueCheckpointData2NV(queue, pCheckpointDataCount, pCheckpointData);
+}
+#endif // defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_KHR_timeline_semaphore)
 
 static PFN_vkWaitSemaphoresKHR pfn_vkWaitSemaphoresKHR;
@@ -4935,6 +5025,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+#if defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
+	pfn_vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarker2AMD");
+#endif // defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
 #if defined(VK_AMD_display_native_hdr)
 	pfn_vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vkGetInstanceProcAddr(instance, "vkSetLocalDimmingAMD");
 #endif // defined(VK_AMD_display_native_hdr)
@@ -5301,6 +5394,17 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vkGetInstanceProcAddr(instance, "vkAcquireNextImageKHR");
 	pfn_vkQueuePresentKHR = (PFN_vkQueuePresentKHR)vkGetInstanceProcAddr(instance, "vkQueuePresentKHR");
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_synchronization2)
+	pfn_vkCmdWriteTimestamp2KHR = (PFN_vkCmdWriteTimestamp2KHR)vkGetInstanceProcAddr(instance, "vkCmdWriteTimestamp2KHR");
+	pfn_vkCmdWaitEvents2KHR = (PFN_vkCmdWaitEvents2KHR)vkGetInstanceProcAddr(instance, "vkCmdWaitEvents2KHR");
+	pfn_vkCmdPipelineBarrier2KHR = (PFN_vkCmdPipelineBarrier2KHR)vkGetInstanceProcAddr(instance, "vkCmdPipelineBarrier2KHR");
+	pfn_vkCmdSetEvent2KHR = (PFN_vkCmdSetEvent2KHR)vkGetInstanceProcAddr(instance, "vkCmdSetEvent2KHR");
+	pfn_vkCmdResetEvent2KHR = (PFN_vkCmdResetEvent2KHR)vkGetInstanceProcAddr(instance, "vkCmdResetEvent2KHR");
+	pfn_vkQueueSubmit2KHR = (PFN_vkQueueSubmit2KHR)vkGetInstanceProcAddr(instance, "vkQueueSubmit2KHR");
+#endif // defined(VK_KHR_synchronization2)
+#if defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
+	pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointData2NV");
+#endif // defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_KHR_timeline_semaphore)
 	pfn_vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vkGetInstanceProcAddr(instance, "vkWaitSemaphoresKHR");
 	pfn_vkGetSemaphoreCounterValueKHR = (PFN_vkGetSemaphoreCounterValueKHR)vkGetInstanceProcAddr(instance, "vkGetSemaphoreCounterValueKHR");
@@ -5609,6 +5713,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
+#if defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
+	pfn_vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarker2AMD");
+#endif // defined(VK_AMD_buffer_marker) && defined(VK_KHR_synchronization2)
 #if defined(VK_AMD_display_native_hdr)
 	pfn_vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vkGetDeviceProcAddr(device, "vkSetLocalDimmingAMD");
 #endif // defined(VK_AMD_display_native_hdr)
@@ -5881,6 +5988,17 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vkGetDeviceProcAddr(device, "vkAcquireNextImageKHR");
 	pfn_vkQueuePresentKHR = (PFN_vkQueuePresentKHR)vkGetDeviceProcAddr(device, "vkQueuePresentKHR");
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_synchronization2)
+	pfn_vkCmdWriteTimestamp2KHR = (PFN_vkCmdWriteTimestamp2KHR)vkGetDeviceProcAddr(device, "vkCmdWriteTimestamp2KHR");
+	pfn_vkCmdWaitEvents2KHR = (PFN_vkCmdWaitEvents2KHR)vkGetDeviceProcAddr(device, "vkCmdWaitEvents2KHR");
+	pfn_vkCmdPipelineBarrier2KHR = (PFN_vkCmdPipelineBarrier2KHR)vkGetDeviceProcAddr(device, "vkCmdPipelineBarrier2KHR");
+	pfn_vkCmdSetEvent2KHR = (PFN_vkCmdSetEvent2KHR)vkGetDeviceProcAddr(device, "vkCmdSetEvent2KHR");
+	pfn_vkCmdResetEvent2KHR = (PFN_vkCmdResetEvent2KHR)vkGetDeviceProcAddr(device, "vkCmdResetEvent2KHR");
+	pfn_vkQueueSubmit2KHR = (PFN_vkQueueSubmit2KHR)vkGetDeviceProcAddr(device, "vkQueueSubmit2KHR");
+#endif // defined(VK_KHR_synchronization2)
+#if defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
+	pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
+#endif // defined(VK_KHR_synchronization2) && defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_KHR_timeline_semaphore)
 	pfn_vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vkGetDeviceProcAddr(device, "vkWaitSemaphoresKHR");
 	pfn_vkGetSemaphoreCounterValueKHR = (PFN_vkGetSemaphoreCounterValueKHR)vkGetDeviceProcAddr(device, "vkGetSemaphoreCounterValueKHR");
