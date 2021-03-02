@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 170 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 171 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -734,6 +734,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vk->vkGetInstanceProcAddr(instance, "vkCmdBindShadingRateImageNV");
 	vk->vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_QNX_screen_surface)
+	vk->vkGetPhysicalDeviceScreenPresentationSupportQNX = (PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");
+	vk->vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vk->vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
+#endif // defined(VK_QNX_screen_surface)
 }
 
 void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
@@ -4779,6 +4783,22 @@ VKAPI_ATTR void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, VkCoa
 	pfn_vkCmdSetCoarseSampleOrderNV(commandBuffer, sampleOrderType, customSampleOrderCount, pCustomSampleOrders);
 }
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_QNX_screen_surface)
+
+static PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX pfn_vkGetPhysicalDeviceScreenPresentationSupportQNX;
+VKAPI_ATTR VkBool32 vkGetPhysicalDeviceScreenPresentationSupportQNX(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, struct _screen_window * window)
+{
+	assert(pfn_vkGetPhysicalDeviceScreenPresentationSupportQNX);
+	return pfn_vkGetPhysicalDeviceScreenPresentationSupportQNX(physicalDevice, queueFamilyIndex, window);
+}
+
+static PFN_vkCreateScreenSurfaceQNX pfn_vkCreateScreenSurfaceQNX;
+VKAPI_ATTR VkResult vkCreateScreenSurfaceQNX(VkInstance instance, const VkScreenSurfaceCreateInfoQNX * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
+{
+	assert(pfn_vkCreateScreenSurfaceQNX);
+	return pfn_vkCreateScreenSurfaceQNX(instance, pCreateInfo, pAllocator, pSurface);
+}
+#endif // defined(VK_QNX_screen_surface)
 
 void vgen_init_vulkan_loader(PFN_vkGetInstanceProcAddr get_address)
 {
@@ -5500,6 +5520,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vkGetInstanceProcAddr(instance, "vkCmdBindShadingRateImageNV");
 	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetInstanceProcAddr(instance, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_QNX_screen_surface)
+	pfn_vkGetPhysicalDeviceScreenPresentationSupportQNX = (PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");
+	pfn_vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
+#endif // defined(VK_QNX_screen_surface)
 }
 
 void vgen_load_device_procs(VkDevice device)
