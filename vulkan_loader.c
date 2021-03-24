@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 172 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 173 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -405,6 +405,14 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyValidationCacheEXT");
 	vk->vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
+#if defined(VK_FUCHSIA_external_memory)
+	vk->vkGetMemoryZirconHandleFUCHSIA = (PFN_vkGetMemoryZirconHandleFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryZirconHandleFUCHSIA");
+	vk->vkGetMemoryZirconHandlePropertiesFUCHSIA = (PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryZirconHandlePropertiesFUCHSIA");
+#endif // defined(VK_FUCHSIA_external_memory)
+#if defined(VK_FUCHSIA_external_semaphore)
+	vk->vkImportSemaphoreZirconHandleFUCHSIA = (PFN_vkImportSemaphoreZirconHandleFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkImportSemaphoreZirconHandleFUCHSIA");
+	vk->vkGetSemaphoreZirconHandleFUCHSIA = (PFN_vkGetSemaphoreZirconHandleFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkGetSemaphoreZirconHandleFUCHSIA");
+#endif // defined(VK_FUCHSIA_external_semaphore)
 #if defined(VK_FUCHSIA_imagepipe_surface)
 	vk->vkCreateImagePipeSurfaceFUCHSIA = (PFN_vkCreateImagePipeSurfaceFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkCreateImagePipeSurfaceFUCHSIA");
 #endif // defined(VK_FUCHSIA_imagepipe_surface)
@@ -1063,6 +1071,14 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyValidationCacheEXT");
 	vk->vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
+#if defined(VK_FUCHSIA_external_memory)
+	vk->vkGetMemoryZirconHandleFUCHSIA = (PFN_vkGetMemoryZirconHandleFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkGetMemoryZirconHandleFUCHSIA");
+	vk->vkGetMemoryZirconHandlePropertiesFUCHSIA = (PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkGetMemoryZirconHandlePropertiesFUCHSIA");
+#endif // defined(VK_FUCHSIA_external_memory)
+#if defined(VK_FUCHSIA_external_semaphore)
+	vk->vkImportSemaphoreZirconHandleFUCHSIA = (PFN_vkImportSemaphoreZirconHandleFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkImportSemaphoreZirconHandleFUCHSIA");
+	vk->vkGetSemaphoreZirconHandleFUCHSIA = (PFN_vkGetSemaphoreZirconHandleFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkGetSemaphoreZirconHandleFUCHSIA");
+#endif // defined(VK_FUCHSIA_external_semaphore)
 #if defined(VK_GOOGLE_display_timing)
 	vk->vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vk->vkGetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
 	vk->vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vk->vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");
@@ -3296,6 +3312,38 @@ VKAPI_ATTR VkResult vkGetValidationCacheDataEXT(VkDevice device, VkValidationCac
 	return pfn_vkGetValidationCacheDataEXT(device, validationCache, pDataSize, pData);
 }
 #endif // defined(VK_EXT_validation_cache)
+#if defined(VK_FUCHSIA_external_memory)
+
+static PFN_vkGetMemoryZirconHandleFUCHSIA pfn_vkGetMemoryZirconHandleFUCHSIA;
+VKAPI_ATTR VkResult vkGetMemoryZirconHandleFUCHSIA(VkDevice device, const VkMemoryGetZirconHandleInfoFUCHSIA * pGetZirconHandleInfo, zx_handle_t * pZirconHandle)
+{
+	assert(pfn_vkGetMemoryZirconHandleFUCHSIA);
+	return pfn_vkGetMemoryZirconHandleFUCHSIA(device, pGetZirconHandleInfo, pZirconHandle);
+}
+
+static PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA;
+VKAPI_ATTR VkResult vkGetMemoryZirconHandlePropertiesFUCHSIA(VkDevice device, VkExternalMemoryHandleTypeFlagBits handleType, zx_handle_t zirconHandle, VkMemoryZirconHandlePropertiesFUCHSIA * pMemoryZirconHandleProperties)
+{
+	assert(pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA);
+	return pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA(device, handleType, zirconHandle, pMemoryZirconHandleProperties);
+}
+#endif // defined(VK_FUCHSIA_external_memory)
+#if defined(VK_FUCHSIA_external_semaphore)
+
+static PFN_vkImportSemaphoreZirconHandleFUCHSIA pfn_vkImportSemaphoreZirconHandleFUCHSIA;
+VKAPI_ATTR VkResult vkImportSemaphoreZirconHandleFUCHSIA(VkDevice device, const VkImportSemaphoreZirconHandleInfoFUCHSIA * pImportSemaphoreZirconHandleInfo)
+{
+	assert(pfn_vkImportSemaphoreZirconHandleFUCHSIA);
+	return pfn_vkImportSemaphoreZirconHandleFUCHSIA(device, pImportSemaphoreZirconHandleInfo);
+}
+
+static PFN_vkGetSemaphoreZirconHandleFUCHSIA pfn_vkGetSemaphoreZirconHandleFUCHSIA;
+VKAPI_ATTR VkResult vkGetSemaphoreZirconHandleFUCHSIA(VkDevice device, const VkSemaphoreGetZirconHandleInfoFUCHSIA * pGetZirconHandleInfo, zx_handle_t * pZirconHandle)
+{
+	assert(pfn_vkGetSemaphoreZirconHandleFUCHSIA);
+	return pfn_vkGetSemaphoreZirconHandleFUCHSIA(device, pGetZirconHandleInfo, pZirconHandle);
+}
+#endif // defined(VK_FUCHSIA_external_semaphore)
 #if defined(VK_FUCHSIA_imagepipe_surface)
 
 static PFN_vkCreateImagePipeSurfaceFUCHSIA pfn_vkCreateImagePipeSurfaceFUCHSIA;
@@ -5191,6 +5239,14 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vkGetInstanceProcAddr(instance, "vkDestroyValidationCacheEXT");
 	pfn_vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vkGetInstanceProcAddr(instance, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
+#if defined(VK_FUCHSIA_external_memory)
+	pfn_vkGetMemoryZirconHandleFUCHSIA = (PFN_vkGetMemoryZirconHandleFUCHSIA)vkGetInstanceProcAddr(instance, "vkGetMemoryZirconHandleFUCHSIA");
+	pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA = (PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA)vkGetInstanceProcAddr(instance, "vkGetMemoryZirconHandlePropertiesFUCHSIA");
+#endif // defined(VK_FUCHSIA_external_memory)
+#if defined(VK_FUCHSIA_external_semaphore)
+	pfn_vkImportSemaphoreZirconHandleFUCHSIA = (PFN_vkImportSemaphoreZirconHandleFUCHSIA)vkGetInstanceProcAddr(instance, "vkImportSemaphoreZirconHandleFUCHSIA");
+	pfn_vkGetSemaphoreZirconHandleFUCHSIA = (PFN_vkGetSemaphoreZirconHandleFUCHSIA)vkGetInstanceProcAddr(instance, "vkGetSemaphoreZirconHandleFUCHSIA");
+#endif // defined(VK_FUCHSIA_external_semaphore)
 #if defined(VK_FUCHSIA_imagepipe_surface)
 	pfn_vkCreateImagePipeSurfaceFUCHSIA = (PFN_vkCreateImagePipeSurfaceFUCHSIA)vkGetInstanceProcAddr(instance, "vkCreateImagePipeSurfaceFUCHSIA");
 #endif // defined(VK_FUCHSIA_imagepipe_surface)
@@ -5849,6 +5905,14 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vkGetDeviceProcAddr(device, "vkDestroyValidationCacheEXT");
 	pfn_vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vkGetDeviceProcAddr(device, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
+#if defined(VK_FUCHSIA_external_memory)
+	pfn_vkGetMemoryZirconHandleFUCHSIA = (PFN_vkGetMemoryZirconHandleFUCHSIA)vkGetDeviceProcAddr(device, "vkGetMemoryZirconHandleFUCHSIA");
+	pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA = (PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA)vkGetDeviceProcAddr(device, "vkGetMemoryZirconHandlePropertiesFUCHSIA");
+#endif // defined(VK_FUCHSIA_external_memory)
+#if defined(VK_FUCHSIA_external_semaphore)
+	pfn_vkImportSemaphoreZirconHandleFUCHSIA = (PFN_vkImportSemaphoreZirconHandleFUCHSIA)vkGetDeviceProcAddr(device, "vkImportSemaphoreZirconHandleFUCHSIA");
+	pfn_vkGetSemaphoreZirconHandleFUCHSIA = (PFN_vkGetSemaphoreZirconHandleFUCHSIA)vkGetDeviceProcAddr(device, "vkGetSemaphoreZirconHandleFUCHSIA");
+#endif // defined(VK_FUCHSIA_external_semaphore)
 #if defined(VK_GOOGLE_display_timing)
 	pfn_vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vkGetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
 	pfn_vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");
