@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 177 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 178 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -410,10 +410,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBeginQueryIndexedEXT = (PFN_vkCmdBeginQueryIndexedEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginQueryIndexedEXT");
 #endif // defined(VK_EXT_transform_feedback)
 #if defined(VK_EXT_validation_cache)
+	vk->vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetValidationCacheDataEXT");
 	vk->vkMergeValidationCachesEXT = (PFN_vkMergeValidationCachesEXT)vk->vkGetInstanceProcAddr(instance, "vkMergeValidationCachesEXT");
 	vk->vkCreateValidationCacheEXT = (PFN_vkCreateValidationCacheEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateValidationCacheEXT");
 	vk->vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyValidationCacheEXT");
-	vk->vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
 #if defined(VK_EXT_vertex_input_dynamic_state)
 	vk->vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetVertexInputEXT");
@@ -710,6 +710,13 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NN_vi_surface)
 	vk->vkCreateViSurfaceNN = (PFN_vkCreateViSurfaceNN)vk->vkGetInstanceProcAddr(instance, "vkCreateViSurfaceNN");
 #endif // defined(VK_NN_vi_surface)
+#if defined(VK_NVX_binary_import)
+	vk->vkDestroyCuFunctionNVX = (PFN_vkDestroyCuFunctionNVX)vk->vkGetInstanceProcAddr(instance, "vkDestroyCuFunctionNVX");
+	vk->vkCreateCuModuleNVX = (PFN_vkCreateCuModuleNVX)vk->vkGetInstanceProcAddr(instance, "vkCreateCuModuleNVX");
+	vk->vkCreateCuFunctionNVX = (PFN_vkCreateCuFunctionNVX)vk->vkGetInstanceProcAddr(instance, "vkCreateCuFunctionNVX");
+	vk->vkDestroyCuModuleNVX = (PFN_vkDestroyCuModuleNVX)vk->vkGetInstanceProcAddr(instance, "vkDestroyCuModuleNVX");
+	vk->vkCmdCuLaunchKernelNVX = (PFN_vkCmdCuLaunchKernelNVX)vk->vkGetInstanceProcAddr(instance, "vkCmdCuLaunchKernelNVX");
+#endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
 	vk->vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewHandleNVX");
 	vk->vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewAddressNVX");
@@ -1109,10 +1116,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdBeginQueryIndexedEXT = (PFN_vkCmdBeginQueryIndexedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginQueryIndexedEXT");
 #endif // defined(VK_EXT_transform_feedback)
 #if defined(VK_EXT_validation_cache)
+	vk->vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetValidationCacheDataEXT");
 	vk->vkMergeValidationCachesEXT = (PFN_vkMergeValidationCachesEXT)vk->vkGetDeviceProcAddr(device, "vkMergeValidationCachesEXT");
 	vk->vkCreateValidationCacheEXT = (PFN_vkCreateValidationCacheEXT)vk->vkGetDeviceProcAddr(device, "vkCreateValidationCacheEXT");
 	vk->vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyValidationCacheEXT");
-	vk->vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
 #if defined(VK_EXT_vertex_input_dynamic_state)
 	vk->vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
@@ -1322,6 +1329,13 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkBindVideoSessionMemoryKHR = (PFN_vkBindVideoSessionMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkBindVideoSessionMemoryKHR");
 	vk->vkDestroyVideoSessionParametersKHR = (PFN_vkDestroyVideoSessionParametersKHR)vk->vkGetDeviceProcAddr(device, "vkDestroyVideoSessionParametersKHR");
 #endif // defined(VK_KHR_video_queue)
+#if defined(VK_NVX_binary_import)
+	vk->vkDestroyCuFunctionNVX = (PFN_vkDestroyCuFunctionNVX)vk->vkGetDeviceProcAddr(device, "vkDestroyCuFunctionNVX");
+	vk->vkCreateCuModuleNVX = (PFN_vkCreateCuModuleNVX)vk->vkGetDeviceProcAddr(device, "vkCreateCuModuleNVX");
+	vk->vkCreateCuFunctionNVX = (PFN_vkCreateCuFunctionNVX)vk->vkGetDeviceProcAddr(device, "vkCreateCuFunctionNVX");
+	vk->vkDestroyCuModuleNVX = (PFN_vkDestroyCuModuleNVX)vk->vkGetDeviceProcAddr(device, "vkDestroyCuModuleNVX");
+	vk->vkCmdCuLaunchKernelNVX = (PFN_vkCmdCuLaunchKernelNVX)vk->vkGetDeviceProcAddr(device, "vkCmdCuLaunchKernelNVX");
+#endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
 	vk->vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vk->vkGetDeviceProcAddr(device, "vkGetImageViewHandleNVX");
 	vk->vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vk->vkGetDeviceProcAddr(device, "vkGetImageViewAddressNVX");
@@ -3394,6 +3408,13 @@ VKAPI_ATTR void vkCmdBeginQueryIndexedEXT(VkCommandBuffer commandBuffer, VkQuery
 #endif // defined(VK_EXT_transform_feedback)
 #if defined(VK_EXT_validation_cache)
 
+static PFN_vkGetValidationCacheDataEXT pfn_vkGetValidationCacheDataEXT;
+VKAPI_ATTR VkResult vkGetValidationCacheDataEXT(VkDevice device, VkValidationCacheEXT validationCache, size_t * pDataSize, void * pData)
+{
+	assert(pfn_vkGetValidationCacheDataEXT);
+	return pfn_vkGetValidationCacheDataEXT(device, validationCache, pDataSize, pData);
+}
+
 static PFN_vkMergeValidationCachesEXT pfn_vkMergeValidationCachesEXT;
 VKAPI_ATTR VkResult vkMergeValidationCachesEXT(VkDevice device, VkValidationCacheEXT dstCache, uint32_t srcCacheCount, const VkValidationCacheEXT * pSrcCaches)
 {
@@ -3413,13 +3434,6 @@ VKAPI_ATTR void vkDestroyValidationCacheEXT(VkDevice device, VkValidationCacheEX
 {
 	assert(pfn_vkDestroyValidationCacheEXT);
 	pfn_vkDestroyValidationCacheEXT(device, validationCache, pAllocator);
-}
-
-static PFN_vkGetValidationCacheDataEXT pfn_vkGetValidationCacheDataEXT;
-VKAPI_ATTR VkResult vkGetValidationCacheDataEXT(VkDevice device, VkValidationCacheEXT validationCache, size_t * pDataSize, void * pData)
-{
-	assert(pfn_vkGetValidationCacheDataEXT);
-	return pfn_vkGetValidationCacheDataEXT(device, validationCache, pDataSize, pData);
 }
 #endif // defined(VK_EXT_validation_cache)
 #if defined(VK_EXT_vertex_input_dynamic_state)
@@ -4767,6 +4781,43 @@ VKAPI_ATTR VkResult vkCreateViSurfaceNN(VkInstance instance, const VkViSurfaceCr
 	return pfn_vkCreateViSurfaceNN(instance, pCreateInfo, pAllocator, pSurface);
 }
 #endif // defined(VK_NN_vi_surface)
+#if defined(VK_NVX_binary_import)
+
+static PFN_vkDestroyCuFunctionNVX pfn_vkDestroyCuFunctionNVX;
+VKAPI_ATTR void vkDestroyCuFunctionNVX(VkDevice device, VkCuFunctionNVX function, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyCuFunctionNVX);
+	pfn_vkDestroyCuFunctionNVX(device, function, pAllocator);
+}
+
+static PFN_vkCreateCuModuleNVX pfn_vkCreateCuModuleNVX;
+VKAPI_ATTR VkResult vkCreateCuModuleNVX(VkDevice device, const VkCuModuleCreateInfoNVX * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkCuModuleNVX * pModule)
+{
+	assert(pfn_vkCreateCuModuleNVX);
+	return pfn_vkCreateCuModuleNVX(device, pCreateInfo, pAllocator, pModule);
+}
+
+static PFN_vkCreateCuFunctionNVX pfn_vkCreateCuFunctionNVX;
+VKAPI_ATTR VkResult vkCreateCuFunctionNVX(VkDevice device, const VkCuFunctionCreateInfoNVX * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkCuFunctionNVX * pFunction)
+{
+	assert(pfn_vkCreateCuFunctionNVX);
+	return pfn_vkCreateCuFunctionNVX(device, pCreateInfo, pAllocator, pFunction);
+}
+
+static PFN_vkDestroyCuModuleNVX pfn_vkDestroyCuModuleNVX;
+VKAPI_ATTR void vkDestroyCuModuleNVX(VkDevice device, VkCuModuleNVX module, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyCuModuleNVX);
+	pfn_vkDestroyCuModuleNVX(device, module, pAllocator);
+}
+
+static PFN_vkCmdCuLaunchKernelNVX pfn_vkCmdCuLaunchKernelNVX;
+VKAPI_ATTR void vkCmdCuLaunchKernelNVX(VkCommandBuffer commandBuffer, const VkCuLaunchInfoNVX * pLaunchInfo)
+{
+	assert(pfn_vkCmdCuLaunchKernelNVX);
+	pfn_vkCmdCuLaunchKernelNVX(commandBuffer, pLaunchInfo);
+}
+#endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
 
 static PFN_vkGetImageViewHandleNVX pfn_vkGetImageViewHandleNVX;
@@ -5467,10 +5518,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBeginQueryIndexedEXT = (PFN_vkCmdBeginQueryIndexedEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginQueryIndexedEXT");
 #endif // defined(VK_EXT_transform_feedback)
 #if defined(VK_EXT_validation_cache)
+	pfn_vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vkGetInstanceProcAddr(instance, "vkGetValidationCacheDataEXT");
 	pfn_vkMergeValidationCachesEXT = (PFN_vkMergeValidationCachesEXT)vkGetInstanceProcAddr(instance, "vkMergeValidationCachesEXT");
 	pfn_vkCreateValidationCacheEXT = (PFN_vkCreateValidationCacheEXT)vkGetInstanceProcAddr(instance, "vkCreateValidationCacheEXT");
 	pfn_vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vkGetInstanceProcAddr(instance, "vkDestroyValidationCacheEXT");
-	pfn_vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vkGetInstanceProcAddr(instance, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
 #if defined(VK_EXT_vertex_input_dynamic_state)
 	pfn_vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vkGetInstanceProcAddr(instance, "vkCmdSetVertexInputEXT");
@@ -5767,6 +5818,13 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NN_vi_surface)
 	pfn_vkCreateViSurfaceNN = (PFN_vkCreateViSurfaceNN)vkGetInstanceProcAddr(instance, "vkCreateViSurfaceNN");
 #endif // defined(VK_NN_vi_surface)
+#if defined(VK_NVX_binary_import)
+	pfn_vkDestroyCuFunctionNVX = (PFN_vkDestroyCuFunctionNVX)vkGetInstanceProcAddr(instance, "vkDestroyCuFunctionNVX");
+	pfn_vkCreateCuModuleNVX = (PFN_vkCreateCuModuleNVX)vkGetInstanceProcAddr(instance, "vkCreateCuModuleNVX");
+	pfn_vkCreateCuFunctionNVX = (PFN_vkCreateCuFunctionNVX)vkGetInstanceProcAddr(instance, "vkCreateCuFunctionNVX");
+	pfn_vkDestroyCuModuleNVX = (PFN_vkDestroyCuModuleNVX)vkGetInstanceProcAddr(instance, "vkDestroyCuModuleNVX");
+	pfn_vkCmdCuLaunchKernelNVX = (PFN_vkCmdCuLaunchKernelNVX)vkGetInstanceProcAddr(instance, "vkCmdCuLaunchKernelNVX");
+#endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
 	pfn_vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vkGetInstanceProcAddr(instance, "vkGetImageViewHandleNVX");
 	pfn_vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vkGetInstanceProcAddr(instance, "vkGetImageViewAddressNVX");
@@ -6166,10 +6224,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdBeginQueryIndexedEXT = (PFN_vkCmdBeginQueryIndexedEXT)vkGetDeviceProcAddr(device, "vkCmdBeginQueryIndexedEXT");
 #endif // defined(VK_EXT_transform_feedback)
 #if defined(VK_EXT_validation_cache)
+	pfn_vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vkGetDeviceProcAddr(device, "vkGetValidationCacheDataEXT");
 	pfn_vkMergeValidationCachesEXT = (PFN_vkMergeValidationCachesEXT)vkGetDeviceProcAddr(device, "vkMergeValidationCachesEXT");
 	pfn_vkCreateValidationCacheEXT = (PFN_vkCreateValidationCacheEXT)vkGetDeviceProcAddr(device, "vkCreateValidationCacheEXT");
 	pfn_vkDestroyValidationCacheEXT = (PFN_vkDestroyValidationCacheEXT)vkGetDeviceProcAddr(device, "vkDestroyValidationCacheEXT");
-	pfn_vkGetValidationCacheDataEXT = (PFN_vkGetValidationCacheDataEXT)vkGetDeviceProcAddr(device, "vkGetValidationCacheDataEXT");
 #endif // defined(VK_EXT_validation_cache)
 #if defined(VK_EXT_vertex_input_dynamic_state)
 	pfn_vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vkGetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
@@ -6379,6 +6437,13 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkBindVideoSessionMemoryKHR = (PFN_vkBindVideoSessionMemoryKHR)vkGetDeviceProcAddr(device, "vkBindVideoSessionMemoryKHR");
 	pfn_vkDestroyVideoSessionParametersKHR = (PFN_vkDestroyVideoSessionParametersKHR)vkGetDeviceProcAddr(device, "vkDestroyVideoSessionParametersKHR");
 #endif // defined(VK_KHR_video_queue)
+#if defined(VK_NVX_binary_import)
+	pfn_vkDestroyCuFunctionNVX = (PFN_vkDestroyCuFunctionNVX)vkGetDeviceProcAddr(device, "vkDestroyCuFunctionNVX");
+	pfn_vkCreateCuModuleNVX = (PFN_vkCreateCuModuleNVX)vkGetDeviceProcAddr(device, "vkCreateCuModuleNVX");
+	pfn_vkCreateCuFunctionNVX = (PFN_vkCreateCuFunctionNVX)vkGetDeviceProcAddr(device, "vkCreateCuFunctionNVX");
+	pfn_vkDestroyCuModuleNVX = (PFN_vkDestroyCuModuleNVX)vkGetDeviceProcAddr(device, "vkDestroyCuModuleNVX");
+	pfn_vkCmdCuLaunchKernelNVX = (PFN_vkCmdCuLaunchKernelNVX)vkGetDeviceProcAddr(device, "vkCmdCuLaunchKernelNVX");
+#endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
 	pfn_vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vkGetDeviceProcAddr(device, "vkGetImageViewHandleNVX");
 	pfn_vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vkGetDeviceProcAddr(device, "vkGetImageViewAddressNVX");
