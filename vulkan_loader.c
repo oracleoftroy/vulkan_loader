@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 181 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 182 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -276,6 +276,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	vk->vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_EXT_acquire_drm_display)
+	vk->vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
+	vk->vkGetDrmDisplayEXT = (PFN_vkGetDrmDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDrmDisplayEXT");
+#endif // defined(VK_EXT_acquire_drm_display)
 #if defined(VK_EXT_acquire_xlib_display)
 	vk->vkAcquireXlibDisplayEXT = (PFN_vkAcquireXlibDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkAcquireXlibDisplayEXT");
 	vk->vkGetRandROutputDisplayEXT = (PFN_vkGetRandROutputDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkGetRandROutputDisplayEXT");
@@ -388,6 +392,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_metal_surface)
 	vk->vkCreateMetalSurfaceEXT = (PFN_vkCreateMetalSurfaceEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateMetalSurfaceEXT");
 #endif // defined(VK_EXT_metal_surface)
+#if defined(VK_EXT_multi_draw)
+	vk->vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMultiEXT");
+	vk->vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMultiIndexedEXT");
+#endif // defined(VK_EXT_multi_draw)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -436,6 +444,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vk->vkGetInstanceProcAddr(instance, "vkGetRefreshCycleDurationGOOGLE");
 	vk->vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vk->vkGetInstanceProcAddr(instance, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_subpass_shading)
+	vk->vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)vk->vkGetInstanceProcAddr(instance, "vkCmdSubpassShadingHUAWEI");
+	vk->vkGetSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI)vk->vkGetInstanceProcAddr(instance, "vkGetSubpassShadingMaxWorkgroupSizeHUAWEI");
+#endif // defined(VK_HUAWEI_subpass_shading)
 #if defined(VK_INTEL_performance_query)
 	vk->vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vk->vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceStreamMarkerINTEL");
 	vk->vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vk->vkGetInstanceProcAddr(instance, "vkAcquirePerformanceConfigurationINTEL");
@@ -1098,6 +1110,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_line_rasterization)
 	vk->vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_multi_draw)
+	vk->vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMultiEXT");
+	vk->vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMultiIndexedEXT");
+#endif // defined(VK_EXT_multi_draw)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -1136,6 +1152,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vk->vkGetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
 	vk->vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vk->vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_subpass_shading)
+	vk->vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)vk->vkGetDeviceProcAddr(device, "vkCmdSubpassShadingHUAWEI");
+	vk->vkGetSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI)vk->vkGetDeviceProcAddr(device, "vkGetSubpassShadingMaxWorkgroupSizeHUAWEI");
+#endif // defined(VK_HUAWEI_subpass_shading)
 #if defined(VK_INTEL_performance_query)
 	vk->vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vk->vkGetDeviceProcAddr(device, "vkCmdSetPerformanceStreamMarkerINTEL");
 	vk->vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vk->vkGetDeviceProcAddr(device, "vkAcquirePerformanceConfigurationINTEL");
@@ -2811,6 +2831,22 @@ VKAPI_ATTR VkResult vkGetMemoryAndroidHardwareBufferANDROID(VkDevice device, con
 	return pfn_vkGetMemoryAndroidHardwareBufferANDROID(device, pInfo, pBuffer);
 }
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_EXT_acquire_drm_display)
+
+static PFN_vkAcquireDrmDisplayEXT pfn_vkAcquireDrmDisplayEXT;
+VKAPI_ATTR VkResult vkAcquireDrmDisplayEXT(VkPhysicalDevice physicalDevice, int32_t drmFd, VkDisplayKHR display)
+{
+	assert(pfn_vkAcquireDrmDisplayEXT);
+	return pfn_vkAcquireDrmDisplayEXT(physicalDevice, drmFd, display);
+}
+
+static PFN_vkGetDrmDisplayEXT pfn_vkGetDrmDisplayEXT;
+VKAPI_ATTR VkResult vkGetDrmDisplayEXT(VkPhysicalDevice physicalDevice, int32_t drmFd, uint32_t connectorId, VkDisplayKHR * display)
+{
+	assert(pfn_vkGetDrmDisplayEXT);
+	return pfn_vkGetDrmDisplayEXT(physicalDevice, drmFd, connectorId, display);
+}
+#endif // defined(VK_EXT_acquire_drm_display)
 #if defined(VK_EXT_acquire_xlib_display)
 
 static PFN_vkAcquireXlibDisplayEXT pfn_vkAcquireXlibDisplayEXT;
@@ -3307,6 +3343,22 @@ VKAPI_ATTR VkResult vkCreateMetalSurfaceEXT(VkInstance instance, const VkMetalSu
 	return pfn_vkCreateMetalSurfaceEXT(instance, pCreateInfo, pAllocator, pSurface);
 }
 #endif // defined(VK_EXT_metal_surface)
+#if defined(VK_EXT_multi_draw)
+
+static PFN_vkCmdDrawMultiEXT pfn_vkCmdDrawMultiEXT;
+VKAPI_ATTR void vkCmdDrawMultiEXT(VkCommandBuffer commandBuffer, uint32_t drawCount, const VkMultiDrawInfoEXT * pVertexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawMultiEXT);
+	pfn_vkCmdDrawMultiEXT(commandBuffer, drawCount, pVertexInfo, instanceCount, firstInstance, stride);
+}
+
+static PFN_vkCmdDrawMultiIndexedEXT pfn_vkCmdDrawMultiIndexedEXT;
+VKAPI_ATTR void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, uint32_t drawCount, const VkMultiDrawIndexedInfoEXT * pIndexInfo, uint32_t instanceCount, uint32_t firstInstance, uint32_t stride, const int32_t * pVertexOffset)
+{
+	assert(pfn_vkCmdDrawMultiIndexedEXT);
+	pfn_vkCmdDrawMultiIndexedEXT(commandBuffer, drawCount, pIndexInfo, instanceCount, firstInstance, stride, pVertexOffset);
+}
+#endif // defined(VK_EXT_multi_draw)
 #if defined(VK_EXT_private_data)
 
 static PFN_vkDestroyPrivateDataSlotEXT pfn_vkDestroyPrivateDataSlotEXT;
@@ -3511,6 +3563,22 @@ VKAPI_ATTR VkResult vkGetPastPresentationTimingGOOGLE(VkDevice device, VkSwapcha
 	return pfn_vkGetPastPresentationTimingGOOGLE(device, swapchain, pPresentationTimingCount, pPresentationTimings);
 }
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_subpass_shading)
+
+static PFN_vkCmdSubpassShadingHUAWEI pfn_vkCmdSubpassShadingHUAWEI;
+VKAPI_ATTR void vkCmdSubpassShadingHUAWEI(VkCommandBuffer commandBuffer)
+{
+	assert(pfn_vkCmdSubpassShadingHUAWEI);
+	pfn_vkCmdSubpassShadingHUAWEI(commandBuffer);
+}
+
+static PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI pfn_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI;
+VKAPI_ATTR VkResult vkGetSubpassShadingMaxWorkgroupSizeHUAWEI(VkRenderPass renderpass, VkExtent2D * pMaxWorkgroupSize)
+{
+	assert(pfn_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI);
+	return pfn_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI(renderpass, pMaxWorkgroupSize);
+}
+#endif // defined(VK_HUAWEI_subpass_shading)
 #if defined(VK_INTEL_performance_query)
 
 static PFN_vkCmdSetPerformanceStreamMarkerINTEL pfn_vkCmdSetPerformanceStreamMarkerINTEL;
@@ -5384,6 +5452,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetInstanceProcAddr(instance, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetInstanceProcAddr(instance, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_EXT_acquire_drm_display)
+	pfn_vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
+	pfn_vkGetDrmDisplayEXT = (PFN_vkGetDrmDisplayEXT)vkGetInstanceProcAddr(instance, "vkGetDrmDisplayEXT");
+#endif // defined(VK_EXT_acquire_drm_display)
 #if defined(VK_EXT_acquire_xlib_display)
 	pfn_vkAcquireXlibDisplayEXT = (PFN_vkAcquireXlibDisplayEXT)vkGetInstanceProcAddr(instance, "vkAcquireXlibDisplayEXT");
 	pfn_vkGetRandROutputDisplayEXT = (PFN_vkGetRandROutputDisplayEXT)vkGetInstanceProcAddr(instance, "vkGetRandROutputDisplayEXT");
@@ -5496,6 +5568,10 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_metal_surface)
 	pfn_vkCreateMetalSurfaceEXT = (PFN_vkCreateMetalSurfaceEXT)vkGetInstanceProcAddr(instance, "vkCreateMetalSurfaceEXT");
 #endif // defined(VK_EXT_metal_surface)
+#if defined(VK_EXT_multi_draw)
+	pfn_vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMultiEXT");
+	pfn_vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMultiIndexedEXT");
+#endif // defined(VK_EXT_multi_draw)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -5544,6 +5620,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vkGetInstanceProcAddr(instance, "vkGetRefreshCycleDurationGOOGLE");
 	pfn_vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vkGetInstanceProcAddr(instance, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_subpass_shading)
+	pfn_vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)vkGetInstanceProcAddr(instance, "vkCmdSubpassShadingHUAWEI");
+	pfn_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI)vkGetInstanceProcAddr(instance, "vkGetSubpassShadingMaxWorkgroupSizeHUAWEI");
+#endif // defined(VK_HUAWEI_subpass_shading)
 #if defined(VK_INTEL_performance_query)
 	pfn_vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceStreamMarkerINTEL");
 	pfn_vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vkGetInstanceProcAddr(instance, "vkAcquirePerformanceConfigurationINTEL");
@@ -6206,6 +6286,10 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_line_rasterization)
 	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_multi_draw)
+	pfn_vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMultiEXT");
+	pfn_vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMultiIndexedEXT");
+#endif // defined(VK_EXT_multi_draw)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -6244,6 +6328,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vkGetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
 	pfn_vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_subpass_shading)
+	pfn_vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)vkGetDeviceProcAddr(device, "vkCmdSubpassShadingHUAWEI");
+	pfn_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetSubpassShadingMaxWorkgroupSizeHUAWEI)vkGetDeviceProcAddr(device, "vkGetSubpassShadingMaxWorkgroupSizeHUAWEI");
+#endif // defined(VK_HUAWEI_subpass_shading)
 #if defined(VK_INTEL_performance_query)
 	pfn_vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vkGetDeviceProcAddr(device, "vkCmdSetPerformanceStreamMarkerINTEL");
 	pfn_vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vkGetDeviceProcAddr(device, "vkAcquirePerformanceConfigurationINTEL");
