@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 184 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 185 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -444,6 +444,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vk->vkGetInstanceProcAddr(instance, "vkGetRefreshCycleDurationGOOGLE");
 	vk->vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vk->vkGetInstanceProcAddr(instance, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_invocation_mask)
+	vk->vkCmdBindInvocationMaskHUAWEI = (PFN_vkCmdBindInvocationMaskHUAWEI)vk->vkGetInstanceProcAddr(instance, "vkCmdBindInvocationMaskHUAWEI");
+#endif // defined(VK_HUAWEI_invocation_mask)
 #if defined(VK_HUAWEI_subpass_shading)
 	vk->vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)vk->vkGetInstanceProcAddr(instance, "vkCmdSubpassShadingHUAWEI");
 	vk->vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI");
@@ -628,6 +631,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineExecutablePropertiesKHR");
 	vk->vkGetPipelineExecutableStatisticsKHR = (PFN_vkGetPipelineExecutableStatisticsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineExecutableStatisticsKHR");
 #endif // defined(VK_KHR_pipeline_executable_properties)
+#if defined(VK_KHR_present_wait)
+	vk->vkWaitForPresentKHR = (PFN_vkWaitForPresentKHR)vk->vkGetInstanceProcAddr(instance, "vkWaitForPresentKHR");
+#endif // defined(VK_KHR_present_wait)
 #if defined(VK_KHR_push_descriptor)
 	vk->vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
@@ -1155,6 +1161,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vk->vkGetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
 	vk->vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vk->vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_invocation_mask)
+	vk->vkCmdBindInvocationMaskHUAWEI = (PFN_vkCmdBindInvocationMaskHUAWEI)vk->vkGetDeviceProcAddr(device, "vkCmdBindInvocationMaskHUAWEI");
+#endif // defined(VK_HUAWEI_invocation_mask)
 #if defined(VK_HUAWEI_subpass_shading)
 	vk->vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)vk->vkGetDeviceProcAddr(device, "vkCmdSubpassShadingHUAWEI");
 	vk->vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI)vk->vkGetDeviceProcAddr(device, "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI");
@@ -1292,6 +1301,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineExecutablePropertiesKHR");
 	vk->vkGetPipelineExecutableStatisticsKHR = (PFN_vkGetPipelineExecutableStatisticsKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineExecutableStatisticsKHR");
 #endif // defined(VK_KHR_pipeline_executable_properties)
+#if defined(VK_KHR_present_wait)
+	vk->vkWaitForPresentKHR = (PFN_vkWaitForPresentKHR)vk->vkGetDeviceProcAddr(device, "vkWaitForPresentKHR");
+#endif // defined(VK_KHR_present_wait)
 #if defined(VK_KHR_push_descriptor)
 	vk->vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
@@ -3569,6 +3581,15 @@ VKAPI_ATTR VkResult vkGetPastPresentationTimingGOOGLE(VkDevice device, VkSwapcha
 	return pfn_vkGetPastPresentationTimingGOOGLE(device, swapchain, pPresentationTimingCount, pPresentationTimings);
 }
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_invocation_mask)
+
+static PFN_vkCmdBindInvocationMaskHUAWEI pfn_vkCmdBindInvocationMaskHUAWEI;
+VKAPI_ATTR void vkCmdBindInvocationMaskHUAWEI(VkCommandBuffer commandBuffer, VkImageView imageView, VkImageLayout imageLayout)
+{
+	assert(pfn_vkCmdBindInvocationMaskHUAWEI);
+	pfn_vkCmdBindInvocationMaskHUAWEI(commandBuffer, imageView, imageLayout);
+}
+#endif // defined(VK_HUAWEI_invocation_mask)
 #if defined(VK_HUAWEI_subpass_shading)
 
 static PFN_vkCmdSubpassShadingHUAWEI pfn_vkCmdSubpassShadingHUAWEI;
@@ -4425,6 +4446,15 @@ VKAPI_ATTR VkResult vkGetPipelineExecutableStatisticsKHR(VkDevice device, const 
 	return pfn_vkGetPipelineExecutableStatisticsKHR(device, pExecutableInfo, pStatisticCount, pStatistics);
 }
 #endif // defined(VK_KHR_pipeline_executable_properties)
+#if defined(VK_KHR_present_wait)
+
+static PFN_vkWaitForPresentKHR pfn_vkWaitForPresentKHR;
+VKAPI_ATTR VkResult vkWaitForPresentKHR(VkDevice device, VkSwapchainKHR swapchain, uint64_t presentId, uint64_t timeout)
+{
+	assert(pfn_vkWaitForPresentKHR);
+	return pfn_vkWaitForPresentKHR(device, swapchain, presentId, timeout);
+}
+#endif // defined(VK_KHR_present_wait)
 #if defined(VK_KHR_push_descriptor)
 
 static PFN_vkCmdPushDescriptorSetKHR pfn_vkCmdPushDescriptorSetKHR;
@@ -5023,10 +5053,10 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceExternalImageFormatPropertiesNV(VkPhysica
 #if defined(VK_NV_external_memory_rdma)
 
 static PFN_vkGetMemoryRemoteAddressNV pfn_vkGetMemoryRemoteAddressNV;
-VKAPI_ATTR VkResult vkGetMemoryRemoteAddressNV(VkDevice device, const VkMemoryGetRemoteAddressInfoNV * getMemoryRemoteAddressInfo, VkRemoteAddressNV * pAddress)
+VKAPI_ATTR VkResult vkGetMemoryRemoteAddressNV(VkDevice device, const VkMemoryGetRemoteAddressInfoNV * pMemoryGetRemoteAddressInfo, VkRemoteAddressNV * pAddress)
 {
 	assert(pfn_vkGetMemoryRemoteAddressNV);
-	return pfn_vkGetMemoryRemoteAddressNV(device, getMemoryRemoteAddressInfo, pAddress);
+	return pfn_vkGetMemoryRemoteAddressNV(device, pMemoryGetRemoteAddressInfo, pAddress);
 }
 #endif // defined(VK_NV_external_memory_rdma)
 #if defined(VK_NV_external_memory_win32)
@@ -5635,6 +5665,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vkGetInstanceProcAddr(instance, "vkGetRefreshCycleDurationGOOGLE");
 	pfn_vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vkGetInstanceProcAddr(instance, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_invocation_mask)
+	pfn_vkCmdBindInvocationMaskHUAWEI = (PFN_vkCmdBindInvocationMaskHUAWEI)vkGetInstanceProcAddr(instance, "vkCmdBindInvocationMaskHUAWEI");
+#endif // defined(VK_HUAWEI_invocation_mask)
 #if defined(VK_HUAWEI_subpass_shading)
 	pfn_vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)vkGetInstanceProcAddr(instance, "vkCmdSubpassShadingHUAWEI");
 	pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI)vkGetInstanceProcAddr(instance, "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI");
@@ -5819,6 +5852,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineExecutablePropertiesKHR");
 	pfn_vkGetPipelineExecutableStatisticsKHR = (PFN_vkGetPipelineExecutableStatisticsKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineExecutableStatisticsKHR");
 #endif // defined(VK_KHR_pipeline_executable_properties)
+#if defined(VK_KHR_present_wait)
+	pfn_vkWaitForPresentKHR = (PFN_vkWaitForPresentKHR)vkGetInstanceProcAddr(instance, "vkWaitForPresentKHR");
+#endif // defined(VK_KHR_present_wait)
 #if defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
@@ -6346,6 +6382,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vkGetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
 	pfn_vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_invocation_mask)
+	pfn_vkCmdBindInvocationMaskHUAWEI = (PFN_vkCmdBindInvocationMaskHUAWEI)vkGetDeviceProcAddr(device, "vkCmdBindInvocationMaskHUAWEI");
+#endif // defined(VK_HUAWEI_invocation_mask)
 #if defined(VK_HUAWEI_subpass_shading)
 	pfn_vkCmdSubpassShadingHUAWEI = (PFN_vkCmdSubpassShadingHUAWEI)vkGetDeviceProcAddr(device, "vkCmdSubpassShadingHUAWEI");
 	pfn_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = (PFN_vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI)vkGetDeviceProcAddr(device, "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI");
@@ -6483,6 +6522,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vkGetDeviceProcAddr(device, "vkGetPipelineExecutablePropertiesKHR");
 	pfn_vkGetPipelineExecutableStatisticsKHR = (PFN_vkGetPipelineExecutableStatisticsKHR)vkGetDeviceProcAddr(device, "vkGetPipelineExecutableStatisticsKHR");
 #endif // defined(VK_KHR_pipeline_executable_properties)
+#if defined(VK_KHR_present_wait)
+	pfn_vkWaitForPresentKHR = (PFN_vkWaitForPresentKHR)vkGetDeviceProcAddr(device, "vkWaitForPresentKHR");
+#endif // defined(VK_KHR_present_wait)
 #if defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
