@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 190 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 191 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -396,6 +396,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMultiEXT");
 	vk->vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMultiIndexedEXT");
 #endif // defined(VK_EXT_multi_draw)
+#if defined(VK_EXT_pageable_device_local_memory)
+	vk->vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vk->vkGetInstanceProcAddr(instance, "vkSetDeviceMemoryPriorityEXT");
+#endif // defined(VK_EXT_pageable_device_local_memory)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -1123,6 +1126,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMultiEXT");
 	vk->vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMultiIndexedEXT");
 #endif // defined(VK_EXT_multi_draw)
+#if defined(VK_EXT_pageable_device_local_memory)
+	vk->vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vk->vkGetDeviceProcAddr(device, "vkSetDeviceMemoryPriorityEXT");
+#endif // defined(VK_EXT_pageable_device_local_memory)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -3377,6 +3383,15 @@ VKAPI_ATTR void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, uint32_t
 	pfn_vkCmdDrawMultiIndexedEXT(commandBuffer, drawCount, pIndexInfo, instanceCount, firstInstance, stride, pVertexOffset);
 }
 #endif // defined(VK_EXT_multi_draw)
+#if defined(VK_EXT_pageable_device_local_memory)
+
+static PFN_vkSetDeviceMemoryPriorityEXT pfn_vkSetDeviceMemoryPriorityEXT;
+VKAPI_ATTR void vkSetDeviceMemoryPriorityEXT(VkDevice device, VkDeviceMemory memory, float priority)
+{
+	assert(pfn_vkSetDeviceMemoryPriorityEXT);
+	pfn_vkSetDeviceMemoryPriorityEXT(device, memory, priority);
+}
+#endif // defined(VK_EXT_pageable_device_local_memory)
 #if defined(VK_EXT_private_data)
 
 static PFN_vkDestroyPrivateDataSlotEXT pfn_vkDestroyPrivateDataSlotEXT;
@@ -5617,6 +5632,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMultiEXT");
 	pfn_vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMultiIndexedEXT");
 #endif // defined(VK_EXT_multi_draw)
+#if defined(VK_EXT_pageable_device_local_memory)
+	pfn_vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vkGetInstanceProcAddr(instance, "vkSetDeviceMemoryPriorityEXT");
+#endif // defined(VK_EXT_pageable_device_local_memory)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -6344,6 +6362,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMultiEXT");
 	pfn_vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMultiIndexedEXT");
 #endif // defined(VK_EXT_multi_draw)
+#if defined(VK_EXT_pageable_device_local_memory)
+	pfn_vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vkGetDeviceProcAddr(device, "vkSetDeviceMemoryPriorityEXT");
+#endif // defined(VK_EXT_pageable_device_local_memory)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
