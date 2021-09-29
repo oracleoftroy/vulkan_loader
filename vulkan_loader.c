@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 193 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 194 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -429,6 +429,13 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_vertex_input_dynamic_state)
 	vk->vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetVertexInputEXT");
 #endif // defined(VK_EXT_vertex_input_dynamic_state)
+#if defined(VK_FUCHSIA_buffer_collection)
+	vk->vkSetBufferCollectionImageConstraintsFUCHSIA = (PFN_vkSetBufferCollectionImageConstraintsFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkSetBufferCollectionImageConstraintsFUCHSIA");
+	vk->vkDestroyBufferCollectionFUCHSIA = (PFN_vkDestroyBufferCollectionFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkDestroyBufferCollectionFUCHSIA");
+	vk->vkCreateBufferCollectionFUCHSIA = (PFN_vkCreateBufferCollectionFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkCreateBufferCollectionFUCHSIA");
+	vk->vkSetBufferCollectionBufferConstraintsFUCHSIA = (PFN_vkSetBufferCollectionBufferConstraintsFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkSetBufferCollectionBufferConstraintsFUCHSIA");
+	vk->vkGetBufferCollectionPropertiesFUCHSIA = (PFN_vkGetBufferCollectionPropertiesFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkGetBufferCollectionPropertiesFUCHSIA");
+#endif // defined(VK_FUCHSIA_buffer_collection)
 #if defined(VK_FUCHSIA_external_memory)
 	vk->vkGetMemoryZirconHandleFUCHSIA = (PFN_vkGetMemoryZirconHandleFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryZirconHandleFUCHSIA");
 	vk->vkGetMemoryZirconHandlePropertiesFUCHSIA = (PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryZirconHandlePropertiesFUCHSIA");
@@ -1155,6 +1162,13 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_vertex_input_dynamic_state)
 	vk->vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
 #endif // defined(VK_EXT_vertex_input_dynamic_state)
+#if defined(VK_FUCHSIA_buffer_collection)
+	vk->vkSetBufferCollectionImageConstraintsFUCHSIA = (PFN_vkSetBufferCollectionImageConstraintsFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkSetBufferCollectionImageConstraintsFUCHSIA");
+	vk->vkDestroyBufferCollectionFUCHSIA = (PFN_vkDestroyBufferCollectionFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkDestroyBufferCollectionFUCHSIA");
+	vk->vkCreateBufferCollectionFUCHSIA = (PFN_vkCreateBufferCollectionFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkCreateBufferCollectionFUCHSIA");
+	vk->vkSetBufferCollectionBufferConstraintsFUCHSIA = (PFN_vkSetBufferCollectionBufferConstraintsFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkSetBufferCollectionBufferConstraintsFUCHSIA");
+	vk->vkGetBufferCollectionPropertiesFUCHSIA = (PFN_vkGetBufferCollectionPropertiesFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkGetBufferCollectionPropertiesFUCHSIA");
+#endif // defined(VK_FUCHSIA_buffer_collection)
 #if defined(VK_FUCHSIA_external_memory)
 	vk->vkGetMemoryZirconHandleFUCHSIA = (PFN_vkGetMemoryZirconHandleFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkGetMemoryZirconHandleFUCHSIA");
 	vk->vkGetMemoryZirconHandlePropertiesFUCHSIA = (PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA)vk->vkGetDeviceProcAddr(device, "vkGetMemoryZirconHandlePropertiesFUCHSIA");
@@ -3530,6 +3544,43 @@ VKAPI_ATTR void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, uint32_t v
 	pfn_vkCmdSetVertexInputEXT(commandBuffer, vertexBindingDescriptionCount, pVertexBindingDescriptions, vertexAttributeDescriptionCount, pVertexAttributeDescriptions);
 }
 #endif // defined(VK_EXT_vertex_input_dynamic_state)
+#if defined(VK_FUCHSIA_buffer_collection)
+
+static PFN_vkSetBufferCollectionImageConstraintsFUCHSIA pfn_vkSetBufferCollectionImageConstraintsFUCHSIA;
+VKAPI_ATTR VkResult vkSetBufferCollectionImageConstraintsFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection, const VkImageConstraintsInfoFUCHSIA * pImageConstraintsInfo)
+{
+	assert(pfn_vkSetBufferCollectionImageConstraintsFUCHSIA);
+	return pfn_vkSetBufferCollectionImageConstraintsFUCHSIA(device, collection, pImageConstraintsInfo);
+}
+
+static PFN_vkDestroyBufferCollectionFUCHSIA pfn_vkDestroyBufferCollectionFUCHSIA;
+VKAPI_ATTR void vkDestroyBufferCollectionFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyBufferCollectionFUCHSIA);
+	pfn_vkDestroyBufferCollectionFUCHSIA(device, collection, pAllocator);
+}
+
+static PFN_vkCreateBufferCollectionFUCHSIA pfn_vkCreateBufferCollectionFUCHSIA;
+VKAPI_ATTR VkResult vkCreateBufferCollectionFUCHSIA(VkDevice device, const VkBufferCollectionCreateInfoFUCHSIA * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkBufferCollectionFUCHSIA * pCollection)
+{
+	assert(pfn_vkCreateBufferCollectionFUCHSIA);
+	return pfn_vkCreateBufferCollectionFUCHSIA(device, pCreateInfo, pAllocator, pCollection);
+}
+
+static PFN_vkSetBufferCollectionBufferConstraintsFUCHSIA pfn_vkSetBufferCollectionBufferConstraintsFUCHSIA;
+VKAPI_ATTR VkResult vkSetBufferCollectionBufferConstraintsFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection, const VkBufferConstraintsInfoFUCHSIA * pBufferConstraintsInfo)
+{
+	assert(pfn_vkSetBufferCollectionBufferConstraintsFUCHSIA);
+	return pfn_vkSetBufferCollectionBufferConstraintsFUCHSIA(device, collection, pBufferConstraintsInfo);
+}
+
+static PFN_vkGetBufferCollectionPropertiesFUCHSIA pfn_vkGetBufferCollectionPropertiesFUCHSIA;
+VKAPI_ATTR VkResult vkGetBufferCollectionPropertiesFUCHSIA(VkDevice device, VkBufferCollectionFUCHSIA collection, VkBufferCollectionPropertiesFUCHSIA * pProperties)
+{
+	assert(pfn_vkGetBufferCollectionPropertiesFUCHSIA);
+	return pfn_vkGetBufferCollectionPropertiesFUCHSIA(device, collection, pProperties);
+}
+#endif // defined(VK_FUCHSIA_buffer_collection)
 #if defined(VK_FUCHSIA_external_memory)
 
 static PFN_vkGetMemoryZirconHandleFUCHSIA pfn_vkGetMemoryZirconHandleFUCHSIA;
@@ -5665,6 +5716,13 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_vertex_input_dynamic_state)
 	pfn_vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vkGetInstanceProcAddr(instance, "vkCmdSetVertexInputEXT");
 #endif // defined(VK_EXT_vertex_input_dynamic_state)
+#if defined(VK_FUCHSIA_buffer_collection)
+	pfn_vkSetBufferCollectionImageConstraintsFUCHSIA = (PFN_vkSetBufferCollectionImageConstraintsFUCHSIA)vkGetInstanceProcAddr(instance, "vkSetBufferCollectionImageConstraintsFUCHSIA");
+	pfn_vkDestroyBufferCollectionFUCHSIA = (PFN_vkDestroyBufferCollectionFUCHSIA)vkGetInstanceProcAddr(instance, "vkDestroyBufferCollectionFUCHSIA");
+	pfn_vkCreateBufferCollectionFUCHSIA = (PFN_vkCreateBufferCollectionFUCHSIA)vkGetInstanceProcAddr(instance, "vkCreateBufferCollectionFUCHSIA");
+	pfn_vkSetBufferCollectionBufferConstraintsFUCHSIA = (PFN_vkSetBufferCollectionBufferConstraintsFUCHSIA)vkGetInstanceProcAddr(instance, "vkSetBufferCollectionBufferConstraintsFUCHSIA");
+	pfn_vkGetBufferCollectionPropertiesFUCHSIA = (PFN_vkGetBufferCollectionPropertiesFUCHSIA)vkGetInstanceProcAddr(instance, "vkGetBufferCollectionPropertiesFUCHSIA");
+#endif // defined(VK_FUCHSIA_buffer_collection)
 #if defined(VK_FUCHSIA_external_memory)
 	pfn_vkGetMemoryZirconHandleFUCHSIA = (PFN_vkGetMemoryZirconHandleFUCHSIA)vkGetInstanceProcAddr(instance, "vkGetMemoryZirconHandleFUCHSIA");
 	pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA = (PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA)vkGetInstanceProcAddr(instance, "vkGetMemoryZirconHandlePropertiesFUCHSIA");
@@ -6391,6 +6449,13 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_vertex_input_dynamic_state)
 	pfn_vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vkGetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
 #endif // defined(VK_EXT_vertex_input_dynamic_state)
+#if defined(VK_FUCHSIA_buffer_collection)
+	pfn_vkSetBufferCollectionImageConstraintsFUCHSIA = (PFN_vkSetBufferCollectionImageConstraintsFUCHSIA)vkGetDeviceProcAddr(device, "vkSetBufferCollectionImageConstraintsFUCHSIA");
+	pfn_vkDestroyBufferCollectionFUCHSIA = (PFN_vkDestroyBufferCollectionFUCHSIA)vkGetDeviceProcAddr(device, "vkDestroyBufferCollectionFUCHSIA");
+	pfn_vkCreateBufferCollectionFUCHSIA = (PFN_vkCreateBufferCollectionFUCHSIA)vkGetDeviceProcAddr(device, "vkCreateBufferCollectionFUCHSIA");
+	pfn_vkSetBufferCollectionBufferConstraintsFUCHSIA = (PFN_vkSetBufferCollectionBufferConstraintsFUCHSIA)vkGetDeviceProcAddr(device, "vkSetBufferCollectionBufferConstraintsFUCHSIA");
+	pfn_vkGetBufferCollectionPropertiesFUCHSIA = (PFN_vkGetBufferCollectionPropertiesFUCHSIA)vkGetDeviceProcAddr(device, "vkGetBufferCollectionPropertiesFUCHSIA");
+#endif // defined(VK_FUCHSIA_buffer_collection)
 #if defined(VK_FUCHSIA_external_memory)
 	pfn_vkGetMemoryZirconHandleFUCHSIA = (PFN_vkGetMemoryZirconHandleFUCHSIA)vkGetDeviceProcAddr(device, "vkGetMemoryZirconHandleFUCHSIA");
 	pfn_vkGetMemoryZirconHandlePropertiesFUCHSIA = (PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA)vkGetDeviceProcAddr(device, "vkGetMemoryZirconHandlePropertiesFUCHSIA");
