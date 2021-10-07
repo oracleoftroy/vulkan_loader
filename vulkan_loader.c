@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 194 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 195 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -630,6 +630,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_maintenance3)
 	vk->vkGetDescriptorSetLayoutSupportKHR = (PFN_vkGetDescriptorSetLayoutSupportKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutSupportKHR");
 #endif // defined(VK_KHR_maintenance3)
+#if defined(VK_KHR_maintenance4)
+	vk->vkGetDeviceImageMemoryRequirementsKHR = (PFN_vkGetDeviceImageMemoryRequirementsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceImageMemoryRequirementsKHR");
+	vk->vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceBufferMemoryRequirementsKHR");
+	vk->vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceImageSparseMemoryRequirementsKHR");
+#endif // defined(VK_KHR_maintenance4)
 #if defined(VK_KHR_performance_query)
 	vk->vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR)vk->vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR");
 	vk->vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = (PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR");
@@ -1312,6 +1317,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_maintenance3)
 	vk->vkGetDescriptorSetLayoutSupportKHR = (PFN_vkGetDescriptorSetLayoutSupportKHR)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSupportKHR");
 #endif // defined(VK_KHR_maintenance3)
+#if defined(VK_KHR_maintenance4)
+	vk->vkGetDeviceImageMemoryRequirementsKHR = (PFN_vkGetDeviceImageMemoryRequirementsKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceImageMemoryRequirementsKHR");
+	vk->vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceBufferMemoryRequirementsKHR");
+	vk->vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceImageSparseMemoryRequirementsKHR");
+#endif // defined(VK_KHR_maintenance4)
 #if defined(VK_KHR_performance_query)
 	vk->vkAcquireProfilingLockKHR = (PFN_vkAcquireProfilingLockKHR)vk->vkGetDeviceProcAddr(device, "vkAcquireProfilingLockKHR");
 	vk->vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vk->vkGetDeviceProcAddr(device, "vkReleaseProfilingLockKHR");
@@ -4459,6 +4469,29 @@ VKAPI_ATTR void vkGetDescriptorSetLayoutSupportKHR(VkDevice device, const VkDesc
 	pfn_vkGetDescriptorSetLayoutSupportKHR(device, pCreateInfo, pSupport);
 }
 #endif // defined(VK_KHR_maintenance3)
+#if defined(VK_KHR_maintenance4)
+
+static PFN_vkGetDeviceImageMemoryRequirementsKHR pfn_vkGetDeviceImageMemoryRequirementsKHR;
+VKAPI_ATTR void vkGetDeviceImageMemoryRequirementsKHR(VkDevice device, const VkDeviceImageMemoryRequirementsKHR * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetDeviceImageMemoryRequirementsKHR);
+	pfn_vkGetDeviceImageMemoryRequirementsKHR(device, pInfo, pMemoryRequirements);
+}
+
+static PFN_vkGetDeviceBufferMemoryRequirementsKHR pfn_vkGetDeviceBufferMemoryRequirementsKHR;
+VKAPI_ATTR void vkGetDeviceBufferMemoryRequirementsKHR(VkDevice device, const VkDeviceBufferMemoryRequirementsKHR * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetDeviceBufferMemoryRequirementsKHR);
+	pfn_vkGetDeviceBufferMemoryRequirementsKHR(device, pInfo, pMemoryRequirements);
+}
+
+static PFN_vkGetDeviceImageSparseMemoryRequirementsKHR pfn_vkGetDeviceImageSparseMemoryRequirementsKHR;
+VKAPI_ATTR void vkGetDeviceImageSparseMemoryRequirementsKHR(VkDevice device, const VkDeviceImageMemoryRequirementsKHR * pInfo, uint32_t * pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2 * pSparseMemoryRequirements)
+{
+	assert(pfn_vkGetDeviceImageSparseMemoryRequirementsKHR);
+	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR(device, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
+}
+#endif // defined(VK_KHR_maintenance4)
 #if defined(VK_KHR_performance_query)
 
 static PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR;
@@ -5917,6 +5950,11 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_KHR_maintenance3)
 	pfn_vkGetDescriptorSetLayoutSupportKHR = (PFN_vkGetDescriptorSetLayoutSupportKHR)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutSupportKHR");
 #endif // defined(VK_KHR_maintenance3)
+#if defined(VK_KHR_maintenance4)
+	pfn_vkGetDeviceImageMemoryRequirementsKHR = (PFN_vkGetDeviceImageMemoryRequirementsKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceImageMemoryRequirementsKHR");
+	pfn_vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceBufferMemoryRequirementsKHR");
+	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceImageSparseMemoryRequirementsKHR");
+#endif // defined(VK_KHR_maintenance4)
 #if defined(VK_KHR_performance_query)
 	pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR)vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR");
 	pfn_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = (PFN_vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR");
@@ -6599,6 +6637,11 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_KHR_maintenance3)
 	pfn_vkGetDescriptorSetLayoutSupportKHR = (PFN_vkGetDescriptorSetLayoutSupportKHR)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSupportKHR");
 #endif // defined(VK_KHR_maintenance3)
+#if defined(VK_KHR_maintenance4)
+	pfn_vkGetDeviceImageMemoryRequirementsKHR = (PFN_vkGetDeviceImageMemoryRequirementsKHR)vkGetDeviceProcAddr(device, "vkGetDeviceImageMemoryRequirementsKHR");
+	pfn_vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vkGetDeviceProcAddr(device, "vkGetDeviceBufferMemoryRequirementsKHR");
+	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vkGetDeviceProcAddr(device, "vkGetDeviceImageSparseMemoryRequirementsKHR");
+#endif // defined(VK_KHR_maintenance4)
 #if defined(VK_KHR_performance_query)
 	pfn_vkAcquireProfilingLockKHR = (PFN_vkAcquireProfilingLockKHR)vkGetDeviceProcAddr(device, "vkAcquireProfilingLockKHR");
 	pfn_vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vkGetDeviceProcAddr(device, "vkReleaseProfilingLockKHR");
