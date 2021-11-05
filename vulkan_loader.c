@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 196 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 197 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -563,6 +563,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdDrawIndirectCountKHR = (PFN_vkCmdDrawIndirectCountKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndirectCountKHR");
 	vk->vkCmdDrawIndexedIndirectCountKHR = (PFN_vkCmdDrawIndexedIndirectCountKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndexedIndirectCountKHR");
 #endif // defined(VK_KHR_draw_indirect_count)
+#if defined(VK_KHR_dynamic_rendering)
+	vk->vkCmdBeginRenderingKHR = (PFN_vkCmdBeginRenderingKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginRenderingKHR");
+	vk->vkCmdEndRenderingKHR = (PFN_vkCmdEndRenderingKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdEndRenderingKHR");
+#endif // defined(VK_KHR_dynamic_rendering)
 #if defined(VK_KHR_external_fence_capabilities)
 	vk->vkGetPhysicalDeviceExternalFencePropertiesKHR = (PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalFencePropertiesKHR");
 #endif // defined(VK_KHR_external_fence_capabilities)
@@ -1279,6 +1283,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdDrawIndirectCountKHR = (PFN_vkCmdDrawIndirectCountKHR)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCountKHR");
 	vk->vkCmdDrawIndexedIndirectCountKHR = (PFN_vkCmdDrawIndexedIndirectCountKHR)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCountKHR");
 #endif // defined(VK_KHR_draw_indirect_count)
+#if defined(VK_KHR_dynamic_rendering)
+	vk->vkCmdBeginRenderingKHR = (PFN_vkCmdBeginRenderingKHR)vk->vkGetDeviceProcAddr(device, "vkCmdBeginRenderingKHR");
+	vk->vkCmdEndRenderingKHR = (PFN_vkCmdEndRenderingKHR)vk->vkGetDeviceProcAddr(device, "vkCmdEndRenderingKHR");
+#endif // defined(VK_KHR_dynamic_rendering)
 #if defined(VK_KHR_external_fence_fd)
 	vk->vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vk->vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 	vk->vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vk->vkGetDeviceProcAddr(device, "vkGetFenceFdKHR");
@@ -4192,6 +4200,22 @@ VKAPI_ATTR void vkCmdDrawIndexedIndirectCountKHR(VkCommandBuffer commandBuffer, 
 	pfn_vkCmdDrawIndexedIndirectCountKHR(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
 }
 #endif // defined(VK_KHR_draw_indirect_count)
+#if defined(VK_KHR_dynamic_rendering)
+
+static PFN_vkCmdBeginRenderingKHR pfn_vkCmdBeginRenderingKHR;
+VKAPI_ATTR void vkCmdBeginRenderingKHR(VkCommandBuffer commandBuffer, const VkRenderingInfoKHR * pRenderingInfo)
+{
+	assert(pfn_vkCmdBeginRenderingKHR);
+	pfn_vkCmdBeginRenderingKHR(commandBuffer, pRenderingInfo);
+}
+
+static PFN_vkCmdEndRenderingKHR pfn_vkCmdEndRenderingKHR;
+VKAPI_ATTR void vkCmdEndRenderingKHR(VkCommandBuffer commandBuffer)
+{
+	assert(pfn_vkCmdEndRenderingKHR);
+	pfn_vkCmdEndRenderingKHR(commandBuffer);
+}
+#endif // defined(VK_KHR_dynamic_rendering)
 #if defined(VK_KHR_external_fence_capabilities)
 
 static PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR pfn_vkGetPhysicalDeviceExternalFencePropertiesKHR;
@@ -5883,6 +5907,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdDrawIndirectCountKHR = (PFN_vkCmdDrawIndirectCountKHR)vkGetInstanceProcAddr(instance, "vkCmdDrawIndirectCountKHR");
 	pfn_vkCmdDrawIndexedIndirectCountKHR = (PFN_vkCmdDrawIndexedIndirectCountKHR)vkGetInstanceProcAddr(instance, "vkCmdDrawIndexedIndirectCountKHR");
 #endif // defined(VK_KHR_draw_indirect_count)
+#if defined(VK_KHR_dynamic_rendering)
+	pfn_vkCmdBeginRenderingKHR = (PFN_vkCmdBeginRenderingKHR)vkGetInstanceProcAddr(instance, "vkCmdBeginRenderingKHR");
+	pfn_vkCmdEndRenderingKHR = (PFN_vkCmdEndRenderingKHR)vkGetInstanceProcAddr(instance, "vkCmdEndRenderingKHR");
+#endif // defined(VK_KHR_dynamic_rendering)
 #if defined(VK_KHR_external_fence_capabilities)
 	pfn_vkGetPhysicalDeviceExternalFencePropertiesKHR = (PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalFencePropertiesKHR");
 #endif // defined(VK_KHR_external_fence_capabilities)
@@ -6599,6 +6627,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdDrawIndirectCountKHR = (PFN_vkCmdDrawIndirectCountKHR)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCountKHR");
 	pfn_vkCmdDrawIndexedIndirectCountKHR = (PFN_vkCmdDrawIndexedIndirectCountKHR)vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCountKHR");
 #endif // defined(VK_KHR_draw_indirect_count)
+#if defined(VK_KHR_dynamic_rendering)
+	pfn_vkCmdBeginRenderingKHR = (PFN_vkCmdBeginRenderingKHR)vkGetDeviceProcAddr(device, "vkCmdBeginRenderingKHR");
+	pfn_vkCmdEndRenderingKHR = (PFN_vkCmdEndRenderingKHR)vkGetDeviceProcAddr(device, "vkCmdEndRenderingKHR");
+#endif // defined(VK_KHR_dynamic_rendering)
 #if defined(VK_KHR_external_fence_fd)
 	pfn_vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 	pfn_vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vkGetDeviceProcAddr(device, "vkGetFenceFdKHR");
