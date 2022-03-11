@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 206 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 207 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -875,6 +875,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceScreenPresentationSupportQNX = (PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");
 	vk->vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vk->vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
 #endif // defined(VK_QNX_screen_surface)
+#if defined(VK_VALVE_descriptor_set_host_mapping)
+	vk->vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetHostMappingVALVE");
+	vk->vkGetDescriptorSetLayoutHostMappingInfoVALVE = (PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
+#endif // defined(VK_VALVE_descriptor_set_host_mapping)
 }
 
 void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
@@ -1560,6 +1564,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vk->vkGetDeviceProcAddr(device, "vkCmdBindShadingRateImageNV");
 	vk->vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_VALVE_descriptor_set_host_mapping)
+	vk->vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetHostMappingVALVE");
+	vk->vkGetDescriptorSetLayoutHostMappingInfoVALVE = (PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
+#endif // defined(VK_VALVE_descriptor_set_host_mapping)
 }
 
 #else // defined(VK_NO_PROTOTYPES)
@@ -5733,6 +5741,22 @@ VKAPI_ATTR VkResult vkCreateScreenSurfaceQNX(VkInstance instance, const VkScreen
 	return pfn_vkCreateScreenSurfaceQNX(instance, pCreateInfo, pAllocator, pSurface);
 }
 #endif // defined(VK_QNX_screen_surface)
+#if defined(VK_VALVE_descriptor_set_host_mapping)
+
+static PFN_vkGetDescriptorSetHostMappingVALVE pfn_vkGetDescriptorSetHostMappingVALVE;
+VKAPI_ATTR void vkGetDescriptorSetHostMappingVALVE(VkDevice device, VkDescriptorSet descriptorSet, void ** ppData)
+{
+	assert(pfn_vkGetDescriptorSetHostMappingVALVE);
+	pfn_vkGetDescriptorSetHostMappingVALVE(device, descriptorSet, ppData);
+}
+
+static PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE pfn_vkGetDescriptorSetLayoutHostMappingInfoVALVE;
+VKAPI_ATTR void vkGetDescriptorSetLayoutHostMappingInfoVALVE(VkDevice device, const VkDescriptorSetBindingReferenceVALVE * pBindingReference, VkDescriptorSetLayoutHostMappingInfoVALVE * pHostMapping)
+{
+	assert(pfn_vkGetDescriptorSetLayoutHostMappingInfoVALVE);
+	pfn_vkGetDescriptorSetLayoutHostMappingInfoVALVE(device, pBindingReference, pHostMapping);
+}
+#endif // defined(VK_VALVE_descriptor_set_host_mapping)
 
 void vgen_init_vulkan_loader(PFN_vkGetInstanceProcAddr get_address)
 {
@@ -6595,6 +6619,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceScreenPresentationSupportQNX = (PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");
 	pfn_vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
 #endif // defined(VK_QNX_screen_surface)
+#if defined(VK_VALVE_descriptor_set_host_mapping)
+	pfn_vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetHostMappingVALVE");
+	pfn_vkGetDescriptorSetLayoutHostMappingInfoVALVE = (PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
+#endif // defined(VK_VALVE_descriptor_set_host_mapping)
 }
 
 void vgen_load_device_procs(VkDevice device)
@@ -7280,6 +7308,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vkGetDeviceProcAddr(device, "vkCmdBindShadingRateImageNV");
 	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetDeviceProcAddr(device, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_VALVE_descriptor_set_host_mapping)
+	pfn_vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vkGetDeviceProcAddr(device, "vkGetDescriptorSetHostMappingVALVE");
+	pfn_vkGetDescriptorSetLayoutHostMappingInfoVALVE = (PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
+#endif // defined(VK_VALVE_descriptor_set_host_mapping)
 }
 
 #endif // defined(VK_NO_PROTOTYPES)
