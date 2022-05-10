@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 212 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 213 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -432,6 +432,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_host_query_reset)
 	vk->vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vk->vkGetInstanceProcAddr(instance, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
+#if defined(VK_EXT_image_compression_control)
+	vk->vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2EXT");
+#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 	vk->vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageDrmFormatModifierPropertiesEXT");
 #endif // defined(VK_EXT_image_drm_format_modifier)
@@ -448,6 +451,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_pageable_device_local_memory)
 	vk->vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vk->vkGetInstanceProcAddr(instance, "vkSetDeviceMemoryPriorityEXT");
 #endif // defined(VK_EXT_pageable_device_local_memory)
+#if defined(VK_EXT_pipeline_properties)
+	vk->vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetPipelinePropertiesEXT");
+#endif // defined(VK_EXT_pipeline_properties)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -705,6 +711,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_push_descriptor)
 	vk->vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
+	vk->vkCmdTraceRaysIndirect2KHR = (PFN_vkCmdTraceRaysIndirect2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdTraceRaysIndirect2KHR");
+#endif // defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
 #if defined(VK_KHR_ray_tracing_pipeline)
 	vk->vkCreateRayTracingPipelinesKHR = (PFN_vkCreateRayTracingPipelinesKHR)vk->vkGetInstanceProcAddr(instance, "vkCreateRayTracingPipelinesKHR");
 	vk->vkGetRayTracingShaderGroupHandlesKHR = (PFN_vkGetRayTracingShaderGroupHandlesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetRayTracingShaderGroupHandlesKHR");
@@ -1232,6 +1241,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_host_query_reset)
 	vk->vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vk->vkGetDeviceProcAddr(device, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
+#if defined(VK_EXT_image_compression_control)
+	vk->vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vk->vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2EXT");
+#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 	vk->vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageDrmFormatModifierPropertiesEXT");
 #endif // defined(VK_EXT_image_drm_format_modifier)
@@ -1245,6 +1257,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_pageable_device_local_memory)
 	vk->vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vk->vkGetDeviceProcAddr(device, "vkSetDeviceMemoryPriorityEXT");
 #endif // defined(VK_EXT_pageable_device_local_memory)
+#if defined(VK_EXT_pipeline_properties)
+	vk->vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetPipelinePropertiesEXT");
+#endif // defined(VK_EXT_pipeline_properties)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -1445,6 +1460,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_push_descriptor)
 	vk->vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
+	vk->vkCmdTraceRaysIndirect2KHR = (PFN_vkCmdTraceRaysIndirect2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdTraceRaysIndirect2KHR");
+#endif // defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
 #if defined(VK_KHR_ray_tracing_pipeline)
 	vk->vkCreateRayTracingPipelinesKHR = (PFN_vkCreateRayTracingPipelinesKHR)vk->vkGetDeviceProcAddr(device, "vkCreateRayTracingPipelinesKHR");
 	vk->vkGetRayTracingShaderGroupHandlesKHR = (PFN_vkGetRayTracingShaderGroupHandlesKHR)vk->vkGetDeviceProcAddr(device, "vkGetRayTracingShaderGroupHandlesKHR");
@@ -3756,6 +3774,15 @@ VKAPI_ATTR void vkResetQueryPoolEXT(VkDevice device, VkQueryPool queryPool, uint
 	pfn_vkResetQueryPoolEXT(device, queryPool, firstQuery, queryCount);
 }
 #endif // defined(VK_EXT_host_query_reset)
+#if defined(VK_EXT_image_compression_control)
+
+static PFN_vkGetImageSubresourceLayout2EXT pfn_vkGetImageSubresourceLayout2EXT;
+VKAPI_ATTR void vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, const VkImageSubresource2EXT * pSubresource, VkSubresourceLayout2EXT * pLayout)
+{
+	assert(pfn_vkGetImageSubresourceLayout2EXT);
+	pfn_vkGetImageSubresourceLayout2EXT(device, image, pSubresource, pLayout);
+}
+#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 
 static PFN_vkGetImageDrmFormatModifierPropertiesEXT pfn_vkGetImageDrmFormatModifierPropertiesEXT;
@@ -3808,6 +3835,15 @@ VKAPI_ATTR void vkSetDeviceMemoryPriorityEXT(VkDevice device, VkDeviceMemory mem
 	pfn_vkSetDeviceMemoryPriorityEXT(device, memory, priority);
 }
 #endif // defined(VK_EXT_pageable_device_local_memory)
+#if defined(VK_EXT_pipeline_properties)
+
+static PFN_vkGetPipelinePropertiesEXT pfn_vkGetPipelinePropertiesEXT;
+VKAPI_ATTR VkResult vkGetPipelinePropertiesEXT(VkDevice device, const VkPipelineInfoEXT * pPipelineInfo, VkBaseOutStructure * pPipelineProperties)
+{
+	assert(pfn_vkGetPipelinePropertiesEXT);
+	return pfn_vkGetPipelinePropertiesEXT(device, pPipelineInfo, pPipelineProperties);
+}
+#endif // defined(VK_EXT_pipeline_properties)
 #if defined(VK_EXT_private_data)
 
 static PFN_vkDestroyPrivateDataSlotEXT pfn_vkDestroyPrivateDataSlotEXT;
@@ -4971,6 +5007,15 @@ VKAPI_ATTR void vkCmdPushDescriptorSetKHR(VkCommandBuffer commandBuffer, VkPipel
 	pfn_vkCmdPushDescriptorSetKHR(commandBuffer, pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites);
 }
 #endif // defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
+
+static PFN_vkCmdTraceRaysIndirect2KHR pfn_vkCmdTraceRaysIndirect2KHR;
+VKAPI_ATTR void vkCmdTraceRaysIndirect2KHR(VkCommandBuffer commandBuffer, VkDeviceAddress indirectDeviceAddress)
+{
+	assert(pfn_vkCmdTraceRaysIndirect2KHR);
+	pfn_vkCmdTraceRaysIndirect2KHR(commandBuffer, indirectDeviceAddress);
+}
+#endif // defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
 #if defined(VK_KHR_ray_tracing_pipeline)
 
 static PFN_vkCreateRayTracingPipelinesKHR pfn_vkCreateRayTracingPipelinesKHR;
@@ -6176,6 +6221,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetInstanceProcAddr(instance, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
+#if defined(VK_EXT_image_compression_control)
+	pfn_vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2EXT");
+#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 	pfn_vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetImageDrmFormatModifierPropertiesEXT");
 #endif // defined(VK_EXT_image_drm_format_modifier)
@@ -6192,6 +6240,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_pageable_device_local_memory)
 	pfn_vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vkGetInstanceProcAddr(instance, "vkSetDeviceMemoryPriorityEXT");
 #endif // defined(VK_EXT_pageable_device_local_memory)
+#if defined(VK_EXT_pipeline_properties)
+	pfn_vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetPipelinePropertiesEXT");
+#endif // defined(VK_EXT_pipeline_properties)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -6449,6 +6500,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
+	pfn_vkCmdTraceRaysIndirect2KHR = (PFN_vkCmdTraceRaysIndirect2KHR)vkGetInstanceProcAddr(instance, "vkCmdTraceRaysIndirect2KHR");
+#endif // defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
 #if defined(VK_KHR_ray_tracing_pipeline)
 	pfn_vkCreateRayTracingPipelinesKHR = (PFN_vkCreateRayTracingPipelinesKHR)vkGetInstanceProcAddr(instance, "vkCreateRayTracingPipelinesKHR");
 	pfn_vkGetRayTracingShaderGroupHandlesKHR = (PFN_vkGetRayTracingShaderGroupHandlesKHR)vkGetInstanceProcAddr(instance, "vkGetRayTracingShaderGroupHandlesKHR");
@@ -6976,6 +7030,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetDeviceProcAddr(device, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
+#if defined(VK_EXT_image_compression_control)
+	pfn_vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2EXT");
+#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 	pfn_vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetImageDrmFormatModifierPropertiesEXT");
 #endif // defined(VK_EXT_image_drm_format_modifier)
@@ -6989,6 +7046,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_pageable_device_local_memory)
 	pfn_vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vkGetDeviceProcAddr(device, "vkSetDeviceMemoryPriorityEXT");
 #endif // defined(VK_EXT_pageable_device_local_memory)
+#if defined(VK_EXT_pipeline_properties)
+	pfn_vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)vkGetDeviceProcAddr(device, "vkGetPipelinePropertiesEXT");
+#endif // defined(VK_EXT_pipeline_properties)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -7189,6 +7249,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
+	pfn_vkCmdTraceRaysIndirect2KHR = (PFN_vkCmdTraceRaysIndirect2KHR)vkGetDeviceProcAddr(device, "vkCmdTraceRaysIndirect2KHR");
+#endif // defined(VK_KHR_ray_tracing_maintenance1) && defined(VK_KHR_ray_tracing_pipeline)
 #if defined(VK_KHR_ray_tracing_pipeline)
 	pfn_vkCreateRayTracingPipelinesKHR = (PFN_vkCreateRayTracingPipelinesKHR)vkGetDeviceProcAddr(device, "vkCreateRayTracingPipelinesKHR");
 	pfn_vkGetRayTracingShaderGroupHandlesKHR = (PFN_vkGetRayTracingShaderGroupHandlesKHR)vkGetDeviceProcAddr(device, "vkGetRayTracingShaderGroupHandlesKHR");
