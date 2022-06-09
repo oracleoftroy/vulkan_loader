@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 216 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 217 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -441,6 +441,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_line_rasterization)
 	vk->vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_metal_objects)
+	vk->vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)vk->vkGetInstanceProcAddr(instance, "vkExportMetalObjectsEXT");
+#endif // defined(VK_EXT_metal_objects)
 #if defined(VK_EXT_metal_surface)
 	vk->vkCreateMetalSurfaceEXT = (PFN_vkCreateMetalSurfaceEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateMetalSurfaceEXT");
 #endif // defined(VK_EXT_metal_surface)
@@ -817,8 +820,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewAddressNVX");
 #endif // defined(VK_NVX_image_view_handle)
 #if defined(VK_NV_acquire_winrt_display)
-	vk->vkAcquireWinrtDisplayNV = (PFN_vkAcquireWinrtDisplayNV)vk->vkGetInstanceProcAddr(instance, "vkAcquireWinrtDisplayNV");
 	vk->vkGetWinrtDisplayNV = (PFN_vkGetWinrtDisplayNV)vk->vkGetInstanceProcAddr(instance, "vkGetWinrtDisplayNV");
+	vk->vkAcquireWinrtDisplayNV = (PFN_vkAcquireWinrtDisplayNV)vk->vkGetInstanceProcAddr(instance, "vkAcquireWinrtDisplayNV");
 #endif // defined(VK_NV_acquire_winrt_display)
 #if defined(VK_NV_clip_space_w_scaling)
 	vk->vkCmdSetViewportWScalingNV = (PFN_vkCmdSetViewportWScalingNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingNV");
@@ -1250,6 +1253,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_line_rasterization)
 	vk->vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_metal_objects)
+	vk->vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)vk->vkGetDeviceProcAddr(device, "vkExportMetalObjectsEXT");
+#endif // defined(VK_EXT_metal_objects)
 #if defined(VK_EXT_multi_draw)
 	vk->vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMultiEXT");
 	vk->vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMultiIndexedEXT");
@@ -3801,6 +3807,15 @@ VKAPI_ATTR void vkCmdSetLineStippleEXT(VkCommandBuffer commandBuffer, uint32_t l
 	pfn_vkCmdSetLineStippleEXT(commandBuffer, lineStippleFactor, lineStipplePattern);
 }
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_metal_objects)
+
+static PFN_vkExportMetalObjectsEXT pfn_vkExportMetalObjectsEXT;
+VKAPI_ATTR void vkExportMetalObjectsEXT(VkDevice device, VkExportMetalObjectsInfoEXT * pMetalObjectsInfo)
+{
+	assert(pfn_vkExportMetalObjectsEXT);
+	pfn_vkExportMetalObjectsEXT(device, pMetalObjectsInfo);
+}
+#endif // defined(VK_EXT_metal_objects)
 #if defined(VK_EXT_metal_surface)
 
 static PFN_vkCreateMetalSurfaceEXT pfn_vkCreateMetalSurfaceEXT;
@@ -5492,18 +5507,18 @@ VKAPI_ATTR VkResult vkGetImageViewAddressNVX(VkDevice device, VkImageView imageV
 #endif // defined(VK_NVX_image_view_handle)
 #if defined(VK_NV_acquire_winrt_display)
 
-static PFN_vkAcquireWinrtDisplayNV pfn_vkAcquireWinrtDisplayNV;
-VKAPI_ATTR VkResult vkAcquireWinrtDisplayNV(VkPhysicalDevice physicalDevice, VkDisplayKHR display)
-{
-	assert(pfn_vkAcquireWinrtDisplayNV);
-	return pfn_vkAcquireWinrtDisplayNV(physicalDevice, display);
-}
-
 static PFN_vkGetWinrtDisplayNV pfn_vkGetWinrtDisplayNV;
 VKAPI_ATTR VkResult vkGetWinrtDisplayNV(VkPhysicalDevice physicalDevice, uint32_t deviceRelativeId, VkDisplayKHR * pDisplay)
 {
 	assert(pfn_vkGetWinrtDisplayNV);
 	return pfn_vkGetWinrtDisplayNV(physicalDevice, deviceRelativeId, pDisplay);
+}
+
+static PFN_vkAcquireWinrtDisplayNV pfn_vkAcquireWinrtDisplayNV;
+VKAPI_ATTR VkResult vkAcquireWinrtDisplayNV(VkPhysicalDevice physicalDevice, VkDisplayKHR display)
+{
+	assert(pfn_vkAcquireWinrtDisplayNV);
+	return pfn_vkAcquireWinrtDisplayNV(physicalDevice, display);
 }
 #endif // defined(VK_NV_acquire_winrt_display)
 #if defined(VK_NV_clip_space_w_scaling)
@@ -6230,6 +6245,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_line_rasterization)
 	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetInstanceProcAddr(instance, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_metal_objects)
+	pfn_vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)vkGetInstanceProcAddr(instance, "vkExportMetalObjectsEXT");
+#endif // defined(VK_EXT_metal_objects)
 #if defined(VK_EXT_metal_surface)
 	pfn_vkCreateMetalSurfaceEXT = (PFN_vkCreateMetalSurfaceEXT)vkGetInstanceProcAddr(instance, "vkCreateMetalSurfaceEXT");
 #endif // defined(VK_EXT_metal_surface)
@@ -6606,8 +6624,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vkGetInstanceProcAddr(instance, "vkGetImageViewAddressNVX");
 #endif // defined(VK_NVX_image_view_handle)
 #if defined(VK_NV_acquire_winrt_display)
-	pfn_vkAcquireWinrtDisplayNV = (PFN_vkAcquireWinrtDisplayNV)vkGetInstanceProcAddr(instance, "vkAcquireWinrtDisplayNV");
 	pfn_vkGetWinrtDisplayNV = (PFN_vkGetWinrtDisplayNV)vkGetInstanceProcAddr(instance, "vkGetWinrtDisplayNV");
+	pfn_vkAcquireWinrtDisplayNV = (PFN_vkAcquireWinrtDisplayNV)vkGetInstanceProcAddr(instance, "vkAcquireWinrtDisplayNV");
 #endif // defined(VK_NV_acquire_winrt_display)
 #if defined(VK_NV_clip_space_w_scaling)
 	pfn_vkCmdSetViewportWScalingNV = (PFN_vkCmdSetViewportWScalingNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingNV");
@@ -7039,6 +7057,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_line_rasterization)
 	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_metal_objects)
+	pfn_vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)vkGetDeviceProcAddr(device, "vkExportMetalObjectsEXT");
+#endif // defined(VK_EXT_metal_objects)
 #if defined(VK_EXT_multi_draw)
 	pfn_vkCmdDrawMultiEXT = (PFN_vkCmdDrawMultiEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMultiEXT");
 	pfn_vkCmdDrawMultiIndexedEXT = (PFN_vkCmdDrawMultiIndexedEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMultiIndexedEXT");
