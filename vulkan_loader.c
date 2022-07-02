@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 218 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 219 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -467,6 +467,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetSampleLocationsEXT = (PFN_vkCmdSetSampleLocationsEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetSampleLocationsEXT");
 	vk->vkGetPhysicalDeviceMultisamplePropertiesEXT = (PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceMultisamplePropertiesEXT");
 #endif // defined(VK_EXT_sample_locations)
+#if defined(VK_EXT_shader_module_identifier)
+	vk->vkGetShaderModuleCreateInfoIdentifierEXT = (PFN_vkGetShaderModuleCreateInfoIdentifierEXT)vk->vkGetInstanceProcAddr(instance, "vkGetShaderModuleCreateInfoIdentifierEXT");
+	vk->vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)vk->vkGetInstanceProcAddr(instance, "vkGetShaderModuleIdentifierEXT");
+#endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_tooling_info)
 	vk->vkGetPhysicalDeviceToolPropertiesEXT = (PFN_vkGetPhysicalDeviceToolPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceToolPropertiesEXT");
 #endif // defined(VK_EXT_tooling_info)
@@ -1275,6 +1279,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_sample_locations)
 	vk->vkCmdSetSampleLocationsEXT = (PFN_vkCmdSetSampleLocationsEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetSampleLocationsEXT");
 #endif // defined(VK_EXT_sample_locations)
+#if defined(VK_EXT_shader_module_identifier)
+	vk->vkGetShaderModuleCreateInfoIdentifierEXT = (PFN_vkGetShaderModuleCreateInfoIdentifierEXT)vk->vkGetDeviceProcAddr(device, "vkGetShaderModuleCreateInfoIdentifierEXT");
+	vk->vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)vk->vkGetDeviceProcAddr(device, "vkGetShaderModuleIdentifierEXT");
+#endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_transform_feedback)
 	vk->vkCmdEndQueryIndexedEXT = (PFN_vkCmdEndQueryIndexedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdEndQueryIndexedEXT");
 	vk->vkCmdEndTransformFeedbackEXT = (PFN_vkCmdEndTransformFeedbackEXT)vk->vkGetDeviceProcAddr(device, "vkCmdEndTransformFeedbackEXT");
@@ -3905,6 +3913,22 @@ VKAPI_ATTR void vkGetPhysicalDeviceMultisamplePropertiesEXT(VkPhysicalDevice phy
 	pfn_vkGetPhysicalDeviceMultisamplePropertiesEXT(physicalDevice, samples, pMultisampleProperties);
 }
 #endif // defined(VK_EXT_sample_locations)
+#if defined(VK_EXT_shader_module_identifier)
+
+static PFN_vkGetShaderModuleCreateInfoIdentifierEXT pfn_vkGetShaderModuleCreateInfoIdentifierEXT;
+VKAPI_ATTR void vkGetShaderModuleCreateInfoIdentifierEXT(VkDevice device, const VkShaderModuleCreateInfo * pCreateInfo, VkShaderModuleIdentifierEXT * pIdentifier)
+{
+	assert(pfn_vkGetShaderModuleCreateInfoIdentifierEXT);
+	pfn_vkGetShaderModuleCreateInfoIdentifierEXT(device, pCreateInfo, pIdentifier);
+}
+
+static PFN_vkGetShaderModuleIdentifierEXT pfn_vkGetShaderModuleIdentifierEXT;
+VKAPI_ATTR void vkGetShaderModuleIdentifierEXT(VkDevice device, VkShaderModule shaderModule, VkShaderModuleIdentifierEXT * pIdentifier)
+{
+	assert(pfn_vkGetShaderModuleIdentifierEXT);
+	pfn_vkGetShaderModuleIdentifierEXT(device, shaderModule, pIdentifier);
+}
+#endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_tooling_info)
 
 static PFN_vkGetPhysicalDeviceToolPropertiesEXT pfn_vkGetPhysicalDeviceToolPropertiesEXT;
@@ -6271,6 +6295,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdSetSampleLocationsEXT = (PFN_vkCmdSetSampleLocationsEXT)vkGetInstanceProcAddr(instance, "vkCmdSetSampleLocationsEXT");
 	pfn_vkGetPhysicalDeviceMultisamplePropertiesEXT = (PFN_vkGetPhysicalDeviceMultisamplePropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceMultisamplePropertiesEXT");
 #endif // defined(VK_EXT_sample_locations)
+#if defined(VK_EXT_shader_module_identifier)
+	pfn_vkGetShaderModuleCreateInfoIdentifierEXT = (PFN_vkGetShaderModuleCreateInfoIdentifierEXT)vkGetInstanceProcAddr(instance, "vkGetShaderModuleCreateInfoIdentifierEXT");
+	pfn_vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)vkGetInstanceProcAddr(instance, "vkGetShaderModuleIdentifierEXT");
+#endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_tooling_info)
 	pfn_vkGetPhysicalDeviceToolPropertiesEXT = (PFN_vkGetPhysicalDeviceToolPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceToolPropertiesEXT");
 #endif // defined(VK_EXT_tooling_info)
@@ -7079,6 +7107,10 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_sample_locations)
 	pfn_vkCmdSetSampleLocationsEXT = (PFN_vkCmdSetSampleLocationsEXT)vkGetDeviceProcAddr(device, "vkCmdSetSampleLocationsEXT");
 #endif // defined(VK_EXT_sample_locations)
+#if defined(VK_EXT_shader_module_identifier)
+	pfn_vkGetShaderModuleCreateInfoIdentifierEXT = (PFN_vkGetShaderModuleCreateInfoIdentifierEXT)vkGetDeviceProcAddr(device, "vkGetShaderModuleCreateInfoIdentifierEXT");
+	pfn_vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)vkGetDeviceProcAddr(device, "vkGetShaderModuleIdentifierEXT");
+#endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_transform_feedback)
 	pfn_vkCmdEndQueryIndexedEXT = (PFN_vkCmdEndQueryIndexedEXT)vkGetDeviceProcAddr(device, "vkCmdEndQueryIndexedEXT");
 	pfn_vkCmdEndTransformFeedbackEXT = (PFN_vkCmdEndTransformFeedbackEXT)vkGetDeviceProcAddr(device, "vkCmdEndTransformFeedbackEXT");
