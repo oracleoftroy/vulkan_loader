@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 224 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 225 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -5331,10 +5331,10 @@ VKAPI_ATTR void vkCmdBeginVideoCodingKHR(VkCommandBuffer commandBuffer, const Vk
 }
 
 static PFN_vkGetVideoSessionMemoryRequirementsKHR pfn_vkGetVideoSessionMemoryRequirementsKHR;
-VKAPI_ATTR VkResult vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t * pVideoSessionMemoryRequirementsCount, VkVideoGetMemoryPropertiesKHR * pVideoSessionMemoryRequirements)
+VKAPI_ATTR VkResult vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t * pMemoryRequirementsCount, VkVideoSessionMemoryRequirementsKHR * pMemoryRequirements)
 {
 	assert(pfn_vkGetVideoSessionMemoryRequirementsKHR);
-	return pfn_vkGetVideoSessionMemoryRequirementsKHR(device, videoSession, pVideoSessionMemoryRequirementsCount, pVideoSessionMemoryRequirements);
+	return pfn_vkGetVideoSessionMemoryRequirementsKHR(device, videoSession, pMemoryRequirementsCount, pMemoryRequirements);
 }
 
 static PFN_vkCreateVideoSessionParametersKHR pfn_vkCreateVideoSessionParametersKHR;
@@ -5359,7 +5359,7 @@ VKAPI_ATTR void vkDestroyVideoSessionKHR(VkDevice device, VkVideoSessionKHR vide
 }
 
 static PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR pfn_vkGetPhysicalDeviceVideoCapabilitiesKHR;
-VKAPI_ATTR VkResult vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, const VkVideoProfileKHR * pVideoProfile, VkVideoCapabilitiesKHR * pCapabilities)
+VKAPI_ATTR VkResult vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, const VkVideoProfileInfoKHR * pVideoProfile, VkVideoCapabilitiesKHR * pCapabilities)
 {
 	assert(pfn_vkGetPhysicalDeviceVideoCapabilitiesKHR);
 	return pfn_vkGetPhysicalDeviceVideoCapabilitiesKHR(physicalDevice, pVideoProfile, pCapabilities);
@@ -5380,10 +5380,10 @@ VKAPI_ATTR VkResult vkCreateVideoSessionKHR(VkDevice device, const VkVideoSessio
 }
 
 static PFN_vkBindVideoSessionMemoryKHR pfn_vkBindVideoSessionMemoryKHR;
-VKAPI_ATTR VkResult vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t videoSessionBindMemoryCount, const VkVideoBindMemoryKHR * pVideoSessionBindMemories)
+VKAPI_ATTR VkResult vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t bindSessionMemoryInfoCount, const VkBindVideoSessionMemoryInfoKHR * pBindSessionMemoryInfos)
 {
 	assert(pfn_vkBindVideoSessionMemoryKHR);
-	return pfn_vkBindVideoSessionMemoryKHR(device, videoSession, videoSessionBindMemoryCount, pVideoSessionBindMemories);
+	return pfn_vkBindVideoSessionMemoryKHR(device, videoSession, bindSessionMemoryInfoCount, pBindSessionMemoryInfos);
 }
 
 static PFN_vkDestroyVideoSessionParametersKHR pfn_vkDestroyVideoSessionParametersKHR;
