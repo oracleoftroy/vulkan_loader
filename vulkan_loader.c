@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 225 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 226 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -441,6 +441,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_line_rasterization)
 	vk->vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_mesh_shader)
+	vk->vkCmdDrawMeshTasksEXT = (PFN_vkCmdDrawMeshTasksEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksEXT");
+	vk->vkCmdDrawMeshTasksIndirectEXT = (PFN_vkCmdDrawMeshTasksIndirectEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirectEXT");
+	vk->vkCmdDrawMeshTasksIndirectCountEXT = (PFN_vkCmdDrawMeshTasksIndirectCountEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirectCountEXT");
+#endif // defined(VK_EXT_mesh_shader)
 #if defined(VK_EXT_metal_objects)
 	vk->vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)vk->vkGetInstanceProcAddr(instance, "vkExportMetalObjectsEXT");
 #endif // defined(VK_EXT_metal_objects)
@@ -1261,6 +1266,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_line_rasterization)
 	vk->vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_mesh_shader)
+	vk->vkCmdDrawMeshTasksEXT = (PFN_vkCmdDrawMeshTasksEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksEXT");
+	vk->vkCmdDrawMeshTasksIndirectEXT = (PFN_vkCmdDrawMeshTasksIndirectEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectEXT");
+	vk->vkCmdDrawMeshTasksIndirectCountEXT = (PFN_vkCmdDrawMeshTasksIndirectCountEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectCountEXT");
+#endif // defined(VK_EXT_mesh_shader)
 #if defined(VK_EXT_metal_objects)
 	vk->vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)vk->vkGetDeviceProcAddr(device, "vkExportMetalObjectsEXT");
 #endif // defined(VK_EXT_metal_objects)
@@ -3823,6 +3833,29 @@ VKAPI_ATTR void vkCmdSetLineStippleEXT(VkCommandBuffer commandBuffer, uint32_t l
 	pfn_vkCmdSetLineStippleEXT(commandBuffer, lineStippleFactor, lineStipplePattern);
 }
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_mesh_shader)
+
+static PFN_vkCmdDrawMeshTasksEXT pfn_vkCmdDrawMeshTasksEXT;
+VKAPI_ATTR void vkCmdDrawMeshTasksEXT(VkCommandBuffer commandBuffer, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ)
+{
+	assert(pfn_vkCmdDrawMeshTasksEXT);
+	pfn_vkCmdDrawMeshTasksEXT(commandBuffer, groupCountX, groupCountY, groupCountZ);
+}
+
+static PFN_vkCmdDrawMeshTasksIndirectEXT pfn_vkCmdDrawMeshTasksIndirectEXT;
+VKAPI_ATTR void vkCmdDrawMeshTasksIndirectEXT(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, uint32_t drawCount, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawMeshTasksIndirectEXT);
+	pfn_vkCmdDrawMeshTasksIndirectEXT(commandBuffer, buffer, offset, drawCount, stride);
+}
+
+static PFN_vkCmdDrawMeshTasksIndirectCountEXT pfn_vkCmdDrawMeshTasksIndirectCountEXT;
+VKAPI_ATTR void vkCmdDrawMeshTasksIndirectCountEXT(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint32_t maxDrawCount, uint32_t stride)
+{
+	assert(pfn_vkCmdDrawMeshTasksIndirectCountEXT);
+	pfn_vkCmdDrawMeshTasksIndirectCountEXT(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+}
+#endif // defined(VK_EXT_mesh_shader)
 #if defined(VK_EXT_metal_objects)
 
 static PFN_vkExportMetalObjectsEXT pfn_vkExportMetalObjectsEXT;
@@ -6293,6 +6326,11 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_line_rasterization)
 	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetInstanceProcAddr(instance, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_mesh_shader)
+	pfn_vkCmdDrawMeshTasksEXT = (PFN_vkCmdDrawMeshTasksEXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksEXT");
+	pfn_vkCmdDrawMeshTasksIndirectEXT = (PFN_vkCmdDrawMeshTasksIndirectEXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirectEXT");
+	pfn_vkCmdDrawMeshTasksIndirectCountEXT = (PFN_vkCmdDrawMeshTasksIndirectCountEXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirectCountEXT");
+#endif // defined(VK_EXT_mesh_shader)
 #if defined(VK_EXT_metal_objects)
 	pfn_vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)vkGetInstanceProcAddr(instance, "vkExportMetalObjectsEXT");
 #endif // defined(VK_EXT_metal_objects)
@@ -7113,6 +7151,11 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_line_rasterization)
 	pfn_vkCmdSetLineStippleEXT = (PFN_vkCmdSetLineStippleEXT)vkGetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
 #endif // defined(VK_EXT_line_rasterization)
+#if defined(VK_EXT_mesh_shader)
+	pfn_vkCmdDrawMeshTasksEXT = (PFN_vkCmdDrawMeshTasksEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksEXT");
+	pfn_vkCmdDrawMeshTasksIndirectEXT = (PFN_vkCmdDrawMeshTasksIndirectEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectEXT");
+	pfn_vkCmdDrawMeshTasksIndirectCountEXT = (PFN_vkCmdDrawMeshTasksIndirectCountEXT)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectCountEXT");
+#endif // defined(VK_EXT_mesh_shader)
 #if defined(VK_EXT_metal_objects)
 	pfn_vkExportMetalObjectsEXT = (PFN_vkExportMetalObjectsEXT)vkGetDeviceProcAddr(device, "vkExportMetalObjectsEXT");
 #endif // defined(VK_EXT_metal_objects)
