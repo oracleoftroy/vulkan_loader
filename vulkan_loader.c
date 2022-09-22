@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 227 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 229 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -5325,10 +5325,10 @@ VKAPI_ATTR VkResult vkSignalSemaphoreKHR(VkDevice device, const VkSemaphoreSigna
 #if defined(VK_KHR_video_decode_queue)
 
 static PFN_vkCmdDecodeVideoKHR pfn_vkCmdDecodeVideoKHR;
-VKAPI_ATTR void vkCmdDecodeVideoKHR(VkCommandBuffer commandBuffer, const VkVideoDecodeInfoKHR * pFrameInfo)
+VKAPI_ATTR void vkCmdDecodeVideoKHR(VkCommandBuffer commandBuffer, const VkVideoDecodeInfoKHR * pDecodeInfo)
 {
 	assert(pfn_vkCmdDecodeVideoKHR);
-	pfn_vkCmdDecodeVideoKHR(commandBuffer, pFrameInfo);
+	pfn_vkCmdDecodeVideoKHR(commandBuffer, pDecodeInfo);
 }
 #endif // defined(VK_KHR_video_decode_queue)
 #if defined(VK_KHR_video_encode_queue)
