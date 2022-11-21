@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 234 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 235 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -372,6 +372,21 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCreateDebugUtilsMessengerEXT = (PFN_vkCreateDebugUtilsMessengerEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
 	vk->vkDestroyDebugUtilsMessengerEXT = (PFN_vkDestroyDebugUtilsMessengerEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_descriptor_buffer)
+	vk->vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDescriptorDataEXT");
+	vk->vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBuffersEXT");
+	vk->vkCmdSetDescriptorBufferOffsetsEXT = (PFN_vkCmdSetDescriptorBufferOffsetsEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDescriptorBufferOffsetsEXT");
+	vk->vkGetDescriptorSetLayoutSizeEXT = (PFN_vkGetDescriptorSetLayoutSizeEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutSizeEXT");
+	vk->vkGetDescriptorSetLayoutBindingOffsetEXT = (PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutBindingOffsetEXT");
+	vk->vkGetDescriptorEXT = (PFN_vkGetDescriptorEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorEXT");
+	vk->vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
+	vk->vkGetBufferOpaqueCaptureDescriptorDataEXT = (PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
+	vk->vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
+	vk->vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
+#endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
+	vk->vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
+#endif // defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
 #if defined(VK_EXT_device_fault)
 	vk->vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
@@ -497,6 +512,7 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetMicromapBuildSizesEXT = (PFN_vkGetMicromapBuildSizesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetMicromapBuildSizesEXT");
 	vk->vkCopyMicromapEXT = (PFN_vkCopyMicromapEXT)vk->vkGetInstanceProcAddr(instance, "vkCopyMicromapEXT");
 	vk->vkCopyMemoryToMicromapEXT = (PFN_vkCopyMemoryToMicromapEXT)vk->vkGetInstanceProcAddr(instance, "vkCopyMemoryToMicromapEXT");
+	vk->vkCmdWriteMicromapsPropertiesEXT = (PFN_vkCmdWriteMicromapsPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteMicromapsPropertiesEXT");
 	vk->vkDestroyMicromapEXT = (PFN_vkDestroyMicromapEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyMicromapEXT");
 	vk->vkBuildMicromapsEXT = (PFN_vkBuildMicromapsEXT)vk->vkGetInstanceProcAddr(instance, "vkBuildMicromapsEXT");
 	vk->vkCreateMicromapEXT = (PFN_vkCreateMicromapEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateMicromapEXT");
@@ -506,7 +522,6 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdCopyMicromapEXT = (PFN_vkCmdCopyMicromapEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMicromapEXT");
 	vk->vkCmdCopyMicromapToMemoryEXT = (PFN_vkCmdCopyMicromapToMemoryEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMicromapToMemoryEXT");
 	vk->vkCmdCopyMemoryToMicromapEXT = (PFN_vkCmdCopyMemoryToMicromapEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryToMicromapEXT");
-	vk->vkCmdWriteMicromapsPropertiesEXT = (PFN_vkCmdWriteMicromapsPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteMicromapsPropertiesEXT");
 #endif // defined(VK_EXT_opacity_micromap)
 #if defined(VK_EXT_pageable_device_local_memory)
 	vk->vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vk->vkGetInstanceProcAddr(instance, "vkSetDeviceMemoryPriorityEXT");
@@ -1278,6 +1293,21 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkQueueEndDebugUtilsLabelEXT");
 	vk->vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginDebugUtilsLabelEXT");
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_descriptor_buffer)
+	vk->vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
+	vk->vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
+	vk->vkCmdSetDescriptorBufferOffsetsEXT = (PFN_vkCmdSetDescriptorBufferOffsetsEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsetsEXT");
+	vk->vkGetDescriptorSetLayoutSizeEXT = (PFN_vkGetDescriptorSetLayoutSizeEXT)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSizeEXT");
+	vk->vkGetDescriptorSetLayoutBindingOffsetEXT = (PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutBindingOffsetEXT");
+	vk->vkGetDescriptorEXT = (PFN_vkGetDescriptorEXT)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorEXT");
+	vk->vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
+	vk->vkGetBufferOpaqueCaptureDescriptorDataEXT = (PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
+	vk->vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
+	vk->vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
+#endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
+	vk->vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
+#endif // defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
 #if defined(VK_EXT_device_fault)
 	vk->vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vk->vkGetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
@@ -1386,6 +1416,7 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetMicromapBuildSizesEXT = (PFN_vkGetMicromapBuildSizesEXT)vk->vkGetDeviceProcAddr(device, "vkGetMicromapBuildSizesEXT");
 	vk->vkCopyMicromapEXT = (PFN_vkCopyMicromapEXT)vk->vkGetDeviceProcAddr(device, "vkCopyMicromapEXT");
 	vk->vkCopyMemoryToMicromapEXT = (PFN_vkCopyMemoryToMicromapEXT)vk->vkGetDeviceProcAddr(device, "vkCopyMemoryToMicromapEXT");
+	vk->vkCmdWriteMicromapsPropertiesEXT = (PFN_vkCmdWriteMicromapsPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkCmdWriteMicromapsPropertiesEXT");
 	vk->vkDestroyMicromapEXT = (PFN_vkDestroyMicromapEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyMicromapEXT");
 	vk->vkBuildMicromapsEXT = (PFN_vkBuildMicromapsEXT)vk->vkGetDeviceProcAddr(device, "vkBuildMicromapsEXT");
 	vk->vkCreateMicromapEXT = (PFN_vkCreateMicromapEXT)vk->vkGetDeviceProcAddr(device, "vkCreateMicromapEXT");
@@ -1395,7 +1426,6 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdCopyMicromapEXT = (PFN_vkCmdCopyMicromapEXT)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMicromapEXT");
 	vk->vkCmdCopyMicromapToMemoryEXT = (PFN_vkCmdCopyMicromapToMemoryEXT)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMicromapToMemoryEXT");
 	vk->vkCmdCopyMemoryToMicromapEXT = (PFN_vkCmdCopyMemoryToMicromapEXT)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToMicromapEXT");
-	vk->vkCmdWriteMicromapsPropertiesEXT = (PFN_vkCmdWriteMicromapsPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkCmdWriteMicromapsPropertiesEXT");
 #endif // defined(VK_EXT_opacity_micromap)
 #if defined(VK_EXT_pageable_device_local_memory)
 	vk->vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vk->vkGetDeviceProcAddr(device, "vkSetDeviceMemoryPriorityEXT");
@@ -3675,6 +3705,87 @@ VKAPI_ATTR void vkDestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtil
 	pfn_vkDestroyDebugUtilsMessengerEXT(instance, messenger, pAllocator);
 }
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_descriptor_buffer)
+
+static PFN_vkGetImageOpaqueCaptureDescriptorDataEXT pfn_vkGetImageOpaqueCaptureDescriptorDataEXT;
+VKAPI_ATTR VkResult vkGetImageOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkImageCaptureDescriptorDataInfoEXT * pInfo, void * pData)
+{
+	assert(pfn_vkGetImageOpaqueCaptureDescriptorDataEXT);
+	return pfn_vkGetImageOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
+}
+
+static PFN_vkCmdBindDescriptorBuffersEXT pfn_vkCmdBindDescriptorBuffersEXT;
+VKAPI_ATTR void vkCmdBindDescriptorBuffersEXT(VkCommandBuffer commandBuffer, uint32_t bufferCount, const VkDescriptorBufferBindingInfoEXT * pBindingInfos)
+{
+	assert(pfn_vkCmdBindDescriptorBuffersEXT);
+	pfn_vkCmdBindDescriptorBuffersEXT(commandBuffer, bufferCount, pBindingInfos);
+}
+
+static PFN_vkCmdSetDescriptorBufferOffsetsEXT pfn_vkCmdSetDescriptorBufferOffsetsEXT;
+VKAPI_ATTR void vkCmdSetDescriptorBufferOffsetsEXT(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t firstSet, uint32_t setCount, const uint32_t * pBufferIndices, const VkDeviceSize * pOffsets)
+{
+	assert(pfn_vkCmdSetDescriptorBufferOffsetsEXT);
+	pfn_vkCmdSetDescriptorBufferOffsetsEXT(commandBuffer, pipelineBindPoint, layout, firstSet, setCount, pBufferIndices, pOffsets);
+}
+
+static PFN_vkGetDescriptorSetLayoutSizeEXT pfn_vkGetDescriptorSetLayoutSizeEXT;
+VKAPI_ATTR void vkGetDescriptorSetLayoutSizeEXT(VkDevice device, VkDescriptorSetLayout layout, VkDeviceSize * pLayoutSizeInBytes)
+{
+	assert(pfn_vkGetDescriptorSetLayoutSizeEXT);
+	pfn_vkGetDescriptorSetLayoutSizeEXT(device, layout, pLayoutSizeInBytes);
+}
+
+static PFN_vkGetDescriptorSetLayoutBindingOffsetEXT pfn_vkGetDescriptorSetLayoutBindingOffsetEXT;
+VKAPI_ATTR void vkGetDescriptorSetLayoutBindingOffsetEXT(VkDevice device, VkDescriptorSetLayout layout, uint32_t binding, VkDeviceSize * pOffset)
+{
+	assert(pfn_vkGetDescriptorSetLayoutBindingOffsetEXT);
+	pfn_vkGetDescriptorSetLayoutBindingOffsetEXT(device, layout, binding, pOffset);
+}
+
+static PFN_vkGetDescriptorEXT pfn_vkGetDescriptorEXT;
+VKAPI_ATTR void vkGetDescriptorEXT(VkDevice device, const VkDescriptorGetInfoEXT * pDescriptorInfo, size_t dataSize, void * pDescriptor)
+{
+	assert(pfn_vkGetDescriptorEXT);
+	pfn_vkGetDescriptorEXT(device, pDescriptorInfo, dataSize, pDescriptor);
+}
+
+static PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT;
+VKAPI_ATTR void vkCmdBindDescriptorBufferEmbeddedSamplersEXT(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32_t set)
+{
+	assert(pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT);
+	pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT(commandBuffer, pipelineBindPoint, layout, set);
+}
+
+static PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT;
+VKAPI_ATTR VkResult vkGetBufferOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkBufferCaptureDescriptorDataInfoEXT * pInfo, void * pData)
+{
+	assert(pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT);
+	return pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
+}
+
+static PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT;
+VKAPI_ATTR VkResult vkGetImageViewOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkImageViewCaptureDescriptorDataInfoEXT * pInfo, void * pData)
+{
+	assert(pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT);
+	return pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
+}
+
+static PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT;
+VKAPI_ATTR VkResult vkGetSamplerOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkSamplerCaptureDescriptorDataInfoEXT * pInfo, void * pData)
+{
+	assert(pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT);
+	return pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
+}
+#endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
+
+static PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT;
+VKAPI_ATTR VkResult vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkAccelerationStructureCaptureDescriptorDataInfoEXT * pInfo, void * pData)
+{
+	assert(pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT);
+	return pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
+}
+#endif // defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
 #if defined(VK_EXT_device_fault)
 
 static PFN_vkGetDeviceFaultInfoEXT pfn_vkGetDeviceFaultInfoEXT;
@@ -4281,6 +4392,13 @@ VKAPI_ATTR VkResult vkCopyMemoryToMicromapEXT(VkDevice device, VkDeferredOperati
 	return pfn_vkCopyMemoryToMicromapEXT(device, deferredOperation, pInfo);
 }
 
+static PFN_vkCmdWriteMicromapsPropertiesEXT pfn_vkCmdWriteMicromapsPropertiesEXT;
+VKAPI_ATTR void vkCmdWriteMicromapsPropertiesEXT(VkCommandBuffer commandBuffer, uint32_t micromapCount, const VkMicromapEXT * pMicromaps, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
+{
+	assert(pfn_vkCmdWriteMicromapsPropertiesEXT);
+	pfn_vkCmdWriteMicromapsPropertiesEXT(commandBuffer, micromapCount, pMicromaps, queryType, queryPool, firstQuery);
+}
+
 static PFN_vkDestroyMicromapEXT pfn_vkDestroyMicromapEXT;
 VKAPI_ATTR void vkDestroyMicromapEXT(VkDevice device, VkMicromapEXT micromap, const VkAllocationCallbacks * pAllocator)
 {
@@ -4342,13 +4460,6 @@ VKAPI_ATTR void vkCmdCopyMemoryToMicromapEXT(VkCommandBuffer commandBuffer, cons
 {
 	assert(pfn_vkCmdCopyMemoryToMicromapEXT);
 	pfn_vkCmdCopyMemoryToMicromapEXT(commandBuffer, pInfo);
-}
-
-static PFN_vkCmdWriteMicromapsPropertiesEXT pfn_vkCmdWriteMicromapsPropertiesEXT;
-VKAPI_ATTR void vkCmdWriteMicromapsPropertiesEXT(VkCommandBuffer commandBuffer, uint32_t micromapCount, const VkMicromapEXT * pMicromaps, VkQueryType queryType, VkQueryPool queryPool, uint32_t firstQuery)
-{
-	assert(pfn_vkCmdWriteMicromapsPropertiesEXT);
-	pfn_vkCmdWriteMicromapsPropertiesEXT(commandBuffer, micromapCount, pMicromaps, queryType, queryPool, firstQuery);
 }
 #endif // defined(VK_EXT_opacity_micromap)
 #if defined(VK_EXT_pageable_device_local_memory)
@@ -6787,6 +6898,21 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCreateDebugUtilsMessengerEXT = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
 	pfn_vkDestroyDebugUtilsMessengerEXT = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_descriptor_buffer)
+	pfn_vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDescriptorDataEXT");
+	pfn_vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBuffersEXT");
+	pfn_vkCmdSetDescriptorBufferOffsetsEXT = (PFN_vkCmdSetDescriptorBufferOffsetsEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDescriptorBufferOffsetsEXT");
+	pfn_vkGetDescriptorSetLayoutSizeEXT = (PFN_vkGetDescriptorSetLayoutSizeEXT)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutSizeEXT");
+	pfn_vkGetDescriptorSetLayoutBindingOffsetEXT = (PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutBindingOffsetEXT");
+	pfn_vkGetDescriptorEXT = (PFN_vkGetDescriptorEXT)vkGetInstanceProcAddr(instance, "vkGetDescriptorEXT");
+	pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
+	pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT = (PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
+	pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
+	pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
+#endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
+	pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
+#endif // defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
 #if defined(VK_EXT_device_fault)
 	pfn_vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vkGetInstanceProcAddr(instance, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
@@ -6912,6 +7038,7 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetMicromapBuildSizesEXT = (PFN_vkGetMicromapBuildSizesEXT)vkGetInstanceProcAddr(instance, "vkGetMicromapBuildSizesEXT");
 	pfn_vkCopyMicromapEXT = (PFN_vkCopyMicromapEXT)vkGetInstanceProcAddr(instance, "vkCopyMicromapEXT");
 	pfn_vkCopyMemoryToMicromapEXT = (PFN_vkCopyMemoryToMicromapEXT)vkGetInstanceProcAddr(instance, "vkCopyMemoryToMicromapEXT");
+	pfn_vkCmdWriteMicromapsPropertiesEXT = (PFN_vkCmdWriteMicromapsPropertiesEXT)vkGetInstanceProcAddr(instance, "vkCmdWriteMicromapsPropertiesEXT");
 	pfn_vkDestroyMicromapEXT = (PFN_vkDestroyMicromapEXT)vkGetInstanceProcAddr(instance, "vkDestroyMicromapEXT");
 	pfn_vkBuildMicromapsEXT = (PFN_vkBuildMicromapsEXT)vkGetInstanceProcAddr(instance, "vkBuildMicromapsEXT");
 	pfn_vkCreateMicromapEXT = (PFN_vkCreateMicromapEXT)vkGetInstanceProcAddr(instance, "vkCreateMicromapEXT");
@@ -6921,7 +7048,6 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdCopyMicromapEXT = (PFN_vkCmdCopyMicromapEXT)vkGetInstanceProcAddr(instance, "vkCmdCopyMicromapEXT");
 	pfn_vkCmdCopyMicromapToMemoryEXT = (PFN_vkCmdCopyMicromapToMemoryEXT)vkGetInstanceProcAddr(instance, "vkCmdCopyMicromapToMemoryEXT");
 	pfn_vkCmdCopyMemoryToMicromapEXT = (PFN_vkCmdCopyMemoryToMicromapEXT)vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryToMicromapEXT");
-	pfn_vkCmdWriteMicromapsPropertiesEXT = (PFN_vkCmdWriteMicromapsPropertiesEXT)vkGetInstanceProcAddr(instance, "vkCmdWriteMicromapsPropertiesEXT");
 #endif // defined(VK_EXT_opacity_micromap)
 #if defined(VK_EXT_pageable_device_local_memory)
 	pfn_vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vkGetInstanceProcAddr(instance, "vkSetDeviceMemoryPriorityEXT");
@@ -7693,6 +7819,21 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkQueueEndDebugUtilsLabelEXT");
 	pfn_vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkCmdBeginDebugUtilsLabelEXT");
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_descriptor_buffer)
+	pfn_vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
+	pfn_vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
+	pfn_vkCmdSetDescriptorBufferOffsetsEXT = (PFN_vkCmdSetDescriptorBufferOffsetsEXT)vkGetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsetsEXT");
+	pfn_vkGetDescriptorSetLayoutSizeEXT = (PFN_vkGetDescriptorSetLayoutSizeEXT)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSizeEXT");
+	pfn_vkGetDescriptorSetLayoutBindingOffsetEXT = (PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutBindingOffsetEXT");
+	pfn_vkGetDescriptorEXT = (PFN_vkGetDescriptorEXT)vkGetDeviceProcAddr(device, "vkGetDescriptorEXT");
+	pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
+	pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT = (PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
+	pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
+	pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
+#endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
+	pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
+#endif // defined(VK_EXT_descriptor_buffer) && defined(VK_KHR_acceleration_structure,VK_NV_ray_tracing)
 #if defined(VK_EXT_device_fault)
 	pfn_vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vkGetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
@@ -7801,6 +7942,7 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetMicromapBuildSizesEXT = (PFN_vkGetMicromapBuildSizesEXT)vkGetDeviceProcAddr(device, "vkGetMicromapBuildSizesEXT");
 	pfn_vkCopyMicromapEXT = (PFN_vkCopyMicromapEXT)vkGetDeviceProcAddr(device, "vkCopyMicromapEXT");
 	pfn_vkCopyMemoryToMicromapEXT = (PFN_vkCopyMemoryToMicromapEXT)vkGetDeviceProcAddr(device, "vkCopyMemoryToMicromapEXT");
+	pfn_vkCmdWriteMicromapsPropertiesEXT = (PFN_vkCmdWriteMicromapsPropertiesEXT)vkGetDeviceProcAddr(device, "vkCmdWriteMicromapsPropertiesEXT");
 	pfn_vkDestroyMicromapEXT = (PFN_vkDestroyMicromapEXT)vkGetDeviceProcAddr(device, "vkDestroyMicromapEXT");
 	pfn_vkBuildMicromapsEXT = (PFN_vkBuildMicromapsEXT)vkGetDeviceProcAddr(device, "vkBuildMicromapsEXT");
 	pfn_vkCreateMicromapEXT = (PFN_vkCreateMicromapEXT)vkGetDeviceProcAddr(device, "vkCreateMicromapEXT");
@@ -7810,7 +7952,6 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdCopyMicromapEXT = (PFN_vkCmdCopyMicromapEXT)vkGetDeviceProcAddr(device, "vkCmdCopyMicromapEXT");
 	pfn_vkCmdCopyMicromapToMemoryEXT = (PFN_vkCmdCopyMicromapToMemoryEXT)vkGetDeviceProcAddr(device, "vkCmdCopyMicromapToMemoryEXT");
 	pfn_vkCmdCopyMemoryToMicromapEXT = (PFN_vkCmdCopyMemoryToMicromapEXT)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToMicromapEXT");
-	pfn_vkCmdWriteMicromapsPropertiesEXT = (PFN_vkCmdWriteMicromapsPropertiesEXT)vkGetDeviceProcAddr(device, "vkCmdWriteMicromapsPropertiesEXT");
 #endif // defined(VK_EXT_opacity_micromap)
 #if defined(VK_EXT_pageable_device_local_memory)
 	pfn_vkSetDeviceMemoryPriorityEXT = (PFN_vkSetDeviceMemoryPriorityEXT)vkGetDeviceProcAddr(device, "vkSetDeviceMemoryPriorityEXT");
