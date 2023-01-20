@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 238 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 239 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -591,6 +591,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vk->vkGetInstanceProcAddr(instance, "vkGetRefreshCycleDurationGOOGLE");
 	vk->vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vk->vkGetInstanceProcAddr(instance, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_cluster_culling_shader)
+	vk->vkCmdDrawClusterHUAWEI = (PFN_vkCmdDrawClusterHUAWEI)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawClusterHUAWEI");
+	vk->vkCmdDrawClusterIndirectHUAWEI = (PFN_vkCmdDrawClusterIndirectHUAWEI)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawClusterIndirectHUAWEI");
+#endif // defined(VK_HUAWEI_cluster_culling_shader)
 #if defined(VK_HUAWEI_invocation_mask)
 	vk->vkCmdBindInvocationMaskHUAWEI = (PFN_vkCmdBindInvocationMaskHUAWEI)vk->vkGetInstanceProcAddr(instance, "vkCmdBindInvocationMaskHUAWEI");
 #endif // defined(VK_HUAWEI_invocation_mask)
@@ -1488,6 +1492,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vk->vkGetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
 	vk->vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vk->vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_cluster_culling_shader)
+	vk->vkCmdDrawClusterHUAWEI = (PFN_vkCmdDrawClusterHUAWEI)vk->vkGetDeviceProcAddr(device, "vkCmdDrawClusterHUAWEI");
+	vk->vkCmdDrawClusterIndirectHUAWEI = (PFN_vkCmdDrawClusterIndirectHUAWEI)vk->vkGetDeviceProcAddr(device, "vkCmdDrawClusterIndirectHUAWEI");
+#endif // defined(VK_HUAWEI_cluster_culling_shader)
 #if defined(VK_HUAWEI_invocation_mask)
 	vk->vkCmdBindInvocationMaskHUAWEI = (PFN_vkCmdBindInvocationMaskHUAWEI)vk->vkGetDeviceProcAddr(device, "vkCmdBindInvocationMaskHUAWEI");
 #endif // defined(VK_HUAWEI_invocation_mask)
@@ -4752,6 +4760,22 @@ VKAPI_ATTR VkResult vkGetPastPresentationTimingGOOGLE(VkDevice device, VkSwapcha
 	return pfn_vkGetPastPresentationTimingGOOGLE(device, swapchain, pPresentationTimingCount, pPresentationTimings);
 }
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_cluster_culling_shader)
+
+static PFN_vkCmdDrawClusterHUAWEI pfn_vkCmdDrawClusterHUAWEI;
+VKAPI_ATTR void vkCmdDrawClusterHUAWEI(VkCommandBuffer commandBuffer, uint32_t groupCountX, uint32_t groupCountY, uint32_t groupCountZ)
+{
+	assert(pfn_vkCmdDrawClusterHUAWEI);
+	pfn_vkCmdDrawClusterHUAWEI(commandBuffer, groupCountX, groupCountY, groupCountZ);
+}
+
+static PFN_vkCmdDrawClusterIndirectHUAWEI pfn_vkCmdDrawClusterIndirectHUAWEI;
+VKAPI_ATTR void vkCmdDrawClusterIndirectHUAWEI(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset)
+{
+	assert(pfn_vkCmdDrawClusterIndirectHUAWEI);
+	pfn_vkCmdDrawClusterIndirectHUAWEI(commandBuffer, buffer, offset);
+}
+#endif // defined(VK_HUAWEI_cluster_culling_shader)
 #if defined(VK_HUAWEI_invocation_mask)
 
 static PFN_vkCmdBindInvocationMaskHUAWEI pfn_vkCmdBindInvocationMaskHUAWEI;
@@ -7132,6 +7156,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vkGetInstanceProcAddr(instance, "vkGetRefreshCycleDurationGOOGLE");
 	pfn_vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vkGetInstanceProcAddr(instance, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_cluster_culling_shader)
+	pfn_vkCmdDrawClusterHUAWEI = (PFN_vkCmdDrawClusterHUAWEI)vkGetInstanceProcAddr(instance, "vkCmdDrawClusterHUAWEI");
+	pfn_vkCmdDrawClusterIndirectHUAWEI = (PFN_vkCmdDrawClusterIndirectHUAWEI)vkGetInstanceProcAddr(instance, "vkCmdDrawClusterIndirectHUAWEI");
+#endif // defined(VK_HUAWEI_cluster_culling_shader)
 #if defined(VK_HUAWEI_invocation_mask)
 	pfn_vkCmdBindInvocationMaskHUAWEI = (PFN_vkCmdBindInvocationMaskHUAWEI)vkGetInstanceProcAddr(instance, "vkCmdBindInvocationMaskHUAWEI");
 #endif // defined(VK_HUAWEI_invocation_mask)
@@ -8029,6 +8057,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetRefreshCycleDurationGOOGLE = (PFN_vkGetRefreshCycleDurationGOOGLE)vkGetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
 	pfn_vkGetPastPresentationTimingGOOGLE = (PFN_vkGetPastPresentationTimingGOOGLE)vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");
 #endif // defined(VK_GOOGLE_display_timing)
+#if defined(VK_HUAWEI_cluster_culling_shader)
+	pfn_vkCmdDrawClusterHUAWEI = (PFN_vkCmdDrawClusterHUAWEI)vkGetDeviceProcAddr(device, "vkCmdDrawClusterHUAWEI");
+	pfn_vkCmdDrawClusterIndirectHUAWEI = (PFN_vkCmdDrawClusterIndirectHUAWEI)vkGetDeviceProcAddr(device, "vkCmdDrawClusterIndirectHUAWEI");
+#endif // defined(VK_HUAWEI_cluster_culling_shader)
 #if defined(VK_HUAWEI_invocation_mask)
 	pfn_vkCmdBindInvocationMaskHUAWEI = (PFN_vkCmdBindInvocationMaskHUAWEI)vkGetDeviceProcAddr(device, "vkCmdBindInvocationMaskHUAWEI");
 #endif // defined(VK_HUAWEI_invocation_mask)
