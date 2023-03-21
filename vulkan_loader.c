@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 243 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 244 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -781,6 +781,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceBufferMemoryRequirementsKHR");
 	vk->vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceImageSparseMemoryRequirementsKHR");
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_map_memory2)
+	vk->vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vk->vkGetInstanceProcAddr(instance, "vkUnmapMemory2KHR");
+	vk->vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vk->vkGetInstanceProcAddr(instance, "vkMapMemory2KHR");
+#endif // defined(VK_KHR_map_memory2)
 #if defined(VK_KHR_object_refresh)
 	vk->vkGetPhysicalDeviceRefreshableObjectTypesKHR = (PFN_vkGetPhysicalDeviceRefreshableObjectTypesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceRefreshableObjectTypesKHR");
 	vk->vkCmdRefreshObjectsKHR = (PFN_vkCmdRefreshObjectsKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdRefreshObjectsKHR");
@@ -1662,6 +1666,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceBufferMemoryRequirementsKHR");
 	vk->vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceImageSparseMemoryRequirementsKHR");
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_map_memory2)
+	vk->vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vk->vkGetDeviceProcAddr(device, "vkUnmapMemory2KHR");
+	vk->vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vk->vkGetDeviceProcAddr(device, "vkMapMemory2KHR");
+#endif // defined(VK_KHR_map_memory2)
 #if defined(VK_KHR_object_refresh)
 	vk->vkCmdRefreshObjectsKHR = (PFN_vkCmdRefreshObjectsKHR)vk->vkGetDeviceProcAddr(device, "vkCmdRefreshObjectsKHR");
 #endif // defined(VK_KHR_object_refresh)
@@ -5695,6 +5703,22 @@ VKAPI_ATTR void vkGetDeviceImageSparseMemoryRequirementsKHR(VkDevice device, con
 	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR(device, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
 }
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_map_memory2)
+
+static PFN_vkUnmapMemory2KHR pfn_vkUnmapMemory2KHR;
+VKAPI_ATTR VkResult vkUnmapMemory2KHR(VkDevice device, const VkMemoryUnmapInfoKHR * pMemoryUnmapInfo)
+{
+	assert(pfn_vkUnmapMemory2KHR);
+	return pfn_vkUnmapMemory2KHR(device, pMemoryUnmapInfo);
+}
+
+static PFN_vkMapMemory2KHR pfn_vkMapMemory2KHR;
+VKAPI_ATTR VkResult vkMapMemory2KHR(VkDevice device, const VkMemoryMapInfoKHR * pMemoryMapInfo, void ** ppData)
+{
+	assert(pfn_vkMapMemory2KHR);
+	return pfn_vkMapMemory2KHR(device, pMemoryMapInfo, ppData);
+}
+#endif // defined(VK_KHR_map_memory2)
 #if defined(VK_KHR_object_refresh)
 
 static PFN_vkGetPhysicalDeviceRefreshableObjectTypesKHR pfn_vkGetPhysicalDeviceRefreshableObjectTypesKHR;
@@ -7534,6 +7558,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceBufferMemoryRequirementsKHR");
 	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceImageSparseMemoryRequirementsKHR");
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_map_memory2)
+	pfn_vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vkGetInstanceProcAddr(instance, "vkUnmapMemory2KHR");
+	pfn_vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vkGetInstanceProcAddr(instance, "vkMapMemory2KHR");
+#endif // defined(VK_KHR_map_memory2)
 #if defined(VK_KHR_object_refresh)
 	pfn_vkGetPhysicalDeviceRefreshableObjectTypesKHR = (PFN_vkGetPhysicalDeviceRefreshableObjectTypesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceRefreshableObjectTypesKHR");
 	pfn_vkCmdRefreshObjectsKHR = (PFN_vkCmdRefreshObjectsKHR)vkGetInstanceProcAddr(instance, "vkCmdRefreshObjectsKHR");
@@ -8415,6 +8443,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vkGetDeviceProcAddr(device, "vkGetDeviceBufferMemoryRequirementsKHR");
 	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vkGetDeviceProcAddr(device, "vkGetDeviceImageSparseMemoryRequirementsKHR");
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_map_memory2)
+	pfn_vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vkGetDeviceProcAddr(device, "vkUnmapMemory2KHR");
+	pfn_vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vkGetDeviceProcAddr(device, "vkMapMemory2KHR");
+#endif // defined(VK_KHR_map_memory2)
 #if defined(VK_KHR_object_refresh)
 	pfn_vkCmdRefreshObjectsKHR = (PFN_vkCmdRefreshObjectsKHR)vkGetDeviceProcAddr(device, "vkCmdRefreshObjectsKHR");
 #endif // defined(VK_KHR_object_refresh)
