@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 249 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 250 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -338,6 +338,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkAcquireXlibDisplayEXT = (PFN_vkAcquireXlibDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkAcquireXlibDisplayEXT");
 	vk->vkGetRandROutputDisplayEXT = (PFN_vkGetRandROutputDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkGetRandROutputDisplayEXT");
 #endif // defined(VK_EXT_acquire_xlib_display)
+#if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
+	vk->vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
+#endif // defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 #if defined(VK_EXT_buffer_device_address)
 	vk->vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vk->vkGetInstanceProcAddr(instance, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
@@ -1310,6 +1313,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vk->vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	vk->vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vk->vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
+	vk->vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
+#endif // defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 #if defined(VK_EXT_buffer_device_address)
 	vk->vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vk->vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
@@ -3610,6 +3616,15 @@ VKAPI_ATTR VkResult vkGetRandROutputDisplayEXT(VkPhysicalDevice physicalDevice, 
 	return pfn_vkGetRandROutputDisplayEXT(physicalDevice, dpy, rrOutput, pDisplay);
 }
 #endif // defined(VK_EXT_acquire_xlib_display)
+#if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
+
+static PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT pfn_vkCmdSetAttachmentFeedbackLoopEnableEXT;
+VKAPI_ATTR void vkCmdSetAttachmentFeedbackLoopEnableEXT(VkCommandBuffer commandBuffer, VkImageAspectFlags aspectMask)
+{
+	assert(pfn_vkCmdSetAttachmentFeedbackLoopEnableEXT);
+	pfn_vkCmdSetAttachmentFeedbackLoopEnableEXT(commandBuffer, aspectMask);
+}
+#endif // defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 #if defined(VK_EXT_buffer_device_address)
 
 static PFN_vkGetBufferDeviceAddressEXT pfn_vkGetBufferDeviceAddressEXT;
@@ -7157,6 +7172,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkAcquireXlibDisplayEXT = (PFN_vkAcquireXlibDisplayEXT)vkGetInstanceProcAddr(instance, "vkAcquireXlibDisplayEXT");
 	pfn_vkGetRandROutputDisplayEXT = (PFN_vkGetRandROutputDisplayEXT)vkGetInstanceProcAddr(instance, "vkGetRandROutputDisplayEXT");
 #endif // defined(VK_EXT_acquire_xlib_display)
+#if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
+	pfn_vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
+#endif // defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 #if defined(VK_EXT_buffer_device_address)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetInstanceProcAddr(instance, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
@@ -8129,6 +8147,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
+	pfn_vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
+#endif // defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 #if defined(VK_EXT_buffer_device_address)
 	pfn_vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT)vkGetDeviceProcAddr(device, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
