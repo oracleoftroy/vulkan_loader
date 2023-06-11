@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 252 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 253 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -867,6 +867,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdDecodeVideoKHR = (PFN_vkCmdDecodeVideoKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDecodeVideoKHR");
 #endif // defined(VK_KHR_video_decode_queue)
 #if defined(VK_KHR_video_encode_queue)
+	vk->vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR = (PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR");
+	vk->vkGetEncodedVideoSessionParametersKHR = (PFN_vkGetEncodedVideoSessionParametersKHR)vk->vkGetInstanceProcAddr(instance, "vkGetEncodedVideoSessionParametersKHR");
 	vk->vkCmdEncodeVideoKHR = (PFN_vkCmdEncodeVideoKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdEncodeVideoKHR");
 #endif // defined(VK_KHR_video_encode_queue)
 #if defined(VK_KHR_video_queue)
@@ -1751,6 +1753,7 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdDecodeVideoKHR = (PFN_vkCmdDecodeVideoKHR)vk->vkGetDeviceProcAddr(device, "vkCmdDecodeVideoKHR");
 #endif // defined(VK_KHR_video_decode_queue)
 #if defined(VK_KHR_video_encode_queue)
+	vk->vkGetEncodedVideoSessionParametersKHR = (PFN_vkGetEncodedVideoSessionParametersKHR)vk->vkGetDeviceProcAddr(device, "vkGetEncodedVideoSessionParametersKHR");
 	vk->vkCmdEncodeVideoKHR = (PFN_vkCmdEncodeVideoKHR)vk->vkGetDeviceProcAddr(device, "vkCmdEncodeVideoKHR");
 #endif // defined(VK_KHR_video_encode_queue)
 #if defined(VK_KHR_video_queue)
@@ -6114,6 +6117,20 @@ VKAPI_ATTR void vkCmdDecodeVideoKHR(VkCommandBuffer commandBuffer, const VkVideo
 #endif // defined(VK_KHR_video_decode_queue)
 #if defined(VK_KHR_video_encode_queue)
 
+static PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR pfn_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceVideoEncodeQualityLevelInfoKHR * pQualityLevelInfo, VkVideoEncodeQualityLevelPropertiesKHR * pQualityLevelProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR);
+	return pfn_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR(physicalDevice, pQualityLevelInfo, pQualityLevelProperties);
+}
+
+static PFN_vkGetEncodedVideoSessionParametersKHR pfn_vkGetEncodedVideoSessionParametersKHR;
+VKAPI_ATTR VkResult vkGetEncodedVideoSessionParametersKHR(VkDevice device, const VkVideoEncodeSessionParametersGetInfoKHR * pVideoSessionParametersInfo, VkVideoEncodeSessionParametersFeedbackInfoKHR * pFeedbackInfo, size_t * pDataSize, void * pData)
+{
+	assert(pfn_vkGetEncodedVideoSessionParametersKHR);
+	return pfn_vkGetEncodedVideoSessionParametersKHR(device, pVideoSessionParametersInfo, pFeedbackInfo, pDataSize, pData);
+}
+
 static PFN_vkCmdEncodeVideoKHR pfn_vkCmdEncodeVideoKHR;
 VKAPI_ATTR void vkCmdEncodeVideoKHR(VkCommandBuffer commandBuffer, const VkVideoEncodeInfoKHR * pEncodeInfo)
 {
@@ -7701,6 +7718,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdDecodeVideoKHR = (PFN_vkCmdDecodeVideoKHR)vkGetInstanceProcAddr(instance, "vkCmdDecodeVideoKHR");
 #endif // defined(VK_KHR_video_decode_queue)
 #if defined(VK_KHR_video_encode_queue)
+	pfn_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR = (PFN_vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR");
+	pfn_vkGetEncodedVideoSessionParametersKHR = (PFN_vkGetEncodedVideoSessionParametersKHR)vkGetInstanceProcAddr(instance, "vkGetEncodedVideoSessionParametersKHR");
 	pfn_vkCmdEncodeVideoKHR = (PFN_vkCmdEncodeVideoKHR)vkGetInstanceProcAddr(instance, "vkCmdEncodeVideoKHR");
 #endif // defined(VK_KHR_video_encode_queue)
 #if defined(VK_KHR_video_queue)
@@ -8585,6 +8604,7 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdDecodeVideoKHR = (PFN_vkCmdDecodeVideoKHR)vkGetDeviceProcAddr(device, "vkCmdDecodeVideoKHR");
 #endif // defined(VK_KHR_video_decode_queue)
 #if defined(VK_KHR_video_encode_queue)
+	pfn_vkGetEncodedVideoSessionParametersKHR = (PFN_vkGetEncodedVideoSessionParametersKHR)vkGetDeviceProcAddr(device, "vkGetEncodedVideoSessionParametersKHR");
 	pfn_vkCmdEncodeVideoKHR = (PFN_vkCmdEncodeVideoKHR)vkGetDeviceProcAddr(device, "vkCmdEncodeVideoKHR");
 #endif // defined(VK_KHR_video_encode_queue)
 #if defined(VK_KHR_video_queue)
