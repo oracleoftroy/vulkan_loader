@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 253 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 254 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -380,6 +380,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCreateDebugUtilsMessengerEXT = (PFN_vkCreateDebugUtilsMessengerEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
 	vk->vkDestroyDebugUtilsMessengerEXT = (PFN_vkDestroyDebugUtilsMessengerEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_depth_bias_control)
+	vk->vkCmdSetDepthBias2EXT = (PFN_vkCmdSetDepthBias2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthBias2EXT");
+#endif // defined(VK_EXT_depth_bias_control)
 #if defined(VK_EXT_descriptor_buffer)
 	vk->vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	vk->vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBuffersEXT");
@@ -1025,6 +1028,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vk->vkGetInstanceProcAddr(instance, "vkGetFramebufferTilePropertiesQCOM");
 	vk->vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vk->vkGetInstanceProcAddr(instance, "vkGetDynamicRenderingTilePropertiesQCOM");
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QNX_external_memory_screen_buffer)
+	vk->vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vk->vkGetInstanceProcAddr(instance, "vkGetScreenBufferPropertiesQNX");
+#endif // defined(VK_QNX_external_memory_screen_buffer)
 #if defined(VK_QNX_screen_surface)
 	vk->vkGetPhysicalDeviceScreenPresentationSupportQNX = (PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");
 	vk->vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vk->vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
@@ -1348,6 +1354,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkQueueEndDebugUtilsLabelEXT");
 	vk->vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginDebugUtilsLabelEXT");
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_depth_bias_control)
+	vk->vkCmdSetDepthBias2EXT = (PFN_vkCmdSetDepthBias2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthBias2EXT");
+#endif // defined(VK_EXT_depth_bias_control)
 #if defined(VK_EXT_descriptor_buffer)
 	vk->vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	vk->vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
@@ -1866,6 +1875,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vk->vkGetDeviceProcAddr(device, "vkGetFramebufferTilePropertiesQCOM");
 	vk->vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vk->vkGetDeviceProcAddr(device, "vkGetDynamicRenderingTilePropertiesQCOM");
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QNX_external_memory_screen_buffer)
+	vk->vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vk->vkGetDeviceProcAddr(device, "vkGetScreenBufferPropertiesQNX");
+#endif // defined(VK_QNX_external_memory_screen_buffer)
 #if defined(VK_VALVE_descriptor_set_host_mapping)
 	vk->vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetHostMappingVALVE");
 	vk->vkGetDescriptorSetLayoutHostMappingInfoVALVE = (PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
@@ -3817,6 +3829,15 @@ VKAPI_ATTR void vkDestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtil
 	pfn_vkDestroyDebugUtilsMessengerEXT(instance, messenger, pAllocator);
 }
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_depth_bias_control)
+
+static PFN_vkCmdSetDepthBias2EXT pfn_vkCmdSetDepthBias2EXT;
+VKAPI_ATTR void vkCmdSetDepthBias2EXT(VkCommandBuffer commandBuffer, const VkDepthBiasInfoEXT * pDepthBiasInfo)
+{
+	assert(pfn_vkCmdSetDepthBias2EXT);
+	pfn_vkCmdSetDepthBias2EXT(commandBuffer, pDepthBiasInfo);
+}
+#endif // defined(VK_EXT_depth_bias_control)
 #if defined(VK_EXT_descriptor_buffer)
 
 static PFN_vkGetImageOpaqueCaptureDescriptorDataEXT pfn_vkGetImageOpaqueCaptureDescriptorDataEXT;
@@ -6832,6 +6853,15 @@ VKAPI_ATTR VkResult vkGetDynamicRenderingTilePropertiesQCOM(VkDevice device, con
 	return pfn_vkGetDynamicRenderingTilePropertiesQCOM(device, pRenderingInfo, pProperties);
 }
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QNX_external_memory_screen_buffer)
+
+static PFN_vkGetScreenBufferPropertiesQNX pfn_vkGetScreenBufferPropertiesQNX;
+VKAPI_ATTR VkResult vkGetScreenBufferPropertiesQNX(VkDevice device, const struct _screen_buffer * buffer, VkScreenBufferPropertiesQNX * pProperties)
+{
+	assert(pfn_vkGetScreenBufferPropertiesQNX);
+	return pfn_vkGetScreenBufferPropertiesQNX(device, buffer, pProperties);
+}
+#endif // defined(VK_QNX_external_memory_screen_buffer)
 #if defined(VK_QNX_screen_surface)
 
 static PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX pfn_vkGetPhysicalDeviceScreenPresentationSupportQNX;
@@ -7231,6 +7261,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCreateDebugUtilsMessengerEXT = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
 	pfn_vkDestroyDebugUtilsMessengerEXT = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_depth_bias_control)
+	pfn_vkCmdSetDepthBias2EXT = (PFN_vkCmdSetDepthBias2EXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthBias2EXT");
+#endif // defined(VK_EXT_depth_bias_control)
 #if defined(VK_EXT_descriptor_buffer)
 	pfn_vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	pfn_vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBuffersEXT");
@@ -7876,6 +7909,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vkGetInstanceProcAddr(instance, "vkGetFramebufferTilePropertiesQCOM");
 	pfn_vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vkGetInstanceProcAddr(instance, "vkGetDynamicRenderingTilePropertiesQCOM");
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QNX_external_memory_screen_buffer)
+	pfn_vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vkGetInstanceProcAddr(instance, "vkGetScreenBufferPropertiesQNX");
+#endif // defined(VK_QNX_external_memory_screen_buffer)
 #if defined(VK_QNX_screen_surface)
 	pfn_vkGetPhysicalDeviceScreenPresentationSupportQNX = (PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");
 	pfn_vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
@@ -8199,6 +8235,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkQueueEndDebugUtilsLabelEXT");
 	pfn_vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkCmdBeginDebugUtilsLabelEXT");
 #endif // defined(VK_EXT_debug_utils)
+#if defined(VK_EXT_depth_bias_control)
+	pfn_vkCmdSetDepthBias2EXT = (PFN_vkCmdSetDepthBias2EXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthBias2EXT");
+#endif // defined(VK_EXT_depth_bias_control)
 #if defined(VK_EXT_descriptor_buffer)
 	pfn_vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	pfn_vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
@@ -8717,6 +8756,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vkGetDeviceProcAddr(device, "vkGetFramebufferTilePropertiesQCOM");
 	pfn_vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vkGetDeviceProcAddr(device, "vkGetDynamicRenderingTilePropertiesQCOM");
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QNX_external_memory_screen_buffer)
+	pfn_vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vkGetDeviceProcAddr(device, "vkGetScreenBufferPropertiesQNX");
+#endif // defined(VK_QNX_external_memory_screen_buffer)
 #if defined(VK_VALVE_descriptor_set_host_mapping)
 	pfn_vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vkGetDeviceProcAddr(device, "vkGetDescriptorSetHostMappingVALVE");
 	pfn_vkGetDescriptorSetLayoutHostMappingInfoVALVE = (PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
