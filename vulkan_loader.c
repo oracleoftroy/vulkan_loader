@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 254 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 255 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -658,6 +658,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetBufferDeviceAddressKHR = (PFN_vkGetBufferDeviceAddressKHR)vk->vkGetInstanceProcAddr(instance, "vkGetBufferDeviceAddressKHR");
 	vk->vkGetBufferOpaqueCaptureAddressKHR = (PFN_vkGetBufferOpaqueCaptureAddressKHR)vk->vkGetInstanceProcAddr(instance, "vkGetBufferOpaqueCaptureAddressKHR");
 #endif // defined(VK_KHR_buffer_device_address)
+#if defined(VK_KHR_cooperative_matrix)
+	vk->vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR");
+#endif // defined(VK_KHR_cooperative_matrix)
 #if defined(VK_KHR_copy_commands2)
 	vk->vkCmdCopyBuffer2KHR = (PFN_vkCmdCopyBuffer2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyBuffer2KHR");
 	vk->vkCmdCopyImage2KHR = (PFN_vkCmdCopyImage2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyImage2KHR");
@@ -5187,6 +5190,15 @@ VKAPI_ATTR uint64_t vkGetBufferOpaqueCaptureAddressKHR(VkDevice device, const Vk
 	return pfn_vkGetBufferOpaqueCaptureAddressKHR(device, pInfo);
 }
 #endif // defined(VK_KHR_buffer_device_address)
+#if defined(VK_KHR_cooperative_matrix)
+
+static PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR(VkPhysicalDevice physicalDevice, uint32_t * pPropertyCount, VkCooperativeMatrixPropertiesKHR * pProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR);
+	return pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR(physicalDevice, pPropertyCount, pProperties);
+}
+#endif // defined(VK_KHR_cooperative_matrix)
 #if defined(VK_KHR_copy_commands2)
 
 static PFN_vkCmdCopyBuffer2KHR pfn_vkCmdCopyBuffer2KHR;
@@ -7539,6 +7551,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetBufferDeviceAddressKHR = (PFN_vkGetBufferDeviceAddressKHR)vkGetInstanceProcAddr(instance, "vkGetBufferDeviceAddressKHR");
 	pfn_vkGetBufferOpaqueCaptureAddressKHR = (PFN_vkGetBufferOpaqueCaptureAddressKHR)vkGetInstanceProcAddr(instance, "vkGetBufferOpaqueCaptureAddressKHR");
 #endif // defined(VK_KHR_buffer_device_address)
+#if defined(VK_KHR_cooperative_matrix)
+	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR");
+#endif // defined(VK_KHR_cooperative_matrix)
 #if defined(VK_KHR_copy_commands2)
 	pfn_vkCmdCopyBuffer2KHR = (PFN_vkCmdCopyBuffer2KHR)vkGetInstanceProcAddr(instance, "vkCmdCopyBuffer2KHR");
 	pfn_vkCmdCopyImage2KHR = (PFN_vkCmdCopyImage2KHR)vkGetInstanceProcAddr(instance, "vkCmdCopyImage2KHR");
