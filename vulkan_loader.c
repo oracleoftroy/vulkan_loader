@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 257 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 258 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -459,15 +459,15 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetColorWriteMaskEXT = (PFN_vkCmdSetColorWriteMaskEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorWriteMaskEXT");
 	vk->vkCmdSetLogicOpEnableEXT = (PFN_vkCmdSetLogicOpEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetLogicOpEnableEXT");
 	vk->vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToOneEnableEXT");
-	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
+	vk->vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingEnableNV");
 	vk->vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetRasterizationStreamEXT");
+	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
 	vk->vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEquationEXT");
 	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetSampleMaskEXT");
 	vk->vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToCoverageEnableEXT");
 	vk->vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEnableEXT");
 	vk->vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
-	vk->vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingEnableNV");
 	vk->vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportSwizzleNV");
 	vk->vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCoverageToColorEnableNV");
 	vk->vkCmdSetCoverageModulationModeNV = (PFN_vkCmdSetCoverageModulationModeNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCoverageModulationModeNV");
@@ -489,12 +489,18 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_headless_surface)
 	vk->vkCreateHeadlessSurfaceEXT = (PFN_vkCreateHeadlessSurfaceEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateHeadlessSurfaceEXT");
 #endif // defined(VK_EXT_headless_surface)
+#if defined(VK_EXT_host_image_copy)
+	vk->vkCopyImageToImageEXT = (PFN_vkCopyImageToImageEXT)vk->vkGetInstanceProcAddr(instance, "vkCopyImageToImageEXT");
+	vk->vkCopyMemoryToImageEXT = (PFN_vkCopyMemoryToImageEXT)vk->vkGetInstanceProcAddr(instance, "vkCopyMemoryToImageEXT");
+	vk->vkCopyImageToMemoryEXT = (PFN_vkCopyImageToMemoryEXT)vk->vkGetInstanceProcAddr(instance, "vkCopyImageToMemoryEXT");
+	vk->vkTransitionImageLayoutEXT = (PFN_vkTransitionImageLayoutEXT)vk->vkGetInstanceProcAddr(instance, "vkTransitionImageLayoutEXT");
+#endif // defined(VK_EXT_host_image_copy)
+#if defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
+	vk->vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2EXT");
+#endif // defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_host_query_reset)
 	vk->vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vk->vkGetInstanceProcAddr(instance, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
-#if defined(VK_EXT_image_compression_control)
-	vk->vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2EXT");
-#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 	vk->vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageDrmFormatModifierPropertiesEXT");
 #endif // defined(VK_EXT_image_drm_format_modifier)
@@ -555,8 +561,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_shader_object)
 	vk->vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyShaderEXT");
 	vk->vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetShaderBinaryDataEXT");
-	vk->vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateShadersEXT");
 	vk->vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindShadersEXT");
+	vk->vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
 	vk->vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetVertexInputEXT");
@@ -956,6 +962,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindPipelineShaderGroupNV = (PFN_vkCmdBindPipelineShaderGroupNV)vk->vkGetInstanceProcAddr(instance, "vkCmdBindPipelineShaderGroupNV");
 	vk->vkDestroyIndirectCommandsLayoutNV = (PFN_vkDestroyIndirectCommandsLayoutNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyIndirectCommandsLayoutNV");
 #endif // defined(VK_NV_device_generated_commands)
+#if defined(VK_NV_device_generated_commands_compute)
+	vk->vkGetPipelineIndirectMemoryRequirementsNV = (PFN_vkGetPipelineIndirectMemoryRequirementsNV)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectMemoryRequirementsNV");
+	vk->vkCmdUpdatePipelineIndirectBuffer = (PFN_vkCmdUpdatePipelineIndirectBuffer)vk->vkGetInstanceProcAddr(instance, "vkCmdUpdatePipelineIndirectBuffer");
+	vk->vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectDeviceAddressNV");
+#endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_capabilities)
 	vk->vkGetPhysicalDeviceExternalImageFormatPropertiesNV = (PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV");
 #endif // defined(VK_NV_external_memory_capabilities)
@@ -1426,15 +1437,15 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetColorWriteMaskEXT = (PFN_vkCmdSetColorWriteMaskEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorWriteMaskEXT");
 	vk->vkCmdSetLogicOpEnableEXT = (PFN_vkCmdSetLogicOpEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetLogicOpEnableEXT");
 	vk->vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAlphaToOneEnableEXT");
-	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
+	vk->vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
 	vk->vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
+	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
 	vk->vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
 	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
 	vk->vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
 	vk->vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEnableEXT");
 	vk->vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
-	vk->vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
 	vk->vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportSwizzleNV");
 	vk->vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCoverageToColorEnableNV");
 	vk->vkCmdSetCoverageModulationModeNV = (PFN_vkCmdSetCoverageModulationModeNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCoverageModulationModeNV");
@@ -1452,12 +1463,18 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_hdr_metadata)
 	vk->vkSetHdrMetadataEXT = (PFN_vkSetHdrMetadataEXT)vk->vkGetDeviceProcAddr(device, "vkSetHdrMetadataEXT");
 #endif // defined(VK_EXT_hdr_metadata)
+#if defined(VK_EXT_host_image_copy)
+	vk->vkCopyImageToImageEXT = (PFN_vkCopyImageToImageEXT)vk->vkGetDeviceProcAddr(device, "vkCopyImageToImageEXT");
+	vk->vkCopyMemoryToImageEXT = (PFN_vkCopyMemoryToImageEXT)vk->vkGetDeviceProcAddr(device, "vkCopyMemoryToImageEXT");
+	vk->vkCopyImageToMemoryEXT = (PFN_vkCopyImageToMemoryEXT)vk->vkGetDeviceProcAddr(device, "vkCopyImageToMemoryEXT");
+	vk->vkTransitionImageLayoutEXT = (PFN_vkTransitionImageLayoutEXT)vk->vkGetDeviceProcAddr(device, "vkTransitionImageLayoutEXT");
+#endif // defined(VK_EXT_host_image_copy)
+#if defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
+	vk->vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vk->vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2EXT");
+#endif // defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_host_query_reset)
 	vk->vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vk->vkGetDeviceProcAddr(device, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
-#if defined(VK_EXT_image_compression_control)
-	vk->vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vk->vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2EXT");
-#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 	vk->vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageDrmFormatModifierPropertiesEXT");
 #endif // defined(VK_EXT_image_drm_format_modifier)
@@ -1514,8 +1531,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_shader_object)
 	vk->vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyShaderEXT");
 	vk->vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
-	vk->vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vk->vkGetDeviceProcAddr(device, "vkCreateShadersEXT");
 	vk->vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindShadersEXT");
+	vk->vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vk->vkGetDeviceProcAddr(device, "vkCreateShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
 	vk->vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
@@ -1810,6 +1827,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindPipelineShaderGroupNV = (PFN_vkCmdBindPipelineShaderGroupNV)vk->vkGetDeviceProcAddr(device, "vkCmdBindPipelineShaderGroupNV");
 	vk->vkDestroyIndirectCommandsLayoutNV = (PFN_vkDestroyIndirectCommandsLayoutNV)vk->vkGetDeviceProcAddr(device, "vkDestroyIndirectCommandsLayoutNV");
 #endif // defined(VK_NV_device_generated_commands)
+#if defined(VK_NV_device_generated_commands_compute)
+	vk->vkGetPipelineIndirectMemoryRequirementsNV = (PFN_vkGetPipelineIndirectMemoryRequirementsNV)vk->vkGetDeviceProcAddr(device, "vkGetPipelineIndirectMemoryRequirementsNV");
+	vk->vkCmdUpdatePipelineIndirectBuffer = (PFN_vkCmdUpdatePipelineIndirectBuffer)vk->vkGetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBuffer");
+	vk->vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vk->vkGetDeviceProcAddr(device, "vkGetPipelineIndirectDeviceAddressNV");
+#endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_rdma)
 	vk->vkGetMemoryRemoteAddressNV = (PFN_vkGetMemoryRemoteAddressNV)vk->vkGetDeviceProcAddr(device, "vkGetMemoryRemoteAddressNV");
 #endif // defined(VK_NV_external_memory_rdma)
@@ -4260,11 +4282,11 @@ VKAPI_ATTR void vkCmdSetAlphaToOneEnableEXT(VkCommandBuffer commandBuffer, VkBoo
 	pfn_vkCmdSetAlphaToOneEnableEXT(commandBuffer, alphaToOneEnable);
 }
 
-static PFN_vkCmdSetColorBlendAdvancedEXT pfn_vkCmdSetColorBlendAdvancedEXT;
-VKAPI_ATTR void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, uint32_t attachmentCount, const VkColorBlendAdvancedEXT * pColorBlendAdvanced)
+static PFN_vkCmdSetViewportWScalingEnableNV pfn_vkCmdSetViewportWScalingEnableNV;
+VKAPI_ATTR void vkCmdSetViewportWScalingEnableNV(VkCommandBuffer commandBuffer, VkBool32 viewportWScalingEnable)
 {
-	assert(pfn_vkCmdSetColorBlendAdvancedEXT);
-	pfn_vkCmdSetColorBlendAdvancedEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendAdvanced);
+	assert(pfn_vkCmdSetViewportWScalingEnableNV);
+	pfn_vkCmdSetViewportWScalingEnableNV(commandBuffer, viewportWScalingEnable);
 }
 
 static PFN_vkCmdSetRasterizationStreamEXT pfn_vkCmdSetRasterizationStreamEXT;
@@ -4272,6 +4294,13 @@ VKAPI_ATTR void vkCmdSetRasterizationStreamEXT(VkCommandBuffer commandBuffer, ui
 {
 	assert(pfn_vkCmdSetRasterizationStreamEXT);
 	pfn_vkCmdSetRasterizationStreamEXT(commandBuffer, rasterizationStream);
+}
+
+static PFN_vkCmdSetColorBlendAdvancedEXT pfn_vkCmdSetColorBlendAdvancedEXT;
+VKAPI_ATTR void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, uint32_t attachmentCount, const VkColorBlendAdvancedEXT * pColorBlendAdvanced)
+{
+	assert(pfn_vkCmdSetColorBlendAdvancedEXT);
+	pfn_vkCmdSetColorBlendAdvancedEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendAdvanced);
 }
 
 static PFN_vkCmdSetColorBlendEquationEXT pfn_vkCmdSetColorBlendEquationEXT;
@@ -4314,13 +4343,6 @@ VKAPI_ATTR void vkCmdSetExtraPrimitiveOverestimationSizeEXT(VkCommandBuffer comm
 {
 	assert(pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT);
 	pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT(commandBuffer, extraPrimitiveOverestimationSize);
-}
-
-static PFN_vkCmdSetViewportWScalingEnableNV pfn_vkCmdSetViewportWScalingEnableNV;
-VKAPI_ATTR void vkCmdSetViewportWScalingEnableNV(VkCommandBuffer commandBuffer, VkBool32 viewportWScalingEnable)
-{
-	assert(pfn_vkCmdSetViewportWScalingEnableNV);
-	pfn_vkCmdSetViewportWScalingEnableNV(commandBuffer, viewportWScalingEnable);
 }
 
 static PFN_vkCmdSetViewportSwizzleNV pfn_vkCmdSetViewportSwizzleNV;
@@ -4415,6 +4437,45 @@ VKAPI_ATTR VkResult vkCreateHeadlessSurfaceEXT(VkInstance instance, const VkHead
 	return pfn_vkCreateHeadlessSurfaceEXT(instance, pCreateInfo, pAllocator, pSurface);
 }
 #endif // defined(VK_EXT_headless_surface)
+#if defined(VK_EXT_host_image_copy)
+
+static PFN_vkCopyImageToImageEXT pfn_vkCopyImageToImageEXT;
+VKAPI_ATTR VkResult vkCopyImageToImageEXT(VkDevice device, const VkCopyImageToImageInfoEXT * pCopyImageToImageInfo)
+{
+	assert(pfn_vkCopyImageToImageEXT);
+	return pfn_vkCopyImageToImageEXT(device, pCopyImageToImageInfo);
+}
+
+static PFN_vkCopyMemoryToImageEXT pfn_vkCopyMemoryToImageEXT;
+VKAPI_ATTR VkResult vkCopyMemoryToImageEXT(VkDevice device, const VkCopyMemoryToImageInfoEXT * pCopyMemoryToImageInfo)
+{
+	assert(pfn_vkCopyMemoryToImageEXT);
+	return pfn_vkCopyMemoryToImageEXT(device, pCopyMemoryToImageInfo);
+}
+
+static PFN_vkCopyImageToMemoryEXT pfn_vkCopyImageToMemoryEXT;
+VKAPI_ATTR VkResult vkCopyImageToMemoryEXT(VkDevice device, const VkCopyImageToMemoryInfoEXT * pCopyImageToMemoryInfo)
+{
+	assert(pfn_vkCopyImageToMemoryEXT);
+	return pfn_vkCopyImageToMemoryEXT(device, pCopyImageToMemoryInfo);
+}
+
+static PFN_vkTransitionImageLayoutEXT pfn_vkTransitionImageLayoutEXT;
+VKAPI_ATTR VkResult vkTransitionImageLayoutEXT(VkDevice device, uint32_t transitionCount, const VkHostImageLayoutTransitionInfoEXT * pTransitions)
+{
+	assert(pfn_vkTransitionImageLayoutEXT);
+	return pfn_vkTransitionImageLayoutEXT(device, transitionCount, pTransitions);
+}
+#endif // defined(VK_EXT_host_image_copy)
+#if defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
+
+static PFN_vkGetImageSubresourceLayout2EXT pfn_vkGetImageSubresourceLayout2EXT;
+VKAPI_ATTR void vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, const VkImageSubresource2EXT * pSubresource, VkSubresourceLayout2EXT * pLayout)
+{
+	assert(pfn_vkGetImageSubresourceLayout2EXT);
+	pfn_vkGetImageSubresourceLayout2EXT(device, image, pSubresource, pLayout);
+}
+#endif // defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_host_query_reset)
 
 static PFN_vkResetQueryPoolEXT pfn_vkResetQueryPoolEXT;
@@ -4424,15 +4485,6 @@ VKAPI_ATTR void vkResetQueryPoolEXT(VkDevice device, VkQueryPool queryPool, uint
 	pfn_vkResetQueryPoolEXT(device, queryPool, firstQuery, queryCount);
 }
 #endif // defined(VK_EXT_host_query_reset)
-#if defined(VK_EXT_image_compression_control)
-
-static PFN_vkGetImageSubresourceLayout2EXT pfn_vkGetImageSubresourceLayout2EXT;
-VKAPI_ATTR void vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, const VkImageSubresource2EXT * pSubresource, VkSubresourceLayout2EXT * pLayout)
-{
-	assert(pfn_vkGetImageSubresourceLayout2EXT);
-	pfn_vkGetImageSubresourceLayout2EXT(device, image, pSubresource, pLayout);
-}
-#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 
 static PFN_vkGetImageDrmFormatModifierPropertiesEXT pfn_vkGetImageDrmFormatModifierPropertiesEXT;
@@ -4704,18 +4756,18 @@ VKAPI_ATTR VkResult vkGetShaderBinaryDataEXT(VkDevice device, VkShaderEXT shader
 	return pfn_vkGetShaderBinaryDataEXT(device, shader, pDataSize, pData);
 }
 
-static PFN_vkCreateShadersEXT pfn_vkCreateShadersEXT;
-VKAPI_ATTR VkResult vkCreateShadersEXT(VkDevice device, uint32_t createInfoCount, const VkShaderCreateInfoEXT * pCreateInfos, const VkAllocationCallbacks * pAllocator, VkShaderEXT * pShaders)
-{
-	assert(pfn_vkCreateShadersEXT);
-	return pfn_vkCreateShadersEXT(device, createInfoCount, pCreateInfos, pAllocator, pShaders);
-}
-
 static PFN_vkCmdBindShadersEXT pfn_vkCmdBindShadersEXT;
 VKAPI_ATTR void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, uint32_t stageCount, const VkShaderStageFlagBits * pStages, const VkShaderEXT * pShaders)
 {
 	assert(pfn_vkCmdBindShadersEXT);
 	pfn_vkCmdBindShadersEXT(commandBuffer, stageCount, pStages, pShaders);
+}
+
+static PFN_vkCreateShadersEXT pfn_vkCreateShadersEXT;
+VKAPI_ATTR VkResult vkCreateShadersEXT(VkDevice device, uint32_t createInfoCount, const VkShaderCreateInfoEXT * pCreateInfos, const VkAllocationCallbacks * pAllocator, VkShaderEXT * pShaders)
+{
+	assert(pfn_vkCreateShadersEXT);
+	return pfn_vkCreateShadersEXT(device, createInfoCount, pCreateInfos, pAllocator, pShaders);
 }
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
@@ -6520,6 +6572,29 @@ VKAPI_ATTR void vkDestroyIndirectCommandsLayoutNV(VkDevice device, VkIndirectCom
 	pfn_vkDestroyIndirectCommandsLayoutNV(device, indirectCommandsLayout, pAllocator);
 }
 #endif // defined(VK_NV_device_generated_commands)
+#if defined(VK_NV_device_generated_commands_compute)
+
+static PFN_vkGetPipelineIndirectMemoryRequirementsNV pfn_vkGetPipelineIndirectMemoryRequirementsNV;
+VKAPI_ATTR void vkGetPipelineIndirectMemoryRequirementsNV(VkDevice device, const VkComputePipelineCreateInfo * pCreateInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetPipelineIndirectMemoryRequirementsNV);
+	pfn_vkGetPipelineIndirectMemoryRequirementsNV(device, pCreateInfo, pMemoryRequirements);
+}
+
+static PFN_vkCmdUpdatePipelineIndirectBuffer pfn_vkCmdUpdatePipelineIndirectBuffer;
+VKAPI_ATTR void vkCmdUpdatePipelineIndirectBuffer(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline)
+{
+	assert(pfn_vkCmdUpdatePipelineIndirectBuffer);
+	pfn_vkCmdUpdatePipelineIndirectBuffer(commandBuffer, pipelineBindPoint, pipeline);
+}
+
+static PFN_vkGetPipelineIndirectDeviceAddressNV pfn_vkGetPipelineIndirectDeviceAddressNV;
+VKAPI_ATTR VkDeviceAddress vkGetPipelineIndirectDeviceAddressNV(VkDevice device, const VkPipelineIndirectDeviceAddressInfoNV * pInfo)
+{
+	assert(pfn_vkGetPipelineIndirectDeviceAddressNV);
+	return pfn_vkGetPipelineIndirectDeviceAddressNV(device, pInfo);
+}
+#endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_capabilities)
 
 static PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV pfn_vkGetPhysicalDeviceExternalImageFormatPropertiesNV;
@@ -7352,15 +7427,15 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdSetColorWriteMaskEXT = (PFN_vkCmdSetColorWriteMaskEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorWriteMaskEXT");
 	pfn_vkCmdSetLogicOpEnableEXT = (PFN_vkCmdSetLogicOpEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetLogicOpEnableEXT");
 	pfn_vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToOneEnableEXT");
-	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
+	pfn_vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingEnableNV");
 	pfn_vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vkGetInstanceProcAddr(instance, "vkCmdSetRasterizationStreamEXT");
+	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
 	pfn_vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEquationEXT");
 	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vkGetInstanceProcAddr(instance, "vkCmdSetSampleMaskEXT");
 	pfn_vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToCoverageEnableEXT");
 	pfn_vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEnableEXT");
 	pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vkGetInstanceProcAddr(instance, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
-	pfn_vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingEnableNV");
 	pfn_vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportSwizzleNV");
 	pfn_vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vkGetInstanceProcAddr(instance, "vkCmdSetCoverageToColorEnableNV");
 	pfn_vkCmdSetCoverageModulationModeNV = (PFN_vkCmdSetCoverageModulationModeNV)vkGetInstanceProcAddr(instance, "vkCmdSetCoverageModulationModeNV");
@@ -7382,12 +7457,18 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_headless_surface)
 	pfn_vkCreateHeadlessSurfaceEXT = (PFN_vkCreateHeadlessSurfaceEXT)vkGetInstanceProcAddr(instance, "vkCreateHeadlessSurfaceEXT");
 #endif // defined(VK_EXT_headless_surface)
+#if defined(VK_EXT_host_image_copy)
+	pfn_vkCopyImageToImageEXT = (PFN_vkCopyImageToImageEXT)vkGetInstanceProcAddr(instance, "vkCopyImageToImageEXT");
+	pfn_vkCopyMemoryToImageEXT = (PFN_vkCopyMemoryToImageEXT)vkGetInstanceProcAddr(instance, "vkCopyMemoryToImageEXT");
+	pfn_vkCopyImageToMemoryEXT = (PFN_vkCopyImageToMemoryEXT)vkGetInstanceProcAddr(instance, "vkCopyImageToMemoryEXT");
+	pfn_vkTransitionImageLayoutEXT = (PFN_vkTransitionImageLayoutEXT)vkGetInstanceProcAddr(instance, "vkTransitionImageLayoutEXT");
+#endif // defined(VK_EXT_host_image_copy)
+#if defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
+	pfn_vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2EXT");
+#endif // defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetInstanceProcAddr(instance, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
-#if defined(VK_EXT_image_compression_control)
-	pfn_vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2EXT");
-#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 	pfn_vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetImageDrmFormatModifierPropertiesEXT");
 #endif // defined(VK_EXT_image_drm_format_modifier)
@@ -7448,8 +7529,8 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_shader_object)
 	pfn_vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vkGetInstanceProcAddr(instance, "vkDestroyShaderEXT");
 	pfn_vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vkGetInstanceProcAddr(instance, "vkGetShaderBinaryDataEXT");
-	pfn_vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vkGetInstanceProcAddr(instance, "vkCreateShadersEXT");
 	pfn_vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindShadersEXT");
+	pfn_vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vkGetInstanceProcAddr(instance, "vkCreateShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
 	pfn_vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vkGetInstanceProcAddr(instance, "vkCmdSetVertexInputEXT");
@@ -7849,6 +7930,11 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBindPipelineShaderGroupNV = (PFN_vkCmdBindPipelineShaderGroupNV)vkGetInstanceProcAddr(instance, "vkCmdBindPipelineShaderGroupNV");
 	pfn_vkDestroyIndirectCommandsLayoutNV = (PFN_vkDestroyIndirectCommandsLayoutNV)vkGetInstanceProcAddr(instance, "vkDestroyIndirectCommandsLayoutNV");
 #endif // defined(VK_NV_device_generated_commands)
+#if defined(VK_NV_device_generated_commands_compute)
+	pfn_vkGetPipelineIndirectMemoryRequirementsNV = (PFN_vkGetPipelineIndirectMemoryRequirementsNV)vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectMemoryRequirementsNV");
+	pfn_vkCmdUpdatePipelineIndirectBuffer = (PFN_vkCmdUpdatePipelineIndirectBuffer)vkGetInstanceProcAddr(instance, "vkCmdUpdatePipelineIndirectBuffer");
+	pfn_vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectDeviceAddressNV");
+#endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_capabilities)
 	pfn_vkGetPhysicalDeviceExternalImageFormatPropertiesNV = (PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV");
 #endif // defined(VK_NV_external_memory_capabilities)
@@ -8319,15 +8405,15 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdSetColorWriteMaskEXT = (PFN_vkCmdSetColorWriteMaskEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorWriteMaskEXT");
 	pfn_vkCmdSetLogicOpEnableEXT = (PFN_vkCmdSetLogicOpEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetLogicOpEnableEXT");
 	pfn_vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAlphaToOneEnableEXT");
-	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
+	pfn_vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
 	pfn_vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vkGetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
+	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
 	pfn_vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
 	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vkGetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
 	pfn_vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
 	pfn_vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEnableEXT");
 	pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vkGetDeviceProcAddr(device, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
-	pfn_vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
 	pfn_vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportSwizzleNV");
 	pfn_vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vkGetDeviceProcAddr(device, "vkCmdSetCoverageToColorEnableNV");
 	pfn_vkCmdSetCoverageModulationModeNV = (PFN_vkCmdSetCoverageModulationModeNV)vkGetDeviceProcAddr(device, "vkCmdSetCoverageModulationModeNV");
@@ -8345,12 +8431,18 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_hdr_metadata)
 	pfn_vkSetHdrMetadataEXT = (PFN_vkSetHdrMetadataEXT)vkGetDeviceProcAddr(device, "vkSetHdrMetadataEXT");
 #endif // defined(VK_EXT_hdr_metadata)
+#if defined(VK_EXT_host_image_copy)
+	pfn_vkCopyImageToImageEXT = (PFN_vkCopyImageToImageEXT)vkGetDeviceProcAddr(device, "vkCopyImageToImageEXT");
+	pfn_vkCopyMemoryToImageEXT = (PFN_vkCopyMemoryToImageEXT)vkGetDeviceProcAddr(device, "vkCopyMemoryToImageEXT");
+	pfn_vkCopyImageToMemoryEXT = (PFN_vkCopyImageToMemoryEXT)vkGetDeviceProcAddr(device, "vkCopyImageToMemoryEXT");
+	pfn_vkTransitionImageLayoutEXT = (PFN_vkTransitionImageLayoutEXT)vkGetDeviceProcAddr(device, "vkTransitionImageLayoutEXT");
+#endif // defined(VK_EXT_host_image_copy)
+#if defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
+	pfn_vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2EXT");
+#endif // defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_host_query_reset)
 	pfn_vkResetQueryPoolEXT = (PFN_vkResetQueryPoolEXT)vkGetDeviceProcAddr(device, "vkResetQueryPoolEXT");
 #endif // defined(VK_EXT_host_query_reset)
-#if defined(VK_EXT_image_compression_control)
-	pfn_vkGetImageSubresourceLayout2EXT = (PFN_vkGetImageSubresourceLayout2EXT)vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2EXT");
-#endif // defined(VK_EXT_image_compression_control)
 #if defined(VK_EXT_image_drm_format_modifier)
 	pfn_vkGetImageDrmFormatModifierPropertiesEXT = (PFN_vkGetImageDrmFormatModifierPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetImageDrmFormatModifierPropertiesEXT");
 #endif // defined(VK_EXT_image_drm_format_modifier)
@@ -8407,8 +8499,8 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_shader_object)
 	pfn_vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vkGetDeviceProcAddr(device, "vkDestroyShaderEXT");
 	pfn_vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vkGetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
-	pfn_vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vkGetDeviceProcAddr(device, "vkCreateShadersEXT");
 	pfn_vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vkGetDeviceProcAddr(device, "vkCmdBindShadersEXT");
+	pfn_vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vkGetDeviceProcAddr(device, "vkCreateShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
 	pfn_vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vkGetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
@@ -8703,6 +8795,11 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdBindPipelineShaderGroupNV = (PFN_vkCmdBindPipelineShaderGroupNV)vkGetDeviceProcAddr(device, "vkCmdBindPipelineShaderGroupNV");
 	pfn_vkDestroyIndirectCommandsLayoutNV = (PFN_vkDestroyIndirectCommandsLayoutNV)vkGetDeviceProcAddr(device, "vkDestroyIndirectCommandsLayoutNV");
 #endif // defined(VK_NV_device_generated_commands)
+#if defined(VK_NV_device_generated_commands_compute)
+	pfn_vkGetPipelineIndirectMemoryRequirementsNV = (PFN_vkGetPipelineIndirectMemoryRequirementsNV)vkGetDeviceProcAddr(device, "vkGetPipelineIndirectMemoryRequirementsNV");
+	pfn_vkCmdUpdatePipelineIndirectBuffer = (PFN_vkCmdUpdatePipelineIndirectBuffer)vkGetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBuffer");
+	pfn_vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vkGetDeviceProcAddr(device, "vkGetPipelineIndirectDeviceAddressNV");
+#endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_rdma)
 	pfn_vkGetMemoryRemoteAddressNV = (PFN_vkGetMemoryRemoteAddressNV)vkGetDeviceProcAddr(device, "vkGetMemoryRemoteAddressNV");
 #endif // defined(VK_NV_external_memory_rdma)
