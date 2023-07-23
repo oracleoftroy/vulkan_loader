@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 258 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 259 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -964,7 +964,7 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #endif // defined(VK_NV_device_generated_commands)
 #if defined(VK_NV_device_generated_commands_compute)
 	vk->vkGetPipelineIndirectMemoryRequirementsNV = (PFN_vkGetPipelineIndirectMemoryRequirementsNV)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectMemoryRequirementsNV");
-	vk->vkCmdUpdatePipelineIndirectBuffer = (PFN_vkCmdUpdatePipelineIndirectBuffer)vk->vkGetInstanceProcAddr(instance, "vkCmdUpdatePipelineIndirectBuffer");
+	vk->vkCmdUpdatePipelineIndirectBufferNV = (PFN_vkCmdUpdatePipelineIndirectBufferNV)vk->vkGetInstanceProcAddr(instance, "vkCmdUpdatePipelineIndirectBufferNV");
 	vk->vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectDeviceAddressNV");
 #endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_capabilities)
@@ -1829,7 +1829,7 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #endif // defined(VK_NV_device_generated_commands)
 #if defined(VK_NV_device_generated_commands_compute)
 	vk->vkGetPipelineIndirectMemoryRequirementsNV = (PFN_vkGetPipelineIndirectMemoryRequirementsNV)vk->vkGetDeviceProcAddr(device, "vkGetPipelineIndirectMemoryRequirementsNV");
-	vk->vkCmdUpdatePipelineIndirectBuffer = (PFN_vkCmdUpdatePipelineIndirectBuffer)vk->vkGetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBuffer");
+	vk->vkCmdUpdatePipelineIndirectBufferNV = (PFN_vkCmdUpdatePipelineIndirectBufferNV)vk->vkGetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBufferNV");
 	vk->vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vk->vkGetDeviceProcAddr(device, "vkGetPipelineIndirectDeviceAddressNV");
 #endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_rdma)
@@ -6581,11 +6581,11 @@ VKAPI_ATTR void vkGetPipelineIndirectMemoryRequirementsNV(VkDevice device, const
 	pfn_vkGetPipelineIndirectMemoryRequirementsNV(device, pCreateInfo, pMemoryRequirements);
 }
 
-static PFN_vkCmdUpdatePipelineIndirectBuffer pfn_vkCmdUpdatePipelineIndirectBuffer;
-VKAPI_ATTR void vkCmdUpdatePipelineIndirectBuffer(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline)
+static PFN_vkCmdUpdatePipelineIndirectBufferNV pfn_vkCmdUpdatePipelineIndirectBufferNV;
+VKAPI_ATTR void vkCmdUpdatePipelineIndirectBufferNV(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipeline pipeline)
 {
-	assert(pfn_vkCmdUpdatePipelineIndirectBuffer);
-	pfn_vkCmdUpdatePipelineIndirectBuffer(commandBuffer, pipelineBindPoint, pipeline);
+	assert(pfn_vkCmdUpdatePipelineIndirectBufferNV);
+	pfn_vkCmdUpdatePipelineIndirectBufferNV(commandBuffer, pipelineBindPoint, pipeline);
 }
 
 static PFN_vkGetPipelineIndirectDeviceAddressNV pfn_vkGetPipelineIndirectDeviceAddressNV;
@@ -7932,7 +7932,7 @@ void vgen_load_instance_procs(VkInstance instance)
 #endif // defined(VK_NV_device_generated_commands)
 #if defined(VK_NV_device_generated_commands_compute)
 	pfn_vkGetPipelineIndirectMemoryRequirementsNV = (PFN_vkGetPipelineIndirectMemoryRequirementsNV)vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectMemoryRequirementsNV");
-	pfn_vkCmdUpdatePipelineIndirectBuffer = (PFN_vkCmdUpdatePipelineIndirectBuffer)vkGetInstanceProcAddr(instance, "vkCmdUpdatePipelineIndirectBuffer");
+	pfn_vkCmdUpdatePipelineIndirectBufferNV = (PFN_vkCmdUpdatePipelineIndirectBufferNV)vkGetInstanceProcAddr(instance, "vkCmdUpdatePipelineIndirectBufferNV");
 	pfn_vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectDeviceAddressNV");
 #endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_capabilities)
@@ -8797,7 +8797,7 @@ void vgen_load_device_procs(VkDevice device)
 #endif // defined(VK_NV_device_generated_commands)
 #if defined(VK_NV_device_generated_commands_compute)
 	pfn_vkGetPipelineIndirectMemoryRequirementsNV = (PFN_vkGetPipelineIndirectMemoryRequirementsNV)vkGetDeviceProcAddr(device, "vkGetPipelineIndirectMemoryRequirementsNV");
-	pfn_vkCmdUpdatePipelineIndirectBuffer = (PFN_vkCmdUpdatePipelineIndirectBuffer)vkGetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBuffer");
+	pfn_vkCmdUpdatePipelineIndirectBufferNV = (PFN_vkCmdUpdatePipelineIndirectBufferNV)vkGetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBufferNV");
 	pfn_vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vkGetDeviceProcAddr(device, "vkGetPipelineIndirectDeviceAddressNV");
 #endif // defined(VK_NV_device_generated_commands_compute)
 #if defined(VK_NV_external_memory_rdma)
