@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 259 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 260 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -313,6 +313,15 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetFaultData = (PFN_vkGetFaultData)vk->vkGetInstanceProcAddr(instance, "vkGetFaultData");
 
 #endif // defined(VKSC_VERSION_1_0)
+#if defined(VK_AMDX_shader_enqueue)
+	vk->vkGetExecutionGraphPipelineScratchSizeAMDX = (PFN_vkGetExecutionGraphPipelineScratchSizeAMDX)vk->vkGetInstanceProcAddr(instance, "vkGetExecutionGraphPipelineScratchSizeAMDX");
+	vk->vkCreateExecutionGraphPipelinesAMDX = (PFN_vkCreateExecutionGraphPipelinesAMDX)vk->vkGetInstanceProcAddr(instance, "vkCreateExecutionGraphPipelinesAMDX");
+	vk->vkGetExecutionGraphPipelineNodeIndexAMDX = (PFN_vkGetExecutionGraphPipelineNodeIndexAMDX)vk->vkGetInstanceProcAddr(instance, "vkGetExecutionGraphPipelineNodeIndexAMDX");
+	vk->vkCmdInitializeGraphScratchMemoryAMDX = (PFN_vkCmdInitializeGraphScratchMemoryAMDX)vk->vkGetInstanceProcAddr(instance, "vkCmdInitializeGraphScratchMemoryAMDX");
+	vk->vkCmdDispatchGraphAMDX = (PFN_vkCmdDispatchGraphAMDX)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphAMDX");
+	vk->vkCmdDispatchGraphIndirectAMDX = (PFN_vkCmdDispatchGraphIndirectAMDX)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphIndirectAMDX");
+	vk->vkCmdDispatchGraphIndirectCountAMDX = (PFN_vkCmdDispatchGraphIndirectCountAMDX)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphIndirectCountAMDX");
+#endif // defined(VK_AMDX_shader_enqueue)
 #if defined(VK_AMD_buffer_marker)
 	vk->vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
@@ -637,12 +646,12 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_acceleration_structure)
 	vk->vkGetAccelerationStructureBuildSizesKHR = (PFN_vkGetAccelerationStructureBuildSizesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetAccelerationStructureBuildSizesKHR");
 	vk->vkCmdBuildAccelerationStructuresIndirectKHR = (PFN_vkCmdBuildAccelerationStructuresIndirectKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBuildAccelerationStructuresIndirectKHR");
+	vk->vkCopyAccelerationStructureToMemoryKHR = (PFN_vkCopyAccelerationStructureToMemoryKHR)vk->vkGetInstanceProcAddr(instance, "vkCopyAccelerationStructureToMemoryKHR");
 	vk->vkCreateAccelerationStructureKHR = (PFN_vkCreateAccelerationStructureKHR)vk->vkGetInstanceProcAddr(instance, "vkCreateAccelerationStructureKHR");
 	vk->vkDestroyAccelerationStructureKHR = (PFN_vkDestroyAccelerationStructureKHR)vk->vkGetInstanceProcAddr(instance, "vkDestroyAccelerationStructureKHR");
 	vk->vkCmdBuildAccelerationStructuresKHR = (PFN_vkCmdBuildAccelerationStructuresKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBuildAccelerationStructuresKHR");
 	vk->vkBuildAccelerationStructuresKHR = (PFN_vkBuildAccelerationStructuresKHR)vk->vkGetInstanceProcAddr(instance, "vkBuildAccelerationStructuresKHR");
 	vk->vkCopyAccelerationStructureKHR = (PFN_vkCopyAccelerationStructureKHR)vk->vkGetInstanceProcAddr(instance, "vkCopyAccelerationStructureKHR");
-	vk->vkCopyAccelerationStructureToMemoryKHR = (PFN_vkCopyAccelerationStructureToMemoryKHR)vk->vkGetInstanceProcAddr(instance, "vkCopyAccelerationStructureToMemoryKHR");
 	vk->vkCopyMemoryToAccelerationStructureKHR = (PFN_vkCopyMemoryToAccelerationStructureKHR)vk->vkGetInstanceProcAddr(instance, "vkCopyMemoryToAccelerationStructureKHR");
 	vk->vkWriteAccelerationStructuresPropertiesKHR = (PFN_vkWriteAccelerationStructuresPropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkWriteAccelerationStructuresPropertiesKHR");
 	vk->vkCmdCopyAccelerationStructureKHR = (PFN_vkCmdCopyAccelerationStructureKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyAccelerationStructureKHR");
@@ -802,6 +811,12 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceBufferMemoryRequirementsKHR");
 	vk->vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceImageSparseMemoryRequirementsKHR");
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_maintenance5)
+	vk->vkCmdBindIndexBuffer2KHR = (PFN_vkCmdBindIndexBuffer2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBindIndexBuffer2KHR");
+	vk->vkGetDeviceImageSubresourceLayoutKHR = (PFN_vkGetDeviceImageSubresourceLayoutKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceImageSubresourceLayoutKHR");
+	vk->vkGetRenderingAreaGranularityKHR = (PFN_vkGetRenderingAreaGranularityKHR)vk->vkGetInstanceProcAddr(instance, "vkGetRenderingAreaGranularityKHR");
+	vk->vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vk->vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2KHR");
+#endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_map_memory2)
 	vk->vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vk->vkGetInstanceProcAddr(instance, "vkUnmapMemory2KHR");
 	vk->vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vk->vkGetInstanceProcAddr(instance, "vkMapMemory2KHR");
@@ -1318,6 +1333,15 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetFaultData = (PFN_vkGetFaultData)vk->vkGetDeviceProcAddr(device, "vkGetFaultData");
 
 #endif // defined(VKSC_VERSION_1_0)
+#if defined(VK_AMDX_shader_enqueue)
+	vk->vkGetExecutionGraphPipelineScratchSizeAMDX = (PFN_vkGetExecutionGraphPipelineScratchSizeAMDX)vk->vkGetDeviceProcAddr(device, "vkGetExecutionGraphPipelineScratchSizeAMDX");
+	vk->vkCreateExecutionGraphPipelinesAMDX = (PFN_vkCreateExecutionGraphPipelinesAMDX)vk->vkGetDeviceProcAddr(device, "vkCreateExecutionGraphPipelinesAMDX");
+	vk->vkGetExecutionGraphPipelineNodeIndexAMDX = (PFN_vkGetExecutionGraphPipelineNodeIndexAMDX)vk->vkGetDeviceProcAddr(device, "vkGetExecutionGraphPipelineNodeIndexAMDX");
+	vk->vkCmdInitializeGraphScratchMemoryAMDX = (PFN_vkCmdInitializeGraphScratchMemoryAMDX)vk->vkGetDeviceProcAddr(device, "vkCmdInitializeGraphScratchMemoryAMDX");
+	vk->vkCmdDispatchGraphAMDX = (PFN_vkCmdDispatchGraphAMDX)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchGraphAMDX");
+	vk->vkCmdDispatchGraphIndirectAMDX = (PFN_vkCmdDispatchGraphIndirectAMDX)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchGraphIndirectAMDX");
+	vk->vkCmdDispatchGraphIndirectCountAMDX = (PFN_vkCmdDispatchGraphIndirectCountAMDX)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchGraphIndirectCountAMDX");
+#endif // defined(VK_AMDX_shader_enqueue)
 #if defined(VK_AMD_buffer_marker)
 	vk->vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
@@ -1598,12 +1622,12 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_acceleration_structure)
 	vk->vkGetAccelerationStructureBuildSizesKHR = (PFN_vkGetAccelerationStructureBuildSizesKHR)vk->vkGetDeviceProcAddr(device, "vkGetAccelerationStructureBuildSizesKHR");
 	vk->vkCmdBuildAccelerationStructuresIndirectKHR = (PFN_vkCmdBuildAccelerationStructuresIndirectKHR)vk->vkGetDeviceProcAddr(device, "vkCmdBuildAccelerationStructuresIndirectKHR");
+	vk->vkCopyAccelerationStructureToMemoryKHR = (PFN_vkCopyAccelerationStructureToMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkCopyAccelerationStructureToMemoryKHR");
 	vk->vkCreateAccelerationStructureKHR = (PFN_vkCreateAccelerationStructureKHR)vk->vkGetDeviceProcAddr(device, "vkCreateAccelerationStructureKHR");
 	vk->vkDestroyAccelerationStructureKHR = (PFN_vkDestroyAccelerationStructureKHR)vk->vkGetDeviceProcAddr(device, "vkDestroyAccelerationStructureKHR");
 	vk->vkCmdBuildAccelerationStructuresKHR = (PFN_vkCmdBuildAccelerationStructuresKHR)vk->vkGetDeviceProcAddr(device, "vkCmdBuildAccelerationStructuresKHR");
 	vk->vkBuildAccelerationStructuresKHR = (PFN_vkBuildAccelerationStructuresKHR)vk->vkGetDeviceProcAddr(device, "vkBuildAccelerationStructuresKHR");
 	vk->vkCopyAccelerationStructureKHR = (PFN_vkCopyAccelerationStructureKHR)vk->vkGetDeviceProcAddr(device, "vkCopyAccelerationStructureKHR");
-	vk->vkCopyAccelerationStructureToMemoryKHR = (PFN_vkCopyAccelerationStructureToMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkCopyAccelerationStructureToMemoryKHR");
 	vk->vkCopyMemoryToAccelerationStructureKHR = (PFN_vkCopyMemoryToAccelerationStructureKHR)vk->vkGetDeviceProcAddr(device, "vkCopyMemoryToAccelerationStructureKHR");
 	vk->vkWriteAccelerationStructuresPropertiesKHR = (PFN_vkWriteAccelerationStructuresPropertiesKHR)vk->vkGetDeviceProcAddr(device, "vkWriteAccelerationStructuresPropertiesKHR");
 	vk->vkCmdCopyAccelerationStructureKHR = (PFN_vkCmdCopyAccelerationStructureKHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyAccelerationStructureKHR");
@@ -1715,6 +1739,12 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceBufferMemoryRequirementsKHR");
 	vk->vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceImageSparseMemoryRequirementsKHR");
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_maintenance5)
+	vk->vkCmdBindIndexBuffer2KHR = (PFN_vkCmdBindIndexBuffer2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdBindIndexBuffer2KHR");
+	vk->vkGetDeviceImageSubresourceLayoutKHR = (PFN_vkGetDeviceImageSubresourceLayoutKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceImageSubresourceLayoutKHR");
+	vk->vkGetRenderingAreaGranularityKHR = (PFN_vkGetRenderingAreaGranularityKHR)vk->vkGetDeviceProcAddr(device, "vkGetRenderingAreaGranularityKHR");
+	vk->vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vk->vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2KHR");
+#endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_map_memory2)
 	vk->vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vk->vkGetDeviceProcAddr(device, "vkUnmapMemory2KHR");
 	vk->vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vk->vkGetDeviceProcAddr(device, "vkMapMemory2KHR");
@@ -3565,6 +3595,57 @@ VKAPI_ATTR VkResult vkGetFaultData(VkDevice device, VkFaultQueryBehavior faultQu
 }
 
 #endif // defined(VKSC_VERSION_1_0)
+#if defined(VK_AMDX_shader_enqueue)
+
+static PFN_vkGetExecutionGraphPipelineScratchSizeAMDX pfn_vkGetExecutionGraphPipelineScratchSizeAMDX;
+VKAPI_ATTR VkResult vkGetExecutionGraphPipelineScratchSizeAMDX(VkDevice device, VkPipeline executionGraph, VkExecutionGraphPipelineScratchSizeAMDX * pSizeInfo)
+{
+	assert(pfn_vkGetExecutionGraphPipelineScratchSizeAMDX);
+	return pfn_vkGetExecutionGraphPipelineScratchSizeAMDX(device, executionGraph, pSizeInfo);
+}
+
+static PFN_vkCreateExecutionGraphPipelinesAMDX pfn_vkCreateExecutionGraphPipelinesAMDX;
+VKAPI_ATTR VkResult vkCreateExecutionGraphPipelinesAMDX(VkDevice device, VkPipelineCache pipelineCache, uint32_t createInfoCount, const VkExecutionGraphPipelineCreateInfoAMDX * pCreateInfos, const VkAllocationCallbacks * pAllocator, VkPipeline * pPipelines)
+{
+	assert(pfn_vkCreateExecutionGraphPipelinesAMDX);
+	return pfn_vkCreateExecutionGraphPipelinesAMDX(device, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+}
+
+static PFN_vkGetExecutionGraphPipelineNodeIndexAMDX pfn_vkGetExecutionGraphPipelineNodeIndexAMDX;
+VKAPI_ATTR VkResult vkGetExecutionGraphPipelineNodeIndexAMDX(VkDevice device, VkPipeline executionGraph, const VkPipelineShaderStageNodeCreateInfoAMDX * pNodeInfo, uint32_t * pNodeIndex)
+{
+	assert(pfn_vkGetExecutionGraphPipelineNodeIndexAMDX);
+	return pfn_vkGetExecutionGraphPipelineNodeIndexAMDX(device, executionGraph, pNodeInfo, pNodeIndex);
+}
+
+static PFN_vkCmdInitializeGraphScratchMemoryAMDX pfn_vkCmdInitializeGraphScratchMemoryAMDX;
+VKAPI_ATTR void vkCmdInitializeGraphScratchMemoryAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch)
+{
+	assert(pfn_vkCmdInitializeGraphScratchMemoryAMDX);
+	pfn_vkCmdInitializeGraphScratchMemoryAMDX(commandBuffer, scratch);
+}
+
+static PFN_vkCmdDispatchGraphAMDX pfn_vkCmdDispatchGraphAMDX;
+VKAPI_ATTR void vkCmdDispatchGraphAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, const VkDispatchGraphCountInfoAMDX * pCountInfo)
+{
+	assert(pfn_vkCmdDispatchGraphAMDX);
+	pfn_vkCmdDispatchGraphAMDX(commandBuffer, scratch, pCountInfo);
+}
+
+static PFN_vkCmdDispatchGraphIndirectAMDX pfn_vkCmdDispatchGraphIndirectAMDX;
+VKAPI_ATTR void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, const VkDispatchGraphCountInfoAMDX * pCountInfo)
+{
+	assert(pfn_vkCmdDispatchGraphIndirectAMDX);
+	pfn_vkCmdDispatchGraphIndirectAMDX(commandBuffer, scratch, pCountInfo);
+}
+
+static PFN_vkCmdDispatchGraphIndirectCountAMDX pfn_vkCmdDispatchGraphIndirectCountAMDX;
+VKAPI_ATTR void vkCmdDispatchGraphIndirectCountAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, VkDeviceAddress countInfo)
+{
+	assert(pfn_vkCmdDispatchGraphIndirectCountAMDX);
+	pfn_vkCmdDispatchGraphIndirectCountAMDX(commandBuffer, scratch, countInfo);
+}
+#endif // defined(VK_AMDX_shader_enqueue)
 #if defined(VK_AMD_buffer_marker)
 
 static PFN_vkCmdWriteBufferMarkerAMD pfn_vkCmdWriteBufferMarkerAMD;
@@ -4470,7 +4551,7 @@ VKAPI_ATTR VkResult vkTransitionImageLayoutEXT(VkDevice device, uint32_t transit
 #if defined(VK_EXT_host_image_copy) || defined(VK_EXT_image_compression_control)
 
 static PFN_vkGetImageSubresourceLayout2EXT pfn_vkGetImageSubresourceLayout2EXT;
-VKAPI_ATTR void vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, const VkImageSubresource2EXT * pSubresource, VkSubresourceLayout2EXT * pLayout)
+VKAPI_ATTR void vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, const VkImageSubresource2KHR * pSubresource, VkSubresourceLayout2KHR * pLayout)
 {
 	assert(pfn_vkGetImageSubresourceLayout2EXT);
 	pfn_vkGetImageSubresourceLayout2EXT(device, image, pSubresource, pLayout);
@@ -5096,6 +5177,13 @@ VKAPI_ATTR void vkCmdBuildAccelerationStructuresIndirectKHR(VkCommandBuffer comm
 	pfn_vkCmdBuildAccelerationStructuresIndirectKHR(commandBuffer, infoCount, pInfos, pIndirectDeviceAddresses, pIndirectStrides, ppMaxPrimitiveCounts);
 }
 
+static PFN_vkCopyAccelerationStructureToMemoryKHR pfn_vkCopyAccelerationStructureToMemoryKHR;
+VKAPI_ATTR VkResult vkCopyAccelerationStructureToMemoryKHR(VkDevice device, VkDeferredOperationKHR deferredOperation, const VkCopyAccelerationStructureToMemoryInfoKHR * pInfo)
+{
+	assert(pfn_vkCopyAccelerationStructureToMemoryKHR);
+	return pfn_vkCopyAccelerationStructureToMemoryKHR(device, deferredOperation, pInfo);
+}
+
 static PFN_vkCreateAccelerationStructureKHR pfn_vkCreateAccelerationStructureKHR;
 VKAPI_ATTR VkResult vkCreateAccelerationStructureKHR(VkDevice device, const VkAccelerationStructureCreateInfoKHR * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkAccelerationStructureKHR * pAccelerationStructure)
 {
@@ -5129,13 +5217,6 @@ VKAPI_ATTR VkResult vkCopyAccelerationStructureKHR(VkDevice device, VkDeferredOp
 {
 	assert(pfn_vkCopyAccelerationStructureKHR);
 	return pfn_vkCopyAccelerationStructureKHR(device, deferredOperation, pInfo);
-}
-
-static PFN_vkCopyAccelerationStructureToMemoryKHR pfn_vkCopyAccelerationStructureToMemoryKHR;
-VKAPI_ATTR VkResult vkCopyAccelerationStructureToMemoryKHR(VkDevice device, VkDeferredOperationKHR deferredOperation, const VkCopyAccelerationStructureToMemoryInfoKHR * pInfo)
-{
-	assert(pfn_vkCopyAccelerationStructureToMemoryKHR);
-	return pfn_vkCopyAccelerationStructureToMemoryKHR(device, deferredOperation, pInfo);
 }
 
 static PFN_vkCopyMemoryToAccelerationStructureKHR pfn_vkCopyMemoryToAccelerationStructureKHR;
@@ -5848,6 +5929,36 @@ VKAPI_ATTR void vkGetDeviceImageSparseMemoryRequirementsKHR(VkDevice device, con
 	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR(device, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
 }
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_maintenance5)
+
+static PFN_vkCmdBindIndexBuffer2KHR pfn_vkCmdBindIndexBuffer2KHR;
+VKAPI_ATTR void vkCmdBindIndexBuffer2KHR(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkDeviceSize size, VkIndexType indexType)
+{
+	assert(pfn_vkCmdBindIndexBuffer2KHR);
+	pfn_vkCmdBindIndexBuffer2KHR(commandBuffer, buffer, offset, size, indexType);
+}
+
+static PFN_vkGetDeviceImageSubresourceLayoutKHR pfn_vkGetDeviceImageSubresourceLayoutKHR;
+VKAPI_ATTR void vkGetDeviceImageSubresourceLayoutKHR(VkDevice device, const VkDeviceImageSubresourceInfoKHR * pInfo, VkSubresourceLayout2KHR * pLayout)
+{
+	assert(pfn_vkGetDeviceImageSubresourceLayoutKHR);
+	pfn_vkGetDeviceImageSubresourceLayoutKHR(device, pInfo, pLayout);
+}
+
+static PFN_vkGetRenderingAreaGranularityKHR pfn_vkGetRenderingAreaGranularityKHR;
+VKAPI_ATTR void vkGetRenderingAreaGranularityKHR(VkDevice device, const VkRenderingAreaInfoKHR * pRenderingAreaInfo, VkExtent2D * pGranularity)
+{
+	assert(pfn_vkGetRenderingAreaGranularityKHR);
+	pfn_vkGetRenderingAreaGranularityKHR(device, pRenderingAreaInfo, pGranularity);
+}
+
+static PFN_vkGetImageSubresourceLayout2KHR pfn_vkGetImageSubresourceLayout2KHR;
+VKAPI_ATTR void vkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, const VkImageSubresource2KHR * pSubresource, VkSubresourceLayout2KHR * pLayout)
+{
+	assert(pfn_vkGetImageSubresourceLayout2KHR);
+	pfn_vkGetImageSubresourceLayout2KHR(device, image, pSubresource, pLayout);
+}
+#endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_map_memory2)
 
 static PFN_vkUnmapMemory2KHR pfn_vkUnmapMemory2KHR;
@@ -7281,6 +7392,15 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetFaultData = (PFN_vkGetFaultData)vkGetInstanceProcAddr(instance, "vkGetFaultData");
 
 #endif // defined(VKSC_VERSION_1_0)
+#if defined(VK_AMDX_shader_enqueue)
+	pfn_vkGetExecutionGraphPipelineScratchSizeAMDX = (PFN_vkGetExecutionGraphPipelineScratchSizeAMDX)vkGetInstanceProcAddr(instance, "vkGetExecutionGraphPipelineScratchSizeAMDX");
+	pfn_vkCreateExecutionGraphPipelinesAMDX = (PFN_vkCreateExecutionGraphPipelinesAMDX)vkGetInstanceProcAddr(instance, "vkCreateExecutionGraphPipelinesAMDX");
+	pfn_vkGetExecutionGraphPipelineNodeIndexAMDX = (PFN_vkGetExecutionGraphPipelineNodeIndexAMDX)vkGetInstanceProcAddr(instance, "vkGetExecutionGraphPipelineNodeIndexAMDX");
+	pfn_vkCmdInitializeGraphScratchMemoryAMDX = (PFN_vkCmdInitializeGraphScratchMemoryAMDX)vkGetInstanceProcAddr(instance, "vkCmdInitializeGraphScratchMemoryAMDX");
+	pfn_vkCmdDispatchGraphAMDX = (PFN_vkCmdDispatchGraphAMDX)vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphAMDX");
+	pfn_vkCmdDispatchGraphIndirectAMDX = (PFN_vkCmdDispatchGraphIndirectAMDX)vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphIndirectAMDX");
+	pfn_vkCmdDispatchGraphIndirectCountAMDX = (PFN_vkCmdDispatchGraphIndirectCountAMDX)vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphIndirectCountAMDX");
+#endif // defined(VK_AMDX_shader_enqueue)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
@@ -7605,12 +7725,12 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_KHR_acceleration_structure)
 	pfn_vkGetAccelerationStructureBuildSizesKHR = (PFN_vkGetAccelerationStructureBuildSizesKHR)vkGetInstanceProcAddr(instance, "vkGetAccelerationStructureBuildSizesKHR");
 	pfn_vkCmdBuildAccelerationStructuresIndirectKHR = (PFN_vkCmdBuildAccelerationStructuresIndirectKHR)vkGetInstanceProcAddr(instance, "vkCmdBuildAccelerationStructuresIndirectKHR");
+	pfn_vkCopyAccelerationStructureToMemoryKHR = (PFN_vkCopyAccelerationStructureToMemoryKHR)vkGetInstanceProcAddr(instance, "vkCopyAccelerationStructureToMemoryKHR");
 	pfn_vkCreateAccelerationStructureKHR = (PFN_vkCreateAccelerationStructureKHR)vkGetInstanceProcAddr(instance, "vkCreateAccelerationStructureKHR");
 	pfn_vkDestroyAccelerationStructureKHR = (PFN_vkDestroyAccelerationStructureKHR)vkGetInstanceProcAddr(instance, "vkDestroyAccelerationStructureKHR");
 	pfn_vkCmdBuildAccelerationStructuresKHR = (PFN_vkCmdBuildAccelerationStructuresKHR)vkGetInstanceProcAddr(instance, "vkCmdBuildAccelerationStructuresKHR");
 	pfn_vkBuildAccelerationStructuresKHR = (PFN_vkBuildAccelerationStructuresKHR)vkGetInstanceProcAddr(instance, "vkBuildAccelerationStructuresKHR");
 	pfn_vkCopyAccelerationStructureKHR = (PFN_vkCopyAccelerationStructureKHR)vkGetInstanceProcAddr(instance, "vkCopyAccelerationStructureKHR");
-	pfn_vkCopyAccelerationStructureToMemoryKHR = (PFN_vkCopyAccelerationStructureToMemoryKHR)vkGetInstanceProcAddr(instance, "vkCopyAccelerationStructureToMemoryKHR");
 	pfn_vkCopyMemoryToAccelerationStructureKHR = (PFN_vkCopyMemoryToAccelerationStructureKHR)vkGetInstanceProcAddr(instance, "vkCopyMemoryToAccelerationStructureKHR");
 	pfn_vkWriteAccelerationStructuresPropertiesKHR = (PFN_vkWriteAccelerationStructuresPropertiesKHR)vkGetInstanceProcAddr(instance, "vkWriteAccelerationStructuresPropertiesKHR");
 	pfn_vkCmdCopyAccelerationStructureKHR = (PFN_vkCmdCopyAccelerationStructureKHR)vkGetInstanceProcAddr(instance, "vkCmdCopyAccelerationStructureKHR");
@@ -7770,6 +7890,12 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceBufferMemoryRequirementsKHR");
 	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceImageSparseMemoryRequirementsKHR");
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_maintenance5)
+	pfn_vkCmdBindIndexBuffer2KHR = (PFN_vkCmdBindIndexBuffer2KHR)vkGetInstanceProcAddr(instance, "vkCmdBindIndexBuffer2KHR");
+	pfn_vkGetDeviceImageSubresourceLayoutKHR = (PFN_vkGetDeviceImageSubresourceLayoutKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceImageSubresourceLayoutKHR");
+	pfn_vkGetRenderingAreaGranularityKHR = (PFN_vkGetRenderingAreaGranularityKHR)vkGetInstanceProcAddr(instance, "vkGetRenderingAreaGranularityKHR");
+	pfn_vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2KHR");
+#endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_map_memory2)
 	pfn_vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vkGetInstanceProcAddr(instance, "vkUnmapMemory2KHR");
 	pfn_vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vkGetInstanceProcAddr(instance, "vkMapMemory2KHR");
@@ -8286,6 +8412,15 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetFaultData = (PFN_vkGetFaultData)vkGetDeviceProcAddr(device, "vkGetFaultData");
 
 #endif // defined(VKSC_VERSION_1_0)
+#if defined(VK_AMDX_shader_enqueue)
+	pfn_vkGetExecutionGraphPipelineScratchSizeAMDX = (PFN_vkGetExecutionGraphPipelineScratchSizeAMDX)vkGetDeviceProcAddr(device, "vkGetExecutionGraphPipelineScratchSizeAMDX");
+	pfn_vkCreateExecutionGraphPipelinesAMDX = (PFN_vkCreateExecutionGraphPipelinesAMDX)vkGetDeviceProcAddr(device, "vkCreateExecutionGraphPipelinesAMDX");
+	pfn_vkGetExecutionGraphPipelineNodeIndexAMDX = (PFN_vkGetExecutionGraphPipelineNodeIndexAMDX)vkGetDeviceProcAddr(device, "vkGetExecutionGraphPipelineNodeIndexAMDX");
+	pfn_vkCmdInitializeGraphScratchMemoryAMDX = (PFN_vkCmdInitializeGraphScratchMemoryAMDX)vkGetDeviceProcAddr(device, "vkCmdInitializeGraphScratchMemoryAMDX");
+	pfn_vkCmdDispatchGraphAMDX = (PFN_vkCmdDispatchGraphAMDX)vkGetDeviceProcAddr(device, "vkCmdDispatchGraphAMDX");
+	pfn_vkCmdDispatchGraphIndirectAMDX = (PFN_vkCmdDispatchGraphIndirectAMDX)vkGetDeviceProcAddr(device, "vkCmdDispatchGraphIndirectAMDX");
+	pfn_vkCmdDispatchGraphIndirectCountAMDX = (PFN_vkCmdDispatchGraphIndirectCountAMDX)vkGetDeviceProcAddr(device, "vkCmdDispatchGraphIndirectCountAMDX");
+#endif // defined(VK_AMDX_shader_enqueue)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
@@ -8566,12 +8701,12 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_KHR_acceleration_structure)
 	pfn_vkGetAccelerationStructureBuildSizesKHR = (PFN_vkGetAccelerationStructureBuildSizesKHR)vkGetDeviceProcAddr(device, "vkGetAccelerationStructureBuildSizesKHR");
 	pfn_vkCmdBuildAccelerationStructuresIndirectKHR = (PFN_vkCmdBuildAccelerationStructuresIndirectKHR)vkGetDeviceProcAddr(device, "vkCmdBuildAccelerationStructuresIndirectKHR");
+	pfn_vkCopyAccelerationStructureToMemoryKHR = (PFN_vkCopyAccelerationStructureToMemoryKHR)vkGetDeviceProcAddr(device, "vkCopyAccelerationStructureToMemoryKHR");
 	pfn_vkCreateAccelerationStructureKHR = (PFN_vkCreateAccelerationStructureKHR)vkGetDeviceProcAddr(device, "vkCreateAccelerationStructureKHR");
 	pfn_vkDestroyAccelerationStructureKHR = (PFN_vkDestroyAccelerationStructureKHR)vkGetDeviceProcAddr(device, "vkDestroyAccelerationStructureKHR");
 	pfn_vkCmdBuildAccelerationStructuresKHR = (PFN_vkCmdBuildAccelerationStructuresKHR)vkGetDeviceProcAddr(device, "vkCmdBuildAccelerationStructuresKHR");
 	pfn_vkBuildAccelerationStructuresKHR = (PFN_vkBuildAccelerationStructuresKHR)vkGetDeviceProcAddr(device, "vkBuildAccelerationStructuresKHR");
 	pfn_vkCopyAccelerationStructureKHR = (PFN_vkCopyAccelerationStructureKHR)vkGetDeviceProcAddr(device, "vkCopyAccelerationStructureKHR");
-	pfn_vkCopyAccelerationStructureToMemoryKHR = (PFN_vkCopyAccelerationStructureToMemoryKHR)vkGetDeviceProcAddr(device, "vkCopyAccelerationStructureToMemoryKHR");
 	pfn_vkCopyMemoryToAccelerationStructureKHR = (PFN_vkCopyMemoryToAccelerationStructureKHR)vkGetDeviceProcAddr(device, "vkCopyMemoryToAccelerationStructureKHR");
 	pfn_vkWriteAccelerationStructuresPropertiesKHR = (PFN_vkWriteAccelerationStructuresPropertiesKHR)vkGetDeviceProcAddr(device, "vkWriteAccelerationStructuresPropertiesKHR");
 	pfn_vkCmdCopyAccelerationStructureKHR = (PFN_vkCmdCopyAccelerationStructureKHR)vkGetDeviceProcAddr(device, "vkCmdCopyAccelerationStructureKHR");
@@ -8683,6 +8818,12 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetDeviceBufferMemoryRequirementsKHR = (PFN_vkGetDeviceBufferMemoryRequirementsKHR)vkGetDeviceProcAddr(device, "vkGetDeviceBufferMemoryRequirementsKHR");
 	pfn_vkGetDeviceImageSparseMemoryRequirementsKHR = (PFN_vkGetDeviceImageSparseMemoryRequirementsKHR)vkGetDeviceProcAddr(device, "vkGetDeviceImageSparseMemoryRequirementsKHR");
 #endif // defined(VK_KHR_maintenance4)
+#if defined(VK_KHR_maintenance5)
+	pfn_vkCmdBindIndexBuffer2KHR = (PFN_vkCmdBindIndexBuffer2KHR)vkGetDeviceProcAddr(device, "vkCmdBindIndexBuffer2KHR");
+	pfn_vkGetDeviceImageSubresourceLayoutKHR = (PFN_vkGetDeviceImageSubresourceLayoutKHR)vkGetDeviceProcAddr(device, "vkGetDeviceImageSubresourceLayoutKHR");
+	pfn_vkGetRenderingAreaGranularityKHR = (PFN_vkGetRenderingAreaGranularityKHR)vkGetDeviceProcAddr(device, "vkGetRenderingAreaGranularityKHR");
+	pfn_vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2KHR");
+#endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_map_memory2)
 	pfn_vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vkGetDeviceProcAddr(device, "vkUnmapMemory2KHR");
 	pfn_vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vkGetDeviceProcAddr(device, "vkMapMemory2KHR");
