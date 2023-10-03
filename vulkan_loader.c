@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 265 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 266 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -1014,6 +1014,13 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency2)
+	vk->vkLatencySleepNV = (PFN_vkLatencySleepNV)vk->vkGetInstanceProcAddr(instance, "vkLatencySleepNV");
+	vk->vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vk->vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandNV");
+	vk->vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vk->vkGetInstanceProcAddr(instance, "vkSetLatencySleepModeNV");
+	vk->vkSetLatencyMarkerNV = (PFN_vkSetLatencyMarkerNV)vk->vkGetInstanceProcAddr(instance, "vkSetLatencyMarkerNV");
+	vk->vkGetLatencyTimingsNV = (PFN_vkGetLatencyTimingsNV)vk->vkGetInstanceProcAddr(instance, "vkGetLatencyTimingsNV");
+#endif // defined(VK_NV_low_latency2)
 #if defined(VK_NV_memory_decompression)
 	vk->vkCmdDecompressMemoryNV = (PFN_vkCmdDecompressMemoryNV)vk->vkGetInstanceProcAddr(instance, "vkCmdDecompressMemoryNV");
 	vk->vkCmdDecompressMemoryIndirectCountNV = (PFN_vkCmdDecompressMemoryIndirectCountNV)vk->vkGetInstanceProcAddr(instance, "vkCmdDecompressMemoryIndirectCountNV");
@@ -1888,6 +1895,13 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency2)
+	vk->vkLatencySleepNV = (PFN_vkLatencySleepNV)vk->vkGetDeviceProcAddr(device, "vkLatencySleepNV");
+	vk->vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vk->vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandNV");
+	vk->vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vk->vkGetDeviceProcAddr(device, "vkSetLatencySleepModeNV");
+	vk->vkSetLatencyMarkerNV = (PFN_vkSetLatencyMarkerNV)vk->vkGetDeviceProcAddr(device, "vkSetLatencyMarkerNV");
+	vk->vkGetLatencyTimingsNV = (PFN_vkGetLatencyTimingsNV)vk->vkGetDeviceProcAddr(device, "vkGetLatencyTimingsNV");
+#endif // defined(VK_NV_low_latency2)
 #if defined(VK_NV_memory_decompression)
 	vk->vkCmdDecompressMemoryNV = (PFN_vkCmdDecompressMemoryNV)vk->vkGetDeviceProcAddr(device, "vkCmdDecompressMemoryNV");
 	vk->vkCmdDecompressMemoryIndirectCountNV = (PFN_vkCmdDecompressMemoryIndirectCountNV)vk->vkGetDeviceProcAddr(device, "vkCmdDecompressMemoryIndirectCountNV");
@@ -6834,6 +6848,43 @@ VKAPI_ATTR void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer,
 	pfn_vkCmdSetFragmentShadingRateEnumNV(commandBuffer, shadingRate, combinerOps);
 }
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency2)
+
+static PFN_vkLatencySleepNV pfn_vkLatencySleepNV;
+VKAPI_ATTR VkResult vkLatencySleepNV(VkDevice device, VkSwapchainKHR swapchain, VkLatencySleepInfoNV * pSleepInfo)
+{
+	assert(pfn_vkLatencySleepNV);
+	return pfn_vkLatencySleepNV(device, swapchain, pSleepInfo);
+}
+
+static PFN_vkQueueNotifyOutOfBandNV pfn_vkQueueNotifyOutOfBandNV;
+VKAPI_ATTR void vkQueueNotifyOutOfBandNV(VkQueue queue, VkOutOfBandQueueTypeInfoNV pQueueTypeInfo)
+{
+	assert(pfn_vkQueueNotifyOutOfBandNV);
+	pfn_vkQueueNotifyOutOfBandNV(queue, pQueueTypeInfo);
+}
+
+static PFN_vkSetLatencySleepModeNV pfn_vkSetLatencySleepModeNV;
+VKAPI_ATTR VkResult vkSetLatencySleepModeNV(VkDevice device, VkSwapchainKHR swapchain, VkLatencySleepModeInfoNV * pSleepModeInfo)
+{
+	assert(pfn_vkSetLatencySleepModeNV);
+	return pfn_vkSetLatencySleepModeNV(device, swapchain, pSleepModeInfo);
+}
+
+static PFN_vkSetLatencyMarkerNV pfn_vkSetLatencyMarkerNV;
+VKAPI_ATTR void vkSetLatencyMarkerNV(VkDevice device, VkSwapchainKHR swapchain, VkSetLatencyMarkerInfoNV * pLatencyMarkerInfo)
+{
+	assert(pfn_vkSetLatencyMarkerNV);
+	pfn_vkSetLatencyMarkerNV(device, swapchain, pLatencyMarkerInfo);
+}
+
+static PFN_vkGetLatencyTimingsNV pfn_vkGetLatencyTimingsNV;
+VKAPI_ATTR void vkGetLatencyTimingsNV(VkDevice device, VkSwapchainKHR swapchain, uint32_t * pTimingCount, VkGetLatencyMarkerInfoNV * pLatencyMarkerInfo)
+{
+	assert(pfn_vkGetLatencyTimingsNV);
+	pfn_vkGetLatencyTimingsNV(device, swapchain, pTimingCount, pLatencyMarkerInfo);
+}
+#endif // defined(VK_NV_low_latency2)
 #if defined(VK_NV_memory_decompression)
 
 static PFN_vkCmdDecompressMemoryNV pfn_vkCmdDecompressMemoryNV;
@@ -8093,6 +8144,13 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency2)
+	pfn_vkLatencySleepNV = (PFN_vkLatencySleepNV)vkGetInstanceProcAddr(instance, "vkLatencySleepNV");
+	pfn_vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandNV");
+	pfn_vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vkGetInstanceProcAddr(instance, "vkSetLatencySleepModeNV");
+	pfn_vkSetLatencyMarkerNV = (PFN_vkSetLatencyMarkerNV)vkGetInstanceProcAddr(instance, "vkSetLatencyMarkerNV");
+	pfn_vkGetLatencyTimingsNV = (PFN_vkGetLatencyTimingsNV)vkGetInstanceProcAddr(instance, "vkGetLatencyTimingsNV");
+#endif // defined(VK_NV_low_latency2)
 #if defined(VK_NV_memory_decompression)
 	pfn_vkCmdDecompressMemoryNV = (PFN_vkCmdDecompressMemoryNV)vkGetInstanceProcAddr(instance, "vkCmdDecompressMemoryNV");
 	pfn_vkCmdDecompressMemoryIndirectCountNV = (PFN_vkCmdDecompressMemoryIndirectCountNV)vkGetInstanceProcAddr(instance, "vkCmdDecompressMemoryIndirectCountNV");
@@ -8967,6 +9025,13 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency2)
+	pfn_vkLatencySleepNV = (PFN_vkLatencySleepNV)vkGetDeviceProcAddr(device, "vkLatencySleepNV");
+	pfn_vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandNV");
+	pfn_vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vkGetDeviceProcAddr(device, "vkSetLatencySleepModeNV");
+	pfn_vkSetLatencyMarkerNV = (PFN_vkSetLatencyMarkerNV)vkGetDeviceProcAddr(device, "vkSetLatencyMarkerNV");
+	pfn_vkGetLatencyTimingsNV = (PFN_vkGetLatencyTimingsNV)vkGetDeviceProcAddr(device, "vkGetLatencyTimingsNV");
+#endif // defined(VK_NV_low_latency2)
 #if defined(VK_NV_memory_decompression)
 	pfn_vkCmdDecompressMemoryNV = (PFN_vkCmdDecompressMemoryNV)vkGetDeviceProcAddr(device, "vkCmdDecompressMemoryNV");
 	pfn_vkCmdDecompressMemoryIndirectCountNV = (PFN_vkCmdDecompressMemoryIndirectCountNV)vkGetDeviceProcAddr(device, "vkCmdDecompressMemoryIndirectCountNV");
