@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 266 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 267 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -6851,28 +6851,28 @@ VKAPI_ATTR void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer,
 #if defined(VK_NV_low_latency2)
 
 static PFN_vkLatencySleepNV pfn_vkLatencySleepNV;
-VKAPI_ATTR VkResult vkLatencySleepNV(VkDevice device, VkSwapchainKHR swapchain, VkLatencySleepInfoNV * pSleepInfo)
+VKAPI_ATTR VkResult vkLatencySleepNV(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepInfoNV * pSleepInfo)
 {
 	assert(pfn_vkLatencySleepNV);
 	return pfn_vkLatencySleepNV(device, swapchain, pSleepInfo);
 }
 
 static PFN_vkQueueNotifyOutOfBandNV pfn_vkQueueNotifyOutOfBandNV;
-VKAPI_ATTR void vkQueueNotifyOutOfBandNV(VkQueue queue, VkOutOfBandQueueTypeInfoNV pQueueTypeInfo)
+VKAPI_ATTR void vkQueueNotifyOutOfBandNV(VkQueue queue, const VkOutOfBandQueueTypeInfoNV * pQueueTypeInfo)
 {
 	assert(pfn_vkQueueNotifyOutOfBandNV);
 	pfn_vkQueueNotifyOutOfBandNV(queue, pQueueTypeInfo);
 }
 
 static PFN_vkSetLatencySleepModeNV pfn_vkSetLatencySleepModeNV;
-VKAPI_ATTR VkResult vkSetLatencySleepModeNV(VkDevice device, VkSwapchainKHR swapchain, VkLatencySleepModeInfoNV * pSleepModeInfo)
+VKAPI_ATTR VkResult vkSetLatencySleepModeNV(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepModeInfoNV * pSleepModeInfo)
 {
 	assert(pfn_vkSetLatencySleepModeNV);
 	return pfn_vkSetLatencySleepModeNV(device, swapchain, pSleepModeInfo);
 }
 
 static PFN_vkSetLatencyMarkerNV pfn_vkSetLatencyMarkerNV;
-VKAPI_ATTR void vkSetLatencyMarkerNV(VkDevice device, VkSwapchainKHR swapchain, VkSetLatencyMarkerInfoNV * pLatencyMarkerInfo)
+VKAPI_ATTR void vkSetLatencyMarkerNV(VkDevice device, VkSwapchainKHR swapchain, const VkSetLatencyMarkerInfoNV * pLatencyMarkerInfo)
 {
 	assert(pfn_vkSetLatencyMarkerNV);
 	pfn_vkSetLatencyMarkerNV(device, swapchain, pLatencyMarkerInfo);
