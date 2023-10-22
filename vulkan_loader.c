@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 268 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 269 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -396,13 +396,13 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	vk->vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBuffersEXT");
 	vk->vkCmdSetDescriptorBufferOffsetsEXT = (PFN_vkCmdSetDescriptorBufferOffsetsEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDescriptorBufferOffsetsEXT");
+	vk->vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 	vk->vkGetDescriptorSetLayoutSizeEXT = (PFN_vkGetDescriptorSetLayoutSizeEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutSizeEXT");
 	vk->vkGetDescriptorSetLayoutBindingOffsetEXT = (PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutBindingOffsetEXT");
 	vk->vkGetDescriptorEXT = (PFN_vkGetDescriptorEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorEXT");
 	vk->vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
 	vk->vkGetBufferOpaqueCaptureDescriptorDataEXT = (PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
 	vk->vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
-	vk->vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 	vk->vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
 #endif // defined(VK_EXT_descriptor_buffer)
 #if defined(VK_EXT_device_fault)
@@ -965,6 +965,14 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_coverage_reduction_mode)
 	vk->vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
 #endif // defined(VK_NV_coverage_reduction_mode)
+#if defined(VK_NV_cuda_kernel_launch)
+	vk->vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vk->vkGetInstanceProcAddr(instance, "vkCreateCudaFunctionNV");
+	vk->vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vk->vkGetInstanceProcAddr(instance, "vkCreateCudaModuleNV");
+	vk->vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vk->vkGetInstanceProcAddr(instance, "vkGetCudaModuleCacheNV");
+	vk->vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyCudaModuleNV");
+	vk->vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyCudaFunctionNV");
+	vk->vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vk->vkGetInstanceProcAddr(instance, "vkCmdCudaLaunchKernelNV");
+#endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	vk->vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointDataNV");
 	vk->vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCheckpointNV");
@@ -1406,13 +1414,13 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	vk->vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
 	vk->vkCmdSetDescriptorBufferOffsetsEXT = (PFN_vkCmdSetDescriptorBufferOffsetsEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsetsEXT");
+	vk->vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 	vk->vkGetDescriptorSetLayoutSizeEXT = (PFN_vkGetDescriptorSetLayoutSizeEXT)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSizeEXT");
 	vk->vkGetDescriptorSetLayoutBindingOffsetEXT = (PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutBindingOffsetEXT");
 	vk->vkGetDescriptorEXT = (PFN_vkGetDescriptorEXT)vk->vkGetDeviceProcAddr(device, "vkGetDescriptorEXT");
 	vk->vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
 	vk->vkGetBufferOpaqueCaptureDescriptorDataEXT = (PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
 	vk->vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
-	vk->vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 	vk->vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
 #endif // defined(VK_EXT_descriptor_buffer)
 #if defined(VK_EXT_device_fault)
@@ -1852,6 +1860,14 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToImageIndirectNV");
 	vk->vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
 #endif // defined(VK_NV_copy_memory_indirect)
+#if defined(VK_NV_cuda_kernel_launch)
+	vk->vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vk->vkGetDeviceProcAddr(device, "vkCreateCudaFunctionNV");
+	vk->vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vk->vkGetDeviceProcAddr(device, "vkCreateCudaModuleNV");
+	vk->vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vk->vkGetDeviceProcAddr(device, "vkGetCudaModuleCacheNV");
+	vk->vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vk->vkGetDeviceProcAddr(device, "vkDestroyCudaModuleNV");
+	vk->vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vk->vkGetDeviceProcAddr(device, "vkDestroyCudaFunctionNV");
+	vk->vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vk->vkGetDeviceProcAddr(device, "vkCmdCudaLaunchKernelNV");
+#endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	vk->vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vk->vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 	vk->vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
@@ -3981,6 +3997,13 @@ VKAPI_ATTR void vkCmdSetDescriptorBufferOffsetsEXT(VkCommandBuffer commandBuffer
 	pfn_vkCmdSetDescriptorBufferOffsetsEXT(commandBuffer, pipelineBindPoint, layout, firstSet, setCount, pBufferIndices, pOffsets);
 }
 
+static PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT;
+VKAPI_ATTR VkResult vkGetSamplerOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkSamplerCaptureDescriptorDataInfoEXT * pInfo, void * pData)
+{
+	assert(pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT);
+	return pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
+}
+
 static PFN_vkGetDescriptorSetLayoutSizeEXT pfn_vkGetDescriptorSetLayoutSizeEXT;
 VKAPI_ATTR void vkGetDescriptorSetLayoutSizeEXT(VkDevice device, VkDescriptorSetLayout layout, VkDeviceSize * pLayoutSizeInBytes)
 {
@@ -4021,13 +4044,6 @@ VKAPI_ATTR VkResult vkGetImageViewOpaqueCaptureDescriptorDataEXT(VkDevice device
 {
 	assert(pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT);
 	return pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
-}
-
-static PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT;
-VKAPI_ATTR VkResult vkGetSamplerOpaqueCaptureDescriptorDataEXT(VkDevice device, const VkSamplerCaptureDescriptorDataInfoEXT * pInfo, void * pData)
-{
-	assert(pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT);
-	return pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
 }
 
 static PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT;
@@ -6637,6 +6653,50 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinati
 	return pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(physicalDevice, pCombinationCount, pCombinations);
 }
 #endif // defined(VK_NV_coverage_reduction_mode)
+#if defined(VK_NV_cuda_kernel_launch)
+
+static PFN_vkCreateCudaFunctionNV pfn_vkCreateCudaFunctionNV;
+VKAPI_ATTR VkResult vkCreateCudaFunctionNV(VkDevice device, const VkCudaFunctionCreateInfoNV * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkCudaFunctionNV * pFunction)
+{
+	assert(pfn_vkCreateCudaFunctionNV);
+	return pfn_vkCreateCudaFunctionNV(device, pCreateInfo, pAllocator, pFunction);
+}
+
+static PFN_vkCreateCudaModuleNV pfn_vkCreateCudaModuleNV;
+VKAPI_ATTR VkResult vkCreateCudaModuleNV(VkDevice device, const VkCudaModuleCreateInfoNV * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkCudaModuleNV * pModule)
+{
+	assert(pfn_vkCreateCudaModuleNV);
+	return pfn_vkCreateCudaModuleNV(device, pCreateInfo, pAllocator, pModule);
+}
+
+static PFN_vkGetCudaModuleCacheNV pfn_vkGetCudaModuleCacheNV;
+VKAPI_ATTR VkResult vkGetCudaModuleCacheNV(VkDevice device, VkCudaModuleNV module, size_t * pCacheSize, void * pCacheData)
+{
+	assert(pfn_vkGetCudaModuleCacheNV);
+	return pfn_vkGetCudaModuleCacheNV(device, module, pCacheSize, pCacheData);
+}
+
+static PFN_vkDestroyCudaModuleNV pfn_vkDestroyCudaModuleNV;
+VKAPI_ATTR void vkDestroyCudaModuleNV(VkDevice device, VkCudaModuleNV module, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyCudaModuleNV);
+	pfn_vkDestroyCudaModuleNV(device, module, pAllocator);
+}
+
+static PFN_vkDestroyCudaFunctionNV pfn_vkDestroyCudaFunctionNV;
+VKAPI_ATTR void vkDestroyCudaFunctionNV(VkDevice device, VkCudaFunctionNV function, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyCudaFunctionNV);
+	pfn_vkDestroyCudaFunctionNV(device, function, pAllocator);
+}
+
+static PFN_vkCmdCudaLaunchKernelNV pfn_vkCmdCudaLaunchKernelNV;
+VKAPI_ATTR void vkCmdCudaLaunchKernelNV(VkCommandBuffer commandBuffer, const VkCudaLaunchInfoNV * pLaunchInfo)
+{
+	assert(pfn_vkCmdCudaLaunchKernelNV);
+	pfn_vkCmdCudaLaunchKernelNV(commandBuffer, pLaunchInfo);
+}
+#endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 
 static PFN_vkGetQueueCheckpointDataNV pfn_vkGetQueueCheckpointDataNV;
@@ -7526,13 +7586,13 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	pfn_vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBuffersEXT");
 	pfn_vkCmdSetDescriptorBufferOffsetsEXT = (PFN_vkCmdSetDescriptorBufferOffsetsEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDescriptorBufferOffsetsEXT");
+	pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 	pfn_vkGetDescriptorSetLayoutSizeEXT = (PFN_vkGetDescriptorSetLayoutSizeEXT)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutSizeEXT");
 	pfn_vkGetDescriptorSetLayoutBindingOffsetEXT = (PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutBindingOffsetEXT");
 	pfn_vkGetDescriptorEXT = (PFN_vkGetDescriptorEXT)vkGetInstanceProcAddr(instance, "vkGetDescriptorEXT");
 	pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
 	pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT = (PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
 	pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
-	pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 	pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
 #endif // defined(VK_EXT_descriptor_buffer)
 #if defined(VK_EXT_device_fault)
@@ -8095,6 +8155,14 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NV_coverage_reduction_mode)
 	pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
 #endif // defined(VK_NV_coverage_reduction_mode)
+#if defined(VK_NV_cuda_kernel_launch)
+	pfn_vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vkGetInstanceProcAddr(instance, "vkCreateCudaFunctionNV");
+	pfn_vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vkGetInstanceProcAddr(instance, "vkCreateCudaModuleNV");
+	pfn_vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vkGetInstanceProcAddr(instance, "vkGetCudaModuleCacheNV");
+	pfn_vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vkGetInstanceProcAddr(instance, "vkDestroyCudaModuleNV");
+	pfn_vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vkGetInstanceProcAddr(instance, "vkDestroyCudaFunctionNV");
+	pfn_vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vkGetInstanceProcAddr(instance, "vkCmdCudaLaunchKernelNV");
+#endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointDataNV");
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetInstanceProcAddr(instance, "vkCmdSetCheckpointNV");
@@ -8536,13 +8604,13 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	pfn_vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
 	pfn_vkCmdSetDescriptorBufferOffsetsEXT = (PFN_vkCmdSetDescriptorBufferOffsetsEXT)vkGetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsetsEXT");
+	pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 	pfn_vkGetDescriptorSetLayoutSizeEXT = (PFN_vkGetDescriptorSetLayoutSizeEXT)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSizeEXT");
 	pfn_vkGetDescriptorSetLayoutBindingOffsetEXT = (PFN_vkGetDescriptorSetLayoutBindingOffsetEXT)vkGetDeviceProcAddr(device, "vkGetDescriptorSetLayoutBindingOffsetEXT");
 	pfn_vkGetDescriptorEXT = (PFN_vkGetDescriptorEXT)vkGetDeviceProcAddr(device, "vkGetDescriptorEXT");
 	pfn_vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplersEXT)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
 	pfn_vkGetBufferOpaqueCaptureDescriptorDataEXT = (PFN_vkGetBufferOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
 	pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
-	pfn_vkGetSamplerOpaqueCaptureDescriptorDataEXT = (PFN_vkGetSamplerOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 	pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
 #endif // defined(VK_EXT_descriptor_buffer)
 #if defined(VK_EXT_device_fault)
@@ -8982,6 +9050,14 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToImageIndirectNV");
 	pfn_vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
 #endif // defined(VK_NV_copy_memory_indirect)
+#if defined(VK_NV_cuda_kernel_launch)
+	pfn_vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vkGetDeviceProcAddr(device, "vkCreateCudaFunctionNV");
+	pfn_vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vkGetDeviceProcAddr(device, "vkCreateCudaModuleNV");
+	pfn_vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vkGetDeviceProcAddr(device, "vkGetCudaModuleCacheNV");
+	pfn_vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vkGetDeviceProcAddr(device, "vkDestroyCudaModuleNV");
+	pfn_vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vkGetDeviceProcAddr(device, "vkDestroyCudaFunctionNV");
+	pfn_vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vkGetDeviceProcAddr(device, "vkCmdCudaLaunchKernelNV");
+#endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
