@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 270 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 271 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -6939,10 +6939,10 @@ VKAPI_ATTR void vkSetLatencyMarkerNV(VkDevice device, VkSwapchainKHR swapchain, 
 }
 
 static PFN_vkGetLatencyTimingsNV pfn_vkGetLatencyTimingsNV;
-VKAPI_ATTR void vkGetLatencyTimingsNV(VkDevice device, VkSwapchainKHR swapchain, uint32_t * pTimingCount, VkGetLatencyMarkerInfoNV * pLatencyMarkerInfo)
+VKAPI_ATTR void vkGetLatencyTimingsNV(VkDevice device, VkSwapchainKHR swapchain, VkGetLatencyMarkerInfoNV * pLatencyMarkerInfo)
 {
 	assert(pfn_vkGetLatencyTimingsNV);
-	pfn_vkGetLatencyTimingsNV(device, swapchain, pTimingCount, pLatencyMarkerInfo);
+	pfn_vkGetLatencyTimingsNV(device, swapchain, pLatencyMarkerInfo);
 }
 #endif // defined(VK_NV_low_latency2)
 #if defined(VK_NV_memory_decompression)
