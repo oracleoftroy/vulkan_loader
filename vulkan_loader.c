@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 273 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 274 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -821,6 +821,14 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetRenderingAreaGranularityKHR = (PFN_vkGetRenderingAreaGranularityKHR)vk->vkGetInstanceProcAddr(instance, "vkGetRenderingAreaGranularityKHR");
 	vk->vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vk->vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2KHR");
 #endif // defined(VK_KHR_maintenance5)
+#if defined(VK_KHR_maintenance6)
+	vk->vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSet2KHR");
+	vk->vkCmdBindDescriptorSets2KHR = (PFN_vkCmdBindDescriptorSets2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorSets2KHR");
+	vk->vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplate2KHR");
+	vk->vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");
+	vk->vkCmdPushConstants2KHR = (PFN_vkCmdPushConstants2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushConstants2KHR");
+	vk->vkCmdSetDescriptorBufferOffsets2EXT = (PFN_vkCmdSetDescriptorBufferOffsets2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDescriptorBufferOffsets2EXT");
+#endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
 	vk->vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vk->vkGetInstanceProcAddr(instance, "vkUnmapMemory2KHR");
 	vk->vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vk->vkGetInstanceProcAddr(instance, "vkMapMemory2KHR");
@@ -1767,6 +1775,14 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetRenderingAreaGranularityKHR = (PFN_vkGetRenderingAreaGranularityKHR)vk->vkGetDeviceProcAddr(device, "vkGetRenderingAreaGranularityKHR");
 	vk->vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vk->vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2KHR");
 #endif // defined(VK_KHR_maintenance5)
+#if defined(VK_KHR_maintenance6)
+	vk->vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSet2KHR");
+	vk->vkCmdBindDescriptorSets2KHR = (PFN_vkCmdBindDescriptorSets2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorSets2KHR");
+	vk->vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplate2KHR");
+	vk->vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");
+	vk->vkCmdPushConstants2KHR = (PFN_vkCmdPushConstants2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushConstants2KHR");
+	vk->vkCmdSetDescriptorBufferOffsets2EXT = (PFN_vkCmdSetDescriptorBufferOffsets2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsets2EXT");
+#endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
 	vk->vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vk->vkGetDeviceProcAddr(device, "vkUnmapMemory2KHR");
 	vk->vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vk->vkGetDeviceProcAddr(device, "vkMapMemory2KHR");
@@ -6012,6 +6028,50 @@ VKAPI_ATTR void vkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, 
 	pfn_vkGetImageSubresourceLayout2KHR(device, image, pSubresource, pLayout);
 }
 #endif // defined(VK_KHR_maintenance5)
+#if defined(VK_KHR_maintenance6)
+
+static PFN_vkCmdPushDescriptorSet2KHR pfn_vkCmdPushDescriptorSet2KHR;
+VKAPI_ATTR void vkCmdPushDescriptorSet2KHR(VkCommandBuffer commandBuffer, const VkPushDescriptorSetInfoKHR * pPushDescriptorSetInfo)
+{
+	assert(pfn_vkCmdPushDescriptorSet2KHR);
+	pfn_vkCmdPushDescriptorSet2KHR(commandBuffer, pPushDescriptorSetInfo);
+}
+
+static PFN_vkCmdBindDescriptorSets2KHR pfn_vkCmdBindDescriptorSets2KHR;
+VKAPI_ATTR void vkCmdBindDescriptorSets2KHR(VkCommandBuffer commandBuffer, const VkBindDescriptorSetsInfoKHR * pBindDescriptorSetsInfo)
+{
+	assert(pfn_vkCmdBindDescriptorSets2KHR);
+	pfn_vkCmdBindDescriptorSets2KHR(commandBuffer, pBindDescriptorSetsInfo);
+}
+
+static PFN_vkCmdPushDescriptorSetWithTemplate2KHR pfn_vkCmdPushDescriptorSetWithTemplate2KHR;
+VKAPI_ATTR void vkCmdPushDescriptorSetWithTemplate2KHR(VkCommandBuffer commandBuffer, const VkPushDescriptorSetWithTemplateInfoKHR * pPushDescriptorSetWithTemplateInfo)
+{
+	assert(pfn_vkCmdPushDescriptorSetWithTemplate2KHR);
+	pfn_vkCmdPushDescriptorSetWithTemplate2KHR(commandBuffer, pPushDescriptorSetWithTemplateInfo);
+}
+
+static PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT pfn_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT;
+VKAPI_ATTR void vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(VkCommandBuffer commandBuffer, const VkBindDescriptorBufferEmbeddedSamplersInfoEXT * pBindDescriptorBufferEmbeddedSamplersInfo)
+{
+	assert(pfn_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT);
+	pfn_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT(commandBuffer, pBindDescriptorBufferEmbeddedSamplersInfo);
+}
+
+static PFN_vkCmdPushConstants2KHR pfn_vkCmdPushConstants2KHR;
+VKAPI_ATTR void vkCmdPushConstants2KHR(VkCommandBuffer commandBuffer, const VkPushConstantsInfoKHR * pPushConstantsInfo)
+{
+	assert(pfn_vkCmdPushConstants2KHR);
+	pfn_vkCmdPushConstants2KHR(commandBuffer, pPushConstantsInfo);
+}
+
+static PFN_vkCmdSetDescriptorBufferOffsets2EXT pfn_vkCmdSetDescriptorBufferOffsets2EXT;
+VKAPI_ATTR void vkCmdSetDescriptorBufferOffsets2EXT(VkCommandBuffer commandBuffer, const VkSetDescriptorBufferOffsetsInfoEXT * pSetDescriptorBufferOffsetsInfo)
+{
+	assert(pfn_vkCmdSetDescriptorBufferOffsets2EXT);
+	pfn_vkCmdSetDescriptorBufferOffsets2EXT(commandBuffer, pSetDescriptorBufferOffsetsInfo);
+}
+#endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
 
 static PFN_vkUnmapMemory2KHR pfn_vkUnmapMemory2KHR;
@@ -8034,6 +8094,14 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetRenderingAreaGranularityKHR = (PFN_vkGetRenderingAreaGranularityKHR)vkGetInstanceProcAddr(instance, "vkGetRenderingAreaGranularityKHR");
 	pfn_vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2KHR");
 #endif // defined(VK_KHR_maintenance5)
+#if defined(VK_KHR_maintenance6)
+	pfn_vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSet2KHR");
+	pfn_vkCmdBindDescriptorSets2KHR = (PFN_vkCmdBindDescriptorSets2KHR)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorSets2KHR");
+	pfn_vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplate2KHR");
+	pfn_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");
+	pfn_vkCmdPushConstants2KHR = (PFN_vkCmdPushConstants2KHR)vkGetInstanceProcAddr(instance, "vkCmdPushConstants2KHR");
+	pfn_vkCmdSetDescriptorBufferOffsets2EXT = (PFN_vkCmdSetDescriptorBufferOffsets2EXT)vkGetInstanceProcAddr(instance, "vkCmdSetDescriptorBufferOffsets2EXT");
+#endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
 	pfn_vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vkGetInstanceProcAddr(instance, "vkUnmapMemory2KHR");
 	pfn_vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vkGetInstanceProcAddr(instance, "vkMapMemory2KHR");
@@ -8980,6 +9048,14 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetRenderingAreaGranularityKHR = (PFN_vkGetRenderingAreaGranularityKHR)vkGetDeviceProcAddr(device, "vkGetRenderingAreaGranularityKHR");
 	pfn_vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2KHR");
 #endif // defined(VK_KHR_maintenance5)
+#if defined(VK_KHR_maintenance6)
+	pfn_vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSet2KHR");
+	pfn_vkCmdBindDescriptorSets2KHR = (PFN_vkCmdBindDescriptorSets2KHR)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorSets2KHR");
+	pfn_vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplate2KHR");
+	pfn_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");
+	pfn_vkCmdPushConstants2KHR = (PFN_vkCmdPushConstants2KHR)vkGetDeviceProcAddr(device, "vkCmdPushConstants2KHR");
+	pfn_vkCmdSetDescriptorBufferOffsets2EXT = (PFN_vkCmdSetDescriptorBufferOffsets2EXT)vkGetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsets2EXT");
+#endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
 	pfn_vkUnmapMemory2KHR = (PFN_vkUnmapMemory2KHR)vkGetDeviceProcAddr(device, "vkUnmapMemory2KHR");
 	pfn_vkMapMemory2KHR = (PFN_vkMapMemory2KHR)vkGetDeviceProcAddr(device, "vkMapMemory2KHR");
