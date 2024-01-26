@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 275 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 276 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -472,10 +472,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetRasterizationStreamEXT");
 	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
 	vk->vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEquationEXT");
-	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetSampleMaskEXT");
 	vk->vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToCoverageEnableEXT");
 	vk->vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEnableEXT");
+	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
 	vk->vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportSwizzleNV");
 	vk->vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCoverageToColorEnableNV");
@@ -743,6 +743,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBeginRenderingKHR = (PFN_vkCmdBeginRenderingKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginRenderingKHR");
 	vk->vkCmdEndRenderingKHR = (PFN_vkCmdEndRenderingKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdEndRenderingKHR");
 #endif // defined(VK_KHR_dynamic_rendering)
+#if defined(VK_KHR_dynamic_rendering_local_read)
+	vk->vkCmdSetRenderingAttachmentLocationsKHR = (PFN_vkCmdSetRenderingAttachmentLocationsKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdSetRenderingAttachmentLocationsKHR");
+	vk->vkCmdSetRenderingInputAttachmentIndicesKHR = (PFN_vkCmdSetRenderingInputAttachmentIndicesKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdSetRenderingInputAttachmentIndicesKHR");
+#endif // defined(VK_KHR_dynamic_rendering_local_read)
 #if defined(VK_KHR_external_fence_capabilities)
 	vk->vkGetPhysicalDeviceExternalFencePropertiesKHR = (PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalFencePropertiesKHR");
 #endif // defined(VK_KHR_external_fence_capabilities)
@@ -804,6 +808,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceSurfaceCapabilities2KHR = (PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceCapabilities2KHR");
 	vk->vkGetPhysicalDeviceSurfaceFormats2KHR = (PFN_vkGetPhysicalDeviceSurfaceFormats2KHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceFormats2KHR");
 #endif // defined(VK_KHR_get_surface_capabilities2)
+#if defined(VK_KHR_line_rasterization)
+	vk->vkCmdSetLineStippleKHR = (PFN_vkCmdSetLineStippleKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdSetLineStippleKHR");
+#endif // defined(VK_KHR_line_rasterization)
 #if defined(VK_KHR_maintenance1)
 	vk->vkTrimCommandPoolKHR = (PFN_vkTrimCommandPoolKHR)vk->vkGetInstanceProcAddr(instance, "vkTrimCommandPoolKHR");
 #endif // defined(VK_KHR_maintenance1)
@@ -1492,10 +1499,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
 	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
 	vk->vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
-	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
 	vk->vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
 	vk->vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEnableEXT");
+	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
 	vk->vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportSwizzleNV");
 	vk->vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCoverageToColorEnableNV");
@@ -1726,6 +1733,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdBeginRenderingKHR = (PFN_vkCmdBeginRenderingKHR)vk->vkGetDeviceProcAddr(device, "vkCmdBeginRenderingKHR");
 	vk->vkCmdEndRenderingKHR = (PFN_vkCmdEndRenderingKHR)vk->vkGetDeviceProcAddr(device, "vkCmdEndRenderingKHR");
 #endif // defined(VK_KHR_dynamic_rendering)
+#if defined(VK_KHR_dynamic_rendering_local_read)
+	vk->vkCmdSetRenderingAttachmentLocationsKHR = (PFN_vkCmdSetRenderingAttachmentLocationsKHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetRenderingAttachmentLocationsKHR");
+	vk->vkCmdSetRenderingInputAttachmentIndicesKHR = (PFN_vkCmdSetRenderingInputAttachmentIndicesKHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetRenderingInputAttachmentIndicesKHR");
+#endif // defined(VK_KHR_dynamic_rendering_local_read)
 #if defined(VK_KHR_external_fence_fd)
 	vk->vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vk->vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 	vk->vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vk->vkGetDeviceProcAddr(device, "vkGetFenceFdKHR");
@@ -1758,6 +1769,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetBufferMemoryRequirements2KHR = (PFN_vkGetBufferMemoryRequirements2KHR)vk->vkGetDeviceProcAddr(device, "vkGetBufferMemoryRequirements2KHR");
 	vk->vkGetImageSparseMemoryRequirements2KHR = (PFN_vkGetImageSparseMemoryRequirements2KHR)vk->vkGetDeviceProcAddr(device, "vkGetImageSparseMemoryRequirements2KHR");
 #endif // defined(VK_KHR_get_memory_requirements2)
+#if defined(VK_KHR_line_rasterization)
+	vk->vkCmdSetLineStippleKHR = (PFN_vkCmdSetLineStippleKHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetLineStippleKHR");
+#endif // defined(VK_KHR_line_rasterization)
 #if defined(VK_KHR_maintenance1)
 	vk->vkTrimCommandPoolKHR = (PFN_vkTrimCommandPoolKHR)vk->vkGetDeviceProcAddr(device, "vkTrimCommandPoolKHR");
 #endif // defined(VK_KHR_maintenance1)
@@ -4444,13 +4458,6 @@ VKAPI_ATTR void vkCmdSetColorBlendEquationEXT(VkCommandBuffer commandBuffer, uin
 	pfn_vkCmdSetColorBlendEquationEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendEquations);
 }
 
-static PFN_vkCmdSetTessellationDomainOriginEXT pfn_vkCmdSetTessellationDomainOriginEXT;
-VKAPI_ATTR void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin)
-{
-	assert(pfn_vkCmdSetTessellationDomainOriginEXT);
-	pfn_vkCmdSetTessellationDomainOriginEXT(commandBuffer, domainOrigin);
-}
-
 static PFN_vkCmdSetSampleMaskEXT pfn_vkCmdSetSampleMaskEXT;
 VKAPI_ATTR void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, VkSampleCountFlagBits samples, const VkSampleMask * pSampleMask)
 {
@@ -4470,6 +4477,13 @@ VKAPI_ATTR void vkCmdSetColorBlendEnableEXT(VkCommandBuffer commandBuffer, uint3
 {
 	assert(pfn_vkCmdSetColorBlendEnableEXT);
 	pfn_vkCmdSetColorBlendEnableEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendEnables);
+}
+
+static PFN_vkCmdSetTessellationDomainOriginEXT pfn_vkCmdSetTessellationDomainOriginEXT;
+VKAPI_ATTR void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin)
+{
+	assert(pfn_vkCmdSetTessellationDomainOriginEXT);
+	pfn_vkCmdSetTessellationDomainOriginEXT(commandBuffer, domainOrigin);
 }
 
 static PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT;
@@ -5698,6 +5712,22 @@ VKAPI_ATTR void vkCmdEndRenderingKHR(VkCommandBuffer commandBuffer)
 	pfn_vkCmdEndRenderingKHR(commandBuffer);
 }
 #endif // defined(VK_KHR_dynamic_rendering)
+#if defined(VK_KHR_dynamic_rendering_local_read)
+
+static PFN_vkCmdSetRenderingAttachmentLocationsKHR pfn_vkCmdSetRenderingAttachmentLocationsKHR;
+VKAPI_ATTR void vkCmdSetRenderingAttachmentLocationsKHR(VkCommandBuffer commandBuffer, const VkRenderingAttachmentLocationInfoKHR * pLocationInfo)
+{
+	assert(pfn_vkCmdSetRenderingAttachmentLocationsKHR);
+	pfn_vkCmdSetRenderingAttachmentLocationsKHR(commandBuffer, pLocationInfo);
+}
+
+static PFN_vkCmdSetRenderingInputAttachmentIndicesKHR pfn_vkCmdSetRenderingInputAttachmentIndicesKHR;
+VKAPI_ATTR void vkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, const VkRenderingInputAttachmentIndexInfoKHR * pLocationInfo)
+{
+	assert(pfn_vkCmdSetRenderingInputAttachmentIndicesKHR);
+	pfn_vkCmdSetRenderingInputAttachmentIndicesKHR(commandBuffer, pLocationInfo);
+}
+#endif // defined(VK_KHR_dynamic_rendering_local_read)
 #if defined(VK_KHR_external_fence_capabilities)
 
 static PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR pfn_vkGetPhysicalDeviceExternalFencePropertiesKHR;
@@ -5957,6 +5987,15 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceSurfaceFormats2KHR(VkPhysicalDevice physi
 	return pfn_vkGetPhysicalDeviceSurfaceFormats2KHR(physicalDevice, pSurfaceInfo, pSurfaceFormatCount, pSurfaceFormats);
 }
 #endif // defined(VK_KHR_get_surface_capabilities2)
+#if defined(VK_KHR_line_rasterization)
+
+static PFN_vkCmdSetLineStippleKHR pfn_vkCmdSetLineStippleKHR;
+VKAPI_ATTR void vkCmdSetLineStippleKHR(VkCommandBuffer commandBuffer, uint32_t lineStippleFactor, uint16_t lineStipplePattern)
+{
+	assert(pfn_vkCmdSetLineStippleKHR);
+	pfn_vkCmdSetLineStippleKHR(commandBuffer, lineStippleFactor, lineStipplePattern);
+}
+#endif // defined(VK_KHR_line_rasterization)
 #if defined(VK_KHR_maintenance1)
 
 static PFN_vkTrimCommandPoolKHR pfn_vkTrimCommandPoolKHR;
@@ -7745,10 +7784,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vkGetInstanceProcAddr(instance, "vkCmdSetRasterizationStreamEXT");
 	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
 	pfn_vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEquationEXT");
-	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vkGetInstanceProcAddr(instance, "vkCmdSetSampleMaskEXT");
 	pfn_vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToCoverageEnableEXT");
 	pfn_vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEnableEXT");
+	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vkGetInstanceProcAddr(instance, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
 	pfn_vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportSwizzleNV");
 	pfn_vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vkGetInstanceProcAddr(instance, "vkCmdSetCoverageToColorEnableNV");
@@ -8016,6 +8055,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBeginRenderingKHR = (PFN_vkCmdBeginRenderingKHR)vkGetInstanceProcAddr(instance, "vkCmdBeginRenderingKHR");
 	pfn_vkCmdEndRenderingKHR = (PFN_vkCmdEndRenderingKHR)vkGetInstanceProcAddr(instance, "vkCmdEndRenderingKHR");
 #endif // defined(VK_KHR_dynamic_rendering)
+#if defined(VK_KHR_dynamic_rendering_local_read)
+	pfn_vkCmdSetRenderingAttachmentLocationsKHR = (PFN_vkCmdSetRenderingAttachmentLocationsKHR)vkGetInstanceProcAddr(instance, "vkCmdSetRenderingAttachmentLocationsKHR");
+	pfn_vkCmdSetRenderingInputAttachmentIndicesKHR = (PFN_vkCmdSetRenderingInputAttachmentIndicesKHR)vkGetInstanceProcAddr(instance, "vkCmdSetRenderingInputAttachmentIndicesKHR");
+#endif // defined(VK_KHR_dynamic_rendering_local_read)
 #if defined(VK_KHR_external_fence_capabilities)
 	pfn_vkGetPhysicalDeviceExternalFencePropertiesKHR = (PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalFencePropertiesKHR");
 #endif // defined(VK_KHR_external_fence_capabilities)
@@ -8077,6 +8120,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceSurfaceCapabilities2KHR = (PFN_vkGetPhysicalDeviceSurfaceCapabilities2KHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceCapabilities2KHR");
 	pfn_vkGetPhysicalDeviceSurfaceFormats2KHR = (PFN_vkGetPhysicalDeviceSurfaceFormats2KHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceFormats2KHR");
 #endif // defined(VK_KHR_get_surface_capabilities2)
+#if defined(VK_KHR_line_rasterization)
+	pfn_vkCmdSetLineStippleKHR = (PFN_vkCmdSetLineStippleKHR)vkGetInstanceProcAddr(instance, "vkCmdSetLineStippleKHR");
+#endif // defined(VK_KHR_line_rasterization)
 #if defined(VK_KHR_maintenance1)
 	pfn_vkTrimCommandPoolKHR = (PFN_vkTrimCommandPoolKHR)vkGetInstanceProcAddr(instance, "vkTrimCommandPoolKHR");
 #endif // defined(VK_KHR_maintenance1)
@@ -8765,10 +8811,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vkGetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
 	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
 	pfn_vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
-	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vkGetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
 	pfn_vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
 	pfn_vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEnableEXT");
+	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vkGetDeviceProcAddr(device, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
 	pfn_vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportSwizzleNV");
 	pfn_vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vkGetDeviceProcAddr(device, "vkCmdSetCoverageToColorEnableNV");
@@ -8999,6 +9045,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdBeginRenderingKHR = (PFN_vkCmdBeginRenderingKHR)vkGetDeviceProcAddr(device, "vkCmdBeginRenderingKHR");
 	pfn_vkCmdEndRenderingKHR = (PFN_vkCmdEndRenderingKHR)vkGetDeviceProcAddr(device, "vkCmdEndRenderingKHR");
 #endif // defined(VK_KHR_dynamic_rendering)
+#if defined(VK_KHR_dynamic_rendering_local_read)
+	pfn_vkCmdSetRenderingAttachmentLocationsKHR = (PFN_vkCmdSetRenderingAttachmentLocationsKHR)vkGetDeviceProcAddr(device, "vkCmdSetRenderingAttachmentLocationsKHR");
+	pfn_vkCmdSetRenderingInputAttachmentIndicesKHR = (PFN_vkCmdSetRenderingInputAttachmentIndicesKHR)vkGetDeviceProcAddr(device, "vkCmdSetRenderingInputAttachmentIndicesKHR");
+#endif // defined(VK_KHR_dynamic_rendering_local_read)
 #if defined(VK_KHR_external_fence_fd)
 	pfn_vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 	pfn_vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vkGetDeviceProcAddr(device, "vkGetFenceFdKHR");
@@ -9031,6 +9081,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetBufferMemoryRequirements2KHR = (PFN_vkGetBufferMemoryRequirements2KHR)vkGetDeviceProcAddr(device, "vkGetBufferMemoryRequirements2KHR");
 	pfn_vkGetImageSparseMemoryRequirements2KHR = (PFN_vkGetImageSparseMemoryRequirements2KHR)vkGetDeviceProcAddr(device, "vkGetImageSparseMemoryRequirements2KHR");
 #endif // defined(VK_KHR_get_memory_requirements2)
+#if defined(VK_KHR_line_rasterization)
+	pfn_vkCmdSetLineStippleKHR = (PFN_vkCmdSetLineStippleKHR)vkGetDeviceProcAddr(device, "vkCmdSetLineStippleKHR");
+#endif // defined(VK_KHR_line_rasterization)
 #if defined(VK_KHR_maintenance1)
 	pfn_vkTrimCommandPoolKHR = (PFN_vkTrimCommandPoolKHR)vkGetDeviceProcAddr(device, "vkTrimCommandPoolKHR");
 #endif // defined(VK_KHR_maintenance1)
