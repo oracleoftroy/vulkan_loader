@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 290 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 291 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -322,6 +322,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdDispatchGraphIndirectAMDX = (PFN_vkCmdDispatchGraphIndirectAMDX)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphIndirectAMDX");
 	vk->vkCmdDispatchGraphIndirectCountAMDX = (PFN_vkCmdDispatchGraphIndirectCountAMDX)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphIndirectCountAMDX");
 #endif // defined(VK_AMDX_shader_enqueue)
+#if defined(VK_AMD_anti_lag)
+	vk->vkAntiLagUpdateAMD = (PFN_vkAntiLagUpdateAMD)vk->vkGetInstanceProcAddr(instance, "vkAntiLagUpdateAMD");
+#endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 	vk->vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
@@ -1376,6 +1379,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdDispatchGraphIndirectAMDX = (PFN_vkCmdDispatchGraphIndirectAMDX)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchGraphIndirectAMDX");
 	vk->vkCmdDispatchGraphIndirectCountAMDX = (PFN_vkCmdDispatchGraphIndirectCountAMDX)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchGraphIndirectCountAMDX");
 #endif // defined(VK_AMDX_shader_enqueue)
+#if defined(VK_AMD_anti_lag)
+	vk->vkAntiLagUpdateAMD = (PFN_vkAntiLagUpdateAMD)vk->vkGetDeviceProcAddr(device, "vkAntiLagUpdateAMD");
+#endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 	vk->vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
@@ -3713,6 +3719,15 @@ VKAPI_ATTR void vkCmdDispatchGraphIndirectCountAMDX(VkCommandBuffer commandBuffe
 	pfn_vkCmdDispatchGraphIndirectCountAMDX(commandBuffer, scratch, countInfo);
 }
 #endif // defined(VK_AMDX_shader_enqueue)
+#if defined(VK_AMD_anti_lag)
+
+static PFN_vkAntiLagUpdateAMD pfn_vkAntiLagUpdateAMD;
+VKAPI_ATTR void vkAntiLagUpdateAMD(VkDevice device, const VkAntiLagDataAMD * pData)
+{
+	assert(pfn_vkAntiLagUpdateAMD);
+	pfn_vkAntiLagUpdateAMD(device, pData);
+}
+#endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 
 static PFN_vkCmdWriteBufferMarkerAMD pfn_vkCmdWriteBufferMarkerAMD;
@@ -7634,6 +7649,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdDispatchGraphIndirectAMDX = (PFN_vkCmdDispatchGraphIndirectAMDX)vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphIndirectAMDX");
 	pfn_vkCmdDispatchGraphIndirectCountAMDX = (PFN_vkCmdDispatchGraphIndirectCountAMDX)vkGetInstanceProcAddr(instance, "vkCmdDispatchGraphIndirectCountAMDX");
 #endif // defined(VK_AMDX_shader_enqueue)
+#if defined(VK_AMD_anti_lag)
+	pfn_vkAntiLagUpdateAMD = (PFN_vkAntiLagUpdateAMD)vkGetInstanceProcAddr(instance, "vkAntiLagUpdateAMD");
+#endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
@@ -8688,6 +8706,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdDispatchGraphIndirectAMDX = (PFN_vkCmdDispatchGraphIndirectAMDX)vkGetDeviceProcAddr(device, "vkCmdDispatchGraphIndirectAMDX");
 	pfn_vkCmdDispatchGraphIndirectCountAMDX = (PFN_vkCmdDispatchGraphIndirectCountAMDX)vkGetDeviceProcAddr(device, "vkCmdDispatchGraphIndirectCountAMDX");
 #endif // defined(VK_AMDX_shader_enqueue)
+#if defined(VK_AMD_anti_lag)
+	pfn_vkAntiLagUpdateAMD = (PFN_vkAntiLagUpdateAMD)vkGetDeviceProcAddr(device, "vkAntiLagUpdateAMD");
+#endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
 #endif // defined(VK_AMD_buffer_marker)
