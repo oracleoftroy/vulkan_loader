@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 293 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 294 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -853,6 +853,13 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkAcquireProfilingLockKHR = (PFN_vkAcquireProfilingLockKHR)vk->vkGetInstanceProcAddr(instance, "vkAcquireProfilingLockKHR");
 	vk->vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vk->vkGetInstanceProcAddr(instance, "vkReleaseProfilingLockKHR");
 #endif // defined(VK_KHR_performance_query)
+#if defined(VK_KHR_pipeline_binary)
+	vk->vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineBinaryDataKHR");
+	vk->vkCreatePipelineBinariesKHR = (PFN_vkCreatePipelineBinariesKHR)vk->vkGetInstanceProcAddr(instance, "vkCreatePipelineBinariesKHR");
+	vk->vkDestroyPipelineBinaryKHR = (PFN_vkDestroyPipelineBinaryKHR)vk->vkGetInstanceProcAddr(instance, "vkDestroyPipelineBinaryKHR");
+	vk->vkGetPipelineKeyKHR = (PFN_vkGetPipelineKeyKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineKeyKHR");
+	vk->vkReleaseCapturedPipelineDataKHR = (PFN_vkReleaseCapturedPipelineDataKHR)vk->vkGetInstanceProcAddr(instance, "vkReleaseCapturedPipelineDataKHR");
+#endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
 	vk->vkGetPipelineExecutableInternalRepresentationsKHR = (PFN_vkGetPipelineExecutableInternalRepresentationsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineExecutableInternalRepresentationsKHR");
 	vk->vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineExecutablePropertiesKHR");
@@ -1814,6 +1821,13 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkAcquireProfilingLockKHR = (PFN_vkAcquireProfilingLockKHR)vk->vkGetDeviceProcAddr(device, "vkAcquireProfilingLockKHR");
 	vk->vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vk->vkGetDeviceProcAddr(device, "vkReleaseProfilingLockKHR");
 #endif // defined(VK_KHR_performance_query)
+#if defined(VK_KHR_pipeline_binary)
+	vk->vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineBinaryDataKHR");
+	vk->vkCreatePipelineBinariesKHR = (PFN_vkCreatePipelineBinariesKHR)vk->vkGetDeviceProcAddr(device, "vkCreatePipelineBinariesKHR");
+	vk->vkDestroyPipelineBinaryKHR = (PFN_vkDestroyPipelineBinaryKHR)vk->vkGetDeviceProcAddr(device, "vkDestroyPipelineBinaryKHR");
+	vk->vkGetPipelineKeyKHR = (PFN_vkGetPipelineKeyKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineKeyKHR");
+	vk->vkReleaseCapturedPipelineDataKHR = (PFN_vkReleaseCapturedPipelineDataKHR)vk->vkGetDeviceProcAddr(device, "vkReleaseCapturedPipelineDataKHR");
+#endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
 	vk->vkGetPipelineExecutableInternalRepresentationsKHR = (PFN_vkGetPipelineExecutableInternalRepresentationsKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineExecutableInternalRepresentationsKHR");
 	vk->vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineExecutablePropertiesKHR");
@@ -6188,6 +6202,43 @@ VKAPI_ATTR void vkReleaseProfilingLockKHR(VkDevice device)
 	pfn_vkReleaseProfilingLockKHR(device);
 }
 #endif // defined(VK_KHR_performance_query)
+#if defined(VK_KHR_pipeline_binary)
+
+static PFN_vkGetPipelineBinaryDataKHR pfn_vkGetPipelineBinaryDataKHR;
+VKAPI_ATTR VkResult vkGetPipelineBinaryDataKHR(VkDevice device, const VkPipelineBinaryDataInfoKHR * pInfo, VkPipelineBinaryKeyKHR * pPipelineBinaryKey, size_t * pPipelineBinaryDataSize, void * pPipelineBinaryData)
+{
+	assert(pfn_vkGetPipelineBinaryDataKHR);
+	return pfn_vkGetPipelineBinaryDataKHR(device, pInfo, pPipelineBinaryKey, pPipelineBinaryDataSize, pPipelineBinaryData);
+}
+
+static PFN_vkCreatePipelineBinariesKHR pfn_vkCreatePipelineBinariesKHR;
+VKAPI_ATTR VkResult vkCreatePipelineBinariesKHR(VkDevice device, const VkPipelineBinaryCreateInfoKHR * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkPipelineBinaryHandlesInfoKHR * pBinaries)
+{
+	assert(pfn_vkCreatePipelineBinariesKHR);
+	return pfn_vkCreatePipelineBinariesKHR(device, pCreateInfo, pAllocator, pBinaries);
+}
+
+static PFN_vkDestroyPipelineBinaryKHR pfn_vkDestroyPipelineBinaryKHR;
+VKAPI_ATTR void vkDestroyPipelineBinaryKHR(VkDevice device, VkPipelineBinaryKHR pipelineBinary, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyPipelineBinaryKHR);
+	pfn_vkDestroyPipelineBinaryKHR(device, pipelineBinary, pAllocator);
+}
+
+static PFN_vkGetPipelineKeyKHR pfn_vkGetPipelineKeyKHR;
+VKAPI_ATTR VkResult vkGetPipelineKeyKHR(VkDevice device, const VkPipelineCreateInfoKHR * pPipelineCreateInfo, VkPipelineBinaryKeyKHR * pPipelineKey)
+{
+	assert(pfn_vkGetPipelineKeyKHR);
+	return pfn_vkGetPipelineKeyKHR(device, pPipelineCreateInfo, pPipelineKey);
+}
+
+static PFN_vkReleaseCapturedPipelineDataKHR pfn_vkReleaseCapturedPipelineDataKHR;
+VKAPI_ATTR VkResult vkReleaseCapturedPipelineDataKHR(VkDevice device, const VkReleaseCapturedPipelineDataInfoKHR * pInfo, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkReleaseCapturedPipelineDataKHR);
+	return pfn_vkReleaseCapturedPipelineDataKHR(device, pInfo, pAllocator);
+}
+#endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
 
 static PFN_vkGetPipelineExecutableInternalRepresentationsKHR pfn_vkGetPipelineExecutableInternalRepresentationsKHR;
@@ -8180,6 +8231,13 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkAcquireProfilingLockKHR = (PFN_vkAcquireProfilingLockKHR)vkGetInstanceProcAddr(instance, "vkAcquireProfilingLockKHR");
 	pfn_vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vkGetInstanceProcAddr(instance, "vkReleaseProfilingLockKHR");
 #endif // defined(VK_KHR_performance_query)
+#if defined(VK_KHR_pipeline_binary)
+	pfn_vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineBinaryDataKHR");
+	pfn_vkCreatePipelineBinariesKHR = (PFN_vkCreatePipelineBinariesKHR)vkGetInstanceProcAddr(instance, "vkCreatePipelineBinariesKHR");
+	pfn_vkDestroyPipelineBinaryKHR = (PFN_vkDestroyPipelineBinaryKHR)vkGetInstanceProcAddr(instance, "vkDestroyPipelineBinaryKHR");
+	pfn_vkGetPipelineKeyKHR = (PFN_vkGetPipelineKeyKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineKeyKHR");
+	pfn_vkReleaseCapturedPipelineDataKHR = (PFN_vkReleaseCapturedPipelineDataKHR)vkGetInstanceProcAddr(instance, "vkReleaseCapturedPipelineDataKHR");
+#endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
 	pfn_vkGetPipelineExecutableInternalRepresentationsKHR = (PFN_vkGetPipelineExecutableInternalRepresentationsKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineExecutableInternalRepresentationsKHR");
 	pfn_vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineExecutablePropertiesKHR");
@@ -9141,6 +9199,13 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkAcquireProfilingLockKHR = (PFN_vkAcquireProfilingLockKHR)vkGetDeviceProcAddr(device, "vkAcquireProfilingLockKHR");
 	pfn_vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vkGetDeviceProcAddr(device, "vkReleaseProfilingLockKHR");
 #endif // defined(VK_KHR_performance_query)
+#if defined(VK_KHR_pipeline_binary)
+	pfn_vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vkGetDeviceProcAddr(device, "vkGetPipelineBinaryDataKHR");
+	pfn_vkCreatePipelineBinariesKHR = (PFN_vkCreatePipelineBinariesKHR)vkGetDeviceProcAddr(device, "vkCreatePipelineBinariesKHR");
+	pfn_vkDestroyPipelineBinaryKHR = (PFN_vkDestroyPipelineBinaryKHR)vkGetDeviceProcAddr(device, "vkDestroyPipelineBinaryKHR");
+	pfn_vkGetPipelineKeyKHR = (PFN_vkGetPipelineKeyKHR)vkGetDeviceProcAddr(device, "vkGetPipelineKeyKHR");
+	pfn_vkReleaseCapturedPipelineDataKHR = (PFN_vkReleaseCapturedPipelineDataKHR)vkGetDeviceProcAddr(device, "vkReleaseCapturedPipelineDataKHR");
+#endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
 	pfn_vkGetPipelineExecutableInternalRepresentationsKHR = (PFN_vkGetPipelineExecutableInternalRepresentationsKHR)vkGetDeviceProcAddr(device, "vkGetPipelineExecutableInternalRepresentationsKHR");
 	pfn_vkGetPipelineExecutablePropertiesKHR = (PFN_vkGetPipelineExecutablePropertiesKHR)vkGetDeviceProcAddr(device, "vkGetPipelineExecutablePropertiesKHR");
