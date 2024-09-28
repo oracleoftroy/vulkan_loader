@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 295 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 296 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -395,6 +395,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_depth_bias_control)
 	vk->vkCmdSetDepthBias2EXT = (PFN_vkCmdSetDepthBias2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthBias2EXT");
 #endif // defined(VK_EXT_depth_bias_control)
+#if defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
+	vk->vkCmdSetDepthClampRangeEXT = (PFN_vkCmdSetDepthClampRangeEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthClampRangeEXT");
+#endif // defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
 #if defined(VK_EXT_descriptor_buffer)
 	vk->vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	vk->vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBuffersEXT");
@@ -411,6 +414,17 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_device_fault)
 	vk->vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
+#if defined(VK_EXT_device_generated_commands)
+	vk->vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyIndirectExecutionSetEXT");
+	vk->vkCreateIndirectCommandsLayoutEXT = (PFN_vkCreateIndirectCommandsLayoutEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateIndirectCommandsLayoutEXT");
+	vk->vkDestroyIndirectCommandsLayoutEXT = (PFN_vkDestroyIndirectCommandsLayoutEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyIndirectCommandsLayoutEXT");
+	vk->vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vk->vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetShaderEXT");
+	vk->vkCmdPreprocessGeneratedCommandsEXT = (PFN_vkCmdPreprocessGeneratedCommandsEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdPreprocessGeneratedCommandsEXT");
+	vk->vkUpdateIndirectExecutionSetPipelineEXT = (PFN_vkUpdateIndirectExecutionSetPipelineEXT)vk->vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetPipelineEXT");
+	vk->vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vk->vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsEXT");
+	vk->vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdExecuteGeneratedCommandsEXT");
+	vk->vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateIndirectExecutionSetEXT");
+#endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_direct_mode_display)
 	vk->vkReleaseDisplayEXT = (PFN_vkReleaseDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkReleaseDisplayEXT");
 #endif // defined(VK_EXT_direct_mode_display)
@@ -1442,6 +1456,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_depth_bias_control)
 	vk->vkCmdSetDepthBias2EXT = (PFN_vkCmdSetDepthBias2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthBias2EXT");
 #endif // defined(VK_EXT_depth_bias_control)
+#if defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
+	vk->vkCmdSetDepthClampRangeEXT = (PFN_vkCmdSetDepthClampRangeEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthClampRangeEXT");
+#endif // defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
 #if defined(VK_EXT_descriptor_buffer)
 	vk->vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	vk->vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
@@ -1458,6 +1475,17 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_device_fault)
 	vk->vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vk->vkGetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
+#if defined(VK_EXT_device_generated_commands)
+	vk->vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyIndirectExecutionSetEXT");
+	vk->vkCreateIndirectCommandsLayoutEXT = (PFN_vkCreateIndirectCommandsLayoutEXT)vk->vkGetDeviceProcAddr(device, "vkCreateIndirectCommandsLayoutEXT");
+	vk->vkDestroyIndirectCommandsLayoutEXT = (PFN_vkDestroyIndirectCommandsLayoutEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyIndirectCommandsLayoutEXT");
+	vk->vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vk->vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetShaderEXT");
+	vk->vkCmdPreprocessGeneratedCommandsEXT = (PFN_vkCmdPreprocessGeneratedCommandsEXT)vk->vkGetDeviceProcAddr(device, "vkCmdPreprocessGeneratedCommandsEXT");
+	vk->vkUpdateIndirectExecutionSetPipelineEXT = (PFN_vkUpdateIndirectExecutionSetPipelineEXT)vk->vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetPipelineEXT");
+	vk->vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vk->vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsEXT");
+	vk->vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vk->vkGetDeviceProcAddr(device, "vkCmdExecuteGeneratedCommandsEXT");
+	vk->vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vk->vkGetDeviceProcAddr(device, "vkCreateIndirectExecutionSetEXT");
+#endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_discard_rectangles)
 	vk->vkCmdSetDiscardRectangleEXT = (PFN_vkCmdSetDiscardRectangleEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDiscardRectangleEXT");
 	vk->vkCmdSetDiscardRectangleEnableEXT = (PFN_vkCmdSetDiscardRectangleEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDiscardRectangleEnableEXT");
@@ -4040,6 +4068,15 @@ VKAPI_ATTR void vkCmdSetDepthBias2EXT(VkCommandBuffer commandBuffer, const VkDep
 	pfn_vkCmdSetDepthBias2EXT(commandBuffer, pDepthBiasInfo);
 }
 #endif // defined(VK_EXT_depth_bias_control)
+#if defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
+
+static PFN_vkCmdSetDepthClampRangeEXT pfn_vkCmdSetDepthClampRangeEXT;
+VKAPI_ATTR void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, VkDepthClampModeEXT depthClampMode, const VkDepthClampRangeEXT * pDepthClampRange)
+{
+	assert(pfn_vkCmdSetDepthClampRangeEXT);
+	pfn_vkCmdSetDepthClampRangeEXT(commandBuffer, depthClampMode, pDepthClampRange);
+}
+#endif // defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
 #if defined(VK_EXT_descriptor_buffer)
 
 static PFN_vkGetImageOpaqueCaptureDescriptorDataEXT pfn_vkGetImageOpaqueCaptureDescriptorDataEXT;
@@ -4128,6 +4165,71 @@ VKAPI_ATTR VkResult vkGetDeviceFaultInfoEXT(VkDevice device, VkDeviceFaultCounts
 	return pfn_vkGetDeviceFaultInfoEXT(device, pFaultCounts, pFaultInfo);
 }
 #endif // defined(VK_EXT_device_fault)
+#if defined(VK_EXT_device_generated_commands)
+
+static PFN_vkDestroyIndirectExecutionSetEXT pfn_vkDestroyIndirectExecutionSetEXT;
+VKAPI_ATTR void vkDestroyIndirectExecutionSetEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyIndirectExecutionSetEXT);
+	pfn_vkDestroyIndirectExecutionSetEXT(device, indirectExecutionSet, pAllocator);
+}
+
+static PFN_vkCreateIndirectCommandsLayoutEXT pfn_vkCreateIndirectCommandsLayoutEXT;
+VKAPI_ATTR VkResult vkCreateIndirectCommandsLayoutEXT(VkDevice device, const VkIndirectCommandsLayoutCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkIndirectCommandsLayoutEXT * pIndirectCommandsLayout)
+{
+	assert(pfn_vkCreateIndirectCommandsLayoutEXT);
+	return pfn_vkCreateIndirectCommandsLayoutEXT(device, pCreateInfo, pAllocator, pIndirectCommandsLayout);
+}
+
+static PFN_vkDestroyIndirectCommandsLayoutEXT pfn_vkDestroyIndirectCommandsLayoutEXT;
+VKAPI_ATTR void vkDestroyIndirectCommandsLayoutEXT(VkDevice device, VkIndirectCommandsLayoutEXT indirectCommandsLayout, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyIndirectCommandsLayoutEXT);
+	pfn_vkDestroyIndirectCommandsLayoutEXT(device, indirectCommandsLayout, pAllocator);
+}
+
+static PFN_vkUpdateIndirectExecutionSetShaderEXT pfn_vkUpdateIndirectExecutionSetShaderEXT;
+VKAPI_ATTR void vkUpdateIndirectExecutionSetShaderEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, uint32_t executionSetWriteCount, const VkWriteIndirectExecutionSetShaderEXT * pExecutionSetWrites)
+{
+	assert(pfn_vkUpdateIndirectExecutionSetShaderEXT);
+	pfn_vkUpdateIndirectExecutionSetShaderEXT(device, indirectExecutionSet, executionSetWriteCount, pExecutionSetWrites);
+}
+
+static PFN_vkCmdPreprocessGeneratedCommandsEXT pfn_vkCmdPreprocessGeneratedCommandsEXT;
+VKAPI_ATTR void vkCmdPreprocessGeneratedCommandsEXT(VkCommandBuffer commandBuffer, const VkGeneratedCommandsInfoEXT * pGeneratedCommandsInfo, VkCommandBuffer stateCommandBuffer)
+{
+	assert(pfn_vkCmdPreprocessGeneratedCommandsEXT);
+	pfn_vkCmdPreprocessGeneratedCommandsEXT(commandBuffer, pGeneratedCommandsInfo, stateCommandBuffer);
+}
+
+static PFN_vkUpdateIndirectExecutionSetPipelineEXT pfn_vkUpdateIndirectExecutionSetPipelineEXT;
+VKAPI_ATTR void vkUpdateIndirectExecutionSetPipelineEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, uint32_t executionSetWriteCount, const VkWriteIndirectExecutionSetPipelineEXT * pExecutionSetWrites)
+{
+	assert(pfn_vkUpdateIndirectExecutionSetPipelineEXT);
+	pfn_vkUpdateIndirectExecutionSetPipelineEXT(device, indirectExecutionSet, executionSetWriteCount, pExecutionSetWrites);
+}
+
+static PFN_vkGetGeneratedCommandsMemoryRequirementsEXT pfn_vkGetGeneratedCommandsMemoryRequirementsEXT;
+VKAPI_ATTR void vkGetGeneratedCommandsMemoryRequirementsEXT(VkDevice device, const VkGeneratedCommandsMemoryRequirementsInfoEXT * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetGeneratedCommandsMemoryRequirementsEXT);
+	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT(device, pInfo, pMemoryRequirements);
+}
+
+static PFN_vkCmdExecuteGeneratedCommandsEXT pfn_vkCmdExecuteGeneratedCommandsEXT;
+VKAPI_ATTR void vkCmdExecuteGeneratedCommandsEXT(VkCommandBuffer commandBuffer, VkBool32 isPreprocessed, const VkGeneratedCommandsInfoEXT * pGeneratedCommandsInfo)
+{
+	assert(pfn_vkCmdExecuteGeneratedCommandsEXT);
+	pfn_vkCmdExecuteGeneratedCommandsEXT(commandBuffer, isPreprocessed, pGeneratedCommandsInfo);
+}
+
+static PFN_vkCreateIndirectExecutionSetEXT pfn_vkCreateIndirectExecutionSetEXT;
+VKAPI_ATTR VkResult vkCreateIndirectExecutionSetEXT(VkDevice device, const VkIndirectExecutionSetCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkIndirectExecutionSetEXT * pIndirectExecutionSet)
+{
+	assert(pfn_vkCreateIndirectExecutionSetEXT);
+	return pfn_vkCreateIndirectExecutionSetEXT(device, pCreateInfo, pAllocator, pIndirectExecutionSet);
+}
+#endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_direct_mode_display)
 
 static PFN_vkReleaseDisplayEXT pfn_vkReleaseDisplayEXT;
@@ -7773,6 +7875,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_depth_bias_control)
 	pfn_vkCmdSetDepthBias2EXT = (PFN_vkCmdSetDepthBias2EXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthBias2EXT");
 #endif // defined(VK_EXT_depth_bias_control)
+#if defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
+	pfn_vkCmdSetDepthClampRangeEXT = (PFN_vkCmdSetDepthClampRangeEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthClampRangeEXT");
+#endif // defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
 #if defined(VK_EXT_descriptor_buffer)
 	pfn_vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	pfn_vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBuffersEXT");
@@ -7789,6 +7894,17 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_device_fault)
 	pfn_vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vkGetInstanceProcAddr(instance, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
+#if defined(VK_EXT_device_generated_commands)
+	pfn_vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vkGetInstanceProcAddr(instance, "vkDestroyIndirectExecutionSetEXT");
+	pfn_vkCreateIndirectCommandsLayoutEXT = (PFN_vkCreateIndirectCommandsLayoutEXT)vkGetInstanceProcAddr(instance, "vkCreateIndirectCommandsLayoutEXT");
+	pfn_vkDestroyIndirectCommandsLayoutEXT = (PFN_vkDestroyIndirectCommandsLayoutEXT)vkGetInstanceProcAddr(instance, "vkDestroyIndirectCommandsLayoutEXT");
+	pfn_vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetShaderEXT");
+	pfn_vkCmdPreprocessGeneratedCommandsEXT = (PFN_vkCmdPreprocessGeneratedCommandsEXT)vkGetInstanceProcAddr(instance, "vkCmdPreprocessGeneratedCommandsEXT");
+	pfn_vkUpdateIndirectExecutionSetPipelineEXT = (PFN_vkUpdateIndirectExecutionSetPipelineEXT)vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetPipelineEXT");
+	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsEXT");
+	pfn_vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vkGetInstanceProcAddr(instance, "vkCmdExecuteGeneratedCommandsEXT");
+	pfn_vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vkGetInstanceProcAddr(instance, "vkCreateIndirectExecutionSetEXT");
+#endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_direct_mode_display)
 	pfn_vkReleaseDisplayEXT = (PFN_vkReleaseDisplayEXT)vkGetInstanceProcAddr(instance, "vkReleaseDisplayEXT");
 #endif // defined(VK_EXT_direct_mode_display)
@@ -8820,6 +8936,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_depth_bias_control)
 	pfn_vkCmdSetDepthBias2EXT = (PFN_vkCmdSetDepthBias2EXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthBias2EXT");
 #endif // defined(VK_EXT_depth_bias_control)
+#if defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
+	pfn_vkCmdSetDepthClampRangeEXT = (PFN_vkCmdSetDepthClampRangeEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthClampRangeEXT");
+#endif // defined(VK_EXT_depth_clamp_control) || defined(VK_EXT_shader_object)
 #if defined(VK_EXT_descriptor_buffer)
 	pfn_vkGetImageOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
 	pfn_vkCmdBindDescriptorBuffersEXT = (PFN_vkCmdBindDescriptorBuffersEXT)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
@@ -8836,6 +8955,17 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_device_fault)
 	pfn_vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vkGetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
+#if defined(VK_EXT_device_generated_commands)
+	pfn_vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vkGetDeviceProcAddr(device, "vkDestroyIndirectExecutionSetEXT");
+	pfn_vkCreateIndirectCommandsLayoutEXT = (PFN_vkCreateIndirectCommandsLayoutEXT)vkGetDeviceProcAddr(device, "vkCreateIndirectCommandsLayoutEXT");
+	pfn_vkDestroyIndirectCommandsLayoutEXT = (PFN_vkDestroyIndirectCommandsLayoutEXT)vkGetDeviceProcAddr(device, "vkDestroyIndirectCommandsLayoutEXT");
+	pfn_vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetShaderEXT");
+	pfn_vkCmdPreprocessGeneratedCommandsEXT = (PFN_vkCmdPreprocessGeneratedCommandsEXT)vkGetDeviceProcAddr(device, "vkCmdPreprocessGeneratedCommandsEXT");
+	pfn_vkUpdateIndirectExecutionSetPipelineEXT = (PFN_vkUpdateIndirectExecutionSetPipelineEXT)vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetPipelineEXT");
+	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsEXT");
+	pfn_vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vkGetDeviceProcAddr(device, "vkCmdExecuteGeneratedCommandsEXT");
+	pfn_vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vkGetDeviceProcAddr(device, "vkCreateIndirectExecutionSetEXT");
+#endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_discard_rectangles)
 	pfn_vkCmdSetDiscardRectangleEXT = (PFN_vkCmdSetDiscardRectangleEXT)vkGetDeviceProcAddr(device, "vkCmdSetDiscardRectangleEXT");
 	pfn_vkCmdSetDiscardRectangleEnableEXT = (PFN_vkCmdSetDiscardRectangleEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDiscardRectangleEnableEXT");
