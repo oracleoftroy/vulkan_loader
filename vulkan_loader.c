@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 297 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 298 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -3734,31 +3734,31 @@ VKAPI_ATTR VkResult vkGetExecutionGraphPipelineNodeIndexAMDX(VkDevice device, Vk
 }
 
 static PFN_vkCmdInitializeGraphScratchMemoryAMDX pfn_vkCmdInitializeGraphScratchMemoryAMDX;
-VKAPI_ATTR void vkCmdInitializeGraphScratchMemoryAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch)
+VKAPI_ATTR void vkCmdInitializeGraphScratchMemoryAMDX(VkCommandBuffer commandBuffer, VkPipeline executionGraph, VkDeviceAddress scratch, VkDeviceSize scratchSize)
 {
 	assert(pfn_vkCmdInitializeGraphScratchMemoryAMDX);
-	pfn_vkCmdInitializeGraphScratchMemoryAMDX(commandBuffer, scratch);
+	pfn_vkCmdInitializeGraphScratchMemoryAMDX(commandBuffer, executionGraph, scratch, scratchSize);
 }
 
 static PFN_vkCmdDispatchGraphAMDX pfn_vkCmdDispatchGraphAMDX;
-VKAPI_ATTR void vkCmdDispatchGraphAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, const VkDispatchGraphCountInfoAMDX * pCountInfo)
+VKAPI_ATTR void vkCmdDispatchGraphAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, VkDeviceSize scratchSize, const VkDispatchGraphCountInfoAMDX * pCountInfo)
 {
 	assert(pfn_vkCmdDispatchGraphAMDX);
-	pfn_vkCmdDispatchGraphAMDX(commandBuffer, scratch, pCountInfo);
+	pfn_vkCmdDispatchGraphAMDX(commandBuffer, scratch, scratchSize, pCountInfo);
 }
 
 static PFN_vkCmdDispatchGraphIndirectAMDX pfn_vkCmdDispatchGraphIndirectAMDX;
-VKAPI_ATTR void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, const VkDispatchGraphCountInfoAMDX * pCountInfo)
+VKAPI_ATTR void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, VkDeviceSize scratchSize, const VkDispatchGraphCountInfoAMDX * pCountInfo)
 {
 	assert(pfn_vkCmdDispatchGraphIndirectAMDX);
-	pfn_vkCmdDispatchGraphIndirectAMDX(commandBuffer, scratch, pCountInfo);
+	pfn_vkCmdDispatchGraphIndirectAMDX(commandBuffer, scratch, scratchSize, pCountInfo);
 }
 
 static PFN_vkCmdDispatchGraphIndirectCountAMDX pfn_vkCmdDispatchGraphIndirectCountAMDX;
-VKAPI_ATTR void vkCmdDispatchGraphIndirectCountAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, VkDeviceAddress countInfo)
+VKAPI_ATTR void vkCmdDispatchGraphIndirectCountAMDX(VkCommandBuffer commandBuffer, VkDeviceAddress scratch, VkDeviceSize scratchSize, VkDeviceAddress countInfo)
 {
 	assert(pfn_vkCmdDispatchGraphIndirectCountAMDX);
-	pfn_vkCmdDispatchGraphIndirectCountAMDX(commandBuffer, scratch, countInfo);
+	pfn_vkCmdDispatchGraphIndirectCountAMDX(commandBuffer, scratch, scratchSize, countInfo);
 }
 #endif // defined(VK_AMDX_shader_enqueue)
 #if defined(VK_AMD_anti_lag)
