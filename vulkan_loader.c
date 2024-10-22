@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 298 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 299 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -327,6 +327,7 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 	vk->vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarkerAMD");
+	vk->vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarker2AMD");
 #endif // defined(VK_AMD_buffer_marker)
 #if defined(VK_AMD_display_native_hdr)
 	vk->vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vk->vkGetInstanceProcAddr(instance, "vkSetLocalDimmingAMD");
@@ -483,11 +484,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetConservativeRasterizationModeEXT = (PFN_vkCmdSetConservativeRasterizationModeEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetConservativeRasterizationModeEXT");
 	vk->vkCmdSetDepthClampEnableEXT = (PFN_vkCmdSetDepthClampEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthClampEnableEXT");
 	vk->vkCmdSetColorWriteMaskEXT = (PFN_vkCmdSetColorWriteMaskEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorWriteMaskEXT");
+	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
 	vk->vkCmdSetLogicOpEnableEXT = (PFN_vkCmdSetLogicOpEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetLogicOpEnableEXT");
 	vk->vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToOneEnableEXT");
 	vk->vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingEnableNV");
 	vk->vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetRasterizationStreamEXT");
-	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
 	vk->vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEquationEXT");
 	vk->vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetSampleMaskEXT");
 	vk->vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToCoverageEnableEXT");
@@ -925,8 +926,6 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdPipelineBarrier2KHR = (PFN_vkCmdPipelineBarrier2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPipelineBarrier2KHR");
 	vk->vkCmdSetEvent2KHR = (PFN_vkCmdSetEvent2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdSetEvent2KHR");
 	vk->vkQueueSubmit2KHR = (PFN_vkQueueSubmit2KHR)vk->vkGetInstanceProcAddr(instance, "vkQueueSubmit2KHR");
-	vk->vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarker2AMD");
-	vk->vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_KHR_synchronization2)
 #if defined(VK_KHR_timeline_semaphore)
 	vk->vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vk->vkGetInstanceProcAddr(instance, "vkWaitSemaphoresKHR");
@@ -1019,6 +1018,7 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	vk->vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointDataNV");
 	vk->vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCheckpointNV");
+	vk->vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
 	vk->vkGetGeneratedCommandsMemoryRequirementsNV = (PFN_vkGetGeneratedCommandsMemoryRequirementsNV)vk->vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsNV");
@@ -1405,6 +1405,7 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 	vk->vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
+	vk->vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarker2AMD");
 #endif // defined(VK_AMD_buffer_marker)
 #if defined(VK_AMD_display_native_hdr)
 	vk->vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vk->vkGetDeviceProcAddr(device, "vkSetLocalDimmingAMD");
@@ -1534,11 +1535,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetConservativeRasterizationModeEXT = (PFN_vkCmdSetConservativeRasterizationModeEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetConservativeRasterizationModeEXT");
 	vk->vkCmdSetDepthClampEnableEXT = (PFN_vkCmdSetDepthClampEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthClampEnableEXT");
 	vk->vkCmdSetColorWriteMaskEXT = (PFN_vkCmdSetColorWriteMaskEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorWriteMaskEXT");
+	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
 	vk->vkCmdSetLogicOpEnableEXT = (PFN_vkCmdSetLogicOpEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetLogicOpEnableEXT");
 	vk->vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAlphaToOneEnableEXT");
 	vk->vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
 	vk->vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
-	vk->vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
 	vk->vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
 	vk->vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
 	vk->vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
@@ -1900,8 +1901,6 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdPipelineBarrier2KHR = (PFN_vkCmdPipelineBarrier2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPipelineBarrier2KHR");
 	vk->vkCmdSetEvent2KHR = (PFN_vkCmdSetEvent2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetEvent2KHR");
 	vk->vkQueueSubmit2KHR = (PFN_vkQueueSubmit2KHR)vk->vkGetDeviceProcAddr(device, "vkQueueSubmit2KHR");
-	vk->vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarker2AMD");
-	vk->vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vk->vkGetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_KHR_synchronization2)
 #if defined(VK_KHR_timeline_semaphore)
 	vk->vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vk->vkGetDeviceProcAddr(device, "vkWaitSemaphoresKHR");
@@ -1956,6 +1955,7 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	vk->vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vk->vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 	vk->vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
+	vk->vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vk->vkGetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
 	vk->vkGetGeneratedCommandsMemoryRequirementsNV = (PFN_vkGetGeneratedCommandsMemoryRequirementsNV)vk->vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsNV");
@@ -3778,6 +3778,13 @@ VKAPI_ATTR void vkCmdWriteBufferMarkerAMD(VkCommandBuffer commandBuffer, VkPipel
 	assert(pfn_vkCmdWriteBufferMarkerAMD);
 	pfn_vkCmdWriteBufferMarkerAMD(commandBuffer, pipelineStage, dstBuffer, dstOffset, marker);
 }
+
+static PFN_vkCmdWriteBufferMarker2AMD pfn_vkCmdWriteBufferMarker2AMD;
+VKAPI_ATTR void vkCmdWriteBufferMarker2AMD(VkCommandBuffer commandBuffer, VkPipelineStageFlags2 stage, VkBuffer dstBuffer, VkDeviceSize dstOffset, uint32_t marker)
+{
+	assert(pfn_vkCmdWriteBufferMarker2AMD);
+	pfn_vkCmdWriteBufferMarker2AMD(commandBuffer, stage, dstBuffer, dstOffset, marker);
+}
 #endif // defined(VK_AMD_buffer_marker)
 #if defined(VK_AMD_display_native_hdr)
 
@@ -4547,6 +4554,13 @@ VKAPI_ATTR void vkCmdSetColorWriteMaskEXT(VkCommandBuffer commandBuffer, uint32_
 	pfn_vkCmdSetColorWriteMaskEXT(commandBuffer, firstAttachment, attachmentCount, pColorWriteMasks);
 }
 
+static PFN_vkCmdSetColorBlendAdvancedEXT pfn_vkCmdSetColorBlendAdvancedEXT;
+VKAPI_ATTR void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, uint32_t attachmentCount, const VkColorBlendAdvancedEXT * pColorBlendAdvanced)
+{
+	assert(pfn_vkCmdSetColorBlendAdvancedEXT);
+	pfn_vkCmdSetColorBlendAdvancedEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendAdvanced);
+}
+
 static PFN_vkCmdSetLogicOpEnableEXT pfn_vkCmdSetLogicOpEnableEXT;
 VKAPI_ATTR void vkCmdSetLogicOpEnableEXT(VkCommandBuffer commandBuffer, VkBool32 logicOpEnable)
 {
@@ -4573,13 +4587,6 @@ VKAPI_ATTR void vkCmdSetRasterizationStreamEXT(VkCommandBuffer commandBuffer, ui
 {
 	assert(pfn_vkCmdSetRasterizationStreamEXT);
 	pfn_vkCmdSetRasterizationStreamEXT(commandBuffer, rasterizationStream);
-}
-
-static PFN_vkCmdSetColorBlendAdvancedEXT pfn_vkCmdSetColorBlendAdvancedEXT;
-VKAPI_ATTR void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, uint32_t attachmentCount, const VkColorBlendAdvancedEXT * pColorBlendAdvanced)
-{
-	assert(pfn_vkCmdSetColorBlendAdvancedEXT);
-	pfn_vkCmdSetColorBlendAdvancedEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendAdvanced);
 }
 
 static PFN_vkCmdSetColorBlendEquationEXT pfn_vkCmdSetColorBlendEquationEXT;
@@ -6584,20 +6591,6 @@ VKAPI_ATTR VkResult vkQueueSubmit2KHR(VkQueue queue, uint32_t submitCount, const
 	assert(pfn_vkQueueSubmit2KHR);
 	return pfn_vkQueueSubmit2KHR(queue, submitCount, pSubmits, fence);
 }
-
-static PFN_vkCmdWriteBufferMarker2AMD pfn_vkCmdWriteBufferMarker2AMD;
-VKAPI_ATTR void vkCmdWriteBufferMarker2AMD(VkCommandBuffer commandBuffer, VkPipelineStageFlags2 stage, VkBuffer dstBuffer, VkDeviceSize dstOffset, uint32_t marker)
-{
-	assert(pfn_vkCmdWriteBufferMarker2AMD);
-	pfn_vkCmdWriteBufferMarker2AMD(commandBuffer, stage, dstBuffer, dstOffset, marker);
-}
-
-static PFN_vkGetQueueCheckpointData2NV pfn_vkGetQueueCheckpointData2NV;
-VKAPI_ATTR void vkGetQueueCheckpointData2NV(VkQueue queue, uint32_t * pCheckpointDataCount, VkCheckpointData2NV * pCheckpointData)
-{
-	assert(pfn_vkGetQueueCheckpointData2NV);
-	pfn_vkGetQueueCheckpointData2NV(queue, pCheckpointDataCount, pCheckpointData);
-}
 #endif // defined(VK_KHR_synchronization2)
 #if defined(VK_KHR_timeline_semaphore)
 
@@ -7001,6 +6994,13 @@ VKAPI_ATTR void vkCmdSetCheckpointNV(VkCommandBuffer commandBuffer, const void *
 {
 	assert(pfn_vkCmdSetCheckpointNV);
 	pfn_vkCmdSetCheckpointNV(commandBuffer, pCheckpointMarker);
+}
+
+static PFN_vkGetQueueCheckpointData2NV pfn_vkGetQueueCheckpointData2NV;
+VKAPI_ATTR void vkGetQueueCheckpointData2NV(VkQueue queue, uint32_t * pCheckpointDataCount, VkCheckpointData2NV * pCheckpointData)
+{
+	assert(pfn_vkGetQueueCheckpointData2NV);
+	pfn_vkGetQueueCheckpointData2NV(queue, pCheckpointDataCount, pCheckpointData);
 }
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
@@ -7807,6 +7807,7 @@ void vgen_load_instance_procs(VkInstance instance)
 #endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarkerAMD");
+	pfn_vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarker2AMD");
 #endif // defined(VK_AMD_buffer_marker)
 #if defined(VK_AMD_display_native_hdr)
 	pfn_vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vkGetInstanceProcAddr(instance, "vkSetLocalDimmingAMD");
@@ -7963,11 +7964,11 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdSetConservativeRasterizationModeEXT = (PFN_vkCmdSetConservativeRasterizationModeEXT)vkGetInstanceProcAddr(instance, "vkCmdSetConservativeRasterizationModeEXT");
 	pfn_vkCmdSetDepthClampEnableEXT = (PFN_vkCmdSetDepthClampEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthClampEnableEXT");
 	pfn_vkCmdSetColorWriteMaskEXT = (PFN_vkCmdSetColorWriteMaskEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorWriteMaskEXT");
+	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
 	pfn_vkCmdSetLogicOpEnableEXT = (PFN_vkCmdSetLogicOpEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetLogicOpEnableEXT");
 	pfn_vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToOneEnableEXT");
 	pfn_vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingEnableNV");
 	pfn_vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vkGetInstanceProcAddr(instance, "vkCmdSetRasterizationStreamEXT");
-	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendAdvancedEXT");
 	pfn_vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEquationEXT");
 	pfn_vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vkGetInstanceProcAddr(instance, "vkCmdSetSampleMaskEXT");
 	pfn_vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToCoverageEnableEXT");
@@ -8405,8 +8406,6 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdPipelineBarrier2KHR = (PFN_vkCmdPipelineBarrier2KHR)vkGetInstanceProcAddr(instance, "vkCmdPipelineBarrier2KHR");
 	pfn_vkCmdSetEvent2KHR = (PFN_vkCmdSetEvent2KHR)vkGetInstanceProcAddr(instance, "vkCmdSetEvent2KHR");
 	pfn_vkQueueSubmit2KHR = (PFN_vkQueueSubmit2KHR)vkGetInstanceProcAddr(instance, "vkQueueSubmit2KHR");
-	pfn_vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vkGetInstanceProcAddr(instance, "vkCmdWriteBufferMarker2AMD");
-	pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_KHR_synchronization2)
 #if defined(VK_KHR_timeline_semaphore)
 	pfn_vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vkGetInstanceProcAddr(instance, "vkWaitSemaphoresKHR");
@@ -8499,6 +8498,7 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointDataNV");
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetInstanceProcAddr(instance, "vkCmdSetCheckpointNV");
+	pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
 	pfn_vkGetGeneratedCommandsMemoryRequirementsNV = (PFN_vkGetGeneratedCommandsMemoryRequirementsNV)vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsNV");
@@ -8885,6 +8885,7 @@ void vgen_load_device_procs(VkDevice device)
 #endif // defined(VK_AMD_anti_lag)
 #if defined(VK_AMD_buffer_marker)
 	pfn_vkCmdWriteBufferMarkerAMD = (PFN_vkCmdWriteBufferMarkerAMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
+	pfn_vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarker2AMD");
 #endif // defined(VK_AMD_buffer_marker)
 #if defined(VK_AMD_display_native_hdr)
 	pfn_vkSetLocalDimmingAMD = (PFN_vkSetLocalDimmingAMD)vkGetDeviceProcAddr(device, "vkSetLocalDimmingAMD");
@@ -9014,11 +9015,11 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdSetConservativeRasterizationModeEXT = (PFN_vkCmdSetConservativeRasterizationModeEXT)vkGetDeviceProcAddr(device, "vkCmdSetConservativeRasterizationModeEXT");
 	pfn_vkCmdSetDepthClampEnableEXT = (PFN_vkCmdSetDepthClampEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthClampEnableEXT");
 	pfn_vkCmdSetColorWriteMaskEXT = (PFN_vkCmdSetColorWriteMaskEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorWriteMaskEXT");
+	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
 	pfn_vkCmdSetLogicOpEnableEXT = (PFN_vkCmdSetLogicOpEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetLogicOpEnableEXT");
 	pfn_vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAlphaToOneEnableEXT");
 	pfn_vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
 	pfn_vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vkGetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
-	pfn_vkCmdSetColorBlendAdvancedEXT = (PFN_vkCmdSetColorBlendAdvancedEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
 	pfn_vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
 	pfn_vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vkGetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
 	pfn_vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
@@ -9380,8 +9381,6 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdPipelineBarrier2KHR = (PFN_vkCmdPipelineBarrier2KHR)vkGetDeviceProcAddr(device, "vkCmdPipelineBarrier2KHR");
 	pfn_vkCmdSetEvent2KHR = (PFN_vkCmdSetEvent2KHR)vkGetDeviceProcAddr(device, "vkCmdSetEvent2KHR");
 	pfn_vkQueueSubmit2KHR = (PFN_vkQueueSubmit2KHR)vkGetDeviceProcAddr(device, "vkQueueSubmit2KHR");
-	pfn_vkCmdWriteBufferMarker2AMD = (PFN_vkCmdWriteBufferMarker2AMD)vkGetDeviceProcAddr(device, "vkCmdWriteBufferMarker2AMD");
-	pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_KHR_synchronization2)
 #if defined(VK_KHR_timeline_semaphore)
 	pfn_vkWaitSemaphoresKHR = (PFN_vkWaitSemaphoresKHR)vkGetDeviceProcAddr(device, "vkWaitSemaphoresKHR");
@@ -9436,6 +9435,7 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
+	pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
 	pfn_vkGetGeneratedCommandsMemoryRequirementsNV = (PFN_vkGetGeneratedCommandsMemoryRequirementsNV)vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsNV");
