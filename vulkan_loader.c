@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 299 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 300 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -1000,6 +1000,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_cooperative_matrix)
 	vk->vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
+#if defined(VK_NV_cooperative_matrix2)
+	vk->vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV");
+#endif // defined(VK_NV_cooperative_matrix2)
 #if defined(VK_NV_copy_memory_indirect)
 	vk->vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryToImageIndirectNV");
 	vk->vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryIndirectNV");
@@ -6911,6 +6914,15 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(VkPhysicalD
 	return pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(physicalDevice, pPropertyCount, pProperties);
 }
 #endif // defined(VK_NV_cooperative_matrix)
+#if defined(VK_NV_cooperative_matrix2)
+
+static PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV pfn_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV(VkPhysicalDevice physicalDevice, uint32_t * pPropertyCount, VkCooperativeMatrixFlexibleDimensionsPropertiesNV * pProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV);
+	return pfn_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV(physicalDevice, pPropertyCount, pProperties);
+}
+#endif // defined(VK_NV_cooperative_matrix2)
 #if defined(VK_NV_copy_memory_indirect)
 
 static PFN_vkCmdCopyMemoryToImageIndirectNV pfn_vkCmdCopyMemoryToImageIndirectNV;
@@ -8480,6 +8492,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NV_cooperative_matrix)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
+#if defined(VK_NV_cooperative_matrix2)
+	pfn_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV");
+#endif // defined(VK_NV_cooperative_matrix2)
 #if defined(VK_NV_copy_memory_indirect)
 	pfn_vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryToImageIndirectNV");
 	pfn_vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryIndirectNV");
