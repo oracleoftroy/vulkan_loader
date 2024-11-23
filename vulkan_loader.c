@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 301 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 302 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -987,6 +987,7 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdCuLaunchKernelNVX = (PFN_vkCmdCuLaunchKernelNVX)vk->vkGetInstanceProcAddr(instance, "vkCmdCuLaunchKernelNVX");
 #endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
+	vk->vkGetImageViewHandle64NVX = (PFN_vkGetImageViewHandle64NVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewHandle64NVX");
 	vk->vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewHandleNVX");
 	vk->vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewAddressNVX");
 #endif // defined(VK_NVX_image_view_handle)
@@ -1937,6 +1938,7 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdCuLaunchKernelNVX = (PFN_vkCmdCuLaunchKernelNVX)vk->vkGetDeviceProcAddr(device, "vkCmdCuLaunchKernelNVX");
 #endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
+	vk->vkGetImageViewHandle64NVX = (PFN_vkGetImageViewHandle64NVX)vk->vkGetDeviceProcAddr(device, "vkGetImageViewHandle64NVX");
 	vk->vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vk->vkGetDeviceProcAddr(device, "vkGetImageViewHandleNVX");
 	vk->vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vk->vkGetDeviceProcAddr(device, "vkGetImageViewAddressNVX");
 #endif // defined(VK_NVX_image_view_handle)
@@ -6866,6 +6868,13 @@ VKAPI_ATTR void vkCmdCuLaunchKernelNVX(VkCommandBuffer commandBuffer, const VkCu
 #endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
 
+static PFN_vkGetImageViewHandle64NVX pfn_vkGetImageViewHandle64NVX;
+VKAPI_ATTR uint64_t vkGetImageViewHandle64NVX(VkDevice device, const VkImageViewHandleInfoNVX * pInfo)
+{
+	assert(pfn_vkGetImageViewHandle64NVX);
+	return pfn_vkGetImageViewHandle64NVX(device, pInfo);
+}
+
 static PFN_vkGetImageViewHandleNVX pfn_vkGetImageViewHandleNVX;
 VKAPI_ATTR uint32_t vkGetImageViewHandleNVX(VkDevice device, const VkImageViewHandleInfoNVX * pInfo)
 {
@@ -8479,6 +8488,7 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdCuLaunchKernelNVX = (PFN_vkCmdCuLaunchKernelNVX)vkGetInstanceProcAddr(instance, "vkCmdCuLaunchKernelNVX");
 #endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
+	pfn_vkGetImageViewHandle64NVX = (PFN_vkGetImageViewHandle64NVX)vkGetInstanceProcAddr(instance, "vkGetImageViewHandle64NVX");
 	pfn_vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vkGetInstanceProcAddr(instance, "vkGetImageViewHandleNVX");
 	pfn_vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vkGetInstanceProcAddr(instance, "vkGetImageViewAddressNVX");
 #endif // defined(VK_NVX_image_view_handle)
@@ -9429,6 +9439,7 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdCuLaunchKernelNVX = (PFN_vkCmdCuLaunchKernelNVX)vkGetDeviceProcAddr(device, "vkCmdCuLaunchKernelNVX");
 #endif // defined(VK_NVX_binary_import)
 #if defined(VK_NVX_image_view_handle)
+	pfn_vkGetImageViewHandle64NVX = (PFN_vkGetImageViewHandle64NVX)vkGetDeviceProcAddr(device, "vkGetImageViewHandle64NVX");
 	pfn_vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vkGetDeviceProcAddr(device, "vkGetImageViewHandleNVX");
 	pfn_vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vkGetDeviceProcAddr(device, "vkGetImageViewAddressNVX");
 #endif // defined(VK_NVX_image_view_handle)
