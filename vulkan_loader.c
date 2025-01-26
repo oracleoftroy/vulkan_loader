@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 305 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 306 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -534,6 +534,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_external_memory_host)
 	vk->vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryHostPointerPropertiesEXT");
 #endif // defined(VK_EXT_external_memory_host)
+#if defined(VK_EXT_external_memory_metal)
+	vk->vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandlePropertiesEXT");
+	vk->vkGetMemoryMetalHandleEXT = (PFN_vkGetMemoryMetalHandleEXT)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandleEXT");
+#endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_full_screen_exclusive)
 	vk->vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceGroupSurfacePresentModes2EXT");
 	vk->vkGetPhysicalDeviceSurfacePresentModes2EXT = (PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
@@ -1619,6 +1623,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_external_memory_host)
 	vk->vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetMemoryHostPointerPropertiesEXT");
 #endif // defined(VK_EXT_external_memory_host)
+#if defined(VK_EXT_external_memory_metal)
+	vk->vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandlePropertiesEXT");
+	vk->vkGetMemoryMetalHandleEXT = (PFN_vkGetMemoryMetalHandleEXT)vk->vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandleEXT");
+#endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_full_screen_exclusive)
 	vk->vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vk->vkGetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModes2EXT");
 	vk->vkAcquireFullScreenExclusiveModeEXT = (PFN_vkAcquireFullScreenExclusiveModeEXT)vk->vkGetDeviceProcAddr(device, "vkAcquireFullScreenExclusiveModeEXT");
@@ -4892,6 +4900,22 @@ VKAPI_ATTR VkResult vkGetMemoryHostPointerPropertiesEXT(VkDevice device, VkExter
 	return pfn_vkGetMemoryHostPointerPropertiesEXT(device, handleType, pHostPointer, pMemoryHostPointerProperties);
 }
 #endif // defined(VK_EXT_external_memory_host)
+#if defined(VK_EXT_external_memory_metal)
+
+static PFN_vkGetMemoryMetalHandlePropertiesEXT pfn_vkGetMemoryMetalHandlePropertiesEXT;
+VKAPI_ATTR VkResult vkGetMemoryMetalHandlePropertiesEXT(VkDevice device, VkExternalMemoryHandleTypeFlagBits handleType, const void * pHandle, VkMemoryMetalHandlePropertiesEXT * pMemoryMetalHandleProperties)
+{
+	assert(pfn_vkGetMemoryMetalHandlePropertiesEXT);
+	return pfn_vkGetMemoryMetalHandlePropertiesEXT(device, handleType, pHandle, pMemoryMetalHandleProperties);
+}
+
+static PFN_vkGetMemoryMetalHandleEXT pfn_vkGetMemoryMetalHandleEXT;
+VKAPI_ATTR VkResult vkGetMemoryMetalHandleEXT(VkDevice device, const VkMemoryGetMetalHandleInfoEXT * pGetMetalHandleInfo, void ** pHandle)
+{
+	assert(pfn_vkGetMemoryMetalHandleEXT);
+	return pfn_vkGetMemoryMetalHandleEXT(device, pGetMetalHandleInfo, pHandle);
+}
+#endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_full_screen_exclusive)
 
 static PFN_vkGetDeviceGroupSurfacePresentModes2EXT pfn_vkGetDeviceGroupSurfacePresentModes2EXT;
@@ -8247,6 +8271,10 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_external_memory_host)
 	pfn_vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetMemoryHostPointerPropertiesEXT");
 #endif // defined(VK_EXT_external_memory_host)
+#if defined(VK_EXT_external_memory_metal)
+	pfn_vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandlePropertiesEXT");
+	pfn_vkGetMemoryMetalHandleEXT = (PFN_vkGetMemoryMetalHandleEXT)vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandleEXT");
+#endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_full_screen_exclusive)
 	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetInstanceProcAddr(instance, "vkGetDeviceGroupSurfacePresentModes2EXT");
 	pfn_vkGetPhysicalDeviceSurfacePresentModes2EXT = (PFN_vkGetPhysicalDeviceSurfacePresentModes2EXT)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
@@ -9332,6 +9360,10 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_external_memory_host)
 	pfn_vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetMemoryHostPointerPropertiesEXT");
 #endif // defined(VK_EXT_external_memory_host)
+#if defined(VK_EXT_external_memory_metal)
+	pfn_vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandlePropertiesEXT");
+	pfn_vkGetMemoryMetalHandleEXT = (PFN_vkGetMemoryMetalHandleEXT)vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandleEXT");
+#endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_full_screen_exclusive)
 	pfn_vkGetDeviceGroupSurfacePresentModes2EXT = (PFN_vkGetDeviceGroupSurfacePresentModes2EXT)vkGetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModes2EXT");
 	pfn_vkAcquireFullScreenExclusiveModeEXT = (PFN_vkAcquireFullScreenExclusiveModeEXT)vkGetDeviceProcAddr(device, "vkAcquireFullScreenExclusiveModeEXT");
