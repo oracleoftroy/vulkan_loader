@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 306 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 307 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -1032,12 +1032,21 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_clip_space_w_scaling)
 	vk->vkCmdSetViewportWScalingNV = (PFN_vkCmdSetViewportWScalingNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingNV");
 #endif // defined(VK_NV_clip_space_w_scaling)
+#if defined(VK_NV_cluster_acceleration_structure)
+	vk->vkCmdBuildClusterAccelerationStructureIndirectNV = (PFN_vkCmdBuildClusterAccelerationStructureIndirectNV)vk->vkGetInstanceProcAddr(instance, "vkCmdBuildClusterAccelerationStructureIndirectNV");
+	vk->vkGetClusterAccelerationStructureBuildSizesNV = (PFN_vkGetClusterAccelerationStructureBuildSizesNV)vk->vkGetInstanceProcAddr(instance, "vkGetClusterAccelerationStructureBuildSizesNV");
+#endif // defined(VK_NV_cluster_acceleration_structure)
 #if defined(VK_NV_cooperative_matrix)
 	vk->vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
 #if defined(VK_NV_cooperative_matrix2)
 	vk->vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix2)
+#if defined(VK_NV_cooperative_vector)
+	vk->vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vk->vkGetInstanceProcAddr(instance, "vkCmdConvertCooperativeVectorMatrixNV");
+	vk->vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vk->vkGetInstanceProcAddr(instance, "vkConvertCooperativeVectorMatrixNV");
+	vk->vkGetPhysicalDeviceCooperativeVectorPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeVectorPropertiesNV");
+#endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
 	vk->vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryToImageIndirectNV");
 	vk->vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryIndirectNV");
@@ -1126,6 +1135,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkDestroyOpticalFlowSessionNV = (PFN_vkDestroyOpticalFlowSessionNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyOpticalFlowSessionNV");
 	vk->vkCmdOpticalFlowExecuteNV = (PFN_vkCmdOpticalFlowExecuteNV)vk->vkGetInstanceProcAddr(instance, "vkCmdOpticalFlowExecuteNV");
 #endif // defined(VK_NV_optical_flow)
+#if defined(VK_NV_partitioned_acceleration_structure)
+	vk->vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
+	vk->vkCmdBuildPartitionedAccelerationStructuresNV = (PFN_vkCmdBuildPartitionedAccelerationStructuresNV)vk->vkGetInstanceProcAddr(instance, "vkCmdBuildPartitionedAccelerationStructuresNV");
+#endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 	vk->vkCmdTraceRaysNV = (PFN_vkCmdTraceRaysNV)vk->vkGetInstanceProcAddr(instance, "vkCmdTraceRaysNV");
 	vk->vkDestroyAccelerationStructureNV = (PFN_vkDestroyAccelerationStructureNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyAccelerationStructureNV");
@@ -2013,6 +2026,14 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_clip_space_w_scaling)
 	vk->vkCmdSetViewportWScalingNV = (PFN_vkCmdSetViewportWScalingNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingNV");
 #endif // defined(VK_NV_clip_space_w_scaling)
+#if defined(VK_NV_cluster_acceleration_structure)
+	vk->vkCmdBuildClusterAccelerationStructureIndirectNV = (PFN_vkCmdBuildClusterAccelerationStructureIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdBuildClusterAccelerationStructureIndirectNV");
+	vk->vkGetClusterAccelerationStructureBuildSizesNV = (PFN_vkGetClusterAccelerationStructureBuildSizesNV)vk->vkGetDeviceProcAddr(device, "vkGetClusterAccelerationStructureBuildSizesNV");
+#endif // defined(VK_NV_cluster_acceleration_structure)
+#if defined(VK_NV_cooperative_vector)
+	vk->vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vk->vkGetDeviceProcAddr(device, "vkCmdConvertCooperativeVectorMatrixNV");
+	vk->vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vk->vkGetDeviceProcAddr(device, "vkConvertCooperativeVectorMatrixNV");
+#endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
 	vk->vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToImageIndirectNV");
 	vk->vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
@@ -2091,6 +2112,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkDestroyOpticalFlowSessionNV = (PFN_vkDestroyOpticalFlowSessionNV)vk->vkGetDeviceProcAddr(device, "vkDestroyOpticalFlowSessionNV");
 	vk->vkCmdOpticalFlowExecuteNV = (PFN_vkCmdOpticalFlowExecuteNV)vk->vkGetDeviceProcAddr(device, "vkCmdOpticalFlowExecuteNV");
 #endif // defined(VK_NV_optical_flow)
+#if defined(VK_NV_partitioned_acceleration_structure)
+	vk->vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vk->vkGetDeviceProcAddr(device, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
+	vk->vkCmdBuildPartitionedAccelerationStructuresNV = (PFN_vkCmdBuildPartitionedAccelerationStructuresNV)vk->vkGetDeviceProcAddr(device, "vkCmdBuildPartitionedAccelerationStructuresNV");
+#endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 	vk->vkCmdTraceRaysNV = (PFN_vkCmdTraceRaysNV)vk->vkGetDeviceProcAddr(device, "vkCmdTraceRaysNV");
 	vk->vkDestroyAccelerationStructureNV = (PFN_vkDestroyAccelerationStructureNV)vk->vkGetDeviceProcAddr(device, "vkDestroyAccelerationStructureNV");
@@ -7150,6 +7175,22 @@ VKAPI_ATTR void vkCmdSetViewportWScalingNV(VkCommandBuffer commandBuffer, uint32
 	pfn_vkCmdSetViewportWScalingNV(commandBuffer, firstViewport, viewportCount, pViewportWScalings);
 }
 #endif // defined(VK_NV_clip_space_w_scaling)
+#if defined(VK_NV_cluster_acceleration_structure)
+
+static PFN_vkCmdBuildClusterAccelerationStructureIndirectNV pfn_vkCmdBuildClusterAccelerationStructureIndirectNV;
+VKAPI_ATTR void vkCmdBuildClusterAccelerationStructureIndirectNV(VkCommandBuffer commandBuffer, const VkClusterAccelerationStructureCommandsInfoNV * pCommandInfos)
+{
+	assert(pfn_vkCmdBuildClusterAccelerationStructureIndirectNV);
+	pfn_vkCmdBuildClusterAccelerationStructureIndirectNV(commandBuffer, pCommandInfos);
+}
+
+static PFN_vkGetClusterAccelerationStructureBuildSizesNV pfn_vkGetClusterAccelerationStructureBuildSizesNV;
+VKAPI_ATTR void vkGetClusterAccelerationStructureBuildSizesNV(VkDevice device, const VkClusterAccelerationStructureInputInfoNV * pInfo, VkAccelerationStructureBuildSizesInfoKHR * pSizeInfo)
+{
+	assert(pfn_vkGetClusterAccelerationStructureBuildSizesNV);
+	pfn_vkGetClusterAccelerationStructureBuildSizesNV(device, pInfo, pSizeInfo);
+}
+#endif // defined(VK_NV_cluster_acceleration_structure)
 #if defined(VK_NV_cooperative_matrix)
 
 static PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV;
@@ -7168,6 +7209,29 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsProper
 	return pfn_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV(physicalDevice, pPropertyCount, pProperties);
 }
 #endif // defined(VK_NV_cooperative_matrix2)
+#if defined(VK_NV_cooperative_vector)
+
+static PFN_vkCmdConvertCooperativeVectorMatrixNV pfn_vkCmdConvertCooperativeVectorMatrixNV;
+VKAPI_ATTR void vkCmdConvertCooperativeVectorMatrixNV(VkCommandBuffer commandBuffer, uint32_t infoCount, const VkConvertCooperativeVectorMatrixInfoNV * pInfos)
+{
+	assert(pfn_vkCmdConvertCooperativeVectorMatrixNV);
+	pfn_vkCmdConvertCooperativeVectorMatrixNV(commandBuffer, infoCount, pInfos);
+}
+
+static PFN_vkConvertCooperativeVectorMatrixNV pfn_vkConvertCooperativeVectorMatrixNV;
+VKAPI_ATTR VkResult vkConvertCooperativeVectorMatrixNV(VkDevice device, const VkConvertCooperativeVectorMatrixInfoNV * pInfo)
+{
+	assert(pfn_vkConvertCooperativeVectorMatrixNV);
+	return pfn_vkConvertCooperativeVectorMatrixNV(device, pInfo);
+}
+
+static PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV pfn_vkGetPhysicalDeviceCooperativeVectorPropertiesNV;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeVectorPropertiesNV(VkPhysicalDevice physicalDevice, uint32_t * pPropertyCount, VkCooperativeVectorPropertiesNV * pProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceCooperativeVectorPropertiesNV);
+	return pfn_vkGetPhysicalDeviceCooperativeVectorPropertiesNV(physicalDevice, pPropertyCount, pProperties);
+}
+#endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
 
 static PFN_vkCmdCopyMemoryToImageIndirectNV pfn_vkCmdCopyMemoryToImageIndirectNV;
@@ -7568,6 +7632,22 @@ VKAPI_ATTR void vkCmdOpticalFlowExecuteNV(VkCommandBuffer commandBuffer, VkOptic
 	pfn_vkCmdOpticalFlowExecuteNV(commandBuffer, session, pExecuteInfo);
 }
 #endif // defined(VK_NV_optical_flow)
+#if defined(VK_NV_partitioned_acceleration_structure)
+
+static PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV;
+VKAPI_ATTR void vkGetPartitionedAccelerationStructuresBuildSizesNV(VkDevice device, const VkPartitionedAccelerationStructureInstancesInputNV * pInfo, VkAccelerationStructureBuildSizesInfoKHR * pSizeInfo)
+{
+	assert(pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV);
+	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV(device, pInfo, pSizeInfo);
+}
+
+static PFN_vkCmdBuildPartitionedAccelerationStructuresNV pfn_vkCmdBuildPartitionedAccelerationStructuresNV;
+VKAPI_ATTR void vkCmdBuildPartitionedAccelerationStructuresNV(VkCommandBuffer commandBuffer, const VkBuildPartitionedAccelerationStructureInfoNV * pBuildInfo)
+{
+	assert(pfn_vkCmdBuildPartitionedAccelerationStructuresNV);
+	pfn_vkCmdBuildPartitionedAccelerationStructuresNV(commandBuffer, pBuildInfo);
+}
+#endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 
 static PFN_vkCmdTraceRaysNV pfn_vkCmdTraceRaysNV;
@@ -8769,12 +8849,21 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NV_clip_space_w_scaling)
 	pfn_vkCmdSetViewportWScalingNV = (PFN_vkCmdSetViewportWScalingNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingNV");
 #endif // defined(VK_NV_clip_space_w_scaling)
+#if defined(VK_NV_cluster_acceleration_structure)
+	pfn_vkCmdBuildClusterAccelerationStructureIndirectNV = (PFN_vkCmdBuildClusterAccelerationStructureIndirectNV)vkGetInstanceProcAddr(instance, "vkCmdBuildClusterAccelerationStructureIndirectNV");
+	pfn_vkGetClusterAccelerationStructureBuildSizesNV = (PFN_vkGetClusterAccelerationStructureBuildSizesNV)vkGetInstanceProcAddr(instance, "vkGetClusterAccelerationStructureBuildSizesNV");
+#endif // defined(VK_NV_cluster_acceleration_structure)
 #if defined(VK_NV_cooperative_matrix)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
 #if defined(VK_NV_cooperative_matrix2)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix2)
+#if defined(VK_NV_cooperative_vector)
+	pfn_vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vkGetInstanceProcAddr(instance, "vkCmdConvertCooperativeVectorMatrixNV");
+	pfn_vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vkGetInstanceProcAddr(instance, "vkConvertCooperativeVectorMatrixNV");
+	pfn_vkGetPhysicalDeviceCooperativeVectorPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeVectorPropertiesNV");
+#endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
 	pfn_vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryToImageIndirectNV");
 	pfn_vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryIndirectNV");
@@ -8863,6 +8952,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkDestroyOpticalFlowSessionNV = (PFN_vkDestroyOpticalFlowSessionNV)vkGetInstanceProcAddr(instance, "vkDestroyOpticalFlowSessionNV");
 	pfn_vkCmdOpticalFlowExecuteNV = (PFN_vkCmdOpticalFlowExecuteNV)vkGetInstanceProcAddr(instance, "vkCmdOpticalFlowExecuteNV");
 #endif // defined(VK_NV_optical_flow)
+#if defined(VK_NV_partitioned_acceleration_structure)
+	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vkGetInstanceProcAddr(instance, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
+	pfn_vkCmdBuildPartitionedAccelerationStructuresNV = (PFN_vkCmdBuildPartitionedAccelerationStructuresNV)vkGetInstanceProcAddr(instance, "vkCmdBuildPartitionedAccelerationStructuresNV");
+#endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 	pfn_vkCmdTraceRaysNV = (PFN_vkCmdTraceRaysNV)vkGetInstanceProcAddr(instance, "vkCmdTraceRaysNV");
 	pfn_vkDestroyAccelerationStructureNV = (PFN_vkDestroyAccelerationStructureNV)vkGetInstanceProcAddr(instance, "vkDestroyAccelerationStructureNV");
@@ -9750,6 +9843,14 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_NV_clip_space_w_scaling)
 	pfn_vkCmdSetViewportWScalingNV = (PFN_vkCmdSetViewportWScalingNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingNV");
 #endif // defined(VK_NV_clip_space_w_scaling)
+#if defined(VK_NV_cluster_acceleration_structure)
+	pfn_vkCmdBuildClusterAccelerationStructureIndirectNV = (PFN_vkCmdBuildClusterAccelerationStructureIndirectNV)vkGetDeviceProcAddr(device, "vkCmdBuildClusterAccelerationStructureIndirectNV");
+	pfn_vkGetClusterAccelerationStructureBuildSizesNV = (PFN_vkGetClusterAccelerationStructureBuildSizesNV)vkGetDeviceProcAddr(device, "vkGetClusterAccelerationStructureBuildSizesNV");
+#endif // defined(VK_NV_cluster_acceleration_structure)
+#if defined(VK_NV_cooperative_vector)
+	pfn_vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vkGetDeviceProcAddr(device, "vkCmdConvertCooperativeVectorMatrixNV");
+	pfn_vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vkGetDeviceProcAddr(device, "vkConvertCooperativeVectorMatrixNV");
+#endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
 	pfn_vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToImageIndirectNV");
 	pfn_vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
@@ -9828,6 +9929,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkDestroyOpticalFlowSessionNV = (PFN_vkDestroyOpticalFlowSessionNV)vkGetDeviceProcAddr(device, "vkDestroyOpticalFlowSessionNV");
 	pfn_vkCmdOpticalFlowExecuteNV = (PFN_vkCmdOpticalFlowExecuteNV)vkGetDeviceProcAddr(device, "vkCmdOpticalFlowExecuteNV");
 #endif // defined(VK_NV_optical_flow)
+#if defined(VK_NV_partitioned_acceleration_structure)
+	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vkGetDeviceProcAddr(device, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
+	pfn_vkCmdBuildPartitionedAccelerationStructuresNV = (PFN_vkCmdBuildPartitionedAccelerationStructuresNV)vkGetDeviceProcAddr(device, "vkCmdBuildPartitionedAccelerationStructuresNV");
+#endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 	pfn_vkCmdTraceRaysNV = (PFN_vkCmdTraceRaysNV)vkGetDeviceProcAddr(device, "vkCmdTraceRaysNV");
 	pfn_vkDestroyAccelerationStructureNV = (PFN_vkDestroyAccelerationStructureNV)vkGetDeviceProcAddr(device, "vkDestroyAccelerationStructureNV");
