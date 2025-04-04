@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 311 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 312 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -415,8 +415,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdEndDebugUtilsLabelEXT");
 	vk->vkSubmitDebugUtilsMessageEXT = (PFN_vkSubmitDebugUtilsMessageEXT)vk->vkGetInstanceProcAddr(instance, "vkSubmitDebugUtilsMessageEXT");
 	vk->vkSetDebugUtilsObjectTagEXT = (PFN_vkSetDebugUtilsObjectTagEXT)vk->vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
-	vk->vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkQueueInsertDebugUtilsLabelEXT");
 	vk->vkSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vk->vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectNameEXT");
+	vk->vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkQueueInsertDebugUtilsLabelEXT");
 	vk->vkQueueBeginDebugUtilsLabelEXT = (PFN_vkQueueBeginDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkQueueBeginDebugUtilsLabelEXT");
 	vk->vkQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkQueueEndDebugUtilsLabelEXT");
 	vk->vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginDebugUtilsLabelEXT");
@@ -469,8 +469,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetDiscardRectangleModeEXT = (PFN_vkCmdSetDiscardRectangleModeEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDiscardRectangleModeEXT");
 #endif // defined(VK_EXT_discard_rectangles)
 #if defined(VK_EXT_display_control)
-	vk->vkGetSwapchainCounterEXT = (PFN_vkGetSwapchainCounterEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainCounterEXT");
 	vk->vkDisplayPowerControlEXT = (PFN_vkDisplayPowerControlEXT)vk->vkGetInstanceProcAddr(instance, "vkDisplayPowerControlEXT");
+	vk->vkGetSwapchainCounterEXT = (PFN_vkGetSwapchainCounterEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainCounterEXT");
 	vk->vkRegisterDeviceEventEXT = (PFN_vkRegisterDeviceEventEXT)vk->vkGetInstanceProcAddr(instance, "vkRegisterDeviceEventEXT");
 	vk->vkRegisterDisplayEventEXT = (PFN_vkRegisterDisplayEventEXT)vk->vkGetInstanceProcAddr(instance, "vkRegisterDisplayEventEXT");
 #endif // defined(VK_EXT_display_control)
@@ -987,8 +987,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkDestroyVideoSessionKHR = (PFN_vkDestroyVideoSessionKHR)vk->vkGetInstanceProcAddr(instance, "vkDestroyVideoSessionKHR");
 	vk->vkGetPhysicalDeviceVideoCapabilitiesKHR = (PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceVideoCapabilitiesKHR");
 	vk->vkGetPhysicalDeviceVideoFormatPropertiesKHR = (PFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceVideoFormatPropertiesKHR");
-	vk->vkCreateVideoSessionKHR = (PFN_vkCreateVideoSessionKHR)vk->vkGetInstanceProcAddr(instance, "vkCreateVideoSessionKHR");
 	vk->vkBindVideoSessionMemoryKHR = (PFN_vkBindVideoSessionMemoryKHR)vk->vkGetInstanceProcAddr(instance, "vkBindVideoSessionMemoryKHR");
+	vk->vkCreateVideoSessionKHR = (PFN_vkCreateVideoSessionKHR)vk->vkGetInstanceProcAddr(instance, "vkCreateVideoSessionKHR");
 	vk->vkDestroyVideoSessionParametersKHR = (PFN_vkDestroyVideoSessionParametersKHR)vk->vkGetInstanceProcAddr(instance, "vkDestroyVideoSessionParametersKHR");
 #endif // defined(VK_KHR_video_queue)
 #if defined(VK_KHR_wayland_surface)
@@ -1083,6 +1083,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdUpdatePipelineIndirectBufferNV = (PFN_vkCmdUpdatePipelineIndirectBufferNV)vk->vkGetInstanceProcAddr(instance, "vkCmdUpdatePipelineIndirectBufferNV");
 	vk->vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectDeviceAddressNV");
 #endif // defined(VK_NV_device_generated_commands_compute)
+#if defined(VK_NV_external_compute_queue)
+	vk->vkDestroyExternalComputeQueueNV = (PFN_vkDestroyExternalComputeQueueNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyExternalComputeQueueNV");
+	vk->vkCreateExternalComputeQueueNV = (PFN_vkCreateExternalComputeQueueNV)vk->vkGetInstanceProcAddr(instance, "vkCreateExternalComputeQueueNV");
+	vk->vkGetExternalComputeQueueDataNV = (PFN_vkGetExternalComputeQueueDataNV)vk->vkGetInstanceProcAddr(instance, "vkGetExternalComputeQueueDataNV");
+#endif // defined(VK_NV_external_compute_queue)
 #if defined(VK_NV_external_memory_capabilities)
 	vk->vkGetPhysicalDeviceExternalImageFormatPropertiesNV = (PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV");
 #endif // defined(VK_NV_external_memory_capabilities)
@@ -1169,6 +1174,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vk->vkGetInstanceProcAddr(instance, "vkGetFramebufferTilePropertiesQCOM");
 	vk->vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vk->vkGetInstanceProcAddr(instance, "vkGetDynamicRenderingTilePropertiesQCOM");
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QCOM_tile_shading)
+	vk->vkCmdDispatchTileQCOM = (PFN_vkCmdDispatchTileQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchTileQCOM");
+	vk->vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginPerTileExecutionQCOM");
+	vk->vkCmdEndPerTileExecutionQCOM = (PFN_vkCmdEndPerTileExecutionQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdEndPerTileExecutionQCOM");
+#endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 	vk->vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vk->vkGetInstanceProcAddr(instance, "vkGetScreenBufferPropertiesQNX");
 #endif // defined(VK_QNX_external_memory_screen_buffer)
@@ -1532,8 +1542,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdInsertDebugUtilsLabelEXT = (PFN_vkCmdInsertDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkCmdInsertDebugUtilsLabelEXT");
 	vk->vkCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkCmdEndDebugUtilsLabelEXT");
 	vk->vkSetDebugUtilsObjectTagEXT = (PFN_vkSetDebugUtilsObjectTagEXT)vk->vkGetDeviceProcAddr(device, "vkSetDebugUtilsObjectTagEXT");
-	vk->vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkQueueInsertDebugUtilsLabelEXT");
 	vk->vkSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vk->vkGetDeviceProcAddr(device, "vkSetDebugUtilsObjectNameEXT");
+	vk->vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkQueueInsertDebugUtilsLabelEXT");
 	vk->vkQueueBeginDebugUtilsLabelEXT = (PFN_vkQueueBeginDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkQueueBeginDebugUtilsLabelEXT");
 	vk->vkQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkQueueEndDebugUtilsLabelEXT");
 	vk->vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginDebugUtilsLabelEXT");
@@ -1577,8 +1587,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetDiscardRectangleModeEXT = (PFN_vkCmdSetDiscardRectangleModeEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDiscardRectangleModeEXT");
 #endif // defined(VK_EXT_discard_rectangles)
 #if defined(VK_EXT_display_control)
-	vk->vkGetSwapchainCounterEXT = (PFN_vkGetSwapchainCounterEXT)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainCounterEXT");
 	vk->vkDisplayPowerControlEXT = (PFN_vkDisplayPowerControlEXT)vk->vkGetDeviceProcAddr(device, "vkDisplayPowerControlEXT");
+	vk->vkGetSwapchainCounterEXT = (PFN_vkGetSwapchainCounterEXT)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainCounterEXT");
 	vk->vkRegisterDeviceEventEXT = (PFN_vkRegisterDeviceEventEXT)vk->vkGetDeviceProcAddr(device, "vkRegisterDeviceEventEXT");
 	vk->vkRegisterDisplayEventEXT = (PFN_vkRegisterDisplayEventEXT)vk->vkGetDeviceProcAddr(device, "vkRegisterDisplayEventEXT");
 #endif // defined(VK_EXT_display_control)
@@ -2013,8 +2023,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCreateVideoSessionParametersKHR = (PFN_vkCreateVideoSessionParametersKHR)vk->vkGetDeviceProcAddr(device, "vkCreateVideoSessionParametersKHR");
 	vk->vkCmdControlVideoCodingKHR = (PFN_vkCmdControlVideoCodingKHR)vk->vkGetDeviceProcAddr(device, "vkCmdControlVideoCodingKHR");
 	vk->vkDestroyVideoSessionKHR = (PFN_vkDestroyVideoSessionKHR)vk->vkGetDeviceProcAddr(device, "vkDestroyVideoSessionKHR");
-	vk->vkCreateVideoSessionKHR = (PFN_vkCreateVideoSessionKHR)vk->vkGetDeviceProcAddr(device, "vkCreateVideoSessionKHR");
 	vk->vkBindVideoSessionMemoryKHR = (PFN_vkBindVideoSessionMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkBindVideoSessionMemoryKHR");
+	vk->vkCreateVideoSessionKHR = (PFN_vkCreateVideoSessionKHR)vk->vkGetDeviceProcAddr(device, "vkCreateVideoSessionKHR");
 	vk->vkDestroyVideoSessionParametersKHR = (PFN_vkDestroyVideoSessionParametersKHR)vk->vkGetDeviceProcAddr(device, "vkDestroyVideoSessionParametersKHR");
 #endif // defined(VK_KHR_video_queue)
 #if defined(VK_NVX_binary_import)
@@ -2070,6 +2080,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdUpdatePipelineIndirectBufferNV = (PFN_vkCmdUpdatePipelineIndirectBufferNV)vk->vkGetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBufferNV");
 	vk->vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vk->vkGetDeviceProcAddr(device, "vkGetPipelineIndirectDeviceAddressNV");
 #endif // defined(VK_NV_device_generated_commands_compute)
+#if defined(VK_NV_external_compute_queue)
+	vk->vkDestroyExternalComputeQueueNV = (PFN_vkDestroyExternalComputeQueueNV)vk->vkGetDeviceProcAddr(device, "vkDestroyExternalComputeQueueNV");
+	vk->vkCreateExternalComputeQueueNV = (PFN_vkCreateExternalComputeQueueNV)vk->vkGetDeviceProcAddr(device, "vkCreateExternalComputeQueueNV");
+	vk->vkGetExternalComputeQueueDataNV = (PFN_vkGetExternalComputeQueueDataNV)vk->vkGetDeviceProcAddr(device, "vkGetExternalComputeQueueDataNV");
+#endif // defined(VK_NV_external_compute_queue)
 #if defined(VK_NV_external_memory_rdma)
 	vk->vkGetMemoryRemoteAddressNV = (PFN_vkGetMemoryRemoteAddressNV)vk->vkGetDeviceProcAddr(device, "vkGetMemoryRemoteAddressNV");
 #endif // defined(VK_NV_external_memory_rdma)
@@ -2149,6 +2164,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vk->vkGetDeviceProcAddr(device, "vkGetFramebufferTilePropertiesQCOM");
 	vk->vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vk->vkGetDeviceProcAddr(device, "vkGetDynamicRenderingTilePropertiesQCOM");
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QCOM_tile_shading)
+	vk->vkCmdDispatchTileQCOM = (PFN_vkCmdDispatchTileQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchTileQCOM");
+	vk->vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdBeginPerTileExecutionQCOM");
+	vk->vkCmdEndPerTileExecutionQCOM = (PFN_vkCmdEndPerTileExecutionQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdEndPerTileExecutionQCOM");
+#endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 	vk->vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vk->vkGetDeviceProcAddr(device, "vkGetScreenBufferPropertiesQNX");
 #endif // defined(VK_QNX_external_memory_screen_buffer)
@@ -4273,18 +4293,18 @@ VKAPI_ATTR VkResult vkSetDebugUtilsObjectTagEXT(VkDevice device, const VkDebugUt
 	return pfn_vkSetDebugUtilsObjectTagEXT(device, pTagInfo);
 }
 
-static PFN_vkQueueInsertDebugUtilsLabelEXT pfn_vkQueueInsertDebugUtilsLabelEXT;
-VKAPI_ATTR void vkQueueInsertDebugUtilsLabelEXT(VkQueue queue, const VkDebugUtilsLabelEXT * pLabelInfo)
-{
-	assert(pfn_vkQueueInsertDebugUtilsLabelEXT);
-	pfn_vkQueueInsertDebugUtilsLabelEXT(queue, pLabelInfo);
-}
-
 static PFN_vkSetDebugUtilsObjectNameEXT pfn_vkSetDebugUtilsObjectNameEXT;
 VKAPI_ATTR VkResult vkSetDebugUtilsObjectNameEXT(VkDevice device, const VkDebugUtilsObjectNameInfoEXT * pNameInfo)
 {
 	assert(pfn_vkSetDebugUtilsObjectNameEXT);
 	return pfn_vkSetDebugUtilsObjectNameEXT(device, pNameInfo);
+}
+
+static PFN_vkQueueInsertDebugUtilsLabelEXT pfn_vkQueueInsertDebugUtilsLabelEXT;
+VKAPI_ATTR void vkQueueInsertDebugUtilsLabelEXT(VkQueue queue, const VkDebugUtilsLabelEXT * pLabelInfo)
+{
+	assert(pfn_vkQueueInsertDebugUtilsLabelEXT);
+	pfn_vkQueueInsertDebugUtilsLabelEXT(queue, pLabelInfo);
 }
 
 static PFN_vkQueueBeginDebugUtilsLabelEXT pfn_vkQueueBeginDebugUtilsLabelEXT;
@@ -4543,18 +4563,18 @@ VKAPI_ATTR void vkCmdSetDiscardRectangleModeEXT(VkCommandBuffer commandBuffer, V
 #endif // defined(VK_EXT_discard_rectangles)
 #if defined(VK_EXT_display_control)
 
-static PFN_vkGetSwapchainCounterEXT pfn_vkGetSwapchainCounterEXT;
-VKAPI_ATTR VkResult vkGetSwapchainCounterEXT(VkDevice device, VkSwapchainKHR swapchain, VkSurfaceCounterFlagBitsEXT counter, uint64_t * pCounterValue)
-{
-	assert(pfn_vkGetSwapchainCounterEXT);
-	return pfn_vkGetSwapchainCounterEXT(device, swapchain, counter, pCounterValue);
-}
-
 static PFN_vkDisplayPowerControlEXT pfn_vkDisplayPowerControlEXT;
 VKAPI_ATTR VkResult vkDisplayPowerControlEXT(VkDevice device, VkDisplayKHR display, const VkDisplayPowerInfoEXT * pDisplayPowerInfo)
 {
 	assert(pfn_vkDisplayPowerControlEXT);
 	return pfn_vkDisplayPowerControlEXT(device, display, pDisplayPowerInfo);
+}
+
+static PFN_vkGetSwapchainCounterEXT pfn_vkGetSwapchainCounterEXT;
+VKAPI_ATTR VkResult vkGetSwapchainCounterEXT(VkDevice device, VkSwapchainKHR swapchain, VkSurfaceCounterFlagBitsEXT counter, uint64_t * pCounterValue)
+{
+	assert(pfn_vkGetSwapchainCounterEXT);
+	return pfn_vkGetSwapchainCounterEXT(device, swapchain, counter, pCounterValue);
 }
 
 static PFN_vkRegisterDeviceEventEXT pfn_vkRegisterDeviceEventEXT;
@@ -6993,18 +7013,18 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceVideoFormatPropertiesKHR(VkPhysicalDevice
 	return pfn_vkGetPhysicalDeviceVideoFormatPropertiesKHR(physicalDevice, pVideoFormatInfo, pVideoFormatPropertyCount, pVideoFormatProperties);
 }
 
-static PFN_vkCreateVideoSessionKHR pfn_vkCreateVideoSessionKHR;
-VKAPI_ATTR VkResult vkCreateVideoSessionKHR(VkDevice device, const VkVideoSessionCreateInfoKHR * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkVideoSessionKHR * pVideoSession)
-{
-	assert(pfn_vkCreateVideoSessionKHR);
-	return pfn_vkCreateVideoSessionKHR(device, pCreateInfo, pAllocator, pVideoSession);
-}
-
 static PFN_vkBindVideoSessionMemoryKHR pfn_vkBindVideoSessionMemoryKHR;
 VKAPI_ATTR VkResult vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32_t bindSessionMemoryInfoCount, const VkBindVideoSessionMemoryInfoKHR * pBindSessionMemoryInfos)
 {
 	assert(pfn_vkBindVideoSessionMemoryKHR);
 	return pfn_vkBindVideoSessionMemoryKHR(device, videoSession, bindSessionMemoryInfoCount, pBindSessionMemoryInfos);
+}
+
+static PFN_vkCreateVideoSessionKHR pfn_vkCreateVideoSessionKHR;
+VKAPI_ATTR VkResult vkCreateVideoSessionKHR(VkDevice device, const VkVideoSessionCreateInfoKHR * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkVideoSessionKHR * pVideoSession)
+{
+	assert(pfn_vkCreateVideoSessionKHR);
+	return pfn_vkCreateVideoSessionKHR(device, pCreateInfo, pAllocator, pVideoSession);
 }
 
 static PFN_vkDestroyVideoSessionParametersKHR pfn_vkDestroyVideoSessionParametersKHR;
@@ -7406,6 +7426,29 @@ VKAPI_ATTR VkDeviceAddress vkGetPipelineIndirectDeviceAddressNV(VkDevice device,
 	return pfn_vkGetPipelineIndirectDeviceAddressNV(device, pInfo);
 }
 #endif // defined(VK_NV_device_generated_commands_compute)
+#if defined(VK_NV_external_compute_queue)
+
+static PFN_vkDestroyExternalComputeQueueNV pfn_vkDestroyExternalComputeQueueNV;
+VKAPI_ATTR void vkDestroyExternalComputeQueueNV(VkDevice device, VkExternalComputeQueueNV externalQueue, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyExternalComputeQueueNV);
+	pfn_vkDestroyExternalComputeQueueNV(device, externalQueue, pAllocator);
+}
+
+static PFN_vkCreateExternalComputeQueueNV pfn_vkCreateExternalComputeQueueNV;
+VKAPI_ATTR VkResult vkCreateExternalComputeQueueNV(VkDevice device, const VkExternalComputeQueueCreateInfoNV * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkExternalComputeQueueNV * pExternalQueue)
+{
+	assert(pfn_vkCreateExternalComputeQueueNV);
+	return pfn_vkCreateExternalComputeQueueNV(device, pCreateInfo, pAllocator, pExternalQueue);
+}
+
+static PFN_vkGetExternalComputeQueueDataNV pfn_vkGetExternalComputeQueueDataNV;
+VKAPI_ATTR void vkGetExternalComputeQueueDataNV(VkExternalComputeQueueNV externalQueue, VkExternalComputeQueueDataParamsNV * params, void * pData)
+{
+	assert(pfn_vkGetExternalComputeQueueDataNV);
+	pfn_vkGetExternalComputeQueueDataNV(externalQueue, params, pData);
+}
+#endif // defined(VK_NV_external_compute_queue)
 #if defined(VK_NV_external_memory_capabilities)
 
 static PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV pfn_vkGetPhysicalDeviceExternalImageFormatPropertiesNV;
@@ -7804,6 +7847,29 @@ VKAPI_ATTR VkResult vkGetDynamicRenderingTilePropertiesQCOM(VkDevice device, con
 	return pfn_vkGetDynamicRenderingTilePropertiesQCOM(device, pRenderingInfo, pProperties);
 }
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QCOM_tile_shading)
+
+static PFN_vkCmdDispatchTileQCOM pfn_vkCmdDispatchTileQCOM;
+VKAPI_ATTR void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer)
+{
+	assert(pfn_vkCmdDispatchTileQCOM);
+	pfn_vkCmdDispatchTileQCOM(commandBuffer);
+}
+
+static PFN_vkCmdBeginPerTileExecutionQCOM pfn_vkCmdBeginPerTileExecutionQCOM;
+VKAPI_ATTR void vkCmdBeginPerTileExecutionQCOM(VkCommandBuffer commandBuffer, const VkPerTileBeginInfoQCOM * pPerTileBeginInfo)
+{
+	assert(pfn_vkCmdBeginPerTileExecutionQCOM);
+	pfn_vkCmdBeginPerTileExecutionQCOM(commandBuffer, pPerTileBeginInfo);
+}
+
+static PFN_vkCmdEndPerTileExecutionQCOM pfn_vkCmdEndPerTileExecutionQCOM;
+VKAPI_ATTR void vkCmdEndPerTileExecutionQCOM(VkCommandBuffer commandBuffer, const VkPerTileEndInfoQCOM * pPerTileEndInfo)
+{
+	assert(pfn_vkCmdEndPerTileExecutionQCOM);
+	pfn_vkCmdEndPerTileExecutionQCOM(commandBuffer, pPerTileEndInfo);
+}
+#endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 
 static PFN_vkGetScreenBufferPropertiesQNX pfn_vkGetScreenBufferPropertiesQNX;
@@ -8247,8 +8313,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdEndDebugUtilsLabelEXT");
 	pfn_vkSubmitDebugUtilsMessageEXT = (PFN_vkSubmitDebugUtilsMessageEXT)vkGetInstanceProcAddr(instance, "vkSubmitDebugUtilsMessageEXT");
 	pfn_vkSetDebugUtilsObjectTagEXT = (PFN_vkSetDebugUtilsObjectTagEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
-	pfn_vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueInsertDebugUtilsLabelEXT");
 	pfn_vkSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectNameEXT");
+	pfn_vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueInsertDebugUtilsLabelEXT");
 	pfn_vkQueueBeginDebugUtilsLabelEXT = (PFN_vkQueueBeginDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueBeginDebugUtilsLabelEXT");
 	pfn_vkQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueEndDebugUtilsLabelEXT");
 	pfn_vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginDebugUtilsLabelEXT");
@@ -8301,8 +8367,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdSetDiscardRectangleModeEXT = (PFN_vkCmdSetDiscardRectangleModeEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDiscardRectangleModeEXT");
 #endif // defined(VK_EXT_discard_rectangles)
 #if defined(VK_EXT_display_control)
-	pfn_vkGetSwapchainCounterEXT = (PFN_vkGetSwapchainCounterEXT)vkGetInstanceProcAddr(instance, "vkGetSwapchainCounterEXT");
 	pfn_vkDisplayPowerControlEXT = (PFN_vkDisplayPowerControlEXT)vkGetInstanceProcAddr(instance, "vkDisplayPowerControlEXT");
+	pfn_vkGetSwapchainCounterEXT = (PFN_vkGetSwapchainCounterEXT)vkGetInstanceProcAddr(instance, "vkGetSwapchainCounterEXT");
 	pfn_vkRegisterDeviceEventEXT = (PFN_vkRegisterDeviceEventEXT)vkGetInstanceProcAddr(instance, "vkRegisterDeviceEventEXT");
 	pfn_vkRegisterDisplayEventEXT = (PFN_vkRegisterDisplayEventEXT)vkGetInstanceProcAddr(instance, "vkRegisterDisplayEventEXT");
 #endif // defined(VK_EXT_display_control)
@@ -8819,8 +8885,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkDestroyVideoSessionKHR = (PFN_vkDestroyVideoSessionKHR)vkGetInstanceProcAddr(instance, "vkDestroyVideoSessionKHR");
 	pfn_vkGetPhysicalDeviceVideoCapabilitiesKHR = (PFN_vkGetPhysicalDeviceVideoCapabilitiesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceVideoCapabilitiesKHR");
 	pfn_vkGetPhysicalDeviceVideoFormatPropertiesKHR = (PFN_vkGetPhysicalDeviceVideoFormatPropertiesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceVideoFormatPropertiesKHR");
-	pfn_vkCreateVideoSessionKHR = (PFN_vkCreateVideoSessionKHR)vkGetInstanceProcAddr(instance, "vkCreateVideoSessionKHR");
 	pfn_vkBindVideoSessionMemoryKHR = (PFN_vkBindVideoSessionMemoryKHR)vkGetInstanceProcAddr(instance, "vkBindVideoSessionMemoryKHR");
+	pfn_vkCreateVideoSessionKHR = (PFN_vkCreateVideoSessionKHR)vkGetInstanceProcAddr(instance, "vkCreateVideoSessionKHR");
 	pfn_vkDestroyVideoSessionParametersKHR = (PFN_vkDestroyVideoSessionParametersKHR)vkGetInstanceProcAddr(instance, "vkDestroyVideoSessionParametersKHR");
 #endif // defined(VK_KHR_video_queue)
 #if defined(VK_KHR_wayland_surface)
@@ -8915,6 +8981,11 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdUpdatePipelineIndirectBufferNV = (PFN_vkCmdUpdatePipelineIndirectBufferNV)vkGetInstanceProcAddr(instance, "vkCmdUpdatePipelineIndirectBufferNV");
 	pfn_vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vkGetInstanceProcAddr(instance, "vkGetPipelineIndirectDeviceAddressNV");
 #endif // defined(VK_NV_device_generated_commands_compute)
+#if defined(VK_NV_external_compute_queue)
+	pfn_vkDestroyExternalComputeQueueNV = (PFN_vkDestroyExternalComputeQueueNV)vkGetInstanceProcAddr(instance, "vkDestroyExternalComputeQueueNV");
+	pfn_vkCreateExternalComputeQueueNV = (PFN_vkCreateExternalComputeQueueNV)vkGetInstanceProcAddr(instance, "vkCreateExternalComputeQueueNV");
+	pfn_vkGetExternalComputeQueueDataNV = (PFN_vkGetExternalComputeQueueDataNV)vkGetInstanceProcAddr(instance, "vkGetExternalComputeQueueDataNV");
+#endif // defined(VK_NV_external_compute_queue)
 #if defined(VK_NV_external_memory_capabilities)
 	pfn_vkGetPhysicalDeviceExternalImageFormatPropertiesNV = (PFN_vkGetPhysicalDeviceExternalImageFormatPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalImageFormatPropertiesNV");
 #endif // defined(VK_NV_external_memory_capabilities)
@@ -9001,6 +9072,11 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vkGetInstanceProcAddr(instance, "vkGetFramebufferTilePropertiesQCOM");
 	pfn_vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vkGetInstanceProcAddr(instance, "vkGetDynamicRenderingTilePropertiesQCOM");
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QCOM_tile_shading)
+	pfn_vkCmdDispatchTileQCOM = (PFN_vkCmdDispatchTileQCOM)vkGetInstanceProcAddr(instance, "vkCmdDispatchTileQCOM");
+	pfn_vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vkGetInstanceProcAddr(instance, "vkCmdBeginPerTileExecutionQCOM");
+	pfn_vkCmdEndPerTileExecutionQCOM = (PFN_vkCmdEndPerTileExecutionQCOM)vkGetInstanceProcAddr(instance, "vkCmdEndPerTileExecutionQCOM");
+#endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 	pfn_vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vkGetInstanceProcAddr(instance, "vkGetScreenBufferPropertiesQNX");
 #endif // defined(VK_QNX_external_memory_screen_buffer)
@@ -9364,8 +9440,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdInsertDebugUtilsLabelEXT = (PFN_vkCmdInsertDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkCmdInsertDebugUtilsLabelEXT");
 	pfn_vkCmdEndDebugUtilsLabelEXT = (PFN_vkCmdEndDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkCmdEndDebugUtilsLabelEXT");
 	pfn_vkSetDebugUtilsObjectTagEXT = (PFN_vkSetDebugUtilsObjectTagEXT)vkGetDeviceProcAddr(device, "vkSetDebugUtilsObjectTagEXT");
-	pfn_vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkQueueInsertDebugUtilsLabelEXT");
 	pfn_vkSetDebugUtilsObjectNameEXT = (PFN_vkSetDebugUtilsObjectNameEXT)vkGetDeviceProcAddr(device, "vkSetDebugUtilsObjectNameEXT");
+	pfn_vkQueueInsertDebugUtilsLabelEXT = (PFN_vkQueueInsertDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkQueueInsertDebugUtilsLabelEXT");
 	pfn_vkQueueBeginDebugUtilsLabelEXT = (PFN_vkQueueBeginDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkQueueBeginDebugUtilsLabelEXT");
 	pfn_vkQueueEndDebugUtilsLabelEXT = (PFN_vkQueueEndDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkQueueEndDebugUtilsLabelEXT");
 	pfn_vkCmdBeginDebugUtilsLabelEXT = (PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetDeviceProcAddr(device, "vkCmdBeginDebugUtilsLabelEXT");
@@ -9409,8 +9485,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdSetDiscardRectangleModeEXT = (PFN_vkCmdSetDiscardRectangleModeEXT)vkGetDeviceProcAddr(device, "vkCmdSetDiscardRectangleModeEXT");
 #endif // defined(VK_EXT_discard_rectangles)
 #if defined(VK_EXT_display_control)
-	pfn_vkGetSwapchainCounterEXT = (PFN_vkGetSwapchainCounterEXT)vkGetDeviceProcAddr(device, "vkGetSwapchainCounterEXT");
 	pfn_vkDisplayPowerControlEXT = (PFN_vkDisplayPowerControlEXT)vkGetDeviceProcAddr(device, "vkDisplayPowerControlEXT");
+	pfn_vkGetSwapchainCounterEXT = (PFN_vkGetSwapchainCounterEXT)vkGetDeviceProcAddr(device, "vkGetSwapchainCounterEXT");
 	pfn_vkRegisterDeviceEventEXT = (PFN_vkRegisterDeviceEventEXT)vkGetDeviceProcAddr(device, "vkRegisterDeviceEventEXT");
 	pfn_vkRegisterDisplayEventEXT = (PFN_vkRegisterDisplayEventEXT)vkGetDeviceProcAddr(device, "vkRegisterDisplayEventEXT");
 #endif // defined(VK_EXT_display_control)
@@ -9845,8 +9921,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCreateVideoSessionParametersKHR = (PFN_vkCreateVideoSessionParametersKHR)vkGetDeviceProcAddr(device, "vkCreateVideoSessionParametersKHR");
 	pfn_vkCmdControlVideoCodingKHR = (PFN_vkCmdControlVideoCodingKHR)vkGetDeviceProcAddr(device, "vkCmdControlVideoCodingKHR");
 	pfn_vkDestroyVideoSessionKHR = (PFN_vkDestroyVideoSessionKHR)vkGetDeviceProcAddr(device, "vkDestroyVideoSessionKHR");
-	pfn_vkCreateVideoSessionKHR = (PFN_vkCreateVideoSessionKHR)vkGetDeviceProcAddr(device, "vkCreateVideoSessionKHR");
 	pfn_vkBindVideoSessionMemoryKHR = (PFN_vkBindVideoSessionMemoryKHR)vkGetDeviceProcAddr(device, "vkBindVideoSessionMemoryKHR");
+	pfn_vkCreateVideoSessionKHR = (PFN_vkCreateVideoSessionKHR)vkGetDeviceProcAddr(device, "vkCreateVideoSessionKHR");
 	pfn_vkDestroyVideoSessionParametersKHR = (PFN_vkDestroyVideoSessionParametersKHR)vkGetDeviceProcAddr(device, "vkDestroyVideoSessionParametersKHR");
 #endif // defined(VK_KHR_video_queue)
 #if defined(VK_NVX_binary_import)
@@ -9902,6 +9978,11 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdUpdatePipelineIndirectBufferNV = (PFN_vkCmdUpdatePipelineIndirectBufferNV)vkGetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBufferNV");
 	pfn_vkGetPipelineIndirectDeviceAddressNV = (PFN_vkGetPipelineIndirectDeviceAddressNV)vkGetDeviceProcAddr(device, "vkGetPipelineIndirectDeviceAddressNV");
 #endif // defined(VK_NV_device_generated_commands_compute)
+#if defined(VK_NV_external_compute_queue)
+	pfn_vkDestroyExternalComputeQueueNV = (PFN_vkDestroyExternalComputeQueueNV)vkGetDeviceProcAddr(device, "vkDestroyExternalComputeQueueNV");
+	pfn_vkCreateExternalComputeQueueNV = (PFN_vkCreateExternalComputeQueueNV)vkGetDeviceProcAddr(device, "vkCreateExternalComputeQueueNV");
+	pfn_vkGetExternalComputeQueueDataNV = (PFN_vkGetExternalComputeQueueDataNV)vkGetDeviceProcAddr(device, "vkGetExternalComputeQueueDataNV");
+#endif // defined(VK_NV_external_compute_queue)
 #if defined(VK_NV_external_memory_rdma)
 	pfn_vkGetMemoryRemoteAddressNV = (PFN_vkGetMemoryRemoteAddressNV)vkGetDeviceProcAddr(device, "vkGetMemoryRemoteAddressNV");
 #endif // defined(VK_NV_external_memory_rdma)
@@ -9981,6 +10062,11 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vkGetDeviceProcAddr(device, "vkGetFramebufferTilePropertiesQCOM");
 	pfn_vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vkGetDeviceProcAddr(device, "vkGetDynamicRenderingTilePropertiesQCOM");
 #endif // defined(VK_QCOM_tile_properties)
+#if defined(VK_QCOM_tile_shading)
+	pfn_vkCmdDispatchTileQCOM = (PFN_vkCmdDispatchTileQCOM)vkGetDeviceProcAddr(device, "vkCmdDispatchTileQCOM");
+	pfn_vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vkGetDeviceProcAddr(device, "vkCmdBeginPerTileExecutionQCOM");
+	pfn_vkCmdEndPerTileExecutionQCOM = (PFN_vkCmdEndPerTileExecutionQCOM)vkGetDeviceProcAddr(device, "vkCmdEndPerTileExecutionQCOM");
+#endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 	pfn_vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vkGetDeviceProcAddr(device, "vkGetScreenBufferPropertiesQNX");
 #endif // defined(VK_QNX_external_memory_screen_buffer)
