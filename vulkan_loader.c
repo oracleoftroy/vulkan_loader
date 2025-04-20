@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 312 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 313 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -535,8 +535,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryHostPointerPropertiesEXT");
 #endif // defined(VK_EXT_external_memory_host)
 #if defined(VK_EXT_external_memory_metal)
-	vk->vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandlePropertiesEXT");
 	vk->vkGetMemoryMetalHandleEXT = (PFN_vkGetMemoryMetalHandleEXT)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandleEXT");
+	vk->vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandlePropertiesEXT");
 #endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_fragment_density_map_offset)
 	vk->vkCmdEndRendering2EXT = (PFN_vkCmdEndRendering2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdEndRendering2EXT");
@@ -1170,6 +1170,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vk->vkGetInstanceProcAddr(instance, "vkCmdBindShadingRateImageNV");
 	vk->vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_QCOM_tile_memory_heap)
+	vk->vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdBindTileMemoryQCOM");
+#endif // defined(VK_QCOM_tile_memory_heap)
 #if defined(VK_QCOM_tile_properties)
 	vk->vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vk->vkGetInstanceProcAddr(instance, "vkGetFramebufferTilePropertiesQCOM");
 	vk->vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vk->vkGetInstanceProcAddr(instance, "vkGetDynamicRenderingTilePropertiesQCOM");
@@ -1650,8 +1653,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetMemoryHostPointerPropertiesEXT");
 #endif // defined(VK_EXT_external_memory_host)
 #if defined(VK_EXT_external_memory_metal)
-	vk->vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandlePropertiesEXT");
 	vk->vkGetMemoryMetalHandleEXT = (PFN_vkGetMemoryMetalHandleEXT)vk->vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandleEXT");
+	vk->vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandlePropertiesEXT");
 #endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_fragment_density_map_offset)
 	vk->vkCmdEndRendering2EXT = (PFN_vkCmdEndRendering2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdEndRendering2EXT");
@@ -2160,6 +2163,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vk->vkGetDeviceProcAddr(device, "vkCmdBindShadingRateImageNV");
 	vk->vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_QCOM_tile_memory_heap)
+	vk->vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdBindTileMemoryQCOM");
+#endif // defined(VK_QCOM_tile_memory_heap)
 #if defined(VK_QCOM_tile_properties)
 	vk->vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vk->vkGetDeviceProcAddr(device, "vkGetFramebufferTilePropertiesQCOM");
 	vk->vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vk->vkGetDeviceProcAddr(device, "vkGetDynamicRenderingTilePropertiesQCOM");
@@ -4953,18 +4959,18 @@ VKAPI_ATTR VkResult vkGetMemoryHostPointerPropertiesEXT(VkDevice device, VkExter
 #endif // defined(VK_EXT_external_memory_host)
 #if defined(VK_EXT_external_memory_metal)
 
-static PFN_vkGetMemoryMetalHandlePropertiesEXT pfn_vkGetMemoryMetalHandlePropertiesEXT;
-VKAPI_ATTR VkResult vkGetMemoryMetalHandlePropertiesEXT(VkDevice device, VkExternalMemoryHandleTypeFlagBits handleType, const void * pHandle, VkMemoryMetalHandlePropertiesEXT * pMemoryMetalHandleProperties)
-{
-	assert(pfn_vkGetMemoryMetalHandlePropertiesEXT);
-	return pfn_vkGetMemoryMetalHandlePropertiesEXT(device, handleType, pHandle, pMemoryMetalHandleProperties);
-}
-
 static PFN_vkGetMemoryMetalHandleEXT pfn_vkGetMemoryMetalHandleEXT;
 VKAPI_ATTR VkResult vkGetMemoryMetalHandleEXT(VkDevice device, const VkMemoryGetMetalHandleInfoEXT * pGetMetalHandleInfo, void ** pHandle)
 {
 	assert(pfn_vkGetMemoryMetalHandleEXT);
 	return pfn_vkGetMemoryMetalHandleEXT(device, pGetMetalHandleInfo, pHandle);
+}
+
+static PFN_vkGetMemoryMetalHandlePropertiesEXT pfn_vkGetMemoryMetalHandlePropertiesEXT;
+VKAPI_ATTR VkResult vkGetMemoryMetalHandlePropertiesEXT(VkDevice device, VkExternalMemoryHandleTypeFlagBits handleType, const void * pHandle, VkMemoryMetalHandlePropertiesEXT * pMemoryMetalHandleProperties)
+{
+	assert(pfn_vkGetMemoryMetalHandlePropertiesEXT);
+	return pfn_vkGetMemoryMetalHandlePropertiesEXT(device, handleType, pHandle, pMemoryMetalHandleProperties);
 }
 #endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_fragment_density_map_offset)
@@ -7831,6 +7837,15 @@ VKAPI_ATTR void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, VkCoa
 	pfn_vkCmdSetCoarseSampleOrderNV(commandBuffer, sampleOrderType, customSampleOrderCount, pCustomSampleOrders);
 }
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_QCOM_tile_memory_heap)
+
+static PFN_vkCmdBindTileMemoryQCOM pfn_vkCmdBindTileMemoryQCOM;
+VKAPI_ATTR void vkCmdBindTileMemoryQCOM(VkCommandBuffer commandBuffer, const VkTileMemoryBindInfoQCOM * pTileMemoryBindInfo)
+{
+	assert(pfn_vkCmdBindTileMemoryQCOM);
+	pfn_vkCmdBindTileMemoryQCOM(commandBuffer, pTileMemoryBindInfo);
+}
+#endif // defined(VK_QCOM_tile_memory_heap)
 #if defined(VK_QCOM_tile_properties)
 
 static PFN_vkGetFramebufferTilePropertiesQCOM pfn_vkGetFramebufferTilePropertiesQCOM;
@@ -8433,8 +8448,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetMemoryHostPointerPropertiesEXT");
 #endif // defined(VK_EXT_external_memory_host)
 #if defined(VK_EXT_external_memory_metal)
-	pfn_vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandlePropertiesEXT");
 	pfn_vkGetMemoryMetalHandleEXT = (PFN_vkGetMemoryMetalHandleEXT)vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandleEXT");
+	pfn_vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetMemoryMetalHandlePropertiesEXT");
 #endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_fragment_density_map_offset)
 	pfn_vkCmdEndRendering2EXT = (PFN_vkCmdEndRendering2EXT)vkGetInstanceProcAddr(instance, "vkCmdEndRendering2EXT");
@@ -9068,6 +9083,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vkGetInstanceProcAddr(instance, "vkCmdBindShadingRateImageNV");
 	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetInstanceProcAddr(instance, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_QCOM_tile_memory_heap)
+	pfn_vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vkGetInstanceProcAddr(instance, "vkCmdBindTileMemoryQCOM");
+#endif // defined(VK_QCOM_tile_memory_heap)
 #if defined(VK_QCOM_tile_properties)
 	pfn_vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vkGetInstanceProcAddr(instance, "vkGetFramebufferTilePropertiesQCOM");
 	pfn_vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vkGetInstanceProcAddr(instance, "vkGetDynamicRenderingTilePropertiesQCOM");
@@ -9548,8 +9566,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetMemoryHostPointerPropertiesEXT = (PFN_vkGetMemoryHostPointerPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetMemoryHostPointerPropertiesEXT");
 #endif // defined(VK_EXT_external_memory_host)
 #if defined(VK_EXT_external_memory_metal)
-	pfn_vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandlePropertiesEXT");
 	pfn_vkGetMemoryMetalHandleEXT = (PFN_vkGetMemoryMetalHandleEXT)vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandleEXT");
+	pfn_vkGetMemoryMetalHandlePropertiesEXT = (PFN_vkGetMemoryMetalHandlePropertiesEXT)vkGetDeviceProcAddr(device, "vkGetMemoryMetalHandlePropertiesEXT");
 #endif // defined(VK_EXT_external_memory_metal)
 #if defined(VK_EXT_fragment_density_map_offset)
 	pfn_vkCmdEndRendering2EXT = (PFN_vkCmdEndRendering2EXT)vkGetDeviceProcAddr(device, "vkCmdEndRendering2EXT");
@@ -10058,6 +10076,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vkGetDeviceProcAddr(device, "vkCmdBindShadingRateImageNV");
 	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetDeviceProcAddr(device, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_QCOM_tile_memory_heap)
+	pfn_vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vkGetDeviceProcAddr(device, "vkCmdBindTileMemoryQCOM");
+#endif // defined(VK_QCOM_tile_memory_heap)
 #if defined(VK_QCOM_tile_properties)
 	pfn_vkGetFramebufferTilePropertiesQCOM = (PFN_vkGetFramebufferTilePropertiesQCOM)vkGetDeviceProcAddr(device, "vkGetFramebufferTilePropertiesQCOM");
 	pfn_vkGetDynamicRenderingTilePropertiesQCOM = (PFN_vkGetDynamicRenderingTilePropertiesQCOM)vkGetDeviceProcAddr(device, "vkGetDynamicRenderingTilePropertiesQCOM");
