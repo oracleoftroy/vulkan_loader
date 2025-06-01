@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 315 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 316 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -7865,10 +7865,10 @@ VKAPI_ATTR VkResult vkGetDynamicRenderingTilePropertiesQCOM(VkDevice device, con
 #if defined(VK_QCOM_tile_shading)
 
 static PFN_vkCmdDispatchTileQCOM pfn_vkCmdDispatchTileQCOM;
-VKAPI_ATTR void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer)
+VKAPI_ATTR void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, const VkDispatchTileInfoQCOM * pDispatchTileInfo)
 {
 	assert(pfn_vkCmdDispatchTileQCOM);
-	pfn_vkCmdDispatchTileQCOM(commandBuffer);
+	pfn_vkCmdDispatchTileQCOM(commandBuffer, pDispatchTileInfo);
 }
 
 static PFN_vkCmdBeginPerTileExecutionQCOM pfn_vkCmdBeginPerTileExecutionQCOM;
