@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 316 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 317 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -373,6 +373,19 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	vk->vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_tensors)
+	vk->vkCreateTensorARM = (PFN_vkCreateTensorARM)vk->vkGetInstanceProcAddr(instance, "vkCreateTensorARM");
+	vk->vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
+	vk->vkDestroyTensorARM = (PFN_vkDestroyTensorARM)vk->vkGetInstanceProcAddr(instance, "vkDestroyTensorARM");
+	vk->vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vk->vkGetInstanceProcAddr(instance, "vkBindTensorMemoryARM");
+	vk->vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorMemoryRequirementsARM");
+	vk->vkGetPhysicalDeviceExternalTensorPropertiesARM = (PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM");
+	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
+	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
+	vk->vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkDestroyTensorViewARM");
+	vk->vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyTensorARM");
+	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
+#endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
 	vk->vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
 	vk->vkGetDrmDisplayEXT = (PFN_vkGetDrmDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDrmDisplayEXT");
@@ -446,7 +459,6 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
 #if defined(VK_EXT_device_generated_commands)
-	vk->vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyIndirectExecutionSetEXT");
 	vk->vkCreateIndirectCommandsLayoutEXT = (PFN_vkCreateIndirectCommandsLayoutEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateIndirectCommandsLayoutEXT");
 	vk->vkDestroyIndirectCommandsLayoutEXT = (PFN_vkDestroyIndirectCommandsLayoutEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyIndirectCommandsLayoutEXT");
 	vk->vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vk->vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetShaderEXT");
@@ -455,6 +467,7 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vk->vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	vk->vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdExecuteGeneratedCommandsEXT");
 	vk->vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateIndirectExecutionSetEXT");
+	vk->vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyIndirectExecutionSetEXT");
 #endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_direct_mode_display)
 	vk->vkReleaseDisplayEXT = (PFN_vkReleaseDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkReleaseDisplayEXT");
@@ -920,6 +933,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_present_wait)
 	vk->vkWaitForPresentKHR = (PFN_vkWaitForPresentKHR)vk->vkGetInstanceProcAddr(instance, "vkWaitForPresentKHR");
 #endif // defined(VK_KHR_present_wait)
+#if defined(VK_KHR_present_wait2)
+	vk->vkWaitForPresent2KHR = (PFN_vkWaitForPresent2KHR)vk->vkGetInstanceProcAddr(instance, "vkWaitForPresent2KHR");
+#endif // defined(VK_KHR_present_wait2)
 #if defined(VK_KHR_push_descriptor)
 	vk->vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
@@ -1518,6 +1534,18 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vk->vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	vk->vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vk->vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_tensors)
+	vk->vkCreateTensorARM = (PFN_vkCreateTensorARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorARM");
+	vk->vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
+	vk->vkDestroyTensorARM = (PFN_vkDestroyTensorARM)vk->vkGetDeviceProcAddr(device, "vkDestroyTensorARM");
+	vk->vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vk->vkGetDeviceProcAddr(device, "vkBindTensorMemoryARM");
+	vk->vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorMemoryRequirementsARM");
+	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
+	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
+	vk->vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkDestroyTensorViewARM");
+	vk->vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vk->vkGetDeviceProcAddr(device, "vkCmdCopyTensorARM");
+	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
+#endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 	vk->vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
 #endif // defined(VK_EXT_attachment_feedback_loop_dynamic_state)
@@ -1574,7 +1602,6 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vk->vkGetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
 #if defined(VK_EXT_device_generated_commands)
-	vk->vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyIndirectExecutionSetEXT");
 	vk->vkCreateIndirectCommandsLayoutEXT = (PFN_vkCreateIndirectCommandsLayoutEXT)vk->vkGetDeviceProcAddr(device, "vkCreateIndirectCommandsLayoutEXT");
 	vk->vkDestroyIndirectCommandsLayoutEXT = (PFN_vkDestroyIndirectCommandsLayoutEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyIndirectCommandsLayoutEXT");
 	vk->vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vk->vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetShaderEXT");
@@ -1583,6 +1610,7 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vk->vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	vk->vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vk->vkGetDeviceProcAddr(device, "vkCmdExecuteGeneratedCommandsEXT");
 	vk->vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vk->vkGetDeviceProcAddr(device, "vkCreateIndirectExecutionSetEXT");
+	vk->vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyIndirectExecutionSetEXT");
 #endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_discard_rectangles)
 	vk->vkCmdSetDiscardRectangleEXT = (PFN_vkCmdSetDiscardRectangleEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDiscardRectangleEXT");
@@ -1969,6 +1997,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_present_wait)
 	vk->vkWaitForPresentKHR = (PFN_vkWaitForPresentKHR)vk->vkGetDeviceProcAddr(device, "vkWaitForPresentKHR");
 #endif // defined(VK_KHR_present_wait)
+#if defined(VK_KHR_present_wait2)
+	vk->vkWaitForPresent2KHR = (PFN_vkWaitForPresent2KHR)vk->vkGetDeviceProcAddr(device, "vkWaitForPresent2KHR");
+#endif // defined(VK_KHR_present_wait2)
 #if defined(VK_KHR_push_descriptor)
 	vk->vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
@@ -4118,6 +4149,85 @@ VKAPI_ATTR VkResult vkGetMemoryAndroidHardwareBufferANDROID(VkDevice device, con
 	return pfn_vkGetMemoryAndroidHardwareBufferANDROID(device, pInfo, pBuffer);
 }
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_tensors)
+
+static PFN_vkCreateTensorARM pfn_vkCreateTensorARM;
+VKAPI_ATTR VkResult vkCreateTensorARM(VkDevice device, const VkTensorCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkTensorARM * pTensor)
+{
+	assert(pfn_vkCreateTensorARM);
+	return pfn_vkCreateTensorARM(device, pCreateInfo, pAllocator, pTensor);
+}
+
+static PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM;
+VKAPI_ATTR VkResult vkGetTensorViewOpaqueCaptureDescriptorDataARM(VkDevice device, const VkTensorViewCaptureDescriptorDataInfoARM * pInfo, void * pData)
+{
+	assert(pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM);
+	return pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM(device, pInfo, pData);
+}
+
+static PFN_vkDestroyTensorARM pfn_vkDestroyTensorARM;
+VKAPI_ATTR void vkDestroyTensorARM(VkDevice device, VkTensorARM tensor, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyTensorARM);
+	pfn_vkDestroyTensorARM(device, tensor, pAllocator);
+}
+
+static PFN_vkBindTensorMemoryARM pfn_vkBindTensorMemoryARM;
+VKAPI_ATTR VkResult vkBindTensorMemoryARM(VkDevice device, uint32_t bindInfoCount, const VkBindTensorMemoryInfoARM * pBindInfos)
+{
+	assert(pfn_vkBindTensorMemoryARM);
+	return pfn_vkBindTensorMemoryARM(device, bindInfoCount, pBindInfos);
+}
+
+static PFN_vkGetTensorMemoryRequirementsARM pfn_vkGetTensorMemoryRequirementsARM;
+VKAPI_ATTR void vkGetTensorMemoryRequirementsARM(VkDevice device, const VkTensorMemoryRequirementsInfoARM * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetTensorMemoryRequirementsARM);
+	pfn_vkGetTensorMemoryRequirementsARM(device, pInfo, pMemoryRequirements);
+}
+
+static PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM;
+VKAPI_ATTR void vkGetPhysicalDeviceExternalTensorPropertiesARM(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceExternalTensorInfoARM * pExternalTensorInfo, VkExternalTensorPropertiesARM * pExternalTensorProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM);
+	pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM(physicalDevice, pExternalTensorInfo, pExternalTensorProperties);
+}
+
+static PFN_vkGetDeviceTensorMemoryRequirementsARM pfn_vkGetDeviceTensorMemoryRequirementsARM;
+VKAPI_ATTR void vkGetDeviceTensorMemoryRequirementsARM(VkDevice device, const VkDeviceTensorMemoryRequirementsARM * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetDeviceTensorMemoryRequirementsARM);
+	pfn_vkGetDeviceTensorMemoryRequirementsARM(device, pInfo, pMemoryRequirements);
+}
+
+static PFN_vkCreateTensorViewARM pfn_vkCreateTensorViewARM;
+VKAPI_ATTR VkResult vkCreateTensorViewARM(VkDevice device, const VkTensorViewCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkTensorViewARM * pView)
+{
+	assert(pfn_vkCreateTensorViewARM);
+	return pfn_vkCreateTensorViewARM(device, pCreateInfo, pAllocator, pView);
+}
+
+static PFN_vkDestroyTensorViewARM pfn_vkDestroyTensorViewARM;
+VKAPI_ATTR void vkDestroyTensorViewARM(VkDevice device, VkTensorViewARM tensorView, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyTensorViewARM);
+	pfn_vkDestroyTensorViewARM(device, tensorView, pAllocator);
+}
+
+static PFN_vkCmdCopyTensorARM pfn_vkCmdCopyTensorARM;
+VKAPI_ATTR void vkCmdCopyTensorARM(VkCommandBuffer commandBuffer, const VkCopyTensorInfoARM * pCopyTensorInfo)
+{
+	assert(pfn_vkCmdCopyTensorARM);
+	pfn_vkCmdCopyTensorARM(commandBuffer, pCopyTensorInfo);
+}
+
+static PFN_vkGetTensorOpaqueCaptureDescriptorDataARM pfn_vkGetTensorOpaqueCaptureDescriptorDataARM;
+VKAPI_ATTR VkResult vkGetTensorOpaqueCaptureDescriptorDataARM(VkDevice device, const VkTensorCaptureDescriptorDataInfoARM * pInfo, void * pData)
+{
+	assert(pfn_vkGetTensorOpaqueCaptureDescriptorDataARM);
+	return pfn_vkGetTensorOpaqueCaptureDescriptorDataARM(device, pInfo, pData);
+}
+#endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
 
 static PFN_vkAcquireDrmDisplayEXT pfn_vkAcquireDrmDisplayEXT;
@@ -4456,13 +4566,6 @@ VKAPI_ATTR VkResult vkGetDeviceFaultInfoEXT(VkDevice device, VkDeviceFaultCounts
 #endif // defined(VK_EXT_device_fault)
 #if defined(VK_EXT_device_generated_commands)
 
-static PFN_vkDestroyIndirectExecutionSetEXT pfn_vkDestroyIndirectExecutionSetEXT;
-VKAPI_ATTR void vkDestroyIndirectExecutionSetEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, const VkAllocationCallbacks * pAllocator)
-{
-	assert(pfn_vkDestroyIndirectExecutionSetEXT);
-	pfn_vkDestroyIndirectExecutionSetEXT(device, indirectExecutionSet, pAllocator);
-}
-
 static PFN_vkCreateIndirectCommandsLayoutEXT pfn_vkCreateIndirectCommandsLayoutEXT;
 VKAPI_ATTR VkResult vkCreateIndirectCommandsLayoutEXT(VkDevice device, const VkIndirectCommandsLayoutCreateInfoEXT * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkIndirectCommandsLayoutEXT * pIndirectCommandsLayout)
 {
@@ -4517,6 +4620,13 @@ VKAPI_ATTR VkResult vkCreateIndirectExecutionSetEXT(VkDevice device, const VkInd
 {
 	assert(pfn_vkCreateIndirectExecutionSetEXT);
 	return pfn_vkCreateIndirectExecutionSetEXT(device, pCreateInfo, pAllocator, pIndirectExecutionSet);
+}
+
+static PFN_vkDestroyIndirectExecutionSetEXT pfn_vkDestroyIndirectExecutionSetEXT;
+VKAPI_ATTR void vkDestroyIndirectExecutionSetEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyIndirectExecutionSetEXT);
+	pfn_vkDestroyIndirectExecutionSetEXT(device, indirectExecutionSet, pAllocator);
 }
 #endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_direct_mode_display)
@@ -6687,6 +6797,15 @@ VKAPI_ATTR VkResult vkWaitForPresentKHR(VkDevice device, VkSwapchainKHR swapchai
 	return pfn_vkWaitForPresentKHR(device, swapchain, presentId, timeout);
 }
 #endif // defined(VK_KHR_present_wait)
+#if defined(VK_KHR_present_wait2)
+
+static PFN_vkWaitForPresent2KHR pfn_vkWaitForPresent2KHR;
+VKAPI_ATTR VkResult vkWaitForPresent2KHR(VkDevice device, VkSwapchainKHR swapchain, const VkPresentWait2InfoKHR * pPresentWait2Info)
+{
+	assert(pfn_vkWaitForPresent2KHR);
+	return pfn_vkWaitForPresent2KHR(device, swapchain, pPresentWait2Info);
+}
+#endif // defined(VK_KHR_present_wait2)
 #if defined(VK_KHR_push_descriptor)
 
 static PFN_vkCmdPushDescriptorSetKHR pfn_vkCmdPushDescriptorSetKHR;
@@ -8286,6 +8405,19 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetInstanceProcAddr(instance, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetInstanceProcAddr(instance, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_tensors)
+	pfn_vkCreateTensorARM = (PFN_vkCreateTensorARM)vkGetInstanceProcAddr(instance, "vkCreateTensorARM");
+	pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
+	pfn_vkDestroyTensorARM = (PFN_vkDestroyTensorARM)vkGetInstanceProcAddr(instance, "vkDestroyTensorARM");
+	pfn_vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vkGetInstanceProcAddr(instance, "vkBindTensorMemoryARM");
+	pfn_vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetTensorMemoryRequirementsARM");
+	pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM = (PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM");
+	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
+	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
+	pfn_vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vkGetInstanceProcAddr(instance, "vkDestroyTensorViewARM");
+	pfn_vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vkGetInstanceProcAddr(instance, "vkCmdCopyTensorARM");
+	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
+#endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
 	pfn_vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
 	pfn_vkGetDrmDisplayEXT = (PFN_vkGetDrmDisplayEXT)vkGetInstanceProcAddr(instance, "vkGetDrmDisplayEXT");
@@ -8359,7 +8491,6 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vkGetInstanceProcAddr(instance, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
 #if defined(VK_EXT_device_generated_commands)
-	pfn_vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vkGetInstanceProcAddr(instance, "vkDestroyIndirectExecutionSetEXT");
 	pfn_vkCreateIndirectCommandsLayoutEXT = (PFN_vkCreateIndirectCommandsLayoutEXT)vkGetInstanceProcAddr(instance, "vkCreateIndirectCommandsLayoutEXT");
 	pfn_vkDestroyIndirectCommandsLayoutEXT = (PFN_vkDestroyIndirectCommandsLayoutEXT)vkGetInstanceProcAddr(instance, "vkDestroyIndirectCommandsLayoutEXT");
 	pfn_vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetShaderEXT");
@@ -8368,6 +8499,7 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	pfn_vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vkGetInstanceProcAddr(instance, "vkCmdExecuteGeneratedCommandsEXT");
 	pfn_vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vkGetInstanceProcAddr(instance, "vkCreateIndirectExecutionSetEXT");
+	pfn_vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vkGetInstanceProcAddr(instance, "vkDestroyIndirectExecutionSetEXT");
 #endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_direct_mode_display)
 	pfn_vkReleaseDisplayEXT = (PFN_vkReleaseDisplayEXT)vkGetInstanceProcAddr(instance, "vkReleaseDisplayEXT");
@@ -8833,6 +8965,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_KHR_present_wait)
 	pfn_vkWaitForPresentKHR = (PFN_vkWaitForPresentKHR)vkGetInstanceProcAddr(instance, "vkWaitForPresentKHR");
 #endif // defined(VK_KHR_present_wait)
+#if defined(VK_KHR_present_wait2)
+	pfn_vkWaitForPresent2KHR = (PFN_vkWaitForPresent2KHR)vkGetInstanceProcAddr(instance, "vkWaitForPresent2KHR");
+#endif // defined(VK_KHR_present_wait2)
 #if defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
@@ -9431,6 +9566,18 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_tensors)
+	pfn_vkCreateTensorARM = (PFN_vkCreateTensorARM)vkGetDeviceProcAddr(device, "vkCreateTensorARM");
+	pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
+	pfn_vkDestroyTensorARM = (PFN_vkDestroyTensorARM)vkGetDeviceProcAddr(device, "vkDestroyTensorARM");
+	pfn_vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vkGetDeviceProcAddr(device, "vkBindTensorMemoryARM");
+	pfn_vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetTensorMemoryRequirementsARM");
+	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
+	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
+	pfn_vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vkGetDeviceProcAddr(device, "vkDestroyTensorViewARM");
+	pfn_vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vkGetDeviceProcAddr(device, "vkCmdCopyTensorARM");
+	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
+#endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 	pfn_vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
 #endif // defined(VK_EXT_attachment_feedback_loop_dynamic_state)
@@ -9487,7 +9634,6 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vkGetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
 #if defined(VK_EXT_device_generated_commands)
-	pfn_vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vkGetDeviceProcAddr(device, "vkDestroyIndirectExecutionSetEXT");
 	pfn_vkCreateIndirectCommandsLayoutEXT = (PFN_vkCreateIndirectCommandsLayoutEXT)vkGetDeviceProcAddr(device, "vkCreateIndirectCommandsLayoutEXT");
 	pfn_vkDestroyIndirectCommandsLayoutEXT = (PFN_vkDestroyIndirectCommandsLayoutEXT)vkGetDeviceProcAddr(device, "vkDestroyIndirectCommandsLayoutEXT");
 	pfn_vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetShaderEXT");
@@ -9496,6 +9642,7 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	pfn_vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vkGetDeviceProcAddr(device, "vkCmdExecuteGeneratedCommandsEXT");
 	pfn_vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vkGetDeviceProcAddr(device, "vkCreateIndirectExecutionSetEXT");
+	pfn_vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vkGetDeviceProcAddr(device, "vkDestroyIndirectExecutionSetEXT");
 #endif // defined(VK_EXT_device_generated_commands)
 #if defined(VK_EXT_discard_rectangles)
 	pfn_vkCmdSetDiscardRectangleEXT = (PFN_vkCmdSetDiscardRectangleEXT)vkGetDeviceProcAddr(device, "vkCmdSetDiscardRectangleEXT");
@@ -9882,6 +10029,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_KHR_present_wait)
 	pfn_vkWaitForPresentKHR = (PFN_vkWaitForPresentKHR)vkGetDeviceProcAddr(device, "vkWaitForPresentKHR");
 #endif // defined(VK_KHR_present_wait)
+#if defined(VK_KHR_present_wait2)
+	pfn_vkWaitForPresent2KHR = (PFN_vkWaitForPresent2KHR)vkGetDeviceProcAddr(device, "vkWaitForPresent2KHR");
+#endif // defined(VK_KHR_present_wait2)
 #if defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetKHR = (PFN_vkCmdPushDescriptorSetKHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
 #endif // defined(VK_KHR_push_descriptor)
