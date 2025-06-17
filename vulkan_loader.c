@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 317 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 318 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -1186,6 +1186,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vk->vkGetInstanceProcAddr(instance, "vkCmdBindShadingRateImageNV");
 	vk->vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_OHOS_surface)
+	vk->vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS)vk->vkGetInstanceProcAddr(instance, "vkCreateSurfaceOHOS");
+#endif // defined(VK_OHOS_surface)
 #if defined(VK_QCOM_tile_memory_heap)
 	vk->vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdBindTileMemoryQCOM");
 #endif // defined(VK_QCOM_tile_memory_heap)
@@ -7956,6 +7959,15 @@ VKAPI_ATTR void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, VkCoa
 	pfn_vkCmdSetCoarseSampleOrderNV(commandBuffer, sampleOrderType, customSampleOrderCount, pCustomSampleOrders);
 }
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_OHOS_surface)
+
+static PFN_vkCreateSurfaceOHOS pfn_vkCreateSurfaceOHOS;
+VKAPI_ATTR VkResult vkCreateSurfaceOHOS(VkInstance instance, const VkSurfaceCreateInfoOHOS * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
+{
+	assert(pfn_vkCreateSurfaceOHOS);
+	return pfn_vkCreateSurfaceOHOS(instance, pCreateInfo, pAllocator, pSurface);
+}
+#endif // defined(VK_OHOS_surface)
 #if defined(VK_QCOM_tile_memory_heap)
 
 static PFN_vkCmdBindTileMemoryQCOM pfn_vkCmdBindTileMemoryQCOM;
@@ -9218,6 +9230,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBindShadingRateImageNV = (PFN_vkCmdBindShadingRateImageNV)vkGetInstanceProcAddr(instance, "vkCmdBindShadingRateImageNV");
 	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetInstanceProcAddr(instance, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
+#if defined(VK_OHOS_surface)
+	pfn_vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS)vkGetInstanceProcAddr(instance, "vkCreateSurfaceOHOS");
+#endif // defined(VK_OHOS_surface)
 #if defined(VK_QCOM_tile_memory_heap)
 	pfn_vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vkGetInstanceProcAddr(instance, "vkCmdBindTileMemoryQCOM");
 #endif // defined(VK_QCOM_tile_memory_heap)
