@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 318 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 319 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -373,6 +373,19 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	vk->vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_data_graph)
+	vk->vkCreateDataGraphPipelinesARM = (PFN_vkCreateDataGraphPipelinesARM)vk->vkGetInstanceProcAddr(instance, "vkCreateDataGraphPipelinesARM");
+	vk->vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelinePropertiesARM");
+	vk->vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
+	vk->vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
+	vk->vkCreateDataGraphPipelineSessionARM = (PFN_vkCreateDataGraphPipelineSessionARM)vk->vkGetInstanceProcAddr(instance, "vkCreateDataGraphPipelineSessionARM");
+	vk->vkGetDataGraphPipelineSessionMemoryRequirementsARM = (PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionMemoryRequirementsARM");
+	vk->vkBindDataGraphPipelineSessionMemoryARM = (PFN_vkBindDataGraphPipelineSessionMemoryARM)vk->vkGetInstanceProcAddr(instance, "vkBindDataGraphPipelineSessionMemoryARM");
+	vk->vkDestroyDataGraphPipelineSessionARM = (PFN_vkDestroyDataGraphPipelineSessionARM)vk->vkGetInstanceProcAddr(instance, "vkDestroyDataGraphPipelineSessionARM");
+	vk->vkCmdDispatchDataGraphARM = (PFN_vkCmdDispatchDataGraphARM)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchDataGraphARM");
+	vk->vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineAvailablePropertiesARM");
+	vk->vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
+#endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_tensors)
 	vk->vkCreateTensorARM = (PFN_vkCreateTensorARM)vk->vkGetInstanceProcAddr(instance, "vkCreateTensorARM");
 	vk->vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
@@ -897,11 +910,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vk->vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2KHR");
 #endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_maintenance6)
-	vk->vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSet2KHR");
 	vk->vkCmdBindDescriptorSets2KHR = (PFN_vkCmdBindDescriptorSets2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorSets2KHR");
-	vk->vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplate2KHR");
 	vk->vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");
 	vk->vkCmdPushConstants2KHR = (PFN_vkCmdPushConstants2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushConstants2KHR");
+	vk->vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSet2KHR");
+	vk->vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplate2KHR");
 	vk->vkCmdSetDescriptorBufferOffsets2EXT = (PFN_vkCmdSetDescriptorBufferOffsets2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDescriptorBufferOffsets2EXT");
 #endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
@@ -1160,8 +1173,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdOpticalFlowExecuteNV = (PFN_vkCmdOpticalFlowExecuteNV)vk->vkGetInstanceProcAddr(instance, "vkCmdOpticalFlowExecuteNV");
 #endif // defined(VK_NV_optical_flow)
 #if defined(VK_NV_partitioned_acceleration_structure)
-	vk->vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
 	vk->vkCmdBuildPartitionedAccelerationStructuresNV = (PFN_vkCmdBuildPartitionedAccelerationStructuresNV)vk->vkGetInstanceProcAddr(instance, "vkCmdBuildPartitionedAccelerationStructuresNV");
+	vk->vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
 #endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 	vk->vkCmdTraceRaysNV = (PFN_vkCmdTraceRaysNV)vk->vkGetInstanceProcAddr(instance, "vkCmdTraceRaysNV");
@@ -1537,6 +1550,17 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vk->vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	vk->vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vk->vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_data_graph)
+	vk->vkCreateDataGraphPipelinesARM = (PFN_vkCreateDataGraphPipelinesARM)vk->vkGetDeviceProcAddr(device, "vkCreateDataGraphPipelinesARM");
+	vk->vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
+	vk->vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
+	vk->vkCreateDataGraphPipelineSessionARM = (PFN_vkCreateDataGraphPipelineSessionARM)vk->vkGetDeviceProcAddr(device, "vkCreateDataGraphPipelineSessionARM");
+	vk->vkGetDataGraphPipelineSessionMemoryRequirementsARM = (PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionMemoryRequirementsARM");
+	vk->vkBindDataGraphPipelineSessionMemoryARM = (PFN_vkBindDataGraphPipelineSessionMemoryARM)vk->vkGetDeviceProcAddr(device, "vkBindDataGraphPipelineSessionMemoryARM");
+	vk->vkDestroyDataGraphPipelineSessionARM = (PFN_vkDestroyDataGraphPipelineSessionARM)vk->vkGetDeviceProcAddr(device, "vkDestroyDataGraphPipelineSessionARM");
+	vk->vkCmdDispatchDataGraphARM = (PFN_vkCmdDispatchDataGraphARM)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchDataGraphARM");
+	vk->vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineAvailablePropertiesARM");
+#endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_tensors)
 	vk->vkCreateTensorARM = (PFN_vkCreateTensorARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorARM");
 	vk->vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
@@ -1967,11 +1991,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vk->vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2KHR");
 #endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_maintenance6)
-	vk->vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSet2KHR");
 	vk->vkCmdBindDescriptorSets2KHR = (PFN_vkCmdBindDescriptorSets2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorSets2KHR");
-	vk->vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplate2KHR");
 	vk->vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");
 	vk->vkCmdPushConstants2KHR = (PFN_vkCmdPushConstants2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushConstants2KHR");
+	vk->vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSet2KHR");
+	vk->vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplate2KHR");
 	vk->vkCmdSetDescriptorBufferOffsets2EXT = (PFN_vkCmdSetDescriptorBufferOffsets2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsets2EXT");
 #endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
@@ -2171,8 +2195,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdOpticalFlowExecuteNV = (PFN_vkCmdOpticalFlowExecuteNV)vk->vkGetDeviceProcAddr(device, "vkCmdOpticalFlowExecuteNV");
 #endif // defined(VK_NV_optical_flow)
 #if defined(VK_NV_partitioned_acceleration_structure)
-	vk->vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vk->vkGetDeviceProcAddr(device, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
 	vk->vkCmdBuildPartitionedAccelerationStructuresNV = (PFN_vkCmdBuildPartitionedAccelerationStructuresNV)vk->vkGetDeviceProcAddr(device, "vkCmdBuildPartitionedAccelerationStructuresNV");
+	vk->vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vk->vkGetDeviceProcAddr(device, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
 #endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 	vk->vkCmdTraceRaysNV = (PFN_vkCmdTraceRaysNV)vk->vkGetDeviceProcAddr(device, "vkCmdTraceRaysNV");
@@ -4152,6 +4176,85 @@ VKAPI_ATTR VkResult vkGetMemoryAndroidHardwareBufferANDROID(VkDevice device, con
 	return pfn_vkGetMemoryAndroidHardwareBufferANDROID(device, pInfo, pBuffer);
 }
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_data_graph)
+
+static PFN_vkCreateDataGraphPipelinesARM pfn_vkCreateDataGraphPipelinesARM;
+VKAPI_ATTR VkResult vkCreateDataGraphPipelinesARM(VkDevice device, VkDeferredOperationKHR deferredOperation, VkPipelineCache pipelineCache, uint32_t createInfoCount, const VkDataGraphPipelineCreateInfoARM * pCreateInfos, const VkAllocationCallbacks * pAllocator, VkPipeline * pPipelines)
+{
+	assert(pfn_vkCreateDataGraphPipelinesARM);
+	return pfn_vkCreateDataGraphPipelinesARM(device, deferredOperation, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+}
+
+static PFN_vkGetDataGraphPipelinePropertiesARM pfn_vkGetDataGraphPipelinePropertiesARM;
+VKAPI_ATTR VkResult vkGetDataGraphPipelinePropertiesARM(VkDevice device, const VkDataGraphPipelineInfoARM * pPipelineInfo, uint32_t propertiesCount, VkDataGraphPipelinePropertyQueryResultARM * pProperties)
+{
+	assert(pfn_vkGetDataGraphPipelinePropertiesARM);
+	return pfn_vkGetDataGraphPipelinePropertiesARM(device, pPipelineInfo, propertiesCount, pProperties);
+}
+
+static PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM;
+VKAPI_ATTR VkResult vkGetDataGraphPipelineSessionBindPointRequirementsARM(VkDevice device, const VkDataGraphPipelineSessionBindPointRequirementsInfoARM * pInfo, uint32_t * pBindPointRequirementCount, VkDataGraphPipelineSessionBindPointRequirementARM * pBindPointRequirements)
+{
+	assert(pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM);
+	return pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM(device, pInfo, pBindPointRequirementCount, pBindPointRequirements);
+}
+
+static PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM;
+VKAPI_ATTR void vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM * pQueueFamilyDataGraphProcessingEngineInfo, VkQueueFamilyDataGraphProcessingEnginePropertiesARM * pQueueFamilyDataGraphProcessingEngineProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM);
+	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(physicalDevice, pQueueFamilyDataGraphProcessingEngineInfo, pQueueFamilyDataGraphProcessingEngineProperties);
+}
+
+static PFN_vkCreateDataGraphPipelineSessionARM pfn_vkCreateDataGraphPipelineSessionARM;
+VKAPI_ATTR VkResult vkCreateDataGraphPipelineSessionARM(VkDevice device, const VkDataGraphPipelineSessionCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkDataGraphPipelineSessionARM * pSession)
+{
+	assert(pfn_vkCreateDataGraphPipelineSessionARM);
+	return pfn_vkCreateDataGraphPipelineSessionARM(device, pCreateInfo, pAllocator, pSession);
+}
+
+static PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM pfn_vkGetDataGraphPipelineSessionMemoryRequirementsARM;
+VKAPI_ATTR void vkGetDataGraphPipelineSessionMemoryRequirementsARM(VkDevice device, const VkDataGraphPipelineSessionMemoryRequirementsInfoARM * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetDataGraphPipelineSessionMemoryRequirementsARM);
+	pfn_vkGetDataGraphPipelineSessionMemoryRequirementsARM(device, pInfo, pMemoryRequirements);
+}
+
+static PFN_vkBindDataGraphPipelineSessionMemoryARM pfn_vkBindDataGraphPipelineSessionMemoryARM;
+VKAPI_ATTR VkResult vkBindDataGraphPipelineSessionMemoryARM(VkDevice device, uint32_t bindInfoCount, const VkBindDataGraphPipelineSessionMemoryInfoARM * pBindInfos)
+{
+	assert(pfn_vkBindDataGraphPipelineSessionMemoryARM);
+	return pfn_vkBindDataGraphPipelineSessionMemoryARM(device, bindInfoCount, pBindInfos);
+}
+
+static PFN_vkDestroyDataGraphPipelineSessionARM pfn_vkDestroyDataGraphPipelineSessionARM;
+VKAPI_ATTR void vkDestroyDataGraphPipelineSessionARM(VkDevice device, VkDataGraphPipelineSessionARM session, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyDataGraphPipelineSessionARM);
+	pfn_vkDestroyDataGraphPipelineSessionARM(device, session, pAllocator);
+}
+
+static PFN_vkCmdDispatchDataGraphARM pfn_vkCmdDispatchDataGraphARM;
+VKAPI_ATTR void vkCmdDispatchDataGraphARM(VkCommandBuffer commandBuffer, VkDataGraphPipelineSessionARM session, const VkDataGraphPipelineDispatchInfoARM * pInfo)
+{
+	assert(pfn_vkCmdDispatchDataGraphARM);
+	pfn_vkCmdDispatchDataGraphARM(commandBuffer, session, pInfo);
+}
+
+static PFN_vkGetDataGraphPipelineAvailablePropertiesARM pfn_vkGetDataGraphPipelineAvailablePropertiesARM;
+VKAPI_ATTR VkResult vkGetDataGraphPipelineAvailablePropertiesARM(VkDevice device, const VkDataGraphPipelineInfoARM * pPipelineInfo, uint32_t * pPropertiesCount, VkDataGraphPipelinePropertyARM * pProperties)
+{
+	assert(pfn_vkGetDataGraphPipelineAvailablePropertiesARM);
+	return pfn_vkGetDataGraphPipelineAvailablePropertiesARM(device, pPipelineInfo, pPropertiesCount, pProperties);
+}
+
+static PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, uint32_t * pQueueFamilyDataGraphPropertyCount, VkQueueFamilyDataGraphPropertiesARM * pQueueFamilyDataGraphProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM);
+	return pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM(physicalDevice, queueFamilyIndex, pQueueFamilyDataGraphPropertyCount, pQueueFamilyDataGraphProperties);
+}
+#endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_tensors)
 
 static PFN_vkCreateTensorARM pfn_vkCreateTensorARM;
@@ -6627,25 +6730,11 @@ VKAPI_ATTR void vkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, 
 #endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_maintenance6)
 
-static PFN_vkCmdPushDescriptorSet2KHR pfn_vkCmdPushDescriptorSet2KHR;
-VKAPI_ATTR void vkCmdPushDescriptorSet2KHR(VkCommandBuffer commandBuffer, const VkPushDescriptorSetInfo * pPushDescriptorSetInfo)
-{
-	assert(pfn_vkCmdPushDescriptorSet2KHR);
-	pfn_vkCmdPushDescriptorSet2KHR(commandBuffer, pPushDescriptorSetInfo);
-}
-
 static PFN_vkCmdBindDescriptorSets2KHR pfn_vkCmdBindDescriptorSets2KHR;
 VKAPI_ATTR void vkCmdBindDescriptorSets2KHR(VkCommandBuffer commandBuffer, const VkBindDescriptorSetsInfo * pBindDescriptorSetsInfo)
 {
 	assert(pfn_vkCmdBindDescriptorSets2KHR);
 	pfn_vkCmdBindDescriptorSets2KHR(commandBuffer, pBindDescriptorSetsInfo);
-}
-
-static PFN_vkCmdPushDescriptorSetWithTemplate2KHR pfn_vkCmdPushDescriptorSetWithTemplate2KHR;
-VKAPI_ATTR void vkCmdPushDescriptorSetWithTemplate2KHR(VkCommandBuffer commandBuffer, const VkPushDescriptorSetWithTemplateInfo * pPushDescriptorSetWithTemplateInfo)
-{
-	assert(pfn_vkCmdPushDescriptorSetWithTemplate2KHR);
-	pfn_vkCmdPushDescriptorSetWithTemplate2KHR(commandBuffer, pPushDescriptorSetWithTemplateInfo);
 }
 
 static PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT pfn_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT;
@@ -6660,6 +6749,20 @@ VKAPI_ATTR void vkCmdPushConstants2KHR(VkCommandBuffer commandBuffer, const VkPu
 {
 	assert(pfn_vkCmdPushConstants2KHR);
 	pfn_vkCmdPushConstants2KHR(commandBuffer, pPushConstantsInfo);
+}
+
+static PFN_vkCmdPushDescriptorSet2KHR pfn_vkCmdPushDescriptorSet2KHR;
+VKAPI_ATTR void vkCmdPushDescriptorSet2KHR(VkCommandBuffer commandBuffer, const VkPushDescriptorSetInfo * pPushDescriptorSetInfo)
+{
+	assert(pfn_vkCmdPushDescriptorSet2KHR);
+	pfn_vkCmdPushDescriptorSet2KHR(commandBuffer, pPushDescriptorSetInfo);
+}
+
+static PFN_vkCmdPushDescriptorSetWithTemplate2KHR pfn_vkCmdPushDescriptorSetWithTemplate2KHR;
+VKAPI_ATTR void vkCmdPushDescriptorSetWithTemplate2KHR(VkCommandBuffer commandBuffer, const VkPushDescriptorSetWithTemplateInfo * pPushDescriptorSetWithTemplateInfo)
+{
+	assert(pfn_vkCmdPushDescriptorSetWithTemplate2KHR);
+	pfn_vkCmdPushDescriptorSetWithTemplate2KHR(commandBuffer, pPushDescriptorSetWithTemplateInfo);
 }
 
 static PFN_vkCmdSetDescriptorBufferOffsets2EXT pfn_vkCmdSetDescriptorBufferOffsets2EXT;
@@ -7820,18 +7923,18 @@ VKAPI_ATTR void vkCmdOpticalFlowExecuteNV(VkCommandBuffer commandBuffer, VkOptic
 #endif // defined(VK_NV_optical_flow)
 #if defined(VK_NV_partitioned_acceleration_structure)
 
-static PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV;
-VKAPI_ATTR void vkGetPartitionedAccelerationStructuresBuildSizesNV(VkDevice device, const VkPartitionedAccelerationStructureInstancesInputNV * pInfo, VkAccelerationStructureBuildSizesInfoKHR * pSizeInfo)
-{
-	assert(pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV);
-	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV(device, pInfo, pSizeInfo);
-}
-
 static PFN_vkCmdBuildPartitionedAccelerationStructuresNV pfn_vkCmdBuildPartitionedAccelerationStructuresNV;
 VKAPI_ATTR void vkCmdBuildPartitionedAccelerationStructuresNV(VkCommandBuffer commandBuffer, const VkBuildPartitionedAccelerationStructureInfoNV * pBuildInfo)
 {
 	assert(pfn_vkCmdBuildPartitionedAccelerationStructuresNV);
 	pfn_vkCmdBuildPartitionedAccelerationStructuresNV(commandBuffer, pBuildInfo);
+}
+
+static PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV;
+VKAPI_ATTR void vkGetPartitionedAccelerationStructuresBuildSizesNV(VkDevice device, const VkPartitionedAccelerationStructureInstancesInputNV * pInfo, VkAccelerationStructureBuildSizesInfoKHR * pSizeInfo)
+{
+	assert(pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV);
+	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV(device, pInfo, pSizeInfo);
 }
 #endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
@@ -8417,6 +8520,19 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetInstanceProcAddr(instance, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetInstanceProcAddr(instance, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_data_graph)
+	pfn_vkCreateDataGraphPipelinesARM = (PFN_vkCreateDataGraphPipelinesARM)vkGetInstanceProcAddr(instance, "vkCreateDataGraphPipelinesARM");
+	pfn_vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelinePropertiesARM");
+	pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
+	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
+	pfn_vkCreateDataGraphPipelineSessionARM = (PFN_vkCreateDataGraphPipelineSessionARM)vkGetInstanceProcAddr(instance, "vkCreateDataGraphPipelineSessionARM");
+	pfn_vkGetDataGraphPipelineSessionMemoryRequirementsARM = (PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionMemoryRequirementsARM");
+	pfn_vkBindDataGraphPipelineSessionMemoryARM = (PFN_vkBindDataGraphPipelineSessionMemoryARM)vkGetInstanceProcAddr(instance, "vkBindDataGraphPipelineSessionMemoryARM");
+	pfn_vkDestroyDataGraphPipelineSessionARM = (PFN_vkDestroyDataGraphPipelineSessionARM)vkGetInstanceProcAddr(instance, "vkDestroyDataGraphPipelineSessionARM");
+	pfn_vkCmdDispatchDataGraphARM = (PFN_vkCmdDispatchDataGraphARM)vkGetInstanceProcAddr(instance, "vkCmdDispatchDataGraphARM");
+	pfn_vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineAvailablePropertiesARM");
+	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
+#endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_tensors)
 	pfn_vkCreateTensorARM = (PFN_vkCreateTensorARM)vkGetInstanceProcAddr(instance, "vkCreateTensorARM");
 	pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
@@ -8941,11 +9057,11 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vkGetInstanceProcAddr(instance, "vkGetImageSubresourceLayout2KHR");
 #endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_maintenance6)
-	pfn_vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSet2KHR");
 	pfn_vkCmdBindDescriptorSets2KHR = (PFN_vkCmdBindDescriptorSets2KHR)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorSets2KHR");
-	pfn_vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplate2KHR");
 	pfn_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)vkGetInstanceProcAddr(instance, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");
 	pfn_vkCmdPushConstants2KHR = (PFN_vkCmdPushConstants2KHR)vkGetInstanceProcAddr(instance, "vkCmdPushConstants2KHR");
+	pfn_vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSet2KHR");
+	pfn_vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplate2KHR");
 	pfn_vkCmdSetDescriptorBufferOffsets2EXT = (PFN_vkCmdSetDescriptorBufferOffsets2EXT)vkGetInstanceProcAddr(instance, "vkCmdSetDescriptorBufferOffsets2EXT");
 #endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
@@ -9204,8 +9320,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdOpticalFlowExecuteNV = (PFN_vkCmdOpticalFlowExecuteNV)vkGetInstanceProcAddr(instance, "vkCmdOpticalFlowExecuteNV");
 #endif // defined(VK_NV_optical_flow)
 #if defined(VK_NV_partitioned_acceleration_structure)
-	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vkGetInstanceProcAddr(instance, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
 	pfn_vkCmdBuildPartitionedAccelerationStructuresNV = (PFN_vkCmdBuildPartitionedAccelerationStructuresNV)vkGetInstanceProcAddr(instance, "vkCmdBuildPartitionedAccelerationStructuresNV");
+	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vkGetInstanceProcAddr(instance, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
 #endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 	pfn_vkCmdTraceRaysNV = (PFN_vkCmdTraceRaysNV)vkGetInstanceProcAddr(instance, "vkCmdTraceRaysNV");
@@ -9581,6 +9697,17 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID)vkGetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
 	pfn_vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID)vkGetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_ARM_data_graph)
+	pfn_vkCreateDataGraphPipelinesARM = (PFN_vkCreateDataGraphPipelinesARM)vkGetDeviceProcAddr(device, "vkCreateDataGraphPipelinesARM");
+	pfn_vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
+	pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
+	pfn_vkCreateDataGraphPipelineSessionARM = (PFN_vkCreateDataGraphPipelineSessionARM)vkGetDeviceProcAddr(device, "vkCreateDataGraphPipelineSessionARM");
+	pfn_vkGetDataGraphPipelineSessionMemoryRequirementsARM = (PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionMemoryRequirementsARM");
+	pfn_vkBindDataGraphPipelineSessionMemoryARM = (PFN_vkBindDataGraphPipelineSessionMemoryARM)vkGetDeviceProcAddr(device, "vkBindDataGraphPipelineSessionMemoryARM");
+	pfn_vkDestroyDataGraphPipelineSessionARM = (PFN_vkDestroyDataGraphPipelineSessionARM)vkGetDeviceProcAddr(device, "vkDestroyDataGraphPipelineSessionARM");
+	pfn_vkCmdDispatchDataGraphARM = (PFN_vkCmdDispatchDataGraphARM)vkGetDeviceProcAddr(device, "vkCmdDispatchDataGraphARM");
+	pfn_vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineAvailablePropertiesARM");
+#endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_tensors)
 	pfn_vkCreateTensorARM = (PFN_vkCreateTensorARM)vkGetDeviceProcAddr(device, "vkCreateTensorARM");
 	pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
@@ -10011,11 +10138,11 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetImageSubresourceLayout2KHR = (PFN_vkGetImageSubresourceLayout2KHR)vkGetDeviceProcAddr(device, "vkGetImageSubresourceLayout2KHR");
 #endif // defined(VK_KHR_maintenance5)
 #if defined(VK_KHR_maintenance6)
-	pfn_vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSet2KHR");
 	pfn_vkCmdBindDescriptorSets2KHR = (PFN_vkCmdBindDescriptorSets2KHR)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorSets2KHR");
-	pfn_vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplate2KHR");
 	pfn_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT = (PFN_vkCmdBindDescriptorBufferEmbeddedSamplers2EXT)vkGetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplers2EXT");
 	pfn_vkCmdPushConstants2KHR = (PFN_vkCmdPushConstants2KHR)vkGetDeviceProcAddr(device, "vkCmdPushConstants2KHR");
+	pfn_vkCmdPushDescriptorSet2KHR = (PFN_vkCmdPushDescriptorSet2KHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSet2KHR");
+	pfn_vkCmdPushDescriptorSetWithTemplate2KHR = (PFN_vkCmdPushDescriptorSetWithTemplate2KHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplate2KHR");
 	pfn_vkCmdSetDescriptorBufferOffsets2EXT = (PFN_vkCmdSetDescriptorBufferOffsets2EXT)vkGetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsets2EXT");
 #endif // defined(VK_KHR_maintenance6)
 #if defined(VK_KHR_map_memory2)
@@ -10215,8 +10342,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdOpticalFlowExecuteNV = (PFN_vkCmdOpticalFlowExecuteNV)vkGetDeviceProcAddr(device, "vkCmdOpticalFlowExecuteNV");
 #endif // defined(VK_NV_optical_flow)
 #if defined(VK_NV_partitioned_acceleration_structure)
-	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vkGetDeviceProcAddr(device, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
 	pfn_vkCmdBuildPartitionedAccelerationStructuresNV = (PFN_vkCmdBuildPartitionedAccelerationStructuresNV)vkGetDeviceProcAddr(device, "vkCmdBuildPartitionedAccelerationStructuresNV");
+	pfn_vkGetPartitionedAccelerationStructuresBuildSizesNV = (PFN_vkGetPartitionedAccelerationStructuresBuildSizesNV)vkGetDeviceProcAddr(device, "vkGetPartitionedAccelerationStructuresBuildSizesNV");
 #endif // defined(VK_NV_partitioned_acceleration_structure)
 #if defined(VK_NV_ray_tracing)
 	pfn_vkCmdTraceRaysNV = (PFN_vkCmdTraceRaysNV)vkGetDeviceProcAddr(device, "vkCmdTraceRaysNV");
