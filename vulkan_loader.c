@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 320 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 321 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -985,6 +985,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vk->vkGetInstanceProcAddr(instance, "vkAcquireNextImageKHR");
 	vk->vkQueuePresentKHR = (PFN_vkQueuePresentKHR)vk->vkGetInstanceProcAddr(instance, "vkQueuePresentKHR");
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_swapchain_maintenance1)
+	vk->vkReleaseSwapchainImagesKHR = (PFN_vkReleaseSwapchainImagesKHR)vk->vkGetInstanceProcAddr(instance, "vkReleaseSwapchainImagesKHR");
+#endif // defined(VK_KHR_swapchain_maintenance1)
 #if defined(VK_KHR_synchronization2)
 	vk->vkCmdResetEvent2KHR = (PFN_vkCmdResetEvent2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdResetEvent2KHR");
 	vk->vkCmdWriteTimestamp2KHR = (PFN_vkCmdWriteTimestamp2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteTimestamp2KHR");
@@ -2056,6 +2059,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vk->vkGetDeviceProcAddr(device, "vkAcquireNextImageKHR");
 	vk->vkQueuePresentKHR = (PFN_vkQueuePresentKHR)vk->vkGetDeviceProcAddr(device, "vkQueuePresentKHR");
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_swapchain_maintenance1)
+	vk->vkReleaseSwapchainImagesKHR = (PFN_vkReleaseSwapchainImagesKHR)vk->vkGetDeviceProcAddr(device, "vkReleaseSwapchainImagesKHR");
+#endif // defined(VK_KHR_swapchain_maintenance1)
 #if defined(VK_KHR_synchronization2)
 	vk->vkCmdResetEvent2KHR = (PFN_vkCmdResetEvent2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdResetEvent2KHR");
 	vk->vkCmdWriteTimestamp2KHR = (PFN_vkCmdWriteTimestamp2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdWriteTimestamp2KHR");
@@ -5591,7 +5597,7 @@ VKAPI_ATTR void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, uint32_t v
 #if defined(VK_EXT_swapchain_maintenance1)
 
 static PFN_vkReleaseSwapchainImagesEXT pfn_vkReleaseSwapchainImagesEXT;
-VKAPI_ATTR VkResult vkReleaseSwapchainImagesEXT(VkDevice device, const VkReleaseSwapchainImagesInfoEXT * pReleaseInfo)
+VKAPI_ATTR VkResult vkReleaseSwapchainImagesEXT(VkDevice device, const VkReleaseSwapchainImagesInfoKHR * pReleaseInfo)
 {
 	assert(pfn_vkReleaseSwapchainImagesEXT);
 	return pfn_vkReleaseSwapchainImagesEXT(device, pReleaseInfo);
@@ -7080,6 +7086,15 @@ VKAPI_ATTR VkResult vkQueuePresentKHR(VkQueue queue, const VkPresentInfoKHR * pP
 	return pfn_vkQueuePresentKHR(queue, pPresentInfo);
 }
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_swapchain_maintenance1)
+
+static PFN_vkReleaseSwapchainImagesKHR pfn_vkReleaseSwapchainImagesKHR;
+VKAPI_ATTR VkResult vkReleaseSwapchainImagesKHR(VkDevice device, const VkReleaseSwapchainImagesInfoKHR * pReleaseInfo)
+{
+	assert(pfn_vkReleaseSwapchainImagesKHR);
+	return pfn_vkReleaseSwapchainImagesKHR(device, pReleaseInfo);
+}
+#endif // defined(VK_KHR_swapchain_maintenance1)
 #if defined(VK_KHR_synchronization2)
 
 static PFN_vkCmdResetEvent2KHR pfn_vkCmdResetEvent2KHR;
@@ -9132,6 +9147,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vkGetInstanceProcAddr(instance, "vkAcquireNextImageKHR");
 	pfn_vkQueuePresentKHR = (PFN_vkQueuePresentKHR)vkGetInstanceProcAddr(instance, "vkQueuePresentKHR");
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_swapchain_maintenance1)
+	pfn_vkReleaseSwapchainImagesKHR = (PFN_vkReleaseSwapchainImagesKHR)vkGetInstanceProcAddr(instance, "vkReleaseSwapchainImagesKHR");
+#endif // defined(VK_KHR_swapchain_maintenance1)
 #if defined(VK_KHR_synchronization2)
 	pfn_vkCmdResetEvent2KHR = (PFN_vkCmdResetEvent2KHR)vkGetInstanceProcAddr(instance, "vkCmdResetEvent2KHR");
 	pfn_vkCmdWriteTimestamp2KHR = (PFN_vkCmdWriteTimestamp2KHR)vkGetInstanceProcAddr(instance, "vkCmdWriteTimestamp2KHR");
@@ -10203,6 +10221,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkAcquireNextImageKHR = (PFN_vkAcquireNextImageKHR)vkGetDeviceProcAddr(device, "vkAcquireNextImageKHR");
 	pfn_vkQueuePresentKHR = (PFN_vkQueuePresentKHR)vkGetDeviceProcAddr(device, "vkQueuePresentKHR");
 #endif // defined(VK_KHR_swapchain)
+#if defined(VK_KHR_swapchain_maintenance1)
+	pfn_vkReleaseSwapchainImagesKHR = (PFN_vkReleaseSwapchainImagesKHR)vkGetDeviceProcAddr(device, "vkReleaseSwapchainImagesKHR");
+#endif // defined(VK_KHR_swapchain_maintenance1)
 #if defined(VK_KHR_synchronization2)
 	pfn_vkCmdResetEvent2KHR = (PFN_vkCmdResetEvent2KHR)vkGetDeviceProcAddr(device, "vkCmdResetEvent2KHR");
 	pfn_vkCmdWriteTimestamp2KHR = (PFN_vkCmdWriteTimestamp2KHR)vkGetDeviceProcAddr(device, "vkCmdWriteTimestamp2KHR");
