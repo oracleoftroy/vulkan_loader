@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 332 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 333 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -494,6 +494,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginConditionalRenderingEXT");
 	vk->vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
+#if defined(VK_EXT_custom_resolve)
+	vk->vkCmdBeginCustomResolveEXT = (PFN_vkCmdBeginCustomResolveEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginCustomResolveEXT");
+#endif // defined(VK_EXT_custom_resolve)
 #if defined(VK_EXT_debug_marker)
 	vk->vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDebugMarkerEndEXT");
 	vk->vkCmdDebugMarkerBeginEXT = (PFN_vkCmdDebugMarkerBeginEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDebugMarkerBeginEXT");
@@ -1721,6 +1724,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginConditionalRenderingEXT");
 	vk->vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vk->vkGetDeviceProcAddr(device, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
+#if defined(VK_EXT_custom_resolve)
+	vk->vkCmdBeginCustomResolveEXT = (PFN_vkCmdBeginCustomResolveEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginCustomResolveEXT");
+#endif // defined(VK_EXT_custom_resolve)
 #if defined(VK_EXT_debug_marker)
 	vk->vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDebugMarkerEndEXT");
 	vk->vkCmdDebugMarkerBeginEXT = (PFN_vkCmdDebugMarkerBeginEXT)vk->vkGetDeviceProcAddr(device, "vkCmdDebugMarkerBeginEXT");
@@ -4678,6 +4684,15 @@ VKAPI_ATTR void vkCmdEndConditionalRenderingEXT(VkCommandBuffer commandBuffer)
 	pfn_vkCmdEndConditionalRenderingEXT(commandBuffer);
 }
 #endif // defined(VK_EXT_conditional_rendering)
+#if defined(VK_EXT_custom_resolve)
+
+static PFN_vkCmdBeginCustomResolveEXT pfn_vkCmdBeginCustomResolveEXT;
+VKAPI_ATTR void vkCmdBeginCustomResolveEXT(VkCommandBuffer commandBuffer, const VkBeginCustomResolveInfoEXT * pBeginCustomResolveInfo)
+{
+	assert(pfn_vkCmdBeginCustomResolveEXT);
+	pfn_vkCmdBeginCustomResolveEXT(commandBuffer, pBeginCustomResolveInfo);
+}
+#endif // defined(VK_EXT_custom_resolve)
 #if defined(VK_EXT_debug_marker)
 
 static PFN_vkCmdDebugMarkerEndEXT pfn_vkCmdDebugMarkerEndEXT;
@@ -8983,6 +8998,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginConditionalRenderingEXT");
 	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetInstanceProcAddr(instance, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
+#if defined(VK_EXT_custom_resolve)
+	pfn_vkCmdBeginCustomResolveEXT = (PFN_vkCmdBeginCustomResolveEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginCustomResolveEXT");
+#endif // defined(VK_EXT_custom_resolve)
 #if defined(VK_EXT_debug_marker)
 	pfn_vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vkGetInstanceProcAddr(instance, "vkCmdDebugMarkerEndEXT");
 	pfn_vkCmdDebugMarkerBeginEXT = (PFN_vkCmdDebugMarkerBeginEXT)vkGetInstanceProcAddr(instance, "vkCmdDebugMarkerBeginEXT");
@@ -10210,6 +10228,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vkGetDeviceProcAddr(device, "vkCmdBeginConditionalRenderingEXT");
 	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetDeviceProcAddr(device, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
+#if defined(VK_EXT_custom_resolve)
+	pfn_vkCmdBeginCustomResolveEXT = (PFN_vkCmdBeginCustomResolveEXT)vkGetDeviceProcAddr(device, "vkCmdBeginCustomResolveEXT");
+#endif // defined(VK_EXT_custom_resolve)
 #if defined(VK_EXT_debug_marker)
 	pfn_vkCmdDebugMarkerEndEXT = (PFN_vkCmdDebugMarkerEndEXT)vkGetDeviceProcAddr(device, "vkCmdDebugMarkerEndEXT");
 	pfn_vkCmdDebugMarkerBeginEXT = (PFN_vkCmdDebugMarkerBeginEXT)vkGetDeviceProcAddr(device, "vkCmdDebugMarkerBeginEXT");
