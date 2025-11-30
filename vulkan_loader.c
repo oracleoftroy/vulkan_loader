@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 334 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 335 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -711,6 +711,12 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_pipeline_properties)
 	vk->vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetPipelinePropertiesEXT");
 #endif // defined(VK_EXT_pipeline_properties)
+#if defined(VK_EXT_present_timing)
+	vk->vkGetPastPresentationTimingEXT = (PFN_vkGetPastPresentationTimingEXT)vk->vkGetInstanceProcAddr(instance, "vkGetPastPresentationTimingEXT");
+	vk->vkSetSwapchainPresentTimingQueueSizeEXT = (PFN_vkSetSwapchainPresentTimingQueueSizeEXT)vk->vkGetInstanceProcAddr(instance, "vkSetSwapchainPresentTimingQueueSizeEXT");
+	vk->vkGetSwapchainTimingPropertiesEXT = (PFN_vkGetSwapchainTimingPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainTimingPropertiesEXT");
+	vk->vkGetSwapchainTimeDomainPropertiesEXT = (PFN_vkGetSwapchainTimeDomainPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainTimeDomainPropertiesEXT");
+#endif // defined(VK_EXT_present_timing)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -793,9 +799,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_INTEL_performance_query)
 	vk->vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vk->vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceStreamMarkerINTEL");
 	vk->vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vk->vkGetInstanceProcAddr(instance, "vkAcquirePerformanceConfigurationINTEL");
+	vk->vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vk->vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceMarkerINTEL");
 	vk->vkInitializePerformanceApiINTEL = (PFN_vkInitializePerformanceApiINTEL)vk->vkGetInstanceProcAddr(instance, "vkInitializePerformanceApiINTEL");
 	vk->vkUninitializePerformanceApiINTEL = (PFN_vkUninitializePerformanceApiINTEL)vk->vkGetInstanceProcAddr(instance, "vkUninitializePerformanceApiINTEL");
-	vk->vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vk->vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceMarkerINTEL");
 	vk->vkCmdSetPerformanceOverrideINTEL = (PFN_vkCmdSetPerformanceOverrideINTEL)vk->vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceOverrideINTEL");
 	vk->vkReleasePerformanceConfigurationINTEL = (PFN_vkReleasePerformanceConfigurationINTEL)vk->vkGetInstanceProcAddr(instance, "vkReleasePerformanceConfigurationINTEL");
 	vk->vkQueueSetPerformanceConfigurationINTEL = (PFN_vkQueueSetPerformanceConfigurationINTEL)vk->vkGetInstanceProcAddr(instance, "vkQueueSetPerformanceConfigurationINTEL");
@@ -1174,9 +1180,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
 #endif // defined(VK_NV_coverage_reduction_mode)
 #if defined(VK_NV_cuda_kernel_launch)
+	vk->vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vk->vkGetInstanceProcAddr(instance, "vkGetCudaModuleCacheNV");
 	vk->vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vk->vkGetInstanceProcAddr(instance, "vkCreateCudaFunctionNV");
 	vk->vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vk->vkGetInstanceProcAddr(instance, "vkCreateCudaModuleNV");
-	vk->vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vk->vkGetInstanceProcAddr(instance, "vkGetCudaModuleCacheNV");
 	vk->vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyCudaModuleNV");
 	vk->vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyCudaFunctionNV");
 	vk->vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vk->vkGetInstanceProcAddr(instance, "vkCmdCudaLaunchKernelNV");
@@ -1916,6 +1922,12 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_pipeline_properties)
 	vk->vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetPipelinePropertiesEXT");
 #endif // defined(VK_EXT_pipeline_properties)
+#if defined(VK_EXT_present_timing)
+	vk->vkGetPastPresentationTimingEXT = (PFN_vkGetPastPresentationTimingEXT)vk->vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingEXT");
+	vk->vkSetSwapchainPresentTimingQueueSizeEXT = (PFN_vkSetSwapchainPresentTimingQueueSizeEXT)vk->vkGetDeviceProcAddr(device, "vkSetSwapchainPresentTimingQueueSizeEXT");
+	vk->vkGetSwapchainTimingPropertiesEXT = (PFN_vkGetSwapchainTimingPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainTimingPropertiesEXT");
+	vk->vkGetSwapchainTimeDomainPropertiesEXT = (PFN_vkGetSwapchainTimeDomainPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainTimeDomainPropertiesEXT");
+#endif // defined(VK_EXT_present_timing)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -1988,9 +2000,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_INTEL_performance_query)
 	vk->vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vk->vkGetDeviceProcAddr(device, "vkCmdSetPerformanceStreamMarkerINTEL");
 	vk->vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vk->vkGetDeviceProcAddr(device, "vkAcquirePerformanceConfigurationINTEL");
+	vk->vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vk->vkGetDeviceProcAddr(device, "vkCmdSetPerformanceMarkerINTEL");
 	vk->vkInitializePerformanceApiINTEL = (PFN_vkInitializePerformanceApiINTEL)vk->vkGetDeviceProcAddr(device, "vkInitializePerformanceApiINTEL");
 	vk->vkUninitializePerformanceApiINTEL = (PFN_vkUninitializePerformanceApiINTEL)vk->vkGetDeviceProcAddr(device, "vkUninitializePerformanceApiINTEL");
-	vk->vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vk->vkGetDeviceProcAddr(device, "vkCmdSetPerformanceMarkerINTEL");
 	vk->vkCmdSetPerformanceOverrideINTEL = (PFN_vkCmdSetPerformanceOverrideINTEL)vk->vkGetDeviceProcAddr(device, "vkCmdSetPerformanceOverrideINTEL");
 	vk->vkReleasePerformanceConfigurationINTEL = (PFN_vkReleasePerformanceConfigurationINTEL)vk->vkGetDeviceProcAddr(device, "vkReleasePerformanceConfigurationINTEL");
 	vk->vkQueueSetPerformanceConfigurationINTEL = (PFN_vkQueueSetPerformanceConfigurationINTEL)vk->vkGetDeviceProcAddr(device, "vkQueueSetPerformanceConfigurationINTEL");
@@ -2268,9 +2280,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
 #endif // defined(VK_NV_copy_memory_indirect)
 #if defined(VK_NV_cuda_kernel_launch)
+	vk->vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vk->vkGetDeviceProcAddr(device, "vkGetCudaModuleCacheNV");
 	vk->vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vk->vkGetDeviceProcAddr(device, "vkCreateCudaFunctionNV");
 	vk->vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vk->vkGetDeviceProcAddr(device, "vkCreateCudaModuleNV");
-	vk->vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vk->vkGetDeviceProcAddr(device, "vkGetCudaModuleCacheNV");
 	vk->vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vk->vkGetDeviceProcAddr(device, "vkDestroyCudaModuleNV");
 	vk->vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vk->vkGetDeviceProcAddr(device, "vkDestroyCudaFunctionNV");
 	vk->vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vk->vkGetDeviceProcAddr(device, "vkCmdCudaLaunchKernelNV");
@@ -5771,6 +5783,36 @@ VKAPI_ATTR VkResult vkGetPipelinePropertiesEXT(VkDevice device, const VkPipeline
 	return pfn_vkGetPipelinePropertiesEXT(device, pPipelineInfo, pPipelineProperties);
 }
 #endif // defined(VK_EXT_pipeline_properties)
+#if defined(VK_EXT_present_timing)
+
+static PFN_vkGetPastPresentationTimingEXT pfn_vkGetPastPresentationTimingEXT;
+VKAPI_ATTR VkResult vkGetPastPresentationTimingEXT(VkDevice device, const VkPastPresentationTimingInfoEXT * pPastPresentationTimingInfo, VkPastPresentationTimingPropertiesEXT * pPastPresentationTimingProperties)
+{
+	assert(pfn_vkGetPastPresentationTimingEXT);
+	return pfn_vkGetPastPresentationTimingEXT(device, pPastPresentationTimingInfo, pPastPresentationTimingProperties);
+}
+
+static PFN_vkSetSwapchainPresentTimingQueueSizeEXT pfn_vkSetSwapchainPresentTimingQueueSizeEXT;
+VKAPI_ATTR VkResult vkSetSwapchainPresentTimingQueueSizeEXT(VkDevice device, VkSwapchainKHR swapchain, uint32_t size)
+{
+	assert(pfn_vkSetSwapchainPresentTimingQueueSizeEXT);
+	return pfn_vkSetSwapchainPresentTimingQueueSizeEXT(device, swapchain, size);
+}
+
+static PFN_vkGetSwapchainTimingPropertiesEXT pfn_vkGetSwapchainTimingPropertiesEXT;
+VKAPI_ATTR VkResult vkGetSwapchainTimingPropertiesEXT(VkDevice device, VkSwapchainKHR swapchain, VkSwapchainTimingPropertiesEXT * pSwapchainTimingProperties, uint64_t * pSwapchainTimingPropertiesCounter)
+{
+	assert(pfn_vkGetSwapchainTimingPropertiesEXT);
+	return pfn_vkGetSwapchainTimingPropertiesEXT(device, swapchain, pSwapchainTimingProperties, pSwapchainTimingPropertiesCounter);
+}
+
+static PFN_vkGetSwapchainTimeDomainPropertiesEXT pfn_vkGetSwapchainTimeDomainPropertiesEXT;
+VKAPI_ATTR VkResult vkGetSwapchainTimeDomainPropertiesEXT(VkDevice device, VkSwapchainKHR swapchain, VkSwapchainTimeDomainPropertiesEXT * pSwapchainTimeDomainProperties, uint64_t * pTimeDomainsCounter)
+{
+	assert(pfn_vkGetSwapchainTimeDomainPropertiesEXT);
+	return pfn_vkGetSwapchainTimeDomainPropertiesEXT(device, swapchain, pSwapchainTimeDomainProperties, pTimeDomainsCounter);
+}
+#endif // defined(VK_EXT_present_timing)
 #if defined(VK_EXT_private_data)
 
 static PFN_vkDestroyPrivateDataSlotEXT pfn_vkDestroyPrivateDataSlotEXT;
@@ -6124,6 +6166,13 @@ VKAPI_ATTR VkResult vkAcquirePerformanceConfigurationINTEL(VkDevice device, cons
 	return pfn_vkAcquirePerformanceConfigurationINTEL(device, pAcquireInfo, pConfiguration);
 }
 
+static PFN_vkCmdSetPerformanceMarkerINTEL pfn_vkCmdSetPerformanceMarkerINTEL;
+VKAPI_ATTR VkResult vkCmdSetPerformanceMarkerINTEL(VkCommandBuffer commandBuffer, const VkPerformanceMarkerInfoINTEL * pMarkerInfo)
+{
+	assert(pfn_vkCmdSetPerformanceMarkerINTEL);
+	return pfn_vkCmdSetPerformanceMarkerINTEL(commandBuffer, pMarkerInfo);
+}
+
 static PFN_vkInitializePerformanceApiINTEL pfn_vkInitializePerformanceApiINTEL;
 VKAPI_ATTR VkResult vkInitializePerformanceApiINTEL(VkDevice device, const VkInitializePerformanceApiInfoINTEL * pInitializeInfo)
 {
@@ -6136,13 +6185,6 @@ VKAPI_ATTR void vkUninitializePerformanceApiINTEL(VkDevice device)
 {
 	assert(pfn_vkUninitializePerformanceApiINTEL);
 	pfn_vkUninitializePerformanceApiINTEL(device);
-}
-
-static PFN_vkCmdSetPerformanceMarkerINTEL pfn_vkCmdSetPerformanceMarkerINTEL;
-VKAPI_ATTR VkResult vkCmdSetPerformanceMarkerINTEL(VkCommandBuffer commandBuffer, const VkPerformanceMarkerInfoINTEL * pMarkerInfo)
-{
-	assert(pfn_vkCmdSetPerformanceMarkerINTEL);
-	return pfn_vkCmdSetPerformanceMarkerINTEL(commandBuffer, pMarkerInfo);
 }
 
 static PFN_vkCmdSetPerformanceOverrideINTEL pfn_vkCmdSetPerformanceOverrideINTEL;
@@ -7843,6 +7885,13 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinati
 #endif // defined(VK_NV_coverage_reduction_mode)
 #if defined(VK_NV_cuda_kernel_launch)
 
+static PFN_vkGetCudaModuleCacheNV pfn_vkGetCudaModuleCacheNV;
+VKAPI_ATTR VkResult vkGetCudaModuleCacheNV(VkDevice device, VkCudaModuleNV module, size_t * pCacheSize, void * pCacheData)
+{
+	assert(pfn_vkGetCudaModuleCacheNV);
+	return pfn_vkGetCudaModuleCacheNV(device, module, pCacheSize, pCacheData);
+}
+
 static PFN_vkCreateCudaFunctionNV pfn_vkCreateCudaFunctionNV;
 VKAPI_ATTR VkResult vkCreateCudaFunctionNV(VkDevice device, const VkCudaFunctionCreateInfoNV * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkCudaFunctionNV * pFunction)
 {
@@ -7855,13 +7904,6 @@ VKAPI_ATTR VkResult vkCreateCudaModuleNV(VkDevice device, const VkCudaModuleCrea
 {
 	assert(pfn_vkCreateCudaModuleNV);
 	return pfn_vkCreateCudaModuleNV(device, pCreateInfo, pAllocator, pModule);
-}
-
-static PFN_vkGetCudaModuleCacheNV pfn_vkGetCudaModuleCacheNV;
-VKAPI_ATTR VkResult vkGetCudaModuleCacheNV(VkDevice device, VkCudaModuleNV module, size_t * pCacheSize, void * pCacheData)
-{
-	assert(pfn_vkGetCudaModuleCacheNV);
-	return pfn_vkGetCudaModuleCacheNV(device, module, pCacheSize, pCacheData);
 }
 
 static PFN_vkDestroyCudaModuleNV pfn_vkDestroyCudaModuleNV;
@@ -9215,6 +9257,12 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_pipeline_properties)
 	pfn_vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetPipelinePropertiesEXT");
 #endif // defined(VK_EXT_pipeline_properties)
+#if defined(VK_EXT_present_timing)
+	pfn_vkGetPastPresentationTimingEXT = (PFN_vkGetPastPresentationTimingEXT)vkGetInstanceProcAddr(instance, "vkGetPastPresentationTimingEXT");
+	pfn_vkSetSwapchainPresentTimingQueueSizeEXT = (PFN_vkSetSwapchainPresentTimingQueueSizeEXT)vkGetInstanceProcAddr(instance, "vkSetSwapchainPresentTimingQueueSizeEXT");
+	pfn_vkGetSwapchainTimingPropertiesEXT = (PFN_vkGetSwapchainTimingPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetSwapchainTimingPropertiesEXT");
+	pfn_vkGetSwapchainTimeDomainPropertiesEXT = (PFN_vkGetSwapchainTimeDomainPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetSwapchainTimeDomainPropertiesEXT");
+#endif // defined(VK_EXT_present_timing)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -9297,9 +9345,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_INTEL_performance_query)
 	pfn_vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceStreamMarkerINTEL");
 	pfn_vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vkGetInstanceProcAddr(instance, "vkAcquirePerformanceConfigurationINTEL");
+	pfn_vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceMarkerINTEL");
 	pfn_vkInitializePerformanceApiINTEL = (PFN_vkInitializePerformanceApiINTEL)vkGetInstanceProcAddr(instance, "vkInitializePerformanceApiINTEL");
 	pfn_vkUninitializePerformanceApiINTEL = (PFN_vkUninitializePerformanceApiINTEL)vkGetInstanceProcAddr(instance, "vkUninitializePerformanceApiINTEL");
-	pfn_vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceMarkerINTEL");
 	pfn_vkCmdSetPerformanceOverrideINTEL = (PFN_vkCmdSetPerformanceOverrideINTEL)vkGetInstanceProcAddr(instance, "vkCmdSetPerformanceOverrideINTEL");
 	pfn_vkReleasePerformanceConfigurationINTEL = (PFN_vkReleasePerformanceConfigurationINTEL)vkGetInstanceProcAddr(instance, "vkReleasePerformanceConfigurationINTEL");
 	pfn_vkQueueSetPerformanceConfigurationINTEL = (PFN_vkQueueSetPerformanceConfigurationINTEL)vkGetInstanceProcAddr(instance, "vkQueueSetPerformanceConfigurationINTEL");
@@ -9678,9 +9726,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
 #endif // defined(VK_NV_coverage_reduction_mode)
 #if defined(VK_NV_cuda_kernel_launch)
+	pfn_vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vkGetInstanceProcAddr(instance, "vkGetCudaModuleCacheNV");
 	pfn_vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vkGetInstanceProcAddr(instance, "vkCreateCudaFunctionNV");
 	pfn_vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vkGetInstanceProcAddr(instance, "vkCreateCudaModuleNV");
-	pfn_vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vkGetInstanceProcAddr(instance, "vkGetCudaModuleCacheNV");
 	pfn_vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vkGetInstanceProcAddr(instance, "vkDestroyCudaModuleNV");
 	pfn_vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vkGetInstanceProcAddr(instance, "vkDestroyCudaFunctionNV");
 	pfn_vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vkGetInstanceProcAddr(instance, "vkCmdCudaLaunchKernelNV");
@@ -10420,6 +10468,12 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_pipeline_properties)
 	pfn_vkGetPipelinePropertiesEXT = (PFN_vkGetPipelinePropertiesEXT)vkGetDeviceProcAddr(device, "vkGetPipelinePropertiesEXT");
 #endif // defined(VK_EXT_pipeline_properties)
+#if defined(VK_EXT_present_timing)
+	pfn_vkGetPastPresentationTimingEXT = (PFN_vkGetPastPresentationTimingEXT)vkGetDeviceProcAddr(device, "vkGetPastPresentationTimingEXT");
+	pfn_vkSetSwapchainPresentTimingQueueSizeEXT = (PFN_vkSetSwapchainPresentTimingQueueSizeEXT)vkGetDeviceProcAddr(device, "vkSetSwapchainPresentTimingQueueSizeEXT");
+	pfn_vkGetSwapchainTimingPropertiesEXT = (PFN_vkGetSwapchainTimingPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetSwapchainTimingPropertiesEXT");
+	pfn_vkGetSwapchainTimeDomainPropertiesEXT = (PFN_vkGetSwapchainTimeDomainPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetSwapchainTimeDomainPropertiesEXT");
+#endif // defined(VK_EXT_present_timing)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -10492,9 +10546,9 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_INTEL_performance_query)
 	pfn_vkCmdSetPerformanceStreamMarkerINTEL = (PFN_vkCmdSetPerformanceStreamMarkerINTEL)vkGetDeviceProcAddr(device, "vkCmdSetPerformanceStreamMarkerINTEL");
 	pfn_vkAcquirePerformanceConfigurationINTEL = (PFN_vkAcquirePerformanceConfigurationINTEL)vkGetDeviceProcAddr(device, "vkAcquirePerformanceConfigurationINTEL");
+	pfn_vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vkGetDeviceProcAddr(device, "vkCmdSetPerformanceMarkerINTEL");
 	pfn_vkInitializePerformanceApiINTEL = (PFN_vkInitializePerformanceApiINTEL)vkGetDeviceProcAddr(device, "vkInitializePerformanceApiINTEL");
 	pfn_vkUninitializePerformanceApiINTEL = (PFN_vkUninitializePerformanceApiINTEL)vkGetDeviceProcAddr(device, "vkUninitializePerformanceApiINTEL");
-	pfn_vkCmdSetPerformanceMarkerINTEL = (PFN_vkCmdSetPerformanceMarkerINTEL)vkGetDeviceProcAddr(device, "vkCmdSetPerformanceMarkerINTEL");
 	pfn_vkCmdSetPerformanceOverrideINTEL = (PFN_vkCmdSetPerformanceOverrideINTEL)vkGetDeviceProcAddr(device, "vkCmdSetPerformanceOverrideINTEL");
 	pfn_vkReleasePerformanceConfigurationINTEL = (PFN_vkReleasePerformanceConfigurationINTEL)vkGetDeviceProcAddr(device, "vkReleasePerformanceConfigurationINTEL");
 	pfn_vkQueueSetPerformanceConfigurationINTEL = (PFN_vkQueueSetPerformanceConfigurationINTEL)vkGetDeviceProcAddr(device, "vkQueueSetPerformanceConfigurationINTEL");
@@ -10772,9 +10826,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
 #endif // defined(VK_NV_copy_memory_indirect)
 #if defined(VK_NV_cuda_kernel_launch)
+	pfn_vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vkGetDeviceProcAddr(device, "vkGetCudaModuleCacheNV");
 	pfn_vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vkGetDeviceProcAddr(device, "vkCreateCudaFunctionNV");
 	pfn_vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vkGetDeviceProcAddr(device, "vkCreateCudaModuleNV");
-	pfn_vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vkGetDeviceProcAddr(device, "vkGetCudaModuleCacheNV");
 	pfn_vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vkGetDeviceProcAddr(device, "vkDestroyCudaModuleNV");
 	pfn_vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vkGetDeviceProcAddr(device, "vkDestroyCudaFunctionNV");
 	pfn_vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vkGetDeviceProcAddr(device, "vkCmdCudaLaunchKernelNV");
