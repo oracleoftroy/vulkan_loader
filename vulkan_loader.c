@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 335 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 336 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -1161,6 +1161,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBuildClusterAccelerationStructureIndirectNV = (PFN_vkCmdBuildClusterAccelerationStructureIndirectNV)vk->vkGetInstanceProcAddr(instance, "vkCmdBuildClusterAccelerationStructureIndirectNV");
 	vk->vkGetClusterAccelerationStructureBuildSizesNV = (PFN_vkGetClusterAccelerationStructureBuildSizesNV)vk->vkGetInstanceProcAddr(instance, "vkGetClusterAccelerationStructureBuildSizesNV");
 #endif // defined(VK_NV_cluster_acceleration_structure)
+#if defined(VK_NV_compute_occupancy_priority)
+	vk->vkCmdSetComputeOccupancyPriorityNV = (PFN_vkCmdSetComputeOccupancyPriorityNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetComputeOccupancyPriorityNV");
+#endif // defined(VK_NV_compute_occupancy_priority)
 #if defined(VK_NV_cooperative_matrix)
 	vk->vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
@@ -2271,6 +2274,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdBuildClusterAccelerationStructureIndirectNV = (PFN_vkCmdBuildClusterAccelerationStructureIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdBuildClusterAccelerationStructureIndirectNV");
 	vk->vkGetClusterAccelerationStructureBuildSizesNV = (PFN_vkGetClusterAccelerationStructureBuildSizesNV)vk->vkGetDeviceProcAddr(device, "vkGetClusterAccelerationStructureBuildSizesNV");
 #endif // defined(VK_NV_cluster_acceleration_structure)
+#if defined(VK_NV_compute_occupancy_priority)
+	vk->vkCmdSetComputeOccupancyPriorityNV = (PFN_vkCmdSetComputeOccupancyPriorityNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetComputeOccupancyPriorityNV");
+#endif // defined(VK_NV_compute_occupancy_priority)
 #if defined(VK_NV_cooperative_vector)
 	vk->vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vk->vkGetDeviceProcAddr(device, "vkCmdConvertCooperativeVectorMatrixNV");
 	vk->vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vk->vkGetDeviceProcAddr(device, "vkConvertCooperativeVectorMatrixNV");
@@ -7817,6 +7823,15 @@ VKAPI_ATTR void vkGetClusterAccelerationStructureBuildSizesNV(VkDevice device, c
 	pfn_vkGetClusterAccelerationStructureBuildSizesNV(device, pInfo, pSizeInfo);
 }
 #endif // defined(VK_NV_cluster_acceleration_structure)
+#if defined(VK_NV_compute_occupancy_priority)
+
+static PFN_vkCmdSetComputeOccupancyPriorityNV pfn_vkCmdSetComputeOccupancyPriorityNV;
+VKAPI_ATTR void vkCmdSetComputeOccupancyPriorityNV(VkCommandBuffer commandBuffer, const VkComputeOccupancyPriorityParametersNV * pParameters)
+{
+	assert(pfn_vkCmdSetComputeOccupancyPriorityNV);
+	pfn_vkCmdSetComputeOccupancyPriorityNV(commandBuffer, pParameters);
+}
+#endif // defined(VK_NV_compute_occupancy_priority)
 #if defined(VK_NV_cooperative_matrix)
 
 static PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV;
@@ -9707,6 +9722,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBuildClusterAccelerationStructureIndirectNV = (PFN_vkCmdBuildClusterAccelerationStructureIndirectNV)vkGetInstanceProcAddr(instance, "vkCmdBuildClusterAccelerationStructureIndirectNV");
 	pfn_vkGetClusterAccelerationStructureBuildSizesNV = (PFN_vkGetClusterAccelerationStructureBuildSizesNV)vkGetInstanceProcAddr(instance, "vkGetClusterAccelerationStructureBuildSizesNV");
 #endif // defined(VK_NV_cluster_acceleration_structure)
+#if defined(VK_NV_compute_occupancy_priority)
+	pfn_vkCmdSetComputeOccupancyPriorityNV = (PFN_vkCmdSetComputeOccupancyPriorityNV)vkGetInstanceProcAddr(instance, "vkCmdSetComputeOccupancyPriorityNV");
+#endif // defined(VK_NV_compute_occupancy_priority)
 #if defined(VK_NV_cooperative_matrix)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix)
@@ -10817,6 +10835,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdBuildClusterAccelerationStructureIndirectNV = (PFN_vkCmdBuildClusterAccelerationStructureIndirectNV)vkGetDeviceProcAddr(device, "vkCmdBuildClusterAccelerationStructureIndirectNV");
 	pfn_vkGetClusterAccelerationStructureBuildSizesNV = (PFN_vkGetClusterAccelerationStructureBuildSizesNV)vkGetDeviceProcAddr(device, "vkGetClusterAccelerationStructureBuildSizesNV");
 #endif // defined(VK_NV_cluster_acceleration_structure)
+#if defined(VK_NV_compute_occupancy_priority)
+	pfn_vkCmdSetComputeOccupancyPriorityNV = (PFN_vkCmdSetComputeOccupancyPriorityNV)vkGetDeviceProcAddr(device, "vkCmdSetComputeOccupancyPriorityNV");
+#endif // defined(VK_NV_compute_occupancy_priority)
 #if defined(VK_NV_cooperative_vector)
 	pfn_vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vkGetDeviceProcAddr(device, "vkCmdConvertCooperativeVectorMatrixNV");
 	pfn_vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vkGetDeviceProcAddr(device, "vkConvertCooperativeVectorMatrixNV");
