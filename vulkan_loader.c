@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 336 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 337 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -1299,11 +1299,6 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vk->vkGetInstanceProcAddr(instance, "vkGetNativeBufferPropertiesOHOS");
 	vk->vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryNativeBufferOHOS");
 #endif // defined(VK_OHOS_external_memory)
-#if defined(VK_OHOS_native_buffer)
-	vk->vkAcquireImageOHOS = (PFN_vkAcquireImageOHOS)vk->vkGetInstanceProcAddr(instance, "vkAcquireImageOHOS");
-	vk->vkGetSwapchainGrallocUsageOHOS = (PFN_vkGetSwapchainGrallocUsageOHOS)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainGrallocUsageOHOS");
-	vk->vkQueueSignalReleaseImageOHOS = (PFN_vkQueueSignalReleaseImageOHOS)vk->vkGetInstanceProcAddr(instance, "vkQueueSignalReleaseImageOHOS");
-#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_OHOS_surface)
 	vk->vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS)vk->vkGetInstanceProcAddr(instance, "vkCreateSurfaceOHOS");
 #endif // defined(VK_OHOS_surface)
@@ -2395,11 +2390,6 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vk->vkGetDeviceProcAddr(device, "vkGetNativeBufferPropertiesOHOS");
 	vk->vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vk->vkGetDeviceProcAddr(device, "vkGetMemoryNativeBufferOHOS");
 #endif // defined(VK_OHOS_external_memory)
-#if defined(VK_OHOS_native_buffer)
-	vk->vkAcquireImageOHOS = (PFN_vkAcquireImageOHOS)vk->vkGetDeviceProcAddr(device, "vkAcquireImageOHOS");
-	vk->vkGetSwapchainGrallocUsageOHOS = (PFN_vkGetSwapchainGrallocUsageOHOS)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsageOHOS");
-	vk->vkQueueSignalReleaseImageOHOS = (PFN_vkQueueSignalReleaseImageOHOS)vk->vkGetDeviceProcAddr(device, "vkQueueSignalReleaseImageOHOS");
-#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_QCOM_tile_memory_heap)
 	vk->vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdBindTileMemoryQCOM");
 #endif // defined(VK_QCOM_tile_memory_heap)
@@ -8453,29 +8443,6 @@ VKAPI_ATTR VkResult vkGetMemoryNativeBufferOHOS(VkDevice device, const VkMemoryG
 	return pfn_vkGetMemoryNativeBufferOHOS(device, pInfo, pBuffer);
 }
 #endif // defined(VK_OHOS_external_memory)
-#if defined(VK_OHOS_native_buffer)
-
-static PFN_vkAcquireImageOHOS pfn_vkAcquireImageOHOS;
-VKAPI_ATTR VkResult vkAcquireImageOHOS(VkDevice device, VkImage image, int32_t nativeFenceFd, VkSemaphore semaphore, VkFence fence)
-{
-	assert(pfn_vkAcquireImageOHOS);
-	return pfn_vkAcquireImageOHOS(device, image, nativeFenceFd, semaphore, fence);
-}
-
-static PFN_vkGetSwapchainGrallocUsageOHOS pfn_vkGetSwapchainGrallocUsageOHOS;
-VKAPI_ATTR VkResult vkGetSwapchainGrallocUsageOHOS(VkDevice device, VkFormat format, VkImageUsageFlags imageUsage, uint64_t * grallocUsage)
-{
-	assert(pfn_vkGetSwapchainGrallocUsageOHOS);
-	return pfn_vkGetSwapchainGrallocUsageOHOS(device, format, imageUsage, grallocUsage);
-}
-
-static PFN_vkQueueSignalReleaseImageOHOS pfn_vkQueueSignalReleaseImageOHOS;
-VKAPI_ATTR VkResult vkQueueSignalReleaseImageOHOS(VkQueue queue, uint32_t waitSemaphoreCount, const VkSemaphore * pWaitSemaphores, VkImage image, int32_t * pNativeFenceFd)
-{
-	assert(pfn_vkQueueSignalReleaseImageOHOS);
-	return pfn_vkQueueSignalReleaseImageOHOS(queue, waitSemaphoreCount, pWaitSemaphores, image, pNativeFenceFd);
-}
-#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_OHOS_surface)
 
 static PFN_vkCreateSurfaceOHOS pfn_vkCreateSurfaceOHOS;
@@ -9860,11 +9827,6 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vkGetInstanceProcAddr(instance, "vkGetNativeBufferPropertiesOHOS");
 	pfn_vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vkGetInstanceProcAddr(instance, "vkGetMemoryNativeBufferOHOS");
 #endif // defined(VK_OHOS_external_memory)
-#if defined(VK_OHOS_native_buffer)
-	pfn_vkAcquireImageOHOS = (PFN_vkAcquireImageOHOS)vkGetInstanceProcAddr(instance, "vkAcquireImageOHOS");
-	pfn_vkGetSwapchainGrallocUsageOHOS = (PFN_vkGetSwapchainGrallocUsageOHOS)vkGetInstanceProcAddr(instance, "vkGetSwapchainGrallocUsageOHOS");
-	pfn_vkQueueSignalReleaseImageOHOS = (PFN_vkQueueSignalReleaseImageOHOS)vkGetInstanceProcAddr(instance, "vkQueueSignalReleaseImageOHOS");
-#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_OHOS_surface)
 	pfn_vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS)vkGetInstanceProcAddr(instance, "vkCreateSurfaceOHOS");
 #endif // defined(VK_OHOS_surface)
@@ -10956,11 +10918,6 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vkGetDeviceProcAddr(device, "vkGetNativeBufferPropertiesOHOS");
 	pfn_vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vkGetDeviceProcAddr(device, "vkGetMemoryNativeBufferOHOS");
 #endif // defined(VK_OHOS_external_memory)
-#if defined(VK_OHOS_native_buffer)
-	pfn_vkAcquireImageOHOS = (PFN_vkAcquireImageOHOS)vkGetDeviceProcAddr(device, "vkAcquireImageOHOS");
-	pfn_vkGetSwapchainGrallocUsageOHOS = (PFN_vkGetSwapchainGrallocUsageOHOS)vkGetDeviceProcAddr(device, "vkGetSwapchainGrallocUsageOHOS");
-	pfn_vkQueueSignalReleaseImageOHOS = (PFN_vkQueueSignalReleaseImageOHOS)vkGetDeviceProcAddr(device, "vkQueueSignalReleaseImageOHOS");
-#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_QCOM_tile_memory_heap)
 	pfn_vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vkGetDeviceProcAddr(device, "vkCmdBindTileMemoryQCOM");
 #endif // defined(VK_QCOM_tile_memory_heap)
