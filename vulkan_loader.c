@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 339 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 340 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -442,16 +442,16 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
 #if defined(VK_ARM_data_graph)
 	vk->vkCreateDataGraphPipelinesARM = (PFN_vkCreateDataGraphPipelinesARM)vk->vkGetInstanceProcAddr(instance, "vkCreateDataGraphPipelinesARM");
-	vk->vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelinePropertiesARM");
-	vk->vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
-	vk->vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
 	vk->vkCreateDataGraphPipelineSessionARM = (PFN_vkCreateDataGraphPipelineSessionARM)vk->vkGetInstanceProcAddr(instance, "vkCreateDataGraphPipelineSessionARM");
+	vk->vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
 	vk->vkGetDataGraphPipelineSessionMemoryRequirementsARM = (PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionMemoryRequirementsARM");
 	vk->vkBindDataGraphPipelineSessionMemoryARM = (PFN_vkBindDataGraphPipelineSessionMemoryARM)vk->vkGetInstanceProcAddr(instance, "vkBindDataGraphPipelineSessionMemoryARM");
 	vk->vkDestroyDataGraphPipelineSessionARM = (PFN_vkDestroyDataGraphPipelineSessionARM)vk->vkGetInstanceProcAddr(instance, "vkDestroyDataGraphPipelineSessionARM");
 	vk->vkCmdDispatchDataGraphARM = (PFN_vkCmdDispatchDataGraphARM)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchDataGraphARM");
 	vk->vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineAvailablePropertiesARM");
+	vk->vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelinePropertiesARM");
 	vk->vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
+	vk->vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_performance_counters_by_region)
 	vk->vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)vk->vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
@@ -541,6 +541,18 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
 	vk->vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
 #endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_heap)
+	vk->vkGetImageOpaqueCaptureDataEXT = (PFN_vkGetImageOpaqueCaptureDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDataEXT");
+	vk->vkCmdPushDataEXT = (PFN_vkCmdPushDataEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDataEXT");
+	vk->vkCmdBindResourceHeapEXT = (PFN_vkCmdBindResourceHeapEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindResourceHeapEXT");
+	vk->vkUnregisterCustomBorderColorEXT = (PFN_vkUnregisterCustomBorderColorEXT)vk->vkGetInstanceProcAddr(instance, "vkUnregisterCustomBorderColorEXT");
+	vk->vkWriteSamplerDescriptorsEXT = (PFN_vkWriteSamplerDescriptorsEXT)vk->vkGetInstanceProcAddr(instance, "vkWriteSamplerDescriptorsEXT");
+	vk->vkWriteResourceDescriptorsEXT = (PFN_vkWriteResourceDescriptorsEXT)vk->vkGetInstanceProcAddr(instance, "vkWriteResourceDescriptorsEXT");
+	vk->vkCmdBindSamplerHeapEXT = (PFN_vkCmdBindSamplerHeapEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindSamplerHeapEXT");
+	vk->vkGetPhysicalDeviceDescriptorSizeEXT = (PFN_vkGetPhysicalDeviceDescriptorSizeEXT)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceDescriptorSizeEXT");
+	vk->vkRegisterCustomBorderColorEXT = (PFN_vkRegisterCustomBorderColorEXT)vk->vkGetInstanceProcAddr(instance, "vkRegisterCustomBorderColorEXT");
+	vk->vkGetTensorOpaqueCaptureDataARM = (PFN_vkGetTensorOpaqueCaptureDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDataARM");
+#endif // defined(VK_EXT_descriptor_heap)
 #if defined(VK_EXT_device_fault)
 	vk->vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
@@ -580,13 +592,13 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindVertexBuffers2EXT = (PFN_vkCmdBindVertexBuffers2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindVertexBuffers2EXT");
 	vk->vkCmdSetCullModeEXT = (PFN_vkCmdSetCullModeEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCullModeEXT");
 	vk->vkCmdSetDepthTestEnableEXT = (PFN_vkCmdSetDepthTestEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthTestEnableEXT");
+	vk->vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthBoundsTestEnableEXT");
 	vk->vkCmdSetFrontFaceEXT = (PFN_vkCmdSetFrontFaceEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetFrontFaceEXT");
 	vk->vkCmdSetPrimitiveTopologyEXT = (PFN_vkCmdSetPrimitiveTopologyEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetPrimitiveTopologyEXT");
 	vk->vkCmdSetViewportWithCountEXT = (PFN_vkCmdSetViewportWithCountEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportWithCountEXT");
 	vk->vkCmdSetScissorWithCountEXT = (PFN_vkCmdSetScissorWithCountEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetScissorWithCountEXT");
 	vk->vkCmdSetDepthWriteEnableEXT = (PFN_vkCmdSetDepthWriteEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthWriteEnableEXT");
 	vk->vkCmdSetDepthCompareOpEXT = (PFN_vkCmdSetDepthCompareOpEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthCompareOpEXT");
-	vk->vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDepthBoundsTestEnableEXT");
 	vk->vkCmdSetStencilTestEnableEXT = (PFN_vkCmdSetStencilTestEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetStencilTestEnableEXT");
 	vk->vkCmdSetStencilOpEXT = (PFN_vkCmdSetStencilOpEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetStencilOpEXT");
 #endif // defined(VK_EXT_extended_dynamic_state) || defined(VK_EXT_shader_object)
@@ -919,8 +931,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceExternalFencePropertiesKHR = (PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalFencePropertiesKHR");
 #endif // defined(VK_KHR_external_fence_capabilities)
 #if defined(VK_KHR_external_fence_fd)
-	vk->vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vk->vkGetInstanceProcAddr(instance, "vkImportFenceFdKHR");
 	vk->vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vk->vkGetInstanceProcAddr(instance, "vkGetFenceFdKHR");
+	vk->vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vk->vkGetInstanceProcAddr(instance, "vkImportFenceFdKHR");
 #endif // defined(VK_KHR_external_fence_fd)
 #if defined(VK_KHR_external_fence_win32)
 	vk->vkGetFenceWin32HandleKHR = (PFN_vkGetFenceWin32HandleKHR)vk->vkGetInstanceProcAddr(instance, "vkGetFenceWin32HandleKHR");
@@ -1149,6 +1161,7 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetImageViewHandle64NVX = (PFN_vkGetImageViewHandle64NVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewHandle64NVX");
 	vk->vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewHandleNVX");
 	vk->vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vk->vkGetInstanceProcAddr(instance, "vkGetImageViewAddressNVX");
+	vk->vkGetDeviceCombinedImageSamplerIndexNVX = (PFN_vkGetDeviceCombinedImageSamplerIndexNVX)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceCombinedImageSamplerIndexNVX");
 #endif // defined(VK_NVX_image_view_handle)
 #if defined(VK_NV_acquire_winrt_display)
 	vk->vkGetWinrtDisplayNV = (PFN_vkGetWinrtDisplayNV)vk->vkGetInstanceProcAddr(instance, "vkGetWinrtDisplayNV");
@@ -1311,8 +1324,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #endif // defined(VK_QCOM_tile_properties)
 #if defined(VK_QCOM_tile_shading)
 	vk->vkCmdDispatchTileQCOM = (PFN_vkCmdDispatchTileQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchTileQCOM");
-	vk->vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginPerTileExecutionQCOM");
 	vk->vkCmdEndPerTileExecutionQCOM = (PFN_vkCmdEndPerTileExecutionQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdEndPerTileExecutionQCOM");
+	vk->vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginPerTileExecutionQCOM");
 #endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 	vk->vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vk->vkGetInstanceProcAddr(instance, "vkGetScreenBufferPropertiesQNX");
@@ -1691,14 +1704,14 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
 #if defined(VK_ARM_data_graph)
 	vk->vkCreateDataGraphPipelinesARM = (PFN_vkCreateDataGraphPipelinesARM)vk->vkGetDeviceProcAddr(device, "vkCreateDataGraphPipelinesARM");
-	vk->vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
-	vk->vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
 	vk->vkCreateDataGraphPipelineSessionARM = (PFN_vkCreateDataGraphPipelineSessionARM)vk->vkGetDeviceProcAddr(device, "vkCreateDataGraphPipelineSessionARM");
+	vk->vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
 	vk->vkGetDataGraphPipelineSessionMemoryRequirementsARM = (PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionMemoryRequirementsARM");
 	vk->vkBindDataGraphPipelineSessionMemoryARM = (PFN_vkBindDataGraphPipelineSessionMemoryARM)vk->vkGetDeviceProcAddr(device, "vkBindDataGraphPipelineSessionMemoryARM");
 	vk->vkDestroyDataGraphPipelineSessionARM = (PFN_vkDestroyDataGraphPipelineSessionARM)vk->vkGetDeviceProcAddr(device, "vkDestroyDataGraphPipelineSessionARM");
 	vk->vkCmdDispatchDataGraphARM = (PFN_vkCmdDispatchDataGraphARM)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchDataGraphARM");
 	vk->vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineAvailablePropertiesARM");
+	vk->vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_tensors)
 	vk->vkCreateTensorARM = (PFN_vkCreateTensorARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorARM");
@@ -1767,6 +1780,17 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
 	vk->vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
 #endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_heap)
+	vk->vkGetImageOpaqueCaptureDataEXT = (PFN_vkGetImageOpaqueCaptureDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDataEXT");
+	vk->vkCmdPushDataEXT = (PFN_vkCmdPushDataEXT)vk->vkGetDeviceProcAddr(device, "vkCmdPushDataEXT");
+	vk->vkCmdBindResourceHeapEXT = (PFN_vkCmdBindResourceHeapEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindResourceHeapEXT");
+	vk->vkUnregisterCustomBorderColorEXT = (PFN_vkUnregisterCustomBorderColorEXT)vk->vkGetDeviceProcAddr(device, "vkUnregisterCustomBorderColorEXT");
+	vk->vkWriteSamplerDescriptorsEXT = (PFN_vkWriteSamplerDescriptorsEXT)vk->vkGetDeviceProcAddr(device, "vkWriteSamplerDescriptorsEXT");
+	vk->vkWriteResourceDescriptorsEXT = (PFN_vkWriteResourceDescriptorsEXT)vk->vkGetDeviceProcAddr(device, "vkWriteResourceDescriptorsEXT");
+	vk->vkCmdBindSamplerHeapEXT = (PFN_vkCmdBindSamplerHeapEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindSamplerHeapEXT");
+	vk->vkRegisterCustomBorderColorEXT = (PFN_vkRegisterCustomBorderColorEXT)vk->vkGetDeviceProcAddr(device, "vkRegisterCustomBorderColorEXT");
+	vk->vkGetTensorOpaqueCaptureDataARM = (PFN_vkGetTensorOpaqueCaptureDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDataARM");
+#endif // defined(VK_EXT_descriptor_heap)
 #if defined(VK_EXT_device_fault)
 	vk->vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vk->vkGetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
@@ -1796,13 +1820,13 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdBindVertexBuffers2EXT = (PFN_vkCmdBindVertexBuffers2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindVertexBuffers2EXT");
 	vk->vkCmdSetCullModeEXT = (PFN_vkCmdSetCullModeEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetCullModeEXT");
 	vk->vkCmdSetDepthTestEnableEXT = (PFN_vkCmdSetDepthTestEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthTestEnableEXT");
+	vk->vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthBoundsTestEnableEXT");
 	vk->vkCmdSetFrontFaceEXT = (PFN_vkCmdSetFrontFaceEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetFrontFaceEXT");
 	vk->vkCmdSetPrimitiveTopologyEXT = (PFN_vkCmdSetPrimitiveTopologyEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetPrimitiveTopologyEXT");
 	vk->vkCmdSetViewportWithCountEXT = (PFN_vkCmdSetViewportWithCountEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportWithCountEXT");
 	vk->vkCmdSetScissorWithCountEXT = (PFN_vkCmdSetScissorWithCountEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetScissorWithCountEXT");
 	vk->vkCmdSetDepthWriteEnableEXT = (PFN_vkCmdSetDepthWriteEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthWriteEnableEXT");
 	vk->vkCmdSetDepthCompareOpEXT = (PFN_vkCmdSetDepthCompareOpEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthCompareOpEXT");
-	vk->vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetDepthBoundsTestEnableEXT");
 	vk->vkCmdSetStencilTestEnableEXT = (PFN_vkCmdSetStencilTestEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetStencilTestEnableEXT");
 	vk->vkCmdSetStencilOpEXT = (PFN_vkCmdSetStencilOpEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetStencilOpEXT");
 #endif // defined(VK_EXT_extended_dynamic_state) || defined(VK_EXT_shader_object)
@@ -2095,8 +2119,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetRenderingInputAttachmentIndicesKHR = (PFN_vkCmdSetRenderingInputAttachmentIndicesKHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetRenderingInputAttachmentIndicesKHR");
 #endif // defined(VK_KHR_dynamic_rendering_local_read)
 #if defined(VK_KHR_external_fence_fd)
-	vk->vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vk->vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 	vk->vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vk->vkGetDeviceProcAddr(device, "vkGetFenceFdKHR");
+	vk->vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vk->vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 #endif // defined(VK_KHR_external_fence_fd)
 #if defined(VK_KHR_external_fence_win32)
 	vk->vkGetFenceWin32HandleKHR = (PFN_vkGetFenceWin32HandleKHR)vk->vkGetDeviceProcAddr(device, "vkGetFenceWin32HandleKHR");
@@ -2261,6 +2285,7 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetImageViewHandle64NVX = (PFN_vkGetImageViewHandle64NVX)vk->vkGetDeviceProcAddr(device, "vkGetImageViewHandle64NVX");
 	vk->vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vk->vkGetDeviceProcAddr(device, "vkGetImageViewHandleNVX");
 	vk->vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vk->vkGetDeviceProcAddr(device, "vkGetImageViewAddressNVX");
+	vk->vkGetDeviceCombinedImageSamplerIndexNVX = (PFN_vkGetDeviceCombinedImageSamplerIndexNVX)vk->vkGetDeviceProcAddr(device, "vkGetDeviceCombinedImageSamplerIndexNVX");
 #endif // defined(VK_NVX_image_view_handle)
 #if defined(VK_NV_clip_space_w_scaling)
 	vk->vkCmdSetViewportWScalingNV = (PFN_vkCmdSetViewportWScalingNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingNV");
@@ -2399,8 +2424,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #endif // defined(VK_QCOM_tile_properties)
 #if defined(VK_QCOM_tile_shading)
 	vk->vkCmdDispatchTileQCOM = (PFN_vkCmdDispatchTileQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchTileQCOM");
-	vk->vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdBeginPerTileExecutionQCOM");
 	vk->vkCmdEndPerTileExecutionQCOM = (PFN_vkCmdEndPerTileExecutionQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdEndPerTileExecutionQCOM");
+	vk->vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdBeginPerTileExecutionQCOM");
 #endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 	vk->vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vk->vkGetDeviceProcAddr(device, "vkGetScreenBufferPropertiesQNX");
@@ -4443,11 +4468,11 @@ VKAPI_ATTR VkResult vkCreateDataGraphPipelinesARM(VkDevice device, VkDeferredOpe
 	return pfn_vkCreateDataGraphPipelinesARM(device, deferredOperation, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
 }
 
-static PFN_vkGetDataGraphPipelinePropertiesARM pfn_vkGetDataGraphPipelinePropertiesARM;
-VKAPI_ATTR VkResult vkGetDataGraphPipelinePropertiesARM(VkDevice device, const VkDataGraphPipelineInfoARM * pPipelineInfo, uint32_t propertiesCount, VkDataGraphPipelinePropertyQueryResultARM * pProperties)
+static PFN_vkCreateDataGraphPipelineSessionARM pfn_vkCreateDataGraphPipelineSessionARM;
+VKAPI_ATTR VkResult vkCreateDataGraphPipelineSessionARM(VkDevice device, const VkDataGraphPipelineSessionCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkDataGraphPipelineSessionARM * pSession)
 {
-	assert(pfn_vkGetDataGraphPipelinePropertiesARM);
-	return pfn_vkGetDataGraphPipelinePropertiesARM(device, pPipelineInfo, propertiesCount, pProperties);
+	assert(pfn_vkCreateDataGraphPipelineSessionARM);
+	return pfn_vkCreateDataGraphPipelineSessionARM(device, pCreateInfo, pAllocator, pSession);
 }
 
 static PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM;
@@ -4455,20 +4480,6 @@ VKAPI_ATTR VkResult vkGetDataGraphPipelineSessionBindPointRequirementsARM(VkDevi
 {
 	assert(pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM);
 	return pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM(device, pInfo, pBindPointRequirementCount, pBindPointRequirements);
-}
-
-static PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM;
-VKAPI_ATTR void vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM * pQueueFamilyDataGraphProcessingEngineInfo, VkQueueFamilyDataGraphProcessingEnginePropertiesARM * pQueueFamilyDataGraphProcessingEngineProperties)
-{
-	assert(pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM);
-	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(physicalDevice, pQueueFamilyDataGraphProcessingEngineInfo, pQueueFamilyDataGraphProcessingEngineProperties);
-}
-
-static PFN_vkCreateDataGraphPipelineSessionARM pfn_vkCreateDataGraphPipelineSessionARM;
-VKAPI_ATTR VkResult vkCreateDataGraphPipelineSessionARM(VkDevice device, const VkDataGraphPipelineSessionCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkDataGraphPipelineSessionARM * pSession)
-{
-	assert(pfn_vkCreateDataGraphPipelineSessionARM);
-	return pfn_vkCreateDataGraphPipelineSessionARM(device, pCreateInfo, pAllocator, pSession);
 }
 
 static PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM pfn_vkGetDataGraphPipelineSessionMemoryRequirementsARM;
@@ -4506,11 +4517,25 @@ VKAPI_ATTR VkResult vkGetDataGraphPipelineAvailablePropertiesARM(VkDevice device
 	return pfn_vkGetDataGraphPipelineAvailablePropertiesARM(device, pPipelineInfo, pPropertiesCount, pProperties);
 }
 
+static PFN_vkGetDataGraphPipelinePropertiesARM pfn_vkGetDataGraphPipelinePropertiesARM;
+VKAPI_ATTR VkResult vkGetDataGraphPipelinePropertiesARM(VkDevice device, const VkDataGraphPipelineInfoARM * pPipelineInfo, uint32_t propertiesCount, VkDataGraphPipelinePropertyQueryResultARM * pProperties)
+{
+	assert(pfn_vkGetDataGraphPipelinePropertiesARM);
+	return pfn_vkGetDataGraphPipelinePropertiesARM(device, pPipelineInfo, propertiesCount, pProperties);
+}
+
 static PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM;
 VKAPI_ATTR VkResult vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, uint32_t * pQueueFamilyDataGraphPropertyCount, VkQueueFamilyDataGraphPropertiesARM * pQueueFamilyDataGraphProperties)
 {
 	assert(pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM);
 	return pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM(physicalDevice, queueFamilyIndex, pQueueFamilyDataGraphPropertyCount, pQueueFamilyDataGraphProperties);
+}
+
+static PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM;
+VKAPI_ATTR void vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM * pQueueFamilyDataGraphProcessingEngineInfo, VkQueueFamilyDataGraphProcessingEnginePropertiesARM * pQueueFamilyDataGraphProcessingEngineProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM);
+	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(physicalDevice, pQueueFamilyDataGraphProcessingEngineInfo, pQueueFamilyDataGraphProcessingEngineProperties);
 }
 #endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_performance_counters_by_region)
@@ -4937,6 +4962,78 @@ VKAPI_ATTR VkResult vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(VkD
 	return pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT(device, pInfo, pData);
 }
 #endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_heap)
+
+static PFN_vkGetImageOpaqueCaptureDataEXT pfn_vkGetImageOpaqueCaptureDataEXT;
+VKAPI_ATTR VkResult vkGetImageOpaqueCaptureDataEXT(VkDevice device, uint32_t imageCount, const VkImage * pImages, VkHostAddressRangeEXT * pDatas)
+{
+	assert(pfn_vkGetImageOpaqueCaptureDataEXT);
+	return pfn_vkGetImageOpaqueCaptureDataEXT(device, imageCount, pImages, pDatas);
+}
+
+static PFN_vkCmdPushDataEXT pfn_vkCmdPushDataEXT;
+VKAPI_ATTR void vkCmdPushDataEXT(VkCommandBuffer commandBuffer, const VkPushDataInfoEXT * pPushDataInfo)
+{
+	assert(pfn_vkCmdPushDataEXT);
+	pfn_vkCmdPushDataEXT(commandBuffer, pPushDataInfo);
+}
+
+static PFN_vkCmdBindResourceHeapEXT pfn_vkCmdBindResourceHeapEXT;
+VKAPI_ATTR void vkCmdBindResourceHeapEXT(VkCommandBuffer commandBuffer, const VkBindHeapInfoEXT * pBindInfo)
+{
+	assert(pfn_vkCmdBindResourceHeapEXT);
+	pfn_vkCmdBindResourceHeapEXT(commandBuffer, pBindInfo);
+}
+
+static PFN_vkUnregisterCustomBorderColorEXT pfn_vkUnregisterCustomBorderColorEXT;
+VKAPI_ATTR void vkUnregisterCustomBorderColorEXT(VkDevice device, uint32_t index)
+{
+	assert(pfn_vkUnregisterCustomBorderColorEXT);
+	pfn_vkUnregisterCustomBorderColorEXT(device, index);
+}
+
+static PFN_vkWriteSamplerDescriptorsEXT pfn_vkWriteSamplerDescriptorsEXT;
+VKAPI_ATTR VkResult vkWriteSamplerDescriptorsEXT(VkDevice device, uint32_t samplerCount, const VkSamplerCreateInfo * pSamplers, const VkHostAddressRangeEXT * pDescriptors)
+{
+	assert(pfn_vkWriteSamplerDescriptorsEXT);
+	return pfn_vkWriteSamplerDescriptorsEXT(device, samplerCount, pSamplers, pDescriptors);
+}
+
+static PFN_vkWriteResourceDescriptorsEXT pfn_vkWriteResourceDescriptorsEXT;
+VKAPI_ATTR VkResult vkWriteResourceDescriptorsEXT(VkDevice device, uint32_t resourceCount, const VkResourceDescriptorInfoEXT * pResources, const VkHostAddressRangeEXT * pDescriptors)
+{
+	assert(pfn_vkWriteResourceDescriptorsEXT);
+	return pfn_vkWriteResourceDescriptorsEXT(device, resourceCount, pResources, pDescriptors);
+}
+
+static PFN_vkCmdBindSamplerHeapEXT pfn_vkCmdBindSamplerHeapEXT;
+VKAPI_ATTR void vkCmdBindSamplerHeapEXT(VkCommandBuffer commandBuffer, const VkBindHeapInfoEXT * pBindInfo)
+{
+	assert(pfn_vkCmdBindSamplerHeapEXT);
+	pfn_vkCmdBindSamplerHeapEXT(commandBuffer, pBindInfo);
+}
+
+static PFN_vkGetPhysicalDeviceDescriptorSizeEXT pfn_vkGetPhysicalDeviceDescriptorSizeEXT;
+VKAPI_ATTR VkDeviceSize vkGetPhysicalDeviceDescriptorSizeEXT(VkPhysicalDevice physicalDevice, VkDescriptorType descriptorType)
+{
+	assert(pfn_vkGetPhysicalDeviceDescriptorSizeEXT);
+	return pfn_vkGetPhysicalDeviceDescriptorSizeEXT(physicalDevice, descriptorType);
+}
+
+static PFN_vkRegisterCustomBorderColorEXT pfn_vkRegisterCustomBorderColorEXT;
+VKAPI_ATTR VkResult vkRegisterCustomBorderColorEXT(VkDevice device, const VkSamplerCustomBorderColorCreateInfoEXT * pBorderColor, VkBool32 requestIndex, uint32_t * pIndex)
+{
+	assert(pfn_vkRegisterCustomBorderColorEXT);
+	return pfn_vkRegisterCustomBorderColorEXT(device, pBorderColor, requestIndex, pIndex);
+}
+
+static PFN_vkGetTensorOpaqueCaptureDataARM pfn_vkGetTensorOpaqueCaptureDataARM;
+VKAPI_ATTR VkResult vkGetTensorOpaqueCaptureDataARM(VkDevice device, uint32_t tensorCount, const VkTensorARM * pTensors, VkHostAddressRangeEXT * pDatas)
+{
+	assert(pfn_vkGetTensorOpaqueCaptureDataARM);
+	return pfn_vkGetTensorOpaqueCaptureDataARM(device, tensorCount, pTensors, pDatas);
+}
+#endif // defined(VK_EXT_descriptor_heap)
 #if defined(VK_EXT_device_fault)
 
 static PFN_vkGetDeviceFaultInfoEXT pfn_vkGetDeviceFaultInfoEXT;
@@ -5121,6 +5218,13 @@ VKAPI_ATTR void vkCmdSetDepthTestEnableEXT(VkCommandBuffer commandBuffer, VkBool
 	pfn_vkCmdSetDepthTestEnableEXT(commandBuffer, depthTestEnable);
 }
 
+static PFN_vkCmdSetDepthBoundsTestEnableEXT pfn_vkCmdSetDepthBoundsTestEnableEXT;
+VKAPI_ATTR void vkCmdSetDepthBoundsTestEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthBoundsTestEnable)
+{
+	assert(pfn_vkCmdSetDepthBoundsTestEnableEXT);
+	pfn_vkCmdSetDepthBoundsTestEnableEXT(commandBuffer, depthBoundsTestEnable);
+}
+
 static PFN_vkCmdSetFrontFaceEXT pfn_vkCmdSetFrontFaceEXT;
 VKAPI_ATTR void vkCmdSetFrontFaceEXT(VkCommandBuffer commandBuffer, VkFrontFace frontFace)
 {
@@ -5161,13 +5265,6 @@ VKAPI_ATTR void vkCmdSetDepthCompareOpEXT(VkCommandBuffer commandBuffer, VkCompa
 {
 	assert(pfn_vkCmdSetDepthCompareOpEXT);
 	pfn_vkCmdSetDepthCompareOpEXT(commandBuffer, depthCompareOp);
-}
-
-static PFN_vkCmdSetDepthBoundsTestEnableEXT pfn_vkCmdSetDepthBoundsTestEnableEXT;
-VKAPI_ATTR void vkCmdSetDepthBoundsTestEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthBoundsTestEnable)
-{
-	assert(pfn_vkCmdSetDepthBoundsTestEnableEXT);
-	pfn_vkCmdSetDepthBoundsTestEnableEXT(commandBuffer, depthBoundsTestEnable);
 }
 
 static PFN_vkCmdSetStencilTestEnableEXT pfn_vkCmdSetStencilTestEnableEXT;
@@ -6738,18 +6835,18 @@ VKAPI_ATTR void vkGetPhysicalDeviceExternalFencePropertiesKHR(VkPhysicalDevice p
 #endif // defined(VK_KHR_external_fence_capabilities)
 #if defined(VK_KHR_external_fence_fd)
 
-static PFN_vkImportFenceFdKHR pfn_vkImportFenceFdKHR;
-VKAPI_ATTR VkResult vkImportFenceFdKHR(VkDevice device, const VkImportFenceFdInfoKHR * pImportFenceFdInfo)
-{
-	assert(pfn_vkImportFenceFdKHR);
-	return pfn_vkImportFenceFdKHR(device, pImportFenceFdInfo);
-}
-
 static PFN_vkGetFenceFdKHR pfn_vkGetFenceFdKHR;
 VKAPI_ATTR VkResult vkGetFenceFdKHR(VkDevice device, const VkFenceGetFdInfoKHR * pGetFdInfo, int * pFd)
 {
 	assert(pfn_vkGetFenceFdKHR);
 	return pfn_vkGetFenceFdKHR(device, pGetFdInfo, pFd);
+}
+
+static PFN_vkImportFenceFdKHR pfn_vkImportFenceFdKHR;
+VKAPI_ATTR VkResult vkImportFenceFdKHR(VkDevice device, const VkImportFenceFdInfoKHR * pImportFenceFdInfo)
+{
+	assert(pfn_vkImportFenceFdKHR);
+	return pfn_vkImportFenceFdKHR(device, pImportFenceFdInfo);
 }
 #endif // defined(VK_KHR_external_fence_fd)
 #if defined(VK_KHR_external_fence_win32)
@@ -7771,6 +7868,13 @@ VKAPI_ATTR VkResult vkGetImageViewAddressNVX(VkDevice device, VkImageView imageV
 	assert(pfn_vkGetImageViewAddressNVX);
 	return pfn_vkGetImageViewAddressNVX(device, imageView, pProperties);
 }
+
+static PFN_vkGetDeviceCombinedImageSamplerIndexNVX pfn_vkGetDeviceCombinedImageSamplerIndexNVX;
+VKAPI_ATTR uint64_t vkGetDeviceCombinedImageSamplerIndexNVX(VkDevice device, uint64_t imageViewIndex, uint64_t samplerIndex)
+{
+	assert(pfn_vkGetDeviceCombinedImageSamplerIndexNVX);
+	return pfn_vkGetDeviceCombinedImageSamplerIndexNVX(device, imageViewIndex, samplerIndex);
+}
 #endif // defined(VK_NVX_image_view_handle)
 #if defined(VK_NV_acquire_winrt_display)
 
@@ -8486,18 +8590,18 @@ VKAPI_ATTR void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, const VkDis
 	pfn_vkCmdDispatchTileQCOM(commandBuffer, pDispatchTileInfo);
 }
 
-static PFN_vkCmdBeginPerTileExecutionQCOM pfn_vkCmdBeginPerTileExecutionQCOM;
-VKAPI_ATTR void vkCmdBeginPerTileExecutionQCOM(VkCommandBuffer commandBuffer, const VkPerTileBeginInfoQCOM * pPerTileBeginInfo)
-{
-	assert(pfn_vkCmdBeginPerTileExecutionQCOM);
-	pfn_vkCmdBeginPerTileExecutionQCOM(commandBuffer, pPerTileBeginInfo);
-}
-
 static PFN_vkCmdEndPerTileExecutionQCOM pfn_vkCmdEndPerTileExecutionQCOM;
 VKAPI_ATTR void vkCmdEndPerTileExecutionQCOM(VkCommandBuffer commandBuffer, const VkPerTileEndInfoQCOM * pPerTileEndInfo)
 {
 	assert(pfn_vkCmdEndPerTileExecutionQCOM);
 	pfn_vkCmdEndPerTileExecutionQCOM(commandBuffer, pPerTileEndInfo);
+}
+
+static PFN_vkCmdBeginPerTileExecutionQCOM pfn_vkCmdBeginPerTileExecutionQCOM;
+VKAPI_ATTR void vkCmdBeginPerTileExecutionQCOM(VkCommandBuffer commandBuffer, const VkPerTileBeginInfoQCOM * pPerTileBeginInfo)
+{
+	assert(pfn_vkCmdBeginPerTileExecutionQCOM);
+	pfn_vkCmdBeginPerTileExecutionQCOM(commandBuffer, pPerTileBeginInfo);
 }
 #endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
@@ -8970,16 +9074,16 @@ void vgen_load_instance_procs(VkInstance instance)
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
 #if defined(VK_ARM_data_graph)
 	pfn_vkCreateDataGraphPipelinesARM = (PFN_vkCreateDataGraphPipelinesARM)vkGetInstanceProcAddr(instance, "vkCreateDataGraphPipelinesARM");
-	pfn_vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelinePropertiesARM");
-	pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
-	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
 	pfn_vkCreateDataGraphPipelineSessionARM = (PFN_vkCreateDataGraphPipelineSessionARM)vkGetInstanceProcAddr(instance, "vkCreateDataGraphPipelineSessionARM");
+	pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
 	pfn_vkGetDataGraphPipelineSessionMemoryRequirementsARM = (PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineSessionMemoryRequirementsARM");
 	pfn_vkBindDataGraphPipelineSessionMemoryARM = (PFN_vkBindDataGraphPipelineSessionMemoryARM)vkGetInstanceProcAddr(instance, "vkBindDataGraphPipelineSessionMemoryARM");
 	pfn_vkDestroyDataGraphPipelineSessionARM = (PFN_vkDestroyDataGraphPipelineSessionARM)vkGetInstanceProcAddr(instance, "vkDestroyDataGraphPipelineSessionARM");
 	pfn_vkCmdDispatchDataGraphARM = (PFN_vkCmdDispatchDataGraphARM)vkGetInstanceProcAddr(instance, "vkCmdDispatchDataGraphARM");
 	pfn_vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelineAvailablePropertiesARM");
+	pfn_vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetDataGraphPipelinePropertiesARM");
 	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
+	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_performance_counters_by_region)
 	pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
@@ -9069,6 +9173,18 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
 	pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vkGetInstanceProcAddr(instance, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
 #endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_heap)
+	pfn_vkGetImageOpaqueCaptureDataEXT = (PFN_vkGetImageOpaqueCaptureDataEXT)vkGetInstanceProcAddr(instance, "vkGetImageOpaqueCaptureDataEXT");
+	pfn_vkCmdPushDataEXT = (PFN_vkCmdPushDataEXT)vkGetInstanceProcAddr(instance, "vkCmdPushDataEXT");
+	pfn_vkCmdBindResourceHeapEXT = (PFN_vkCmdBindResourceHeapEXT)vkGetInstanceProcAddr(instance, "vkCmdBindResourceHeapEXT");
+	pfn_vkUnregisterCustomBorderColorEXT = (PFN_vkUnregisterCustomBorderColorEXT)vkGetInstanceProcAddr(instance, "vkUnregisterCustomBorderColorEXT");
+	pfn_vkWriteSamplerDescriptorsEXT = (PFN_vkWriteSamplerDescriptorsEXT)vkGetInstanceProcAddr(instance, "vkWriteSamplerDescriptorsEXT");
+	pfn_vkWriteResourceDescriptorsEXT = (PFN_vkWriteResourceDescriptorsEXT)vkGetInstanceProcAddr(instance, "vkWriteResourceDescriptorsEXT");
+	pfn_vkCmdBindSamplerHeapEXT = (PFN_vkCmdBindSamplerHeapEXT)vkGetInstanceProcAddr(instance, "vkCmdBindSamplerHeapEXT");
+	pfn_vkGetPhysicalDeviceDescriptorSizeEXT = (PFN_vkGetPhysicalDeviceDescriptorSizeEXT)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceDescriptorSizeEXT");
+	pfn_vkRegisterCustomBorderColorEXT = (PFN_vkRegisterCustomBorderColorEXT)vkGetInstanceProcAddr(instance, "vkRegisterCustomBorderColorEXT");
+	pfn_vkGetTensorOpaqueCaptureDataARM = (PFN_vkGetTensorOpaqueCaptureDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDataARM");
+#endif // defined(VK_EXT_descriptor_heap)
 #if defined(VK_EXT_device_fault)
 	pfn_vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vkGetInstanceProcAddr(instance, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
@@ -9108,13 +9224,13 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBindVertexBuffers2EXT = (PFN_vkCmdBindVertexBuffers2EXT)vkGetInstanceProcAddr(instance, "vkCmdBindVertexBuffers2EXT");
 	pfn_vkCmdSetCullModeEXT = (PFN_vkCmdSetCullModeEXT)vkGetInstanceProcAddr(instance, "vkCmdSetCullModeEXT");
 	pfn_vkCmdSetDepthTestEnableEXT = (PFN_vkCmdSetDepthTestEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthTestEnableEXT");
+	pfn_vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthBoundsTestEnableEXT");
 	pfn_vkCmdSetFrontFaceEXT = (PFN_vkCmdSetFrontFaceEXT)vkGetInstanceProcAddr(instance, "vkCmdSetFrontFaceEXT");
 	pfn_vkCmdSetPrimitiveTopologyEXT = (PFN_vkCmdSetPrimitiveTopologyEXT)vkGetInstanceProcAddr(instance, "vkCmdSetPrimitiveTopologyEXT");
 	pfn_vkCmdSetViewportWithCountEXT = (PFN_vkCmdSetViewportWithCountEXT)vkGetInstanceProcAddr(instance, "vkCmdSetViewportWithCountEXT");
 	pfn_vkCmdSetScissorWithCountEXT = (PFN_vkCmdSetScissorWithCountEXT)vkGetInstanceProcAddr(instance, "vkCmdSetScissorWithCountEXT");
 	pfn_vkCmdSetDepthWriteEnableEXT = (PFN_vkCmdSetDepthWriteEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthWriteEnableEXT");
 	pfn_vkCmdSetDepthCompareOpEXT = (PFN_vkCmdSetDepthCompareOpEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthCompareOpEXT");
-	pfn_vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetDepthBoundsTestEnableEXT");
 	pfn_vkCmdSetStencilTestEnableEXT = (PFN_vkCmdSetStencilTestEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetStencilTestEnableEXT");
 	pfn_vkCmdSetStencilOpEXT = (PFN_vkCmdSetStencilOpEXT)vkGetInstanceProcAddr(instance, "vkCmdSetStencilOpEXT");
 #endif // defined(VK_EXT_extended_dynamic_state) || defined(VK_EXT_shader_object)
@@ -9447,8 +9563,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceExternalFencePropertiesKHR = (PFN_vkGetPhysicalDeviceExternalFencePropertiesKHR)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalFencePropertiesKHR");
 #endif // defined(VK_KHR_external_fence_capabilities)
 #if defined(VK_KHR_external_fence_fd)
-	pfn_vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vkGetInstanceProcAddr(instance, "vkImportFenceFdKHR");
 	pfn_vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vkGetInstanceProcAddr(instance, "vkGetFenceFdKHR");
+	pfn_vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vkGetInstanceProcAddr(instance, "vkImportFenceFdKHR");
 #endif // defined(VK_KHR_external_fence_fd)
 #if defined(VK_KHR_external_fence_win32)
 	pfn_vkGetFenceWin32HandleKHR = (PFN_vkGetFenceWin32HandleKHR)vkGetInstanceProcAddr(instance, "vkGetFenceWin32HandleKHR");
@@ -9677,6 +9793,7 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetImageViewHandle64NVX = (PFN_vkGetImageViewHandle64NVX)vkGetInstanceProcAddr(instance, "vkGetImageViewHandle64NVX");
 	pfn_vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vkGetInstanceProcAddr(instance, "vkGetImageViewHandleNVX");
 	pfn_vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vkGetInstanceProcAddr(instance, "vkGetImageViewAddressNVX");
+	pfn_vkGetDeviceCombinedImageSamplerIndexNVX = (PFN_vkGetDeviceCombinedImageSamplerIndexNVX)vkGetInstanceProcAddr(instance, "vkGetDeviceCombinedImageSamplerIndexNVX");
 #endif // defined(VK_NVX_image_view_handle)
 #if defined(VK_NV_acquire_winrt_display)
 	pfn_vkGetWinrtDisplayNV = (PFN_vkGetWinrtDisplayNV)vkGetInstanceProcAddr(instance, "vkGetWinrtDisplayNV");
@@ -9839,8 +9956,8 @@ void vgen_load_instance_procs(VkInstance instance)
 #endif // defined(VK_QCOM_tile_properties)
 #if defined(VK_QCOM_tile_shading)
 	pfn_vkCmdDispatchTileQCOM = (PFN_vkCmdDispatchTileQCOM)vkGetInstanceProcAddr(instance, "vkCmdDispatchTileQCOM");
-	pfn_vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vkGetInstanceProcAddr(instance, "vkCmdBeginPerTileExecutionQCOM");
 	pfn_vkCmdEndPerTileExecutionQCOM = (PFN_vkCmdEndPerTileExecutionQCOM)vkGetInstanceProcAddr(instance, "vkCmdEndPerTileExecutionQCOM");
+	pfn_vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vkGetInstanceProcAddr(instance, "vkCmdBeginPerTileExecutionQCOM");
 #endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 	pfn_vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vkGetInstanceProcAddr(instance, "vkGetScreenBufferPropertiesQNX");
@@ -10219,14 +10336,14 @@ void vgen_load_device_procs(VkDevice device)
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
 #if defined(VK_ARM_data_graph)
 	pfn_vkCreateDataGraphPipelinesARM = (PFN_vkCreateDataGraphPipelinesARM)vkGetDeviceProcAddr(device, "vkCreateDataGraphPipelinesARM");
-	pfn_vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
-	pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
 	pfn_vkCreateDataGraphPipelineSessionARM = (PFN_vkCreateDataGraphPipelineSessionARM)vkGetDeviceProcAddr(device, "vkCreateDataGraphPipelineSessionARM");
+	pfn_vkGetDataGraphPipelineSessionBindPointRequirementsARM = (PFN_vkGetDataGraphPipelineSessionBindPointRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionBindPointRequirementsARM");
 	pfn_vkGetDataGraphPipelineSessionMemoryRequirementsARM = (PFN_vkGetDataGraphPipelineSessionMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineSessionMemoryRequirementsARM");
 	pfn_vkBindDataGraphPipelineSessionMemoryARM = (PFN_vkBindDataGraphPipelineSessionMemoryARM)vkGetDeviceProcAddr(device, "vkBindDataGraphPipelineSessionMemoryARM");
 	pfn_vkDestroyDataGraphPipelineSessionARM = (PFN_vkDestroyDataGraphPipelineSessionARM)vkGetDeviceProcAddr(device, "vkDestroyDataGraphPipelineSessionARM");
 	pfn_vkCmdDispatchDataGraphARM = (PFN_vkCmdDispatchDataGraphARM)vkGetDeviceProcAddr(device, "vkCmdDispatchDataGraphARM");
 	pfn_vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineAvailablePropertiesARM");
+	pfn_vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
 #if defined(VK_ARM_tensors)
 	pfn_vkCreateTensorARM = (PFN_vkCreateTensorARM)vkGetDeviceProcAddr(device, "vkCreateTensorARM");
@@ -10295,6 +10412,17 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetImageViewOpaqueCaptureDescriptorDataEXT = (PFN_vkGetImageViewOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
 	pfn_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (PFN_vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT)vkGetDeviceProcAddr(device, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
 #endif // defined(VK_EXT_descriptor_buffer)
+#if defined(VK_EXT_descriptor_heap)
+	pfn_vkGetImageOpaqueCaptureDataEXT = (PFN_vkGetImageOpaqueCaptureDataEXT)vkGetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDataEXT");
+	pfn_vkCmdPushDataEXT = (PFN_vkCmdPushDataEXT)vkGetDeviceProcAddr(device, "vkCmdPushDataEXT");
+	pfn_vkCmdBindResourceHeapEXT = (PFN_vkCmdBindResourceHeapEXT)vkGetDeviceProcAddr(device, "vkCmdBindResourceHeapEXT");
+	pfn_vkUnregisterCustomBorderColorEXT = (PFN_vkUnregisterCustomBorderColorEXT)vkGetDeviceProcAddr(device, "vkUnregisterCustomBorderColorEXT");
+	pfn_vkWriteSamplerDescriptorsEXT = (PFN_vkWriteSamplerDescriptorsEXT)vkGetDeviceProcAddr(device, "vkWriteSamplerDescriptorsEXT");
+	pfn_vkWriteResourceDescriptorsEXT = (PFN_vkWriteResourceDescriptorsEXT)vkGetDeviceProcAddr(device, "vkWriteResourceDescriptorsEXT");
+	pfn_vkCmdBindSamplerHeapEXT = (PFN_vkCmdBindSamplerHeapEXT)vkGetDeviceProcAddr(device, "vkCmdBindSamplerHeapEXT");
+	pfn_vkRegisterCustomBorderColorEXT = (PFN_vkRegisterCustomBorderColorEXT)vkGetDeviceProcAddr(device, "vkRegisterCustomBorderColorEXT");
+	pfn_vkGetTensorOpaqueCaptureDataARM = (PFN_vkGetTensorOpaqueCaptureDataARM)vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDataARM");
+#endif // defined(VK_EXT_descriptor_heap)
 #if defined(VK_EXT_device_fault)
 	pfn_vkGetDeviceFaultInfoEXT = (PFN_vkGetDeviceFaultInfoEXT)vkGetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
 #endif // defined(VK_EXT_device_fault)
@@ -10324,13 +10452,13 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdBindVertexBuffers2EXT = (PFN_vkCmdBindVertexBuffers2EXT)vkGetDeviceProcAddr(device, "vkCmdBindVertexBuffers2EXT");
 	pfn_vkCmdSetCullModeEXT = (PFN_vkCmdSetCullModeEXT)vkGetDeviceProcAddr(device, "vkCmdSetCullModeEXT");
 	pfn_vkCmdSetDepthTestEnableEXT = (PFN_vkCmdSetDepthTestEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthTestEnableEXT");
+	pfn_vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthBoundsTestEnableEXT");
 	pfn_vkCmdSetFrontFaceEXT = (PFN_vkCmdSetFrontFaceEXT)vkGetDeviceProcAddr(device, "vkCmdSetFrontFaceEXT");
 	pfn_vkCmdSetPrimitiveTopologyEXT = (PFN_vkCmdSetPrimitiveTopologyEXT)vkGetDeviceProcAddr(device, "vkCmdSetPrimitiveTopologyEXT");
 	pfn_vkCmdSetViewportWithCountEXT = (PFN_vkCmdSetViewportWithCountEXT)vkGetDeviceProcAddr(device, "vkCmdSetViewportWithCountEXT");
 	pfn_vkCmdSetScissorWithCountEXT = (PFN_vkCmdSetScissorWithCountEXT)vkGetDeviceProcAddr(device, "vkCmdSetScissorWithCountEXT");
 	pfn_vkCmdSetDepthWriteEnableEXT = (PFN_vkCmdSetDepthWriteEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthWriteEnableEXT");
 	pfn_vkCmdSetDepthCompareOpEXT = (PFN_vkCmdSetDepthCompareOpEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthCompareOpEXT");
-	pfn_vkCmdSetDepthBoundsTestEnableEXT = (PFN_vkCmdSetDepthBoundsTestEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetDepthBoundsTestEnableEXT");
 	pfn_vkCmdSetStencilTestEnableEXT = (PFN_vkCmdSetStencilTestEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetStencilTestEnableEXT");
 	pfn_vkCmdSetStencilOpEXT = (PFN_vkCmdSetStencilOpEXT)vkGetDeviceProcAddr(device, "vkCmdSetStencilOpEXT");
 #endif // defined(VK_EXT_extended_dynamic_state) || defined(VK_EXT_shader_object)
@@ -10623,8 +10751,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdSetRenderingInputAttachmentIndicesKHR = (PFN_vkCmdSetRenderingInputAttachmentIndicesKHR)vkGetDeviceProcAddr(device, "vkCmdSetRenderingInputAttachmentIndicesKHR");
 #endif // defined(VK_KHR_dynamic_rendering_local_read)
 #if defined(VK_KHR_external_fence_fd)
-	pfn_vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 	pfn_vkGetFenceFdKHR = (PFN_vkGetFenceFdKHR)vkGetDeviceProcAddr(device, "vkGetFenceFdKHR");
+	pfn_vkImportFenceFdKHR = (PFN_vkImportFenceFdKHR)vkGetDeviceProcAddr(device, "vkImportFenceFdKHR");
 #endif // defined(VK_KHR_external_fence_fd)
 #if defined(VK_KHR_external_fence_win32)
 	pfn_vkGetFenceWin32HandleKHR = (PFN_vkGetFenceWin32HandleKHR)vkGetDeviceProcAddr(device, "vkGetFenceWin32HandleKHR");
@@ -10789,6 +10917,7 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetImageViewHandle64NVX = (PFN_vkGetImageViewHandle64NVX)vkGetDeviceProcAddr(device, "vkGetImageViewHandle64NVX");
 	pfn_vkGetImageViewHandleNVX = (PFN_vkGetImageViewHandleNVX)vkGetDeviceProcAddr(device, "vkGetImageViewHandleNVX");
 	pfn_vkGetImageViewAddressNVX = (PFN_vkGetImageViewAddressNVX)vkGetDeviceProcAddr(device, "vkGetImageViewAddressNVX");
+	pfn_vkGetDeviceCombinedImageSamplerIndexNVX = (PFN_vkGetDeviceCombinedImageSamplerIndexNVX)vkGetDeviceProcAddr(device, "vkGetDeviceCombinedImageSamplerIndexNVX");
 #endif // defined(VK_NVX_image_view_handle)
 #if defined(VK_NV_clip_space_w_scaling)
 	pfn_vkCmdSetViewportWScalingNV = (PFN_vkCmdSetViewportWScalingNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingNV");
@@ -10927,8 +11056,8 @@ void vgen_load_device_procs(VkDevice device)
 #endif // defined(VK_QCOM_tile_properties)
 #if defined(VK_QCOM_tile_shading)
 	pfn_vkCmdDispatchTileQCOM = (PFN_vkCmdDispatchTileQCOM)vkGetDeviceProcAddr(device, "vkCmdDispatchTileQCOM");
-	pfn_vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vkGetDeviceProcAddr(device, "vkCmdBeginPerTileExecutionQCOM");
 	pfn_vkCmdEndPerTileExecutionQCOM = (PFN_vkCmdEndPerTileExecutionQCOM)vkGetDeviceProcAddr(device, "vkCmdEndPerTileExecutionQCOM");
+	pfn_vkCmdBeginPerTileExecutionQCOM = (PFN_vkCmdBeginPerTileExecutionQCOM)vkGetDeviceProcAddr(device, "vkCmdBeginPerTileExecutionQCOM");
 #endif // defined(VK_QCOM_tile_shading)
 #if defined(VK_QNX_external_memory_screen_buffer)
 	pfn_vkGetScreenBufferPropertiesQNX = (PFN_vkGetScreenBufferPropertiesQNX)vkGetDeviceProcAddr(device, "vkGetScreenBufferPropertiesQNX");
