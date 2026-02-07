@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 342 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 343 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -1334,6 +1334,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceScreenPresentationSupportQNX = (PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");
 	vk->vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vk->vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
 #endif // defined(VK_QNX_screen_surface)
+#if defined(VK_SEC_ubm_surface)
+	vk->vkGetPhysicalDeviceUbmPresentationSupportSEC = (PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceUbmPresentationSupportSEC");
+	vk->vkCreateUbmSurfaceSEC = (PFN_vkCreateUbmSurfaceSEC)vk->vkGetInstanceProcAddr(instance, "vkCreateUbmSurfaceSEC");
+#endif // defined(VK_SEC_ubm_surface)
 #if defined(VK_VALVE_descriptor_set_host_mapping)
 	vk->vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetHostMappingVALVE");
 	vk->vkGetDescriptorSetLayoutHostMappingInfoVALVE = (PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
@@ -8629,6 +8633,22 @@ VKAPI_ATTR VkResult vkCreateScreenSurfaceQNX(VkInstance instance, const VkScreen
 	return pfn_vkCreateScreenSurfaceQNX(instance, pCreateInfo, pAllocator, pSurface);
 }
 #endif // defined(VK_QNX_screen_surface)
+#if defined(VK_SEC_ubm_surface)
+
+static PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC;
+VKAPI_ATTR VkBool32 vkGetPhysicalDeviceUbmPresentationSupportSEC(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, struct ubm_device * ubm_device)
+{
+	assert(pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC);
+	return pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC(physicalDevice, queueFamilyIndex, ubm_device);
+}
+
+static PFN_vkCreateUbmSurfaceSEC pfn_vkCreateUbmSurfaceSEC;
+VKAPI_ATTR VkResult vkCreateUbmSurfaceSEC(VkInstance instance, const VkUbmSurfaceCreateInfoSEC * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
+{
+	assert(pfn_vkCreateUbmSurfaceSEC);
+	return pfn_vkCreateUbmSurfaceSEC(instance, pCreateInfo, pAllocator, pSurface);
+}
+#endif // defined(VK_SEC_ubm_surface)
 #if defined(VK_VALVE_descriptor_set_host_mapping)
 
 static PFN_vkGetDescriptorSetHostMappingVALVE pfn_vkGetDescriptorSetHostMappingVALVE;
@@ -9966,6 +9986,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceScreenPresentationSupportQNX = (PFN_vkGetPhysicalDeviceScreenPresentationSupportQNX)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");
 	pfn_vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
 #endif // defined(VK_QNX_screen_surface)
+#if defined(VK_SEC_ubm_surface)
+	pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC = (PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceUbmPresentationSupportSEC");
+	pfn_vkCreateUbmSurfaceSEC = (PFN_vkCreateUbmSurfaceSEC)vkGetInstanceProcAddr(instance, "vkCreateUbmSurfaceSEC");
+#endif // defined(VK_SEC_ubm_surface)
 #if defined(VK_VALVE_descriptor_set_host_mapping)
 	pfn_vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetHostMappingVALVE");
 	pfn_vkGetDescriptorSetLayoutHostMappingInfoVALVE = (PFN_vkGetDescriptorSetLayoutHostMappingInfoVALVE)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
