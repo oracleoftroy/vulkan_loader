@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 343 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 344 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -8636,10 +8636,10 @@ VKAPI_ATTR VkResult vkCreateScreenSurfaceQNX(VkInstance instance, const VkScreen
 #if defined(VK_SEC_ubm_surface)
 
 static PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC;
-VKAPI_ATTR VkBool32 vkGetPhysicalDeviceUbmPresentationSupportSEC(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, struct ubm_device * ubm_device)
+VKAPI_ATTR VkBool32 vkGetPhysicalDeviceUbmPresentationSupportSEC(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, struct ubm_device * device)
 {
 	assert(pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC);
-	return pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC(physicalDevice, queueFamilyIndex, ubm_device);
+	return pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC(physicalDevice, queueFamilyIndex, device);
 }
 
 static PFN_vkCreateUbmSurfaceSEC pfn_vkCreateUbmSurfaceSEC;
