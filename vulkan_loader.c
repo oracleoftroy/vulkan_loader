@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 344 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 345 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -456,6 +456,15 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_ARM_performance_counters_by_region)
 	vk->vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)vk->vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
 #endif // defined(VK_ARM_performance_counters_by_region)
+#if defined(VK_ARM_shader_instrumentation)
+	vk->vkCreateShaderInstrumentationARM = (PFN_vkCreateShaderInstrumentationARM)vk->vkGetInstanceProcAddr(instance, "vkCreateShaderInstrumentationARM");
+	vk->vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM = (PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM)vk->vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM");
+	vk->vkDestroyShaderInstrumentationARM = (PFN_vkDestroyShaderInstrumentationARM)vk->vkGetInstanceProcAddr(instance, "vkDestroyShaderInstrumentationARM");
+	vk->vkCmdBeginShaderInstrumentationARM = (PFN_vkCmdBeginShaderInstrumentationARM)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginShaderInstrumentationARM");
+	vk->vkCmdEndShaderInstrumentationARM = (PFN_vkCmdEndShaderInstrumentationARM)vk->vkGetInstanceProcAddr(instance, "vkCmdEndShaderInstrumentationARM");
+	vk->vkGetShaderInstrumentationValuesARM = (PFN_vkGetShaderInstrumentationValuesARM)vk->vkGetInstanceProcAddr(instance, "vkGetShaderInstrumentationValuesARM");
+	vk->vkClearShaderInstrumentationMetricsARM = (PFN_vkClearShaderInstrumentationMetricsARM)vk->vkGetInstanceProcAddr(instance, "vkClearShaderInstrumentationMetricsARM");
+#endif // defined(VK_ARM_shader_instrumentation)
 #if defined(VK_ARM_tensors)
 	vk->vkCreateTensorARM = (PFN_vkCreateTensorARM)vk->vkGetInstanceProcAddr(instance, "vkCreateTensorARM");
 	vk->vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
@@ -1717,6 +1726,14 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineAvailablePropertiesARM");
 	vk->vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
+#if defined(VK_ARM_shader_instrumentation)
+	vk->vkCreateShaderInstrumentationARM = (PFN_vkCreateShaderInstrumentationARM)vk->vkGetDeviceProcAddr(device, "vkCreateShaderInstrumentationARM");
+	vk->vkDestroyShaderInstrumentationARM = (PFN_vkDestroyShaderInstrumentationARM)vk->vkGetDeviceProcAddr(device, "vkDestroyShaderInstrumentationARM");
+	vk->vkCmdBeginShaderInstrumentationARM = (PFN_vkCmdBeginShaderInstrumentationARM)vk->vkGetDeviceProcAddr(device, "vkCmdBeginShaderInstrumentationARM");
+	vk->vkCmdEndShaderInstrumentationARM = (PFN_vkCmdEndShaderInstrumentationARM)vk->vkGetDeviceProcAddr(device, "vkCmdEndShaderInstrumentationARM");
+	vk->vkGetShaderInstrumentationValuesARM = (PFN_vkGetShaderInstrumentationValuesARM)vk->vkGetDeviceProcAddr(device, "vkGetShaderInstrumentationValuesARM");
+	vk->vkClearShaderInstrumentationMetricsARM = (PFN_vkClearShaderInstrumentationMetricsARM)vk->vkGetDeviceProcAddr(device, "vkClearShaderInstrumentationMetricsARM");
+#endif // defined(VK_ARM_shader_instrumentation)
 #if defined(VK_ARM_tensors)
 	vk->vkCreateTensorARM = (PFN_vkCreateTensorARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorARM");
 	vk->vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
@@ -4551,6 +4568,57 @@ VKAPI_ATTR VkResult vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByReg
 	return pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM(physicalDevice, queueFamilyIndex, pCounterCount, pCounters, pCounterDescriptions);
 }
 #endif // defined(VK_ARM_performance_counters_by_region)
+#if defined(VK_ARM_shader_instrumentation)
+
+static PFN_vkCreateShaderInstrumentationARM pfn_vkCreateShaderInstrumentationARM;
+VKAPI_ATTR VkResult vkCreateShaderInstrumentationARM(VkDevice device, const VkShaderInstrumentationCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkShaderInstrumentationARM * pInstrumentation)
+{
+	assert(pfn_vkCreateShaderInstrumentationARM);
+	return pfn_vkCreateShaderInstrumentationARM(device, pCreateInfo, pAllocator, pInstrumentation);
+}
+
+static PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM pfn_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM;
+VKAPI_ATTR VkResult vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM(VkPhysicalDevice physicalDevice, uint32_t * pDescriptionCount, VkShaderInstrumentationMetricDescriptionARM * pDescriptions)
+{
+	assert(pfn_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM);
+	return pfn_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM(physicalDevice, pDescriptionCount, pDescriptions);
+}
+
+static PFN_vkDestroyShaderInstrumentationARM pfn_vkDestroyShaderInstrumentationARM;
+VKAPI_ATTR void vkDestroyShaderInstrumentationARM(VkDevice device, VkShaderInstrumentationARM instrumentation, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyShaderInstrumentationARM);
+	pfn_vkDestroyShaderInstrumentationARM(device, instrumentation, pAllocator);
+}
+
+static PFN_vkCmdBeginShaderInstrumentationARM pfn_vkCmdBeginShaderInstrumentationARM;
+VKAPI_ATTR void vkCmdBeginShaderInstrumentationARM(VkCommandBuffer commandBuffer, VkShaderInstrumentationARM instrumentation)
+{
+	assert(pfn_vkCmdBeginShaderInstrumentationARM);
+	pfn_vkCmdBeginShaderInstrumentationARM(commandBuffer, instrumentation);
+}
+
+static PFN_vkCmdEndShaderInstrumentationARM pfn_vkCmdEndShaderInstrumentationARM;
+VKAPI_ATTR void vkCmdEndShaderInstrumentationARM(VkCommandBuffer commandBuffer)
+{
+	assert(pfn_vkCmdEndShaderInstrumentationARM);
+	pfn_vkCmdEndShaderInstrumentationARM(commandBuffer);
+}
+
+static PFN_vkGetShaderInstrumentationValuesARM pfn_vkGetShaderInstrumentationValuesARM;
+VKAPI_ATTR VkResult vkGetShaderInstrumentationValuesARM(VkDevice device, VkShaderInstrumentationARM instrumentation, uint32_t * pMetricBlockCount, void * pMetricValues, VkShaderInstrumentationValuesFlagsARM flags)
+{
+	assert(pfn_vkGetShaderInstrumentationValuesARM);
+	return pfn_vkGetShaderInstrumentationValuesARM(device, instrumentation, pMetricBlockCount, pMetricValues, flags);
+}
+
+static PFN_vkClearShaderInstrumentationMetricsARM pfn_vkClearShaderInstrumentationMetricsARM;
+VKAPI_ATTR void vkClearShaderInstrumentationMetricsARM(VkDevice device, VkShaderInstrumentationARM instrumentation)
+{
+	assert(pfn_vkClearShaderInstrumentationMetricsARM);
+	pfn_vkClearShaderInstrumentationMetricsARM(device, instrumentation);
+}
+#endif // defined(VK_ARM_shader_instrumentation)
 #if defined(VK_ARM_tensors)
 
 static PFN_vkCreateTensorARM pfn_vkCreateTensorARM;
@@ -9108,6 +9176,15 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_ARM_performance_counters_by_region)
 	pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
 #endif // defined(VK_ARM_performance_counters_by_region)
+#if defined(VK_ARM_shader_instrumentation)
+	pfn_vkCreateShaderInstrumentationARM = (PFN_vkCreateShaderInstrumentationARM)vkGetInstanceProcAddr(instance, "vkCreateShaderInstrumentationARM");
+	pfn_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM = (PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM)vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM");
+	pfn_vkDestroyShaderInstrumentationARM = (PFN_vkDestroyShaderInstrumentationARM)vkGetInstanceProcAddr(instance, "vkDestroyShaderInstrumentationARM");
+	pfn_vkCmdBeginShaderInstrumentationARM = (PFN_vkCmdBeginShaderInstrumentationARM)vkGetInstanceProcAddr(instance, "vkCmdBeginShaderInstrumentationARM");
+	pfn_vkCmdEndShaderInstrumentationARM = (PFN_vkCmdEndShaderInstrumentationARM)vkGetInstanceProcAddr(instance, "vkCmdEndShaderInstrumentationARM");
+	pfn_vkGetShaderInstrumentationValuesARM = (PFN_vkGetShaderInstrumentationValuesARM)vkGetInstanceProcAddr(instance, "vkGetShaderInstrumentationValuesARM");
+	pfn_vkClearShaderInstrumentationMetricsARM = (PFN_vkClearShaderInstrumentationMetricsARM)vkGetInstanceProcAddr(instance, "vkClearShaderInstrumentationMetricsARM");
+#endif // defined(VK_ARM_shader_instrumentation)
 #if defined(VK_ARM_tensors)
 	pfn_vkCreateTensorARM = (PFN_vkCreateTensorARM)vkGetInstanceProcAddr(instance, "vkCreateTensorARM");
 	pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
@@ -10369,6 +10446,14 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineAvailablePropertiesARM");
 	pfn_vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
+#if defined(VK_ARM_shader_instrumentation)
+	pfn_vkCreateShaderInstrumentationARM = (PFN_vkCreateShaderInstrumentationARM)vkGetDeviceProcAddr(device, "vkCreateShaderInstrumentationARM");
+	pfn_vkDestroyShaderInstrumentationARM = (PFN_vkDestroyShaderInstrumentationARM)vkGetDeviceProcAddr(device, "vkDestroyShaderInstrumentationARM");
+	pfn_vkCmdBeginShaderInstrumentationARM = (PFN_vkCmdBeginShaderInstrumentationARM)vkGetDeviceProcAddr(device, "vkCmdBeginShaderInstrumentationARM");
+	pfn_vkCmdEndShaderInstrumentationARM = (PFN_vkCmdEndShaderInstrumentationARM)vkGetDeviceProcAddr(device, "vkCmdEndShaderInstrumentationARM");
+	pfn_vkGetShaderInstrumentationValuesARM = (PFN_vkGetShaderInstrumentationValuesARM)vkGetDeviceProcAddr(device, "vkGetShaderInstrumentationValuesARM");
+	pfn_vkClearShaderInstrumentationMetricsARM = (PFN_vkClearShaderInstrumentationMetricsARM)vkGetDeviceProcAddr(device, "vkClearShaderInstrumentationMetricsARM");
+#endif // defined(VK_ARM_shader_instrumentation)
 #if defined(VK_ARM_tensors)
 	pfn_vkCreateTensorARM = (PFN_vkCreateTensorARM)vkGetDeviceProcAddr(device, "vkCreateTensorARM");
 	pfn_vkGetTensorViewOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorViewOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorViewOpaqueCaptureDescriptorDataARM");
