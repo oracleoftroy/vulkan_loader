@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 345 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 346 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -472,11 +472,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vk->vkGetInstanceProcAddr(instance, "vkBindTensorMemoryARM");
 	vk->vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorMemoryRequirementsARM");
 	vk->vkGetPhysicalDeviceExternalTensorPropertiesARM = (PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM");
+	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
 	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
 	vk->vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkDestroyTensorViewARM");
 	vk->vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyTensorARM");
-	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
 	vk->vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
@@ -571,8 +571,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vk->vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetShaderEXT");
 	vk->vkCmdPreprocessGeneratedCommandsEXT = (PFN_vkCmdPreprocessGeneratedCommandsEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdPreprocessGeneratedCommandsEXT");
 	vk->vkUpdateIndirectExecutionSetPipelineEXT = (PFN_vkUpdateIndirectExecutionSetPipelineEXT)vk->vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetPipelineEXT");
-	vk->vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vk->vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	vk->vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdExecuteGeneratedCommandsEXT");
+	vk->vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vk->vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	vk->vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateIndirectExecutionSetEXT");
 	vk->vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyIndirectExecutionSetEXT");
 #endif // defined(VK_EXT_device_generated_commands)
@@ -639,11 +639,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToOneEnableEXT");
 	vk->vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingEnableNV");
 	vk->vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetRasterizationStreamEXT");
+	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEquationEXT");
 	vk->vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetSampleMaskEXT");
 	vk->vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToCoverageEnableEXT");
 	vk->vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEnableEXT");
-	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
 	vk->vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetViewportSwizzleNV");
 	vk->vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCoverageToColorEnableNV");
@@ -755,8 +755,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_shader_object)
 	vk->vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyShaderEXT");
 	vk->vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetShaderBinaryDataEXT");
-	vk->vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindShadersEXT");
 	vk->vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateShadersEXT");
+	vk->vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
 	vk->vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetVertexInputEXT");
@@ -898,6 +898,30 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
 	vk->vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplateKHR");
 #endif // defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_device_address_commands)
+	vk->vkCmdBindVertexBuffers3KHR = (PFN_vkCmdBindVertexBuffers3KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBindVertexBuffers3KHR");
+	vk->vkCmdDrawIndexedIndirect2KHR = (PFN_vkCmdDrawIndexedIndirect2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndexedIndirect2KHR");
+	vk->vkCmdCopyMemoryToImageKHR = (PFN_vkCmdCopyMemoryToImageKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryToImageKHR");
+	vk->vkCmdDrawIndexedIndirectCount2KHR = (PFN_vkCmdDrawIndexedIndirectCount2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndexedIndirectCount2KHR");
+	vk->vkCmdDrawMeshTasksIndirectCount2EXT = (PFN_vkCmdDrawMeshTasksIndirectCount2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirectCount2EXT");
+	vk->vkCmdDrawIndirect2KHR = (PFN_vkCmdDrawIndirect2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndirect2KHR");
+	vk->vkCmdBindTransformFeedbackBuffers2EXT = (PFN_vkCmdBindTransformFeedbackBuffers2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindTransformFeedbackBuffers2EXT");
+	vk->vkCmdDrawIndirectByteCount2EXT = (PFN_vkCmdDrawIndirectByteCount2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndirectByteCount2EXT");
+	vk->vkCmdBindIndexBuffer3KHR = (PFN_vkCmdBindIndexBuffer3KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdBindIndexBuffer3KHR");
+	vk->vkCmdDispatchIndirect2KHR = (PFN_vkCmdDispatchIndirect2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDispatchIndirect2KHR");
+	vk->vkCmdCopyMemoryKHR = (PFN_vkCmdCopyMemoryKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryKHR");
+	vk->vkCmdCopyImageToMemoryKHR = (PFN_vkCmdCopyImageToMemoryKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyImageToMemoryKHR");
+	vk->vkCmdUpdateMemoryKHR = (PFN_vkCmdUpdateMemoryKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdUpdateMemoryKHR");
+	vk->vkCmdFillMemoryKHR = (PFN_vkCmdFillMemoryKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdFillMemoryKHR");
+	vk->vkCmdCopyQueryPoolResultsToMemoryKHR = (PFN_vkCmdCopyQueryPoolResultsToMemoryKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyQueryPoolResultsToMemoryKHR");
+	vk->vkCmdDrawIndirectCount2KHR = (PFN_vkCmdDrawIndirectCount2KHR)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndirectCount2KHR");
+	vk->vkCmdBeginConditionalRendering2EXT = (PFN_vkCmdBeginConditionalRendering2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginConditionalRendering2EXT");
+	vk->vkCmdBeginTransformFeedback2EXT = (PFN_vkCmdBeginTransformFeedback2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginTransformFeedback2EXT");
+	vk->vkCmdEndTransformFeedback2EXT = (PFN_vkCmdEndTransformFeedback2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdEndTransformFeedback2EXT");
+	vk->vkCmdDrawMeshTasksIndirect2EXT = (PFN_vkCmdDrawMeshTasksIndirect2EXT)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirect2EXT");
+	vk->vkCmdWriteMarkerToMemoryAMD = (PFN_vkCmdWriteMarkerToMemoryAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteMarkerToMemoryAMD");
+	vk->vkCreateAccelerationStructure2KHR = (PFN_vkCreateAccelerationStructure2KHR)vk->vkGetInstanceProcAddr(instance, "vkCreateAccelerationStructure2KHR");
+#endif // defined(VK_KHR_device_address_commands)
 #if defined(VK_KHR_device_group)
 	vk->vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	vk->vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDeviceMaskKHR");
@@ -1043,10 +1067,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vk->vkGetInstanceProcAddr(instance, "vkReleaseProfilingLockKHR");
 #endif // defined(VK_KHR_performance_query)
 #if defined(VK_KHR_pipeline_binary)
-	vk->vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineBinaryDataKHR");
 	vk->vkCreatePipelineBinariesKHR = (PFN_vkCreatePipelineBinariesKHR)vk->vkGetInstanceProcAddr(instance, "vkCreatePipelineBinariesKHR");
 	vk->vkDestroyPipelineBinaryKHR = (PFN_vkDestroyPipelineBinaryKHR)vk->vkGetInstanceProcAddr(instance, "vkDestroyPipelineBinaryKHR");
 	vk->vkGetPipelineKeyKHR = (PFN_vkGetPipelineKeyKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineKeyKHR");
+	vk->vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vk->vkGetInstanceProcAddr(instance, "vkGetPipelineBinaryDataKHR");
 	vk->vkReleaseCapturedPipelineDataKHR = (PFN_vkReleaseCapturedPipelineDataKHR)vk->vkGetInstanceProcAddr(instance, "vkReleaseCapturedPipelineDataKHR");
 #endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
@@ -1193,8 +1217,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix2)
 #if defined(VK_NV_cooperative_vector)
-	vk->vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vk->vkGetInstanceProcAddr(instance, "vkCmdConvertCooperativeVectorMatrixNV");
 	vk->vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vk->vkGetInstanceProcAddr(instance, "vkConvertCooperativeVectorMatrixNV");
+	vk->vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vk->vkGetInstanceProcAddr(instance, "vkCmdConvertCooperativeVectorMatrixNV");
 	vk->vkGetPhysicalDeviceCooperativeVectorPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeVectorPropertiesNV");
 #endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
@@ -1261,16 +1285,16 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkImportFenceSciSyncObjNV = (PFN_vkImportFenceSciSyncObjNV)vk->vkGetInstanceProcAddr(instance, "vkImportFenceSciSyncObjNV");
 #endif // defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_external_sci_sync2)
-	vk->vkDestroySemaphoreSciSyncPoolNV = (PFN_vkDestroySemaphoreSciSyncPoolNV)vk->vkGetInstanceProcAddr(instance, "vkDestroySemaphoreSciSyncPoolNV");
 	vk->vkCreateSemaphoreSciSyncPoolNV = (PFN_vkCreateSemaphoreSciSyncPoolNV)vk->vkGetInstanceProcAddr(instance, "vkCreateSemaphoreSciSyncPoolNV");
+	vk->vkDestroySemaphoreSciSyncPoolNV = (PFN_vkDestroySemaphoreSciSyncPoolNV)vk->vkGetInstanceProcAddr(instance, "vkDestroySemaphoreSciSyncPoolNV");
 #endif // defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_low_latency2)
-	vk->vkLatencySleepNV = (PFN_vkLatencySleepNV)vk->vkGetInstanceProcAddr(instance, "vkLatencySleepNV");
 	vk->vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vk->vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandNV");
 	vk->vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vk->vkGetInstanceProcAddr(instance, "vkSetLatencySleepModeNV");
+	vk->vkLatencySleepNV = (PFN_vkLatencySleepNV)vk->vkGetInstanceProcAddr(instance, "vkLatencySleepNV");
 	vk->vkSetLatencyMarkerNV = (PFN_vkSetLatencyMarkerNV)vk->vkGetInstanceProcAddr(instance, "vkSetLatencyMarkerNV");
 	vk->vkGetLatencyTimingsNV = (PFN_vkGetLatencyTimingsNV)vk->vkGetInstanceProcAddr(instance, "vkGetLatencyTimingsNV");
 #endif // defined(VK_NV_low_latency2)
@@ -1740,11 +1764,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkDestroyTensorARM = (PFN_vkDestroyTensorARM)vk->vkGetDeviceProcAddr(device, "vkDestroyTensorARM");
 	vk->vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vk->vkGetDeviceProcAddr(device, "vkBindTensorMemoryARM");
 	vk->vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorMemoryRequirementsARM");
+	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
 	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
 	vk->vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkDestroyTensorViewARM");
 	vk->vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vk->vkGetDeviceProcAddr(device, "vkCmdCopyTensorARM");
-	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 	vk->vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
@@ -1821,8 +1845,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vk->vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetShaderEXT");
 	vk->vkCmdPreprocessGeneratedCommandsEXT = (PFN_vkCmdPreprocessGeneratedCommandsEXT)vk->vkGetDeviceProcAddr(device, "vkCmdPreprocessGeneratedCommandsEXT");
 	vk->vkUpdateIndirectExecutionSetPipelineEXT = (PFN_vkUpdateIndirectExecutionSetPipelineEXT)vk->vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetPipelineEXT");
-	vk->vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vk->vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	vk->vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vk->vkGetDeviceProcAddr(device, "vkCmdExecuteGeneratedCommandsEXT");
+	vk->vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vk->vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	vk->vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vk->vkGetDeviceProcAddr(device, "vkCreateIndirectExecutionSetEXT");
 	vk->vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyIndirectExecutionSetEXT");
 #endif // defined(VK_EXT_device_generated_commands)
@@ -1879,11 +1903,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAlphaToOneEnableEXT");
 	vk->vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
 	vk->vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
+	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
 	vk->vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
 	vk->vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
 	vk->vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEnableEXT");
-	vk->vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	vk->vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
 	vk->vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetViewportSwizzleNV");
 	vk->vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCoverageToColorEnableNV");
@@ -1987,8 +2011,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_EXT_shader_object)
 	vk->vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyShaderEXT");
 	vk->vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
-	vk->vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindShadersEXT");
 	vk->vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vk->vkGetDeviceProcAddr(device, "vkCreateShadersEXT");
+	vk->vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
 	vk->vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
@@ -2114,6 +2138,30 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
 	vk->vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vk->vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplateKHR");
 #endif // defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_device_address_commands)
+	vk->vkCmdBindVertexBuffers3KHR = (PFN_vkCmdBindVertexBuffers3KHR)vk->vkGetDeviceProcAddr(device, "vkCmdBindVertexBuffers3KHR");
+	vk->vkCmdDrawIndexedIndirect2KHR = (PFN_vkCmdDrawIndexedIndirect2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirect2KHR");
+	vk->vkCmdCopyMemoryToImageKHR = (PFN_vkCmdCopyMemoryToImageKHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToImageKHR");
+	vk->vkCmdDrawIndexedIndirectCount2KHR = (PFN_vkCmdDrawIndexedIndirectCount2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCount2KHR");
+	vk->vkCmdDrawMeshTasksIndirectCount2EXT = (PFN_vkCmdDrawMeshTasksIndirectCount2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectCount2EXT");
+	vk->vkCmdDrawIndirect2KHR = (PFN_vkCmdDrawIndirect2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndirect2KHR");
+	vk->vkCmdBindTransformFeedbackBuffers2EXT = (PFN_vkCmdBindTransformFeedbackBuffers2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindTransformFeedbackBuffers2EXT");
+	vk->vkCmdDrawIndirectByteCount2EXT = (PFN_vkCmdDrawIndirectByteCount2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndirectByteCount2EXT");
+	vk->vkCmdBindIndexBuffer3KHR = (PFN_vkCmdBindIndexBuffer3KHR)vk->vkGetDeviceProcAddr(device, "vkCmdBindIndexBuffer3KHR");
+	vk->vkCmdDispatchIndirect2KHR = (PFN_vkCmdDispatchIndirect2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdDispatchIndirect2KHR");
+	vk->vkCmdCopyMemoryKHR = (PFN_vkCmdCopyMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryKHR");
+	vk->vkCmdCopyImageToMemoryKHR = (PFN_vkCmdCopyImageToMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyImageToMemoryKHR");
+	vk->vkCmdUpdateMemoryKHR = (PFN_vkCmdUpdateMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkCmdUpdateMemoryKHR");
+	vk->vkCmdFillMemoryKHR = (PFN_vkCmdFillMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkCmdFillMemoryKHR");
+	vk->vkCmdCopyQueryPoolResultsToMemoryKHR = (PFN_vkCmdCopyQueryPoolResultsToMemoryKHR)vk->vkGetDeviceProcAddr(device, "vkCmdCopyQueryPoolResultsToMemoryKHR");
+	vk->vkCmdDrawIndirectCount2KHR = (PFN_vkCmdDrawIndirectCount2KHR)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCount2KHR");
+	vk->vkCmdBeginConditionalRendering2EXT = (PFN_vkCmdBeginConditionalRendering2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginConditionalRendering2EXT");
+	vk->vkCmdBeginTransformFeedback2EXT = (PFN_vkCmdBeginTransformFeedback2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdBeginTransformFeedback2EXT");
+	vk->vkCmdEndTransformFeedback2EXT = (PFN_vkCmdEndTransformFeedback2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdEndTransformFeedback2EXT");
+	vk->vkCmdDrawMeshTasksIndirect2EXT = (PFN_vkCmdDrawMeshTasksIndirect2EXT)vk->vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirect2EXT");
+	vk->vkCmdWriteMarkerToMemoryAMD = (PFN_vkCmdWriteMarkerToMemoryAMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteMarkerToMemoryAMD");
+	vk->vkCreateAccelerationStructure2KHR = (PFN_vkCreateAccelerationStructure2KHR)vk->vkGetDeviceProcAddr(device, "vkCreateAccelerationStructure2KHR");
+#endif // defined(VK_KHR_device_address_commands)
 #if defined(VK_KHR_device_group)
 	vk->vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	vk->vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetDeviceMaskKHR");
@@ -2214,10 +2262,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vk->vkGetDeviceProcAddr(device, "vkReleaseProfilingLockKHR");
 #endif // defined(VK_KHR_performance_query)
 #if defined(VK_KHR_pipeline_binary)
-	vk->vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineBinaryDataKHR");
 	vk->vkCreatePipelineBinariesKHR = (PFN_vkCreatePipelineBinariesKHR)vk->vkGetDeviceProcAddr(device, "vkCreatePipelineBinariesKHR");
 	vk->vkDestroyPipelineBinaryKHR = (PFN_vkDestroyPipelineBinaryKHR)vk->vkGetDeviceProcAddr(device, "vkDestroyPipelineBinaryKHR");
 	vk->vkGetPipelineKeyKHR = (PFN_vkGetPipelineKeyKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineKeyKHR");
+	vk->vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vk->vkGetDeviceProcAddr(device, "vkGetPipelineBinaryDataKHR");
 	vk->vkReleaseCapturedPipelineDataKHR = (PFN_vkReleaseCapturedPipelineDataKHR)vk->vkGetDeviceProcAddr(device, "vkReleaseCapturedPipelineDataKHR");
 #endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
@@ -2319,8 +2367,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetComputeOccupancyPriorityNV = (PFN_vkCmdSetComputeOccupancyPriorityNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetComputeOccupancyPriorityNV");
 #endif // defined(VK_NV_compute_occupancy_priority)
 #if defined(VK_NV_cooperative_vector)
-	vk->vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vk->vkGetDeviceProcAddr(device, "vkCmdConvertCooperativeVectorMatrixNV");
 	vk->vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vk->vkGetDeviceProcAddr(device, "vkConvertCooperativeVectorMatrixNV");
+	vk->vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vk->vkGetDeviceProcAddr(device, "vkCmdConvertCooperativeVectorMatrixNV");
 #endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
 	vk->vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToImageIndirectNV");
@@ -2377,16 +2425,16 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkImportFenceSciSyncObjNV = (PFN_vkImportFenceSciSyncObjNV)vk->vkGetDeviceProcAddr(device, "vkImportFenceSciSyncObjNV");
 #endif // defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_external_sci_sync2)
-	vk->vkDestroySemaphoreSciSyncPoolNV = (PFN_vkDestroySemaphoreSciSyncPoolNV)vk->vkGetDeviceProcAddr(device, "vkDestroySemaphoreSciSyncPoolNV");
 	vk->vkCreateSemaphoreSciSyncPoolNV = (PFN_vkCreateSemaphoreSciSyncPoolNV)vk->vkGetDeviceProcAddr(device, "vkCreateSemaphoreSciSyncPoolNV");
+	vk->vkDestroySemaphoreSciSyncPoolNV = (PFN_vkDestroySemaphoreSciSyncPoolNV)vk->vkGetDeviceProcAddr(device, "vkDestroySemaphoreSciSyncPoolNV");
 #endif // defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_low_latency2)
-	vk->vkLatencySleepNV = (PFN_vkLatencySleepNV)vk->vkGetDeviceProcAddr(device, "vkLatencySleepNV");
 	vk->vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vk->vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandNV");
 	vk->vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vk->vkGetDeviceProcAddr(device, "vkSetLatencySleepModeNV");
+	vk->vkLatencySleepNV = (PFN_vkLatencySleepNV)vk->vkGetDeviceProcAddr(device, "vkLatencySleepNV");
 	vk->vkSetLatencyMarkerNV = (PFN_vkSetLatencyMarkerNV)vk->vkGetDeviceProcAddr(device, "vkSetLatencyMarkerNV");
 	vk->vkGetLatencyTimingsNV = (PFN_vkGetLatencyTimingsNV)vk->vkGetDeviceProcAddr(device, "vkGetLatencyTimingsNV");
 #endif // defined(VK_NV_low_latency2)
@@ -4663,6 +4711,13 @@ VKAPI_ATTR void vkGetPhysicalDeviceExternalTensorPropertiesARM(VkPhysicalDevice 
 	pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM(physicalDevice, pExternalTensorInfo, pExternalTensorProperties);
 }
 
+static PFN_vkGetTensorOpaqueCaptureDescriptorDataARM pfn_vkGetTensorOpaqueCaptureDescriptorDataARM;
+VKAPI_ATTR VkResult vkGetTensorOpaqueCaptureDescriptorDataARM(VkDevice device, const VkTensorCaptureDescriptorDataInfoARM * pInfo, void * pData)
+{
+	assert(pfn_vkGetTensorOpaqueCaptureDescriptorDataARM);
+	return pfn_vkGetTensorOpaqueCaptureDescriptorDataARM(device, pInfo, pData);
+}
+
 static PFN_vkGetDeviceTensorMemoryRequirementsARM pfn_vkGetDeviceTensorMemoryRequirementsARM;
 VKAPI_ATTR void vkGetDeviceTensorMemoryRequirementsARM(VkDevice device, const VkDeviceTensorMemoryRequirementsARM * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
 {
@@ -4689,13 +4744,6 @@ VKAPI_ATTR void vkCmdCopyTensorARM(VkCommandBuffer commandBuffer, const VkCopyTe
 {
 	assert(pfn_vkCmdCopyTensorARM);
 	pfn_vkCmdCopyTensorARM(commandBuffer, pCopyTensorInfo);
-}
-
-static PFN_vkGetTensorOpaqueCaptureDescriptorDataARM pfn_vkGetTensorOpaqueCaptureDescriptorDataARM;
-VKAPI_ATTR VkResult vkGetTensorOpaqueCaptureDescriptorDataARM(VkDevice device, const VkTensorCaptureDescriptorDataInfoARM * pInfo, void * pData)
-{
-	assert(pfn_vkGetTensorOpaqueCaptureDescriptorDataARM);
-	return pfn_vkGetTensorOpaqueCaptureDescriptorDataARM(device, pInfo, pData);
 }
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
@@ -5152,18 +5200,18 @@ VKAPI_ATTR void vkUpdateIndirectExecutionSetPipelineEXT(VkDevice device, VkIndir
 	pfn_vkUpdateIndirectExecutionSetPipelineEXT(device, indirectExecutionSet, executionSetWriteCount, pExecutionSetWrites);
 }
 
-static PFN_vkGetGeneratedCommandsMemoryRequirementsEXT pfn_vkGetGeneratedCommandsMemoryRequirementsEXT;
-VKAPI_ATTR void vkGetGeneratedCommandsMemoryRequirementsEXT(VkDevice device, const VkGeneratedCommandsMemoryRequirementsInfoEXT * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
-{
-	assert(pfn_vkGetGeneratedCommandsMemoryRequirementsEXT);
-	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT(device, pInfo, pMemoryRequirements);
-}
-
 static PFN_vkCmdExecuteGeneratedCommandsEXT pfn_vkCmdExecuteGeneratedCommandsEXT;
 VKAPI_ATTR void vkCmdExecuteGeneratedCommandsEXT(VkCommandBuffer commandBuffer, VkBool32 isPreprocessed, const VkGeneratedCommandsInfoEXT * pGeneratedCommandsInfo)
 {
 	assert(pfn_vkCmdExecuteGeneratedCommandsEXT);
 	pfn_vkCmdExecuteGeneratedCommandsEXT(commandBuffer, isPreprocessed, pGeneratedCommandsInfo);
+}
+
+static PFN_vkGetGeneratedCommandsMemoryRequirementsEXT pfn_vkGetGeneratedCommandsMemoryRequirementsEXT;
+VKAPI_ATTR void vkGetGeneratedCommandsMemoryRequirementsEXT(VkDevice device, const VkGeneratedCommandsMemoryRequirementsInfoEXT * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetGeneratedCommandsMemoryRequirementsEXT);
+	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT(device, pInfo, pMemoryRequirements);
 }
 
 static PFN_vkCreateIndirectExecutionSetEXT pfn_vkCreateIndirectExecutionSetEXT;
@@ -5532,6 +5580,13 @@ VKAPI_ATTR void vkCmdSetRasterizationStreamEXT(VkCommandBuffer commandBuffer, ui
 	pfn_vkCmdSetRasterizationStreamEXT(commandBuffer, rasterizationStream);
 }
 
+static PFN_vkCmdSetTessellationDomainOriginEXT pfn_vkCmdSetTessellationDomainOriginEXT;
+VKAPI_ATTR void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin)
+{
+	assert(pfn_vkCmdSetTessellationDomainOriginEXT);
+	pfn_vkCmdSetTessellationDomainOriginEXT(commandBuffer, domainOrigin);
+}
+
 static PFN_vkCmdSetColorBlendEquationEXT pfn_vkCmdSetColorBlendEquationEXT;
 VKAPI_ATTR void vkCmdSetColorBlendEquationEXT(VkCommandBuffer commandBuffer, uint32_t firstAttachment, uint32_t attachmentCount, const VkColorBlendEquationEXT * pColorBlendEquations)
 {
@@ -5558,13 +5613,6 @@ VKAPI_ATTR void vkCmdSetColorBlendEnableEXT(VkCommandBuffer commandBuffer, uint3
 {
 	assert(pfn_vkCmdSetColorBlendEnableEXT);
 	pfn_vkCmdSetColorBlendEnableEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendEnables);
-}
-
-static PFN_vkCmdSetTessellationDomainOriginEXT pfn_vkCmdSetTessellationDomainOriginEXT;
-VKAPI_ATTR void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin)
-{
-	assert(pfn_vkCmdSetTessellationDomainOriginEXT);
-	pfn_vkCmdSetTessellationDomainOriginEXT(commandBuffer, domainOrigin);
 }
 
 static PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT;
@@ -6056,18 +6104,18 @@ VKAPI_ATTR VkResult vkGetShaderBinaryDataEXT(VkDevice device, VkShaderEXT shader
 	return pfn_vkGetShaderBinaryDataEXT(device, shader, pDataSize, pData);
 }
 
-static PFN_vkCmdBindShadersEXT pfn_vkCmdBindShadersEXT;
-VKAPI_ATTR void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, uint32_t stageCount, const VkShaderStageFlagBits * pStages, const VkShaderEXT * pShaders)
-{
-	assert(pfn_vkCmdBindShadersEXT);
-	pfn_vkCmdBindShadersEXT(commandBuffer, stageCount, pStages, pShaders);
-}
-
 static PFN_vkCreateShadersEXT pfn_vkCreateShadersEXT;
 VKAPI_ATTR VkResult vkCreateShadersEXT(VkDevice device, uint32_t createInfoCount, const VkShaderCreateInfoEXT * pCreateInfos, const VkAllocationCallbacks * pAllocator, VkShaderEXT * pShaders)
 {
 	assert(pfn_vkCreateShadersEXT);
 	return pfn_vkCreateShadersEXT(device, createInfoCount, pCreateInfos, pAllocator, pShaders);
+}
+
+static PFN_vkCmdBindShadersEXT pfn_vkCmdBindShadersEXT;
+VKAPI_ATTR void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, uint32_t stageCount, const VkShaderStageFlagBits * pStages, const VkShaderEXT * pShaders)
+{
+	assert(pfn_vkCmdBindShadersEXT);
+	pfn_vkCmdBindShadersEXT(commandBuffer, stageCount, pStages, pShaders);
 }
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
@@ -6726,6 +6774,162 @@ VKAPI_ATTR void vkCmdPushDescriptorSetWithTemplateKHR(VkCommandBuffer commandBuf
 	pfn_vkCmdPushDescriptorSetWithTemplateKHR(commandBuffer, descriptorUpdateTemplate, layout, set, pData);
 }
 #endif // defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_device_address_commands)
+
+static PFN_vkCmdBindVertexBuffers3KHR pfn_vkCmdBindVertexBuffers3KHR;
+VKAPI_ATTR void vkCmdBindVertexBuffers3KHR(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, const VkBindVertexBuffer3InfoKHR * pBindingInfos)
+{
+	assert(pfn_vkCmdBindVertexBuffers3KHR);
+	pfn_vkCmdBindVertexBuffers3KHR(commandBuffer, firstBinding, bindingCount, pBindingInfos);
+}
+
+static PFN_vkCmdDrawIndexedIndirect2KHR pfn_vkCmdDrawIndexedIndirect2KHR;
+VKAPI_ATTR void vkCmdDrawIndexedIndirect2KHR(VkCommandBuffer commandBuffer, const VkDrawIndirect2InfoKHR * pInfo)
+{
+	assert(pfn_vkCmdDrawIndexedIndirect2KHR);
+	pfn_vkCmdDrawIndexedIndirect2KHR(commandBuffer, pInfo);
+}
+
+static PFN_vkCmdCopyMemoryToImageKHR pfn_vkCmdCopyMemoryToImageKHR;
+VKAPI_ATTR void vkCmdCopyMemoryToImageKHR(VkCommandBuffer commandBuffer, const VkCopyDeviceMemoryImageInfoKHR * pCopyMemoryInfo)
+{
+	assert(pfn_vkCmdCopyMemoryToImageKHR);
+	pfn_vkCmdCopyMemoryToImageKHR(commandBuffer, pCopyMemoryInfo);
+}
+
+static PFN_vkCmdDrawIndexedIndirectCount2KHR pfn_vkCmdDrawIndexedIndirectCount2KHR;
+VKAPI_ATTR void vkCmdDrawIndexedIndirectCount2KHR(VkCommandBuffer commandBuffer, const VkDrawIndirectCount2InfoKHR * pInfo)
+{
+	assert(pfn_vkCmdDrawIndexedIndirectCount2KHR);
+	pfn_vkCmdDrawIndexedIndirectCount2KHR(commandBuffer, pInfo);
+}
+
+static PFN_vkCmdDrawMeshTasksIndirectCount2EXT pfn_vkCmdDrawMeshTasksIndirectCount2EXT;
+VKAPI_ATTR void vkCmdDrawMeshTasksIndirectCount2EXT(VkCommandBuffer commandBuffer, const VkDrawIndirectCount2InfoKHR * pInfo)
+{
+	assert(pfn_vkCmdDrawMeshTasksIndirectCount2EXT);
+	pfn_vkCmdDrawMeshTasksIndirectCount2EXT(commandBuffer, pInfo);
+}
+
+static PFN_vkCmdDrawIndirect2KHR pfn_vkCmdDrawIndirect2KHR;
+VKAPI_ATTR void vkCmdDrawIndirect2KHR(VkCommandBuffer commandBuffer, const VkDrawIndirect2InfoKHR * pInfo)
+{
+	assert(pfn_vkCmdDrawIndirect2KHR);
+	pfn_vkCmdDrawIndirect2KHR(commandBuffer, pInfo);
+}
+
+static PFN_vkCmdBindTransformFeedbackBuffers2EXT pfn_vkCmdBindTransformFeedbackBuffers2EXT;
+VKAPI_ATTR void vkCmdBindTransformFeedbackBuffers2EXT(VkCommandBuffer commandBuffer, uint32_t firstBinding, uint32_t bindingCount, const VkBindTransformFeedbackBuffer2InfoEXT * pBindingInfos)
+{
+	assert(pfn_vkCmdBindTransformFeedbackBuffers2EXT);
+	pfn_vkCmdBindTransformFeedbackBuffers2EXT(commandBuffer, firstBinding, bindingCount, pBindingInfos);
+}
+
+static PFN_vkCmdDrawIndirectByteCount2EXT pfn_vkCmdDrawIndirectByteCount2EXT;
+VKAPI_ATTR void vkCmdDrawIndirectByteCount2EXT(VkCommandBuffer commandBuffer, uint32_t instanceCount, uint32_t firstInstance, const VkBindTransformFeedbackBuffer2InfoEXT * pCounterInfo, uint32_t counterOffset, uint32_t vertexStride)
+{
+	assert(pfn_vkCmdDrawIndirectByteCount2EXT);
+	pfn_vkCmdDrawIndirectByteCount2EXT(commandBuffer, instanceCount, firstInstance, pCounterInfo, counterOffset, vertexStride);
+}
+
+static PFN_vkCmdBindIndexBuffer3KHR pfn_vkCmdBindIndexBuffer3KHR;
+VKAPI_ATTR void vkCmdBindIndexBuffer3KHR(VkCommandBuffer commandBuffer, const VkBindIndexBuffer3InfoKHR * pInfo)
+{
+	assert(pfn_vkCmdBindIndexBuffer3KHR);
+	pfn_vkCmdBindIndexBuffer3KHR(commandBuffer, pInfo);
+}
+
+static PFN_vkCmdDispatchIndirect2KHR pfn_vkCmdDispatchIndirect2KHR;
+VKAPI_ATTR void vkCmdDispatchIndirect2KHR(VkCommandBuffer commandBuffer, const VkDispatchIndirect2InfoKHR * pInfo)
+{
+	assert(pfn_vkCmdDispatchIndirect2KHR);
+	pfn_vkCmdDispatchIndirect2KHR(commandBuffer, pInfo);
+}
+
+static PFN_vkCmdCopyMemoryKHR pfn_vkCmdCopyMemoryKHR;
+VKAPI_ATTR void vkCmdCopyMemoryKHR(VkCommandBuffer commandBuffer, const VkCopyDeviceMemoryInfoKHR * pCopyMemoryInfo)
+{
+	assert(pfn_vkCmdCopyMemoryKHR);
+	pfn_vkCmdCopyMemoryKHR(commandBuffer, pCopyMemoryInfo);
+}
+
+static PFN_vkCmdCopyImageToMemoryKHR pfn_vkCmdCopyImageToMemoryKHR;
+VKAPI_ATTR void vkCmdCopyImageToMemoryKHR(VkCommandBuffer commandBuffer, const VkCopyDeviceMemoryImageInfoKHR * pCopyMemoryInfo)
+{
+	assert(pfn_vkCmdCopyImageToMemoryKHR);
+	pfn_vkCmdCopyImageToMemoryKHR(commandBuffer, pCopyMemoryInfo);
+}
+
+static PFN_vkCmdUpdateMemoryKHR pfn_vkCmdUpdateMemoryKHR;
+VKAPI_ATTR void vkCmdUpdateMemoryKHR(VkCommandBuffer commandBuffer, const VkDeviceAddressRangeKHR * pDstRange, VkAddressCommandFlagsKHR dstFlags, VkDeviceSize dataSize, const void * pData)
+{
+	assert(pfn_vkCmdUpdateMemoryKHR);
+	pfn_vkCmdUpdateMemoryKHR(commandBuffer, pDstRange, dstFlags, dataSize, pData);
+}
+
+static PFN_vkCmdFillMemoryKHR pfn_vkCmdFillMemoryKHR;
+VKAPI_ATTR void vkCmdFillMemoryKHR(VkCommandBuffer commandBuffer, const VkDeviceAddressRangeKHR * pDstRange, VkAddressCommandFlagsKHR dstFlags, uint32_t data)
+{
+	assert(pfn_vkCmdFillMemoryKHR);
+	pfn_vkCmdFillMemoryKHR(commandBuffer, pDstRange, dstFlags, data);
+}
+
+static PFN_vkCmdCopyQueryPoolResultsToMemoryKHR pfn_vkCmdCopyQueryPoolResultsToMemoryKHR;
+VKAPI_ATTR void vkCmdCopyQueryPoolResultsToMemoryKHR(VkCommandBuffer commandBuffer, VkQueryPool queryPool, uint32_t firstQuery, uint32_t queryCount, const VkStridedDeviceAddressRangeKHR * pDstRange, VkAddressCommandFlagsKHR dstFlags, VkQueryResultFlags queryResultFlags)
+{
+	assert(pfn_vkCmdCopyQueryPoolResultsToMemoryKHR);
+	pfn_vkCmdCopyQueryPoolResultsToMemoryKHR(commandBuffer, queryPool, firstQuery, queryCount, pDstRange, dstFlags, queryResultFlags);
+}
+
+static PFN_vkCmdDrawIndirectCount2KHR pfn_vkCmdDrawIndirectCount2KHR;
+VKAPI_ATTR void vkCmdDrawIndirectCount2KHR(VkCommandBuffer commandBuffer, const VkDrawIndirectCount2InfoKHR * pInfo)
+{
+	assert(pfn_vkCmdDrawIndirectCount2KHR);
+	pfn_vkCmdDrawIndirectCount2KHR(commandBuffer, pInfo);
+}
+
+static PFN_vkCmdBeginConditionalRendering2EXT pfn_vkCmdBeginConditionalRendering2EXT;
+VKAPI_ATTR void vkCmdBeginConditionalRendering2EXT(VkCommandBuffer commandBuffer, const VkConditionalRenderingBeginInfo2EXT * pConditionalRenderingBegin)
+{
+	assert(pfn_vkCmdBeginConditionalRendering2EXT);
+	pfn_vkCmdBeginConditionalRendering2EXT(commandBuffer, pConditionalRenderingBegin);
+}
+
+static PFN_vkCmdBeginTransformFeedback2EXT pfn_vkCmdBeginTransformFeedback2EXT;
+VKAPI_ATTR void vkCmdBeginTransformFeedback2EXT(VkCommandBuffer commandBuffer, uint32_t firstCounterRange, uint32_t counterRangeCount, const VkBindTransformFeedbackBuffer2InfoEXT * pCounterInfos)
+{
+	assert(pfn_vkCmdBeginTransformFeedback2EXT);
+	pfn_vkCmdBeginTransformFeedback2EXT(commandBuffer, firstCounterRange, counterRangeCount, pCounterInfos);
+}
+
+static PFN_vkCmdEndTransformFeedback2EXT pfn_vkCmdEndTransformFeedback2EXT;
+VKAPI_ATTR void vkCmdEndTransformFeedback2EXT(VkCommandBuffer commandBuffer, uint32_t firstCounterRange, uint32_t counterRangeCount, const VkBindTransformFeedbackBuffer2InfoEXT * pCounterInfos)
+{
+	assert(pfn_vkCmdEndTransformFeedback2EXT);
+	pfn_vkCmdEndTransformFeedback2EXT(commandBuffer, firstCounterRange, counterRangeCount, pCounterInfos);
+}
+
+static PFN_vkCmdDrawMeshTasksIndirect2EXT pfn_vkCmdDrawMeshTasksIndirect2EXT;
+VKAPI_ATTR void vkCmdDrawMeshTasksIndirect2EXT(VkCommandBuffer commandBuffer, const VkDrawIndirect2InfoKHR * pInfo)
+{
+	assert(pfn_vkCmdDrawMeshTasksIndirect2EXT);
+	pfn_vkCmdDrawMeshTasksIndirect2EXT(commandBuffer, pInfo);
+}
+
+static PFN_vkCmdWriteMarkerToMemoryAMD pfn_vkCmdWriteMarkerToMemoryAMD;
+VKAPI_ATTR void vkCmdWriteMarkerToMemoryAMD(VkCommandBuffer commandBuffer, const VkMemoryMarkerInfoAMD * pInfo)
+{
+	assert(pfn_vkCmdWriteMarkerToMemoryAMD);
+	pfn_vkCmdWriteMarkerToMemoryAMD(commandBuffer, pInfo);
+}
+
+static PFN_vkCreateAccelerationStructure2KHR pfn_vkCreateAccelerationStructure2KHR;
+VKAPI_ATTR VkResult vkCreateAccelerationStructure2KHR(VkDevice device, const VkAccelerationStructureCreateInfo2KHR * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkAccelerationStructureKHR * pAccelerationStructure)
+{
+	assert(pfn_vkCreateAccelerationStructure2KHR);
+	return pfn_vkCreateAccelerationStructure2KHR(device, pCreateInfo, pAllocator, pAccelerationStructure);
+}
+#endif // defined(VK_KHR_device_address_commands)
 #if defined(VK_KHR_device_group)
 
 static PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR;
@@ -7352,13 +7556,6 @@ VKAPI_ATTR void vkReleaseProfilingLockKHR(VkDevice device)
 #endif // defined(VK_KHR_performance_query)
 #if defined(VK_KHR_pipeline_binary)
 
-static PFN_vkGetPipelineBinaryDataKHR pfn_vkGetPipelineBinaryDataKHR;
-VKAPI_ATTR VkResult vkGetPipelineBinaryDataKHR(VkDevice device, const VkPipelineBinaryDataInfoKHR * pInfo, VkPipelineBinaryKeyKHR * pPipelineBinaryKey, size_t * pPipelineBinaryDataSize, void * pPipelineBinaryData)
-{
-	assert(pfn_vkGetPipelineBinaryDataKHR);
-	return pfn_vkGetPipelineBinaryDataKHR(device, pInfo, pPipelineBinaryKey, pPipelineBinaryDataSize, pPipelineBinaryData);
-}
-
 static PFN_vkCreatePipelineBinariesKHR pfn_vkCreatePipelineBinariesKHR;
 VKAPI_ATTR VkResult vkCreatePipelineBinariesKHR(VkDevice device, const VkPipelineBinaryCreateInfoKHR * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkPipelineBinaryHandlesInfoKHR * pBinaries)
 {
@@ -7378,6 +7575,13 @@ VKAPI_ATTR VkResult vkGetPipelineKeyKHR(VkDevice device, const VkPipelineCreateI
 {
 	assert(pfn_vkGetPipelineKeyKHR);
 	return pfn_vkGetPipelineKeyKHR(device, pPipelineCreateInfo, pPipelineKey);
+}
+
+static PFN_vkGetPipelineBinaryDataKHR pfn_vkGetPipelineBinaryDataKHR;
+VKAPI_ATTR VkResult vkGetPipelineBinaryDataKHR(VkDevice device, const VkPipelineBinaryDataInfoKHR * pInfo, VkPipelineBinaryKeyKHR * pPipelineBinaryKey, size_t * pPipelineBinaryDataSize, void * pPipelineBinaryData)
+{
+	assert(pfn_vkGetPipelineBinaryDataKHR);
+	return pfn_vkGetPipelineBinaryDataKHR(device, pInfo, pPipelineBinaryKey, pPipelineBinaryDataSize, pPipelineBinaryData);
 }
 
 static PFN_vkReleaseCapturedPipelineDataKHR pfn_vkReleaseCapturedPipelineDataKHR;
@@ -8018,18 +8222,18 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsProper
 #endif // defined(VK_NV_cooperative_matrix2)
 #if defined(VK_NV_cooperative_vector)
 
-static PFN_vkCmdConvertCooperativeVectorMatrixNV pfn_vkCmdConvertCooperativeVectorMatrixNV;
-VKAPI_ATTR void vkCmdConvertCooperativeVectorMatrixNV(VkCommandBuffer commandBuffer, uint32_t infoCount, const VkConvertCooperativeVectorMatrixInfoNV * pInfos)
-{
-	assert(pfn_vkCmdConvertCooperativeVectorMatrixNV);
-	pfn_vkCmdConvertCooperativeVectorMatrixNV(commandBuffer, infoCount, pInfos);
-}
-
 static PFN_vkConvertCooperativeVectorMatrixNV pfn_vkConvertCooperativeVectorMatrixNV;
 VKAPI_ATTR VkResult vkConvertCooperativeVectorMatrixNV(VkDevice device, const VkConvertCooperativeVectorMatrixInfoNV * pInfo)
 {
 	assert(pfn_vkConvertCooperativeVectorMatrixNV);
 	return pfn_vkConvertCooperativeVectorMatrixNV(device, pInfo);
+}
+
+static PFN_vkCmdConvertCooperativeVectorMatrixNV pfn_vkCmdConvertCooperativeVectorMatrixNV;
+VKAPI_ATTR void vkCmdConvertCooperativeVectorMatrixNV(VkCommandBuffer commandBuffer, uint32_t infoCount, const VkConvertCooperativeVectorMatrixInfoNV * pInfos)
+{
+	assert(pfn_vkCmdConvertCooperativeVectorMatrixNV);
+	pfn_vkCmdConvertCooperativeVectorMatrixNV(commandBuffer, infoCount, pInfos);
 }
 
 static PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV pfn_vkGetPhysicalDeviceCooperativeVectorPropertiesNV;
@@ -8326,18 +8530,18 @@ VKAPI_ATTR VkResult vkImportFenceSciSyncObjNV(VkDevice device, const VkImportFen
 #endif // defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_external_sci_sync2)
 
-static PFN_vkDestroySemaphoreSciSyncPoolNV pfn_vkDestroySemaphoreSciSyncPoolNV;
-VKAPI_ATTR void vkDestroySemaphoreSciSyncPoolNV(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, const VkAllocationCallbacks * pAllocator)
-{
-	assert(pfn_vkDestroySemaphoreSciSyncPoolNV);
-	pfn_vkDestroySemaphoreSciSyncPoolNV(device, semaphorePool, pAllocator);
-}
-
 static PFN_vkCreateSemaphoreSciSyncPoolNV pfn_vkCreateSemaphoreSciSyncPoolNV;
 VKAPI_ATTR VkResult vkCreateSemaphoreSciSyncPoolNV(VkDevice device, const VkSemaphoreSciSyncPoolCreateInfoNV * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSemaphoreSciSyncPoolNV * pSemaphorePool)
 {
 	assert(pfn_vkCreateSemaphoreSciSyncPoolNV);
 	return pfn_vkCreateSemaphoreSciSyncPoolNV(device, pCreateInfo, pAllocator, pSemaphorePool);
+}
+
+static PFN_vkDestroySemaphoreSciSyncPoolNV pfn_vkDestroySemaphoreSciSyncPoolNV;
+VKAPI_ATTR void vkDestroySemaphoreSciSyncPoolNV(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroySemaphoreSciSyncPoolNV);
+	pfn_vkDestroySemaphoreSciSyncPoolNV(device, semaphorePool, pAllocator);
 }
 #endif // defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_fragment_shading_rate_enums)
@@ -8351,13 +8555,6 @@ VKAPI_ATTR void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer,
 #endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_low_latency2)
 
-static PFN_vkLatencySleepNV pfn_vkLatencySleepNV;
-VKAPI_ATTR VkResult vkLatencySleepNV(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepInfoNV * pSleepInfo)
-{
-	assert(pfn_vkLatencySleepNV);
-	return pfn_vkLatencySleepNV(device, swapchain, pSleepInfo);
-}
-
 static PFN_vkQueueNotifyOutOfBandNV pfn_vkQueueNotifyOutOfBandNV;
 VKAPI_ATTR void vkQueueNotifyOutOfBandNV(VkQueue queue, const VkOutOfBandQueueTypeInfoNV * pQueueTypeInfo)
 {
@@ -8370,6 +8567,13 @@ VKAPI_ATTR VkResult vkSetLatencySleepModeNV(VkDevice device, VkSwapchainKHR swap
 {
 	assert(pfn_vkSetLatencySleepModeNV);
 	return pfn_vkSetLatencySleepModeNV(device, swapchain, pSleepModeInfo);
+}
+
+static PFN_vkLatencySleepNV pfn_vkLatencySleepNV;
+VKAPI_ATTR VkResult vkLatencySleepNV(VkDevice device, VkSwapchainKHR swapchain, const VkLatencySleepInfoNV * pSleepInfo)
+{
+	assert(pfn_vkLatencySleepNV);
+	return pfn_vkLatencySleepNV(device, swapchain, pSleepInfo);
 }
 
 static PFN_vkSetLatencyMarkerNV pfn_vkSetLatencyMarkerNV;
@@ -9192,11 +9396,11 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vkGetInstanceProcAddr(instance, "vkBindTensorMemoryARM");
 	pfn_vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetTensorMemoryRequirementsARM");
 	pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM = (PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM");
+	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
 	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
 	pfn_vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vkGetInstanceProcAddr(instance, "vkDestroyTensorViewARM");
 	pfn_vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vkGetInstanceProcAddr(instance, "vkCmdCopyTensorARM");
-	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
 	pfn_vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
@@ -9291,8 +9495,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetShaderEXT");
 	pfn_vkCmdPreprocessGeneratedCommandsEXT = (PFN_vkCmdPreprocessGeneratedCommandsEXT)vkGetInstanceProcAddr(instance, "vkCmdPreprocessGeneratedCommandsEXT");
 	pfn_vkUpdateIndirectExecutionSetPipelineEXT = (PFN_vkUpdateIndirectExecutionSetPipelineEXT)vkGetInstanceProcAddr(instance, "vkUpdateIndirectExecutionSetPipelineEXT");
-	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	pfn_vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vkGetInstanceProcAddr(instance, "vkCmdExecuteGeneratedCommandsEXT");
+	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vkGetInstanceProcAddr(instance, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	pfn_vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vkGetInstanceProcAddr(instance, "vkCreateIndirectExecutionSetEXT");
 	pfn_vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vkGetInstanceProcAddr(instance, "vkDestroyIndirectExecutionSetEXT");
 #endif // defined(VK_EXT_device_generated_commands)
@@ -9359,11 +9563,11 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToOneEnableEXT");
 	pfn_vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportWScalingEnableNV");
 	pfn_vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vkGetInstanceProcAddr(instance, "vkCmdSetRasterizationStreamEXT");
+	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEquationEXT");
 	pfn_vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vkGetInstanceProcAddr(instance, "vkCmdSetSampleMaskEXT");
 	pfn_vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetAlphaToCoverageEnableEXT");
 	pfn_vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vkGetInstanceProcAddr(instance, "vkCmdSetColorBlendEnableEXT");
-	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetInstanceProcAddr(instance, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vkGetInstanceProcAddr(instance, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
 	pfn_vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vkGetInstanceProcAddr(instance, "vkCmdSetViewportSwizzleNV");
 	pfn_vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vkGetInstanceProcAddr(instance, "vkCmdSetCoverageToColorEnableNV");
@@ -9475,8 +9679,8 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_EXT_shader_object)
 	pfn_vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vkGetInstanceProcAddr(instance, "vkDestroyShaderEXT");
 	pfn_vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vkGetInstanceProcAddr(instance, "vkGetShaderBinaryDataEXT");
-	pfn_vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindShadersEXT");
 	pfn_vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vkGetInstanceProcAddr(instance, "vkCreateShadersEXT");
+	pfn_vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
 	pfn_vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vkGetInstanceProcAddr(instance, "vkCmdSetVertexInputEXT");
@@ -9618,6 +9822,30 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetWithTemplateKHR");
 #endif // defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_device_address_commands)
+	pfn_vkCmdBindVertexBuffers3KHR = (PFN_vkCmdBindVertexBuffers3KHR)vkGetInstanceProcAddr(instance, "vkCmdBindVertexBuffers3KHR");
+	pfn_vkCmdDrawIndexedIndirect2KHR = (PFN_vkCmdDrawIndexedIndirect2KHR)vkGetInstanceProcAddr(instance, "vkCmdDrawIndexedIndirect2KHR");
+	pfn_vkCmdCopyMemoryToImageKHR = (PFN_vkCmdCopyMemoryToImageKHR)vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryToImageKHR");
+	pfn_vkCmdDrawIndexedIndirectCount2KHR = (PFN_vkCmdDrawIndexedIndirectCount2KHR)vkGetInstanceProcAddr(instance, "vkCmdDrawIndexedIndirectCount2KHR");
+	pfn_vkCmdDrawMeshTasksIndirectCount2EXT = (PFN_vkCmdDrawMeshTasksIndirectCount2EXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirectCount2EXT");
+	pfn_vkCmdDrawIndirect2KHR = (PFN_vkCmdDrawIndirect2KHR)vkGetInstanceProcAddr(instance, "vkCmdDrawIndirect2KHR");
+	pfn_vkCmdBindTransformFeedbackBuffers2EXT = (PFN_vkCmdBindTransformFeedbackBuffers2EXT)vkGetInstanceProcAddr(instance, "vkCmdBindTransformFeedbackBuffers2EXT");
+	pfn_vkCmdDrawIndirectByteCount2EXT = (PFN_vkCmdDrawIndirectByteCount2EXT)vkGetInstanceProcAddr(instance, "vkCmdDrawIndirectByteCount2EXT");
+	pfn_vkCmdBindIndexBuffer3KHR = (PFN_vkCmdBindIndexBuffer3KHR)vkGetInstanceProcAddr(instance, "vkCmdBindIndexBuffer3KHR");
+	pfn_vkCmdDispatchIndirect2KHR = (PFN_vkCmdDispatchIndirect2KHR)vkGetInstanceProcAddr(instance, "vkCmdDispatchIndirect2KHR");
+	pfn_vkCmdCopyMemoryKHR = (PFN_vkCmdCopyMemoryKHR)vkGetInstanceProcAddr(instance, "vkCmdCopyMemoryKHR");
+	pfn_vkCmdCopyImageToMemoryKHR = (PFN_vkCmdCopyImageToMemoryKHR)vkGetInstanceProcAddr(instance, "vkCmdCopyImageToMemoryKHR");
+	pfn_vkCmdUpdateMemoryKHR = (PFN_vkCmdUpdateMemoryKHR)vkGetInstanceProcAddr(instance, "vkCmdUpdateMemoryKHR");
+	pfn_vkCmdFillMemoryKHR = (PFN_vkCmdFillMemoryKHR)vkGetInstanceProcAddr(instance, "vkCmdFillMemoryKHR");
+	pfn_vkCmdCopyQueryPoolResultsToMemoryKHR = (PFN_vkCmdCopyQueryPoolResultsToMemoryKHR)vkGetInstanceProcAddr(instance, "vkCmdCopyQueryPoolResultsToMemoryKHR");
+	pfn_vkCmdDrawIndirectCount2KHR = (PFN_vkCmdDrawIndirectCount2KHR)vkGetInstanceProcAddr(instance, "vkCmdDrawIndirectCount2KHR");
+	pfn_vkCmdBeginConditionalRendering2EXT = (PFN_vkCmdBeginConditionalRendering2EXT)vkGetInstanceProcAddr(instance, "vkCmdBeginConditionalRendering2EXT");
+	pfn_vkCmdBeginTransformFeedback2EXT = (PFN_vkCmdBeginTransformFeedback2EXT)vkGetInstanceProcAddr(instance, "vkCmdBeginTransformFeedback2EXT");
+	pfn_vkCmdEndTransformFeedback2EXT = (PFN_vkCmdEndTransformFeedback2EXT)vkGetInstanceProcAddr(instance, "vkCmdEndTransformFeedback2EXT");
+	pfn_vkCmdDrawMeshTasksIndirect2EXT = (PFN_vkCmdDrawMeshTasksIndirect2EXT)vkGetInstanceProcAddr(instance, "vkCmdDrawMeshTasksIndirect2EXT");
+	pfn_vkCmdWriteMarkerToMemoryAMD = (PFN_vkCmdWriteMarkerToMemoryAMD)vkGetInstanceProcAddr(instance, "vkCmdWriteMarkerToMemoryAMD");
+	pfn_vkCreateAccelerationStructure2KHR = (PFN_vkCreateAccelerationStructure2KHR)vkGetInstanceProcAddr(instance, "vkCreateAccelerationStructure2KHR");
+#endif // defined(VK_KHR_device_address_commands)
 #if defined(VK_KHR_device_group)
 	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	pfn_vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vkGetInstanceProcAddr(instance, "vkCmdSetDeviceMaskKHR");
@@ -9763,10 +9991,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vkGetInstanceProcAddr(instance, "vkReleaseProfilingLockKHR");
 #endif // defined(VK_KHR_performance_query)
 #if defined(VK_KHR_pipeline_binary)
-	pfn_vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineBinaryDataKHR");
 	pfn_vkCreatePipelineBinariesKHR = (PFN_vkCreatePipelineBinariesKHR)vkGetInstanceProcAddr(instance, "vkCreatePipelineBinariesKHR");
 	pfn_vkDestroyPipelineBinaryKHR = (PFN_vkDestroyPipelineBinaryKHR)vkGetInstanceProcAddr(instance, "vkDestroyPipelineBinaryKHR");
 	pfn_vkGetPipelineKeyKHR = (PFN_vkGetPipelineKeyKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineKeyKHR");
+	pfn_vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vkGetInstanceProcAddr(instance, "vkGetPipelineBinaryDataKHR");
 	pfn_vkReleaseCapturedPipelineDataKHR = (PFN_vkReleaseCapturedPipelineDataKHR)vkGetInstanceProcAddr(instance, "vkReleaseCapturedPipelineDataKHR");
 #endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
@@ -9913,8 +10141,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV");
 #endif // defined(VK_NV_cooperative_matrix2)
 #if defined(VK_NV_cooperative_vector)
-	pfn_vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vkGetInstanceProcAddr(instance, "vkCmdConvertCooperativeVectorMatrixNV");
 	pfn_vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vkGetInstanceProcAddr(instance, "vkConvertCooperativeVectorMatrixNV");
+	pfn_vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vkGetInstanceProcAddr(instance, "vkCmdConvertCooperativeVectorMatrixNV");
 	pfn_vkGetPhysicalDeviceCooperativeVectorPropertiesNV = (PFN_vkGetPhysicalDeviceCooperativeVectorPropertiesNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeVectorPropertiesNV");
 #endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
@@ -9981,16 +10209,16 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkImportFenceSciSyncObjNV = (PFN_vkImportFenceSciSyncObjNV)vkGetInstanceProcAddr(instance, "vkImportFenceSciSyncObjNV");
 #endif // defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_external_sci_sync2)
-	pfn_vkDestroySemaphoreSciSyncPoolNV = (PFN_vkDestroySemaphoreSciSyncPoolNV)vkGetInstanceProcAddr(instance, "vkDestroySemaphoreSciSyncPoolNV");
 	pfn_vkCreateSemaphoreSciSyncPoolNV = (PFN_vkCreateSemaphoreSciSyncPoolNV)vkGetInstanceProcAddr(instance, "vkCreateSemaphoreSciSyncPoolNV");
+	pfn_vkDestroySemaphoreSciSyncPoolNV = (PFN_vkDestroySemaphoreSciSyncPoolNV)vkGetInstanceProcAddr(instance, "vkDestroySemaphoreSciSyncPoolNV");
 #endif // defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_low_latency2)
-	pfn_vkLatencySleepNV = (PFN_vkLatencySleepNV)vkGetInstanceProcAddr(instance, "vkLatencySleepNV");
 	pfn_vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandNV");
 	pfn_vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vkGetInstanceProcAddr(instance, "vkSetLatencySleepModeNV");
+	pfn_vkLatencySleepNV = (PFN_vkLatencySleepNV)vkGetInstanceProcAddr(instance, "vkLatencySleepNV");
 	pfn_vkSetLatencyMarkerNV = (PFN_vkSetLatencyMarkerNV)vkGetInstanceProcAddr(instance, "vkSetLatencyMarkerNV");
 	pfn_vkGetLatencyTimingsNV = (PFN_vkGetLatencyTimingsNV)vkGetInstanceProcAddr(instance, "vkGetLatencyTimingsNV");
 #endif // defined(VK_NV_low_latency2)
@@ -10460,11 +10688,11 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkDestroyTensorARM = (PFN_vkDestroyTensorARM)vkGetDeviceProcAddr(device, "vkDestroyTensorARM");
 	pfn_vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vkGetDeviceProcAddr(device, "vkBindTensorMemoryARM");
 	pfn_vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetTensorMemoryRequirementsARM");
+	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
 	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
 	pfn_vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vkGetDeviceProcAddr(device, "vkDestroyTensorViewARM");
 	pfn_vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vkGetDeviceProcAddr(device, "vkCmdCopyTensorARM");
-	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 	pfn_vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
@@ -10541,8 +10769,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkUpdateIndirectExecutionSetShaderEXT = (PFN_vkUpdateIndirectExecutionSetShaderEXT)vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetShaderEXT");
 	pfn_vkCmdPreprocessGeneratedCommandsEXT = (PFN_vkCmdPreprocessGeneratedCommandsEXT)vkGetDeviceProcAddr(device, "vkCmdPreprocessGeneratedCommandsEXT");
 	pfn_vkUpdateIndirectExecutionSetPipelineEXT = (PFN_vkUpdateIndirectExecutionSetPipelineEXT)vkGetDeviceProcAddr(device, "vkUpdateIndirectExecutionSetPipelineEXT");
-	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	pfn_vkCmdExecuteGeneratedCommandsEXT = (PFN_vkCmdExecuteGeneratedCommandsEXT)vkGetDeviceProcAddr(device, "vkCmdExecuteGeneratedCommandsEXT");
+	pfn_vkGetGeneratedCommandsMemoryRequirementsEXT = (PFN_vkGetGeneratedCommandsMemoryRequirementsEXT)vkGetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsEXT");
 	pfn_vkCreateIndirectExecutionSetEXT = (PFN_vkCreateIndirectExecutionSetEXT)vkGetDeviceProcAddr(device, "vkCreateIndirectExecutionSetEXT");
 	pfn_vkDestroyIndirectExecutionSetEXT = (PFN_vkDestroyIndirectExecutionSetEXT)vkGetDeviceProcAddr(device, "vkDestroyIndirectExecutionSetEXT");
 #endif // defined(VK_EXT_device_generated_commands)
@@ -10599,11 +10827,11 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdSetAlphaToOneEnableEXT = (PFN_vkCmdSetAlphaToOneEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAlphaToOneEnableEXT");
 	pfn_vkCmdSetViewportWScalingEnableNV = (PFN_vkCmdSetViewportWScalingEnableNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
 	pfn_vkCmdSetRasterizationStreamEXT = (PFN_vkCmdSetRasterizationStreamEXT)vkGetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
+	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetColorBlendEquationEXT = (PFN_vkCmdSetColorBlendEquationEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
 	pfn_vkCmdSetSampleMaskEXT = (PFN_vkCmdSetSampleMaskEXT)vkGetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
 	pfn_vkCmdSetAlphaToCoverageEnableEXT = (PFN_vkCmdSetAlphaToCoverageEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
 	pfn_vkCmdSetColorBlendEnableEXT = (PFN_vkCmdSetColorBlendEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetColorBlendEnableEXT");
-	pfn_vkCmdSetTessellationDomainOriginEXT = (PFN_vkCmdSetTessellationDomainOriginEXT)vkGetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
 	pfn_vkCmdSetExtraPrimitiveOverestimationSizeEXT = (PFN_vkCmdSetExtraPrimitiveOverestimationSizeEXT)vkGetDeviceProcAddr(device, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
 	pfn_vkCmdSetViewportSwizzleNV = (PFN_vkCmdSetViewportSwizzleNV)vkGetDeviceProcAddr(device, "vkCmdSetViewportSwizzleNV");
 	pfn_vkCmdSetCoverageToColorEnableNV = (PFN_vkCmdSetCoverageToColorEnableNV)vkGetDeviceProcAddr(device, "vkCmdSetCoverageToColorEnableNV");
@@ -10707,8 +10935,8 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_EXT_shader_object)
 	pfn_vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vkGetDeviceProcAddr(device, "vkDestroyShaderEXT");
 	pfn_vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vkGetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
-	pfn_vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vkGetDeviceProcAddr(device, "vkCmdBindShadersEXT");
 	pfn_vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vkGetDeviceProcAddr(device, "vkCreateShadersEXT");
+	pfn_vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vkGetDeviceProcAddr(device, "vkCmdBindShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
 	pfn_vkCmdSetVertexInputEXT = (PFN_vkCmdSetVertexInputEXT)vkGetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
@@ -10834,6 +11062,30 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
 	pfn_vkCmdPushDescriptorSetWithTemplateKHR = (PFN_vkCmdPushDescriptorSetWithTemplateKHR)vkGetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplateKHR");
 #endif // defined(VK_KHR_descriptor_update_template) || defined(VK_KHR_push_descriptor)
+#if defined(VK_KHR_device_address_commands)
+	pfn_vkCmdBindVertexBuffers3KHR = (PFN_vkCmdBindVertexBuffers3KHR)vkGetDeviceProcAddr(device, "vkCmdBindVertexBuffers3KHR");
+	pfn_vkCmdDrawIndexedIndirect2KHR = (PFN_vkCmdDrawIndexedIndirect2KHR)vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirect2KHR");
+	pfn_vkCmdCopyMemoryToImageKHR = (PFN_vkCmdCopyMemoryToImageKHR)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToImageKHR");
+	pfn_vkCmdDrawIndexedIndirectCount2KHR = (PFN_vkCmdDrawIndexedIndirectCount2KHR)vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCount2KHR");
+	pfn_vkCmdDrawMeshTasksIndirectCount2EXT = (PFN_vkCmdDrawMeshTasksIndirectCount2EXT)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirectCount2EXT");
+	pfn_vkCmdDrawIndirect2KHR = (PFN_vkCmdDrawIndirect2KHR)vkGetDeviceProcAddr(device, "vkCmdDrawIndirect2KHR");
+	pfn_vkCmdBindTransformFeedbackBuffers2EXT = (PFN_vkCmdBindTransformFeedbackBuffers2EXT)vkGetDeviceProcAddr(device, "vkCmdBindTransformFeedbackBuffers2EXT");
+	pfn_vkCmdDrawIndirectByteCount2EXT = (PFN_vkCmdDrawIndirectByteCount2EXT)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectByteCount2EXT");
+	pfn_vkCmdBindIndexBuffer3KHR = (PFN_vkCmdBindIndexBuffer3KHR)vkGetDeviceProcAddr(device, "vkCmdBindIndexBuffer3KHR");
+	pfn_vkCmdDispatchIndirect2KHR = (PFN_vkCmdDispatchIndirect2KHR)vkGetDeviceProcAddr(device, "vkCmdDispatchIndirect2KHR");
+	pfn_vkCmdCopyMemoryKHR = (PFN_vkCmdCopyMemoryKHR)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryKHR");
+	pfn_vkCmdCopyImageToMemoryKHR = (PFN_vkCmdCopyImageToMemoryKHR)vkGetDeviceProcAddr(device, "vkCmdCopyImageToMemoryKHR");
+	pfn_vkCmdUpdateMemoryKHR = (PFN_vkCmdUpdateMemoryKHR)vkGetDeviceProcAddr(device, "vkCmdUpdateMemoryKHR");
+	pfn_vkCmdFillMemoryKHR = (PFN_vkCmdFillMemoryKHR)vkGetDeviceProcAddr(device, "vkCmdFillMemoryKHR");
+	pfn_vkCmdCopyQueryPoolResultsToMemoryKHR = (PFN_vkCmdCopyQueryPoolResultsToMemoryKHR)vkGetDeviceProcAddr(device, "vkCmdCopyQueryPoolResultsToMemoryKHR");
+	pfn_vkCmdDrawIndirectCount2KHR = (PFN_vkCmdDrawIndirectCount2KHR)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCount2KHR");
+	pfn_vkCmdBeginConditionalRendering2EXT = (PFN_vkCmdBeginConditionalRendering2EXT)vkGetDeviceProcAddr(device, "vkCmdBeginConditionalRendering2EXT");
+	pfn_vkCmdBeginTransformFeedback2EXT = (PFN_vkCmdBeginTransformFeedback2EXT)vkGetDeviceProcAddr(device, "vkCmdBeginTransformFeedback2EXT");
+	pfn_vkCmdEndTransformFeedback2EXT = (PFN_vkCmdEndTransformFeedback2EXT)vkGetDeviceProcAddr(device, "vkCmdEndTransformFeedback2EXT");
+	pfn_vkCmdDrawMeshTasksIndirect2EXT = (PFN_vkCmdDrawMeshTasksIndirect2EXT)vkGetDeviceProcAddr(device, "vkCmdDrawMeshTasksIndirect2EXT");
+	pfn_vkCmdWriteMarkerToMemoryAMD = (PFN_vkCmdWriteMarkerToMemoryAMD)vkGetDeviceProcAddr(device, "vkCmdWriteMarkerToMemoryAMD");
+	pfn_vkCreateAccelerationStructure2KHR = (PFN_vkCreateAccelerationStructure2KHR)vkGetDeviceProcAddr(device, "vkCreateAccelerationStructure2KHR");
+#endif // defined(VK_KHR_device_address_commands)
 #if defined(VK_KHR_device_group)
 	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vkGetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	pfn_vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vkGetDeviceProcAddr(device, "vkCmdSetDeviceMaskKHR");
@@ -10934,10 +11186,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkReleaseProfilingLockKHR = (PFN_vkReleaseProfilingLockKHR)vkGetDeviceProcAddr(device, "vkReleaseProfilingLockKHR");
 #endif // defined(VK_KHR_performance_query)
 #if defined(VK_KHR_pipeline_binary)
-	pfn_vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vkGetDeviceProcAddr(device, "vkGetPipelineBinaryDataKHR");
 	pfn_vkCreatePipelineBinariesKHR = (PFN_vkCreatePipelineBinariesKHR)vkGetDeviceProcAddr(device, "vkCreatePipelineBinariesKHR");
 	pfn_vkDestroyPipelineBinaryKHR = (PFN_vkDestroyPipelineBinaryKHR)vkGetDeviceProcAddr(device, "vkDestroyPipelineBinaryKHR");
 	pfn_vkGetPipelineKeyKHR = (PFN_vkGetPipelineKeyKHR)vkGetDeviceProcAddr(device, "vkGetPipelineKeyKHR");
+	pfn_vkGetPipelineBinaryDataKHR = (PFN_vkGetPipelineBinaryDataKHR)vkGetDeviceProcAddr(device, "vkGetPipelineBinaryDataKHR");
 	pfn_vkReleaseCapturedPipelineDataKHR = (PFN_vkReleaseCapturedPipelineDataKHR)vkGetDeviceProcAddr(device, "vkReleaseCapturedPipelineDataKHR");
 #endif // defined(VK_KHR_pipeline_binary)
 #if defined(VK_KHR_pipeline_executable_properties)
@@ -11039,8 +11291,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdSetComputeOccupancyPriorityNV = (PFN_vkCmdSetComputeOccupancyPriorityNV)vkGetDeviceProcAddr(device, "vkCmdSetComputeOccupancyPriorityNV");
 #endif // defined(VK_NV_compute_occupancy_priority)
 #if defined(VK_NV_cooperative_vector)
-	pfn_vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vkGetDeviceProcAddr(device, "vkCmdConvertCooperativeVectorMatrixNV");
 	pfn_vkConvertCooperativeVectorMatrixNV = (PFN_vkConvertCooperativeVectorMatrixNV)vkGetDeviceProcAddr(device, "vkConvertCooperativeVectorMatrixNV");
+	pfn_vkCmdConvertCooperativeVectorMatrixNV = (PFN_vkCmdConvertCooperativeVectorMatrixNV)vkGetDeviceProcAddr(device, "vkCmdConvertCooperativeVectorMatrixNV");
 #endif // defined(VK_NV_cooperative_vector)
 #if defined(VK_NV_copy_memory_indirect)
 	pfn_vkCmdCopyMemoryToImageIndirectNV = (PFN_vkCmdCopyMemoryToImageIndirectNV)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryToImageIndirectNV");
@@ -11097,16 +11349,16 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkImportFenceSciSyncObjNV = (PFN_vkImportFenceSciSyncObjNV)vkGetDeviceProcAddr(device, "vkImportFenceSciSyncObjNV");
 #endif // defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_external_sci_sync2)
-	pfn_vkDestroySemaphoreSciSyncPoolNV = (PFN_vkDestroySemaphoreSciSyncPoolNV)vkGetDeviceProcAddr(device, "vkDestroySemaphoreSciSyncPoolNV");
 	pfn_vkCreateSemaphoreSciSyncPoolNV = (PFN_vkCreateSemaphoreSciSyncPoolNV)vkGetDeviceProcAddr(device, "vkCreateSemaphoreSciSyncPoolNV");
+	pfn_vkDestroySemaphoreSciSyncPoolNV = (PFN_vkDestroySemaphoreSciSyncPoolNV)vkGetDeviceProcAddr(device, "vkDestroySemaphoreSciSyncPoolNV");
 #endif // defined(VK_NV_external_sci_sync2)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
 #if defined(VK_NV_low_latency2)
-	pfn_vkLatencySleepNV = (PFN_vkLatencySleepNV)vkGetDeviceProcAddr(device, "vkLatencySleepNV");
 	pfn_vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandNV");
 	pfn_vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vkGetDeviceProcAddr(device, "vkSetLatencySleepModeNV");
+	pfn_vkLatencySleepNV = (PFN_vkLatencySleepNV)vkGetDeviceProcAddr(device, "vkLatencySleepNV");
 	pfn_vkSetLatencyMarkerNV = (PFN_vkSetLatencyMarkerNV)vkGetDeviceProcAddr(device, "vkSetLatencyMarkerNV");
 	pfn_vkGetLatencyTimingsNV = (PFN_vkGetLatencyTimingsNV)vkGetDeviceProcAddr(device, "vkGetLatencyTimingsNV");
 #endif // defined(VK_NV_low_latency2)
