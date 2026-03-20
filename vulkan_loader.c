@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 346 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 347 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -922,6 +922,10 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdWriteMarkerToMemoryAMD = (PFN_vkCmdWriteMarkerToMemoryAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdWriteMarkerToMemoryAMD");
 	vk->vkCreateAccelerationStructure2KHR = (PFN_vkCreateAccelerationStructure2KHR)vk->vkGetInstanceProcAddr(instance, "vkCreateAccelerationStructure2KHR");
 #endif // defined(VK_KHR_device_address_commands)
+#if defined(VK_KHR_device_fault)
+	vk->vkGetDeviceFaultDebugInfoKHR = (PFN_vkGetDeviceFaultDebugInfoKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceFaultDebugInfoKHR");
+	vk->vkGetDeviceFaultReportsKHR = (PFN_vkGetDeviceFaultReportsKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceFaultReportsKHR");
+#endif // defined(VK_KHR_device_fault)
 #if defined(VK_KHR_device_group)
 	vk->vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	vk->vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDeviceMaskKHR");
@@ -2162,6 +2166,10 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdWriteMarkerToMemoryAMD = (PFN_vkCmdWriteMarkerToMemoryAMD)vk->vkGetDeviceProcAddr(device, "vkCmdWriteMarkerToMemoryAMD");
 	vk->vkCreateAccelerationStructure2KHR = (PFN_vkCreateAccelerationStructure2KHR)vk->vkGetDeviceProcAddr(device, "vkCreateAccelerationStructure2KHR");
 #endif // defined(VK_KHR_device_address_commands)
+#if defined(VK_KHR_device_fault)
+	vk->vkGetDeviceFaultDebugInfoKHR = (PFN_vkGetDeviceFaultDebugInfoKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceFaultDebugInfoKHR");
+	vk->vkGetDeviceFaultReportsKHR = (PFN_vkGetDeviceFaultReportsKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceFaultReportsKHR");
+#endif // defined(VK_KHR_device_fault)
 #if defined(VK_KHR_device_group)
 	vk->vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vk->vkGetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	vk->vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vk->vkGetDeviceProcAddr(device, "vkCmdSetDeviceMaskKHR");
@@ -6930,6 +6938,22 @@ VKAPI_ATTR VkResult vkCreateAccelerationStructure2KHR(VkDevice device, const VkA
 	return pfn_vkCreateAccelerationStructure2KHR(device, pCreateInfo, pAllocator, pAccelerationStructure);
 }
 #endif // defined(VK_KHR_device_address_commands)
+#if defined(VK_KHR_device_fault)
+
+static PFN_vkGetDeviceFaultDebugInfoKHR pfn_vkGetDeviceFaultDebugInfoKHR;
+VKAPI_ATTR VkResult vkGetDeviceFaultDebugInfoKHR(VkDevice device, VkDeviceFaultDebugInfoKHR * pDebugInfo)
+{
+	assert(pfn_vkGetDeviceFaultDebugInfoKHR);
+	return pfn_vkGetDeviceFaultDebugInfoKHR(device, pDebugInfo);
+}
+
+static PFN_vkGetDeviceFaultReportsKHR pfn_vkGetDeviceFaultReportsKHR;
+VKAPI_ATTR VkResult vkGetDeviceFaultReportsKHR(VkDevice device, uint64_t timeout, uint32_t * pFaultCounts, VkDeviceFaultInfoKHR * pFaultInfo)
+{
+	assert(pfn_vkGetDeviceFaultReportsKHR);
+	return pfn_vkGetDeviceFaultReportsKHR(device, timeout, pFaultCounts, pFaultInfo);
+}
+#endif // defined(VK_KHR_device_fault)
 #if defined(VK_KHR_device_group)
 
 static PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR;
@@ -9846,6 +9870,10 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdWriteMarkerToMemoryAMD = (PFN_vkCmdWriteMarkerToMemoryAMD)vkGetInstanceProcAddr(instance, "vkCmdWriteMarkerToMemoryAMD");
 	pfn_vkCreateAccelerationStructure2KHR = (PFN_vkCreateAccelerationStructure2KHR)vkGetInstanceProcAddr(instance, "vkCreateAccelerationStructure2KHR");
 #endif // defined(VK_KHR_device_address_commands)
+#if defined(VK_KHR_device_fault)
+	pfn_vkGetDeviceFaultDebugInfoKHR = (PFN_vkGetDeviceFaultDebugInfoKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceFaultDebugInfoKHR");
+	pfn_vkGetDeviceFaultReportsKHR = (PFN_vkGetDeviceFaultReportsKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceFaultReportsKHR");
+#endif // defined(VK_KHR_device_fault)
 #if defined(VK_KHR_device_group)
 	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vkGetInstanceProcAddr(instance, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	pfn_vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vkGetInstanceProcAddr(instance, "vkCmdSetDeviceMaskKHR");
@@ -11086,6 +11114,10 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdWriteMarkerToMemoryAMD = (PFN_vkCmdWriteMarkerToMemoryAMD)vkGetDeviceProcAddr(device, "vkCmdWriteMarkerToMemoryAMD");
 	pfn_vkCreateAccelerationStructure2KHR = (PFN_vkCreateAccelerationStructure2KHR)vkGetDeviceProcAddr(device, "vkCreateAccelerationStructure2KHR");
 #endif // defined(VK_KHR_device_address_commands)
+#if defined(VK_KHR_device_fault)
+	pfn_vkGetDeviceFaultDebugInfoKHR = (PFN_vkGetDeviceFaultDebugInfoKHR)vkGetDeviceProcAddr(device, "vkGetDeviceFaultDebugInfoKHR");
+	pfn_vkGetDeviceFaultReportsKHR = (PFN_vkGetDeviceFaultReportsKHR)vkGetDeviceProcAddr(device, "vkGetDeviceFaultReportsKHR");
+#endif // defined(VK_KHR_device_fault)
 #if defined(VK_KHR_device_group)
 	pfn_vkGetDeviceGroupPeerMemoryFeaturesKHR = (PFN_vkGetDeviceGroupPeerMemoryFeaturesKHR)vkGetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeaturesKHR");
 	pfn_vkCmdSetDeviceMaskKHR = (PFN_vkCmdSetDeviceMaskKHR)vkGetDeviceProcAddr(device, "vkCmdSetDeviceMaskKHR");
