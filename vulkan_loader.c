@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 347 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 348 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -453,9 +453,15 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
 	vk->vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
+#if defined(VK_ARM_data_graph_instruction_set_tosa)
+	vk->vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM");
+#endif // defined(VK_ARM_data_graph_instruction_set_tosa)
 #if defined(VK_ARM_performance_counters_by_region)
 	vk->vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)vk->vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
 #endif // defined(VK_ARM_performance_counters_by_region)
+#if defined(VK_ARM_scheduling_controls)
+	vk->vkCmdSetDispatchParametersARM = (PFN_vkCmdSetDispatchParametersARM)vk->vkGetInstanceProcAddr(instance, "vkCmdSetDispatchParametersARM");
+#endif // defined(VK_ARM_scheduling_controls)
 #if defined(VK_ARM_shader_instrumentation)
 	vk->vkCreateShaderInstrumentationARM = (PFN_vkCreateShaderInstrumentationARM)vk->vkGetInstanceProcAddr(instance, "vkCreateShaderInstrumentationARM");
 	vk->vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM = (PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM)vk->vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM");
@@ -474,8 +480,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceExternalTensorPropertiesARM = (PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM");
 	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
-	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
 	vk->vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkDestroyTensorViewARM");
+	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
 	vk->vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyTensorARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
@@ -738,6 +744,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetSwapchainTimingPropertiesEXT = (PFN_vkGetSwapchainTimingPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainTimingPropertiesEXT");
 	vk->vkGetSwapchainTimeDomainPropertiesEXT = (PFN_vkGetSwapchainTimeDomainPropertiesEXT)vk->vkGetInstanceProcAddr(instance, "vkGetSwapchainTimeDomainPropertiesEXT");
 #endif // defined(VK_EXT_present_timing)
+#if defined(VK_EXT_primitive_restart_index)
+	vk->vkCmdSetPrimitiveRestartIndexEXT = (PFN_vkCmdSetPrimitiveRestartIndexEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdSetPrimitiveRestartIndexEXT");
+#endif // defined(VK_EXT_primitive_restart_index)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -753,9 +762,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)vk->vkGetInstanceProcAddr(instance, "vkGetShaderModuleIdentifierEXT");
 #endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_shader_object)
-	vk->vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyShaderEXT");
 	vk->vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vk->vkGetInstanceProcAddr(instance, "vkGetShaderBinaryDataEXT");
 	vk->vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vk->vkGetInstanceProcAddr(instance, "vkCreateShadersEXT");
+	vk->vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vk->vkGetInstanceProcAddr(instance, "vkDestroyShaderEXT");
 	vk->vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBindShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
@@ -1352,6 +1361,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_OHOS_surface)
 	vk->vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS)vk->vkGetInstanceProcAddr(instance, "vkCreateSurfaceOHOS");
 #endif // defined(VK_OHOS_surface)
+#if defined(VK_QCOM_queue_perf_hint)
+	vk->vkQueueSetPerfHintQCOM = (PFN_vkQueueSetPerfHintQCOM)vk->vkGetInstanceProcAddr(instance, "vkQueueSetPerfHintQCOM");
+#endif // defined(VK_QCOM_queue_perf_hint)
 #if defined(VK_QCOM_tile_memory_heap)
 	vk->vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vk->vkGetInstanceProcAddr(instance, "vkCmdBindTileMemoryQCOM");
 #endif // defined(VK_QCOM_tile_memory_heap)
@@ -1754,6 +1766,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineAvailablePropertiesARM");
 	vk->vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vk->vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
+#if defined(VK_ARM_scheduling_controls)
+	vk->vkCmdSetDispatchParametersARM = (PFN_vkCmdSetDispatchParametersARM)vk->vkGetDeviceProcAddr(device, "vkCmdSetDispatchParametersARM");
+#endif // defined(VK_ARM_scheduling_controls)
 #if defined(VK_ARM_shader_instrumentation)
 	vk->vkCreateShaderInstrumentationARM = (PFN_vkCreateShaderInstrumentationARM)vk->vkGetDeviceProcAddr(device, "vkCreateShaderInstrumentationARM");
 	vk->vkDestroyShaderInstrumentationARM = (PFN_vkDestroyShaderInstrumentationARM)vk->vkGetDeviceProcAddr(device, "vkDestroyShaderInstrumentationARM");
@@ -1770,8 +1785,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorMemoryRequirementsARM");
 	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
-	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
 	vk->vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkDestroyTensorViewARM");
+	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
 	vk->vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vk->vkGetDeviceProcAddr(device, "vkCmdCopyTensorARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
@@ -1999,6 +2014,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetSwapchainTimingPropertiesEXT = (PFN_vkGetSwapchainTimingPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainTimingPropertiesEXT");
 	vk->vkGetSwapchainTimeDomainPropertiesEXT = (PFN_vkGetSwapchainTimeDomainPropertiesEXT)vk->vkGetDeviceProcAddr(device, "vkGetSwapchainTimeDomainPropertiesEXT");
 #endif // defined(VK_EXT_present_timing)
+#if defined(VK_EXT_primitive_restart_index)
+	vk->vkCmdSetPrimitiveRestartIndexEXT = (PFN_vkCmdSetPrimitiveRestartIndexEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetPrimitiveRestartIndexEXT");
+#endif // defined(VK_EXT_primitive_restart_index)
 #if defined(VK_EXT_private_data)
 	vk->vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	vk->vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vk->vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -2013,9 +2031,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)vk->vkGetDeviceProcAddr(device, "vkGetShaderModuleIdentifierEXT");
 #endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_shader_object)
-	vk->vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyShaderEXT");
 	vk->vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vk->vkGetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
 	vk->vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vk->vkGetDeviceProcAddr(device, "vkCreateShadersEXT");
+	vk->vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vk->vkGetDeviceProcAddr(device, "vkDestroyShaderEXT");
 	vk->vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vk->vkGetDeviceProcAddr(device, "vkCmdBindShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
@@ -2492,6 +2510,9 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vk->vkGetDeviceProcAddr(device, "vkGetNativeBufferPropertiesOHOS");
 	vk->vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vk->vkGetDeviceProcAddr(device, "vkGetMemoryNativeBufferOHOS");
 #endif // defined(VK_OHOS_external_memory)
+#if defined(VK_QCOM_queue_perf_hint)
+	vk->vkQueueSetPerfHintQCOM = (PFN_vkQueueSetPerfHintQCOM)vk->vkGetDeviceProcAddr(device, "vkQueueSetPerfHintQCOM");
+#endif // defined(VK_QCOM_queue_perf_hint)
 #if defined(VK_QCOM_tile_memory_heap)
 	vk->vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vk->vkGetDeviceProcAddr(device, "vkCmdBindTileMemoryQCOM");
 #endif // defined(VK_QCOM_tile_memory_heap)
@@ -4615,6 +4636,15 @@ VKAPI_ATTR void vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertie
 	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(physicalDevice, pQueueFamilyDataGraphProcessingEngineInfo, pQueueFamilyDataGraphProcessingEngineProperties);
 }
 #endif // defined(VK_ARM_data_graph)
+#if defined(VK_ARM_data_graph_instruction_set_tosa)
+
+static PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM pfn_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, const VkQueueFamilyDataGraphPropertiesARM * pQueueFamilyDataGraphProperties, VkBaseOutStructure * pProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM);
+	return pfn_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM(physicalDevice, queueFamilyIndex, pQueueFamilyDataGraphProperties, pProperties);
+}
+#endif // defined(VK_ARM_data_graph_instruction_set_tosa)
 #if defined(VK_ARM_performance_counters_by_region)
 
 static PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM;
@@ -4624,6 +4654,15 @@ VKAPI_ATTR VkResult vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByReg
 	return pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM(physicalDevice, queueFamilyIndex, pCounterCount, pCounters, pCounterDescriptions);
 }
 #endif // defined(VK_ARM_performance_counters_by_region)
+#if defined(VK_ARM_scheduling_controls)
+
+static PFN_vkCmdSetDispatchParametersARM pfn_vkCmdSetDispatchParametersARM;
+VKAPI_ATTR void vkCmdSetDispatchParametersARM(VkCommandBuffer commandBuffer, const VkDispatchParametersARM * pDispatchParameters)
+{
+	assert(pfn_vkCmdSetDispatchParametersARM);
+	pfn_vkCmdSetDispatchParametersARM(commandBuffer, pDispatchParameters);
+}
+#endif // defined(VK_ARM_scheduling_controls)
 #if defined(VK_ARM_shader_instrumentation)
 
 static PFN_vkCreateShaderInstrumentationARM pfn_vkCreateShaderInstrumentationARM;
@@ -4733,18 +4772,18 @@ VKAPI_ATTR void vkGetDeviceTensorMemoryRequirementsARM(VkDevice device, const Vk
 	pfn_vkGetDeviceTensorMemoryRequirementsARM(device, pInfo, pMemoryRequirements);
 }
 
-static PFN_vkCreateTensorViewARM pfn_vkCreateTensorViewARM;
-VKAPI_ATTR VkResult vkCreateTensorViewARM(VkDevice device, const VkTensorViewCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkTensorViewARM * pView)
-{
-	assert(pfn_vkCreateTensorViewARM);
-	return pfn_vkCreateTensorViewARM(device, pCreateInfo, pAllocator, pView);
-}
-
 static PFN_vkDestroyTensorViewARM pfn_vkDestroyTensorViewARM;
 VKAPI_ATTR void vkDestroyTensorViewARM(VkDevice device, VkTensorViewARM tensorView, const VkAllocationCallbacks * pAllocator)
 {
 	assert(pfn_vkDestroyTensorViewARM);
 	pfn_vkDestroyTensorViewARM(device, tensorView, pAllocator);
+}
+
+static PFN_vkCreateTensorViewARM pfn_vkCreateTensorViewARM;
+VKAPI_ATTR VkResult vkCreateTensorViewARM(VkDevice device, const VkTensorViewCreateInfoARM * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkTensorViewARM * pView)
+{
+	assert(pfn_vkCreateTensorViewARM);
+	return pfn_vkCreateTensorViewARM(device, pCreateInfo, pAllocator, pView);
 }
 
 static PFN_vkCmdCopyTensorARM pfn_vkCmdCopyTensorARM;
@@ -5998,7 +6037,7 @@ VKAPI_ATTR void vkSetDeviceMemoryPriorityEXT(VkDevice device, VkDeviceMemory mem
 #if defined(VK_EXT_pipeline_properties)
 
 static PFN_vkGetPipelinePropertiesEXT pfn_vkGetPipelinePropertiesEXT;
-VKAPI_ATTR VkResult vkGetPipelinePropertiesEXT(VkDevice device, const VkPipelineInfoEXT * pPipelineInfo, VkBaseOutStructure * pPipelineProperties)
+VKAPI_ATTR VkResult vkGetPipelinePropertiesEXT(VkDevice device, const VkPipelineInfoKHR * pPipelineInfo, VkBaseOutStructure * pPipelineProperties)
 {
 	assert(pfn_vkGetPipelinePropertiesEXT);
 	return pfn_vkGetPipelinePropertiesEXT(device, pPipelineInfo, pPipelineProperties);
@@ -6034,6 +6073,15 @@ VKAPI_ATTR VkResult vkGetSwapchainTimeDomainPropertiesEXT(VkDevice device, VkSwa
 	return pfn_vkGetSwapchainTimeDomainPropertiesEXT(device, swapchain, pSwapchainTimeDomainProperties, pTimeDomainsCounter);
 }
 #endif // defined(VK_EXT_present_timing)
+#if defined(VK_EXT_primitive_restart_index)
+
+static PFN_vkCmdSetPrimitiveRestartIndexEXT pfn_vkCmdSetPrimitiveRestartIndexEXT;
+VKAPI_ATTR void vkCmdSetPrimitiveRestartIndexEXT(VkCommandBuffer commandBuffer, uint32_t primitiveRestartIndex)
+{
+	assert(pfn_vkCmdSetPrimitiveRestartIndexEXT);
+	pfn_vkCmdSetPrimitiveRestartIndexEXT(commandBuffer, primitiveRestartIndex);
+}
+#endif // defined(VK_EXT_primitive_restart_index)
 #if defined(VK_EXT_private_data)
 
 static PFN_vkDestroyPrivateDataSlotEXT pfn_vkDestroyPrivateDataSlotEXT;
@@ -6098,13 +6146,6 @@ VKAPI_ATTR void vkGetShaderModuleIdentifierEXT(VkDevice device, VkShaderModule s
 #endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_shader_object)
 
-static PFN_vkDestroyShaderEXT pfn_vkDestroyShaderEXT;
-VKAPI_ATTR void vkDestroyShaderEXT(VkDevice device, VkShaderEXT shader, const VkAllocationCallbacks * pAllocator)
-{
-	assert(pfn_vkDestroyShaderEXT);
-	pfn_vkDestroyShaderEXT(device, shader, pAllocator);
-}
-
 static PFN_vkGetShaderBinaryDataEXT pfn_vkGetShaderBinaryDataEXT;
 VKAPI_ATTR VkResult vkGetShaderBinaryDataEXT(VkDevice device, VkShaderEXT shader, size_t * pDataSize, void * pData)
 {
@@ -6117,6 +6158,13 @@ VKAPI_ATTR VkResult vkCreateShadersEXT(VkDevice device, uint32_t createInfoCount
 {
 	assert(pfn_vkCreateShadersEXT);
 	return pfn_vkCreateShadersEXT(device, createInfoCount, pCreateInfos, pAllocator, pShaders);
+}
+
+static PFN_vkDestroyShaderEXT pfn_vkDestroyShaderEXT;
+VKAPI_ATTR void vkDestroyShaderEXT(VkDevice device, VkShaderEXT shader, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyShaderEXT);
+	pfn_vkDestroyShaderEXT(device, shader, pAllocator);
 }
 
 static PFN_vkCmdBindShadersEXT pfn_vkCmdBindShadersEXT;
@@ -8737,7 +8785,7 @@ VKAPI_ATTR VkResult vkCreateAccelerationStructureNV(VkDevice device, const VkAcc
 }
 
 static PFN_vkGetAccelerationStructureMemoryRequirementsNV pfn_vkGetAccelerationStructureMemoryRequirementsNV;
-VKAPI_ATTR void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, const VkAccelerationStructureMemoryRequirementsInfoNV * pInfo, VkMemoryRequirements2KHR * pMemoryRequirements)
+VKAPI_ATTR void vkGetAccelerationStructureMemoryRequirementsNV(VkDevice device, const VkAccelerationStructureMemoryRequirementsInfoNV * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
 {
 	assert(pfn_vkGetAccelerationStructureMemoryRequirementsNV);
 	pfn_vkGetAccelerationStructureMemoryRequirementsNV(device, pInfo, pMemoryRequirements);
@@ -8856,6 +8904,15 @@ VKAPI_ATTR VkResult vkCreateSurfaceOHOS(VkInstance instance, const VkSurfaceCrea
 	return pfn_vkCreateSurfaceOHOS(instance, pCreateInfo, pAllocator, pSurface);
 }
 #endif // defined(VK_OHOS_surface)
+#if defined(VK_QCOM_queue_perf_hint)
+
+static PFN_vkQueueSetPerfHintQCOM pfn_vkQueueSetPerfHintQCOM;
+VKAPI_ATTR VkResult vkQueueSetPerfHintQCOM(VkQueue queue, const VkPerfHintInfoQCOM * pPerfHintInfo)
+{
+	assert(pfn_vkQueueSetPerfHintQCOM);
+	return pfn_vkQueueSetPerfHintQCOM(queue, pPerfHintInfo);
+}
+#endif // defined(VK_QCOM_queue_perf_hint)
 #if defined(VK_QCOM_tile_memory_heap)
 
 static PFN_vkCmdBindTileMemoryQCOM pfn_vkCmdBindTileMemoryQCOM;
@@ -9401,9 +9458,15 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
 	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
+#if defined(VK_ARM_data_graph_instruction_set_tosa)
+	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM");
+#endif // defined(VK_ARM_data_graph_instruction_set_tosa)
 #if defined(VK_ARM_performance_counters_by_region)
 	pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
 #endif // defined(VK_ARM_performance_counters_by_region)
+#if defined(VK_ARM_scheduling_controls)
+	pfn_vkCmdSetDispatchParametersARM = (PFN_vkCmdSetDispatchParametersARM)vkGetInstanceProcAddr(instance, "vkCmdSetDispatchParametersARM");
+#endif // defined(VK_ARM_scheduling_controls)
 #if defined(VK_ARM_shader_instrumentation)
 	pfn_vkCreateShaderInstrumentationARM = (PFN_vkCreateShaderInstrumentationARM)vkGetInstanceProcAddr(instance, "vkCreateShaderInstrumentationARM");
 	pfn_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM = (PFN_vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM)vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceShaderInstrumentationMetricsARM");
@@ -9422,8 +9485,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM = (PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM");
 	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
-	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
 	pfn_vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vkGetInstanceProcAddr(instance, "vkDestroyTensorViewARM");
+	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
 	pfn_vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vkGetInstanceProcAddr(instance, "vkCmdCopyTensorARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
@@ -9686,6 +9749,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetSwapchainTimingPropertiesEXT = (PFN_vkGetSwapchainTimingPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetSwapchainTimingPropertiesEXT");
 	pfn_vkGetSwapchainTimeDomainPropertiesEXT = (PFN_vkGetSwapchainTimeDomainPropertiesEXT)vkGetInstanceProcAddr(instance, "vkGetSwapchainTimeDomainPropertiesEXT");
 #endif // defined(VK_EXT_present_timing)
+#if defined(VK_EXT_primitive_restart_index)
+	pfn_vkCmdSetPrimitiveRestartIndexEXT = (PFN_vkCmdSetPrimitiveRestartIndexEXT)vkGetInstanceProcAddr(instance, "vkCmdSetPrimitiveRestartIndexEXT");
+#endif // defined(VK_EXT_primitive_restart_index)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetInstanceProcAddr(instance, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetInstanceProcAddr(instance, "vkSetPrivateDataEXT");
@@ -9701,9 +9767,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)vkGetInstanceProcAddr(instance, "vkGetShaderModuleIdentifierEXT");
 #endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_shader_object)
-	pfn_vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vkGetInstanceProcAddr(instance, "vkDestroyShaderEXT");
 	pfn_vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vkGetInstanceProcAddr(instance, "vkGetShaderBinaryDataEXT");
 	pfn_vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vkGetInstanceProcAddr(instance, "vkCreateShadersEXT");
+	pfn_vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vkGetInstanceProcAddr(instance, "vkDestroyShaderEXT");
 	pfn_vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vkGetInstanceProcAddr(instance, "vkCmdBindShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
@@ -10300,6 +10366,9 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_OHOS_surface)
 	pfn_vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS)vkGetInstanceProcAddr(instance, "vkCreateSurfaceOHOS");
 #endif // defined(VK_OHOS_surface)
+#if defined(VK_QCOM_queue_perf_hint)
+	pfn_vkQueueSetPerfHintQCOM = (PFN_vkQueueSetPerfHintQCOM)vkGetInstanceProcAddr(instance, "vkQueueSetPerfHintQCOM");
+#endif // defined(VK_QCOM_queue_perf_hint)
 #if defined(VK_QCOM_tile_memory_heap)
 	pfn_vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vkGetInstanceProcAddr(instance, "vkCmdBindTileMemoryQCOM");
 #endif // defined(VK_QCOM_tile_memory_heap)
@@ -10702,6 +10771,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetDataGraphPipelineAvailablePropertiesARM = (PFN_vkGetDataGraphPipelineAvailablePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelineAvailablePropertiesARM");
 	pfn_vkGetDataGraphPipelinePropertiesARM = (PFN_vkGetDataGraphPipelinePropertiesARM)vkGetDeviceProcAddr(device, "vkGetDataGraphPipelinePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
+#if defined(VK_ARM_scheduling_controls)
+	pfn_vkCmdSetDispatchParametersARM = (PFN_vkCmdSetDispatchParametersARM)vkGetDeviceProcAddr(device, "vkCmdSetDispatchParametersARM");
+#endif // defined(VK_ARM_scheduling_controls)
 #if defined(VK_ARM_shader_instrumentation)
 	pfn_vkCreateShaderInstrumentationARM = (PFN_vkCreateShaderInstrumentationARM)vkGetDeviceProcAddr(device, "vkCreateShaderInstrumentationARM");
 	pfn_vkDestroyShaderInstrumentationARM = (PFN_vkDestroyShaderInstrumentationARM)vkGetDeviceProcAddr(device, "vkDestroyShaderInstrumentationARM");
@@ -10718,8 +10790,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetTensorMemoryRequirementsARM");
 	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
-	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
 	pfn_vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vkGetDeviceProcAddr(device, "vkDestroyTensorViewARM");
+	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
 	pfn_vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vkGetDeviceProcAddr(device, "vkCmdCopyTensorARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
@@ -10947,6 +11019,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetSwapchainTimingPropertiesEXT = (PFN_vkGetSwapchainTimingPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetSwapchainTimingPropertiesEXT");
 	pfn_vkGetSwapchainTimeDomainPropertiesEXT = (PFN_vkGetSwapchainTimeDomainPropertiesEXT)vkGetDeviceProcAddr(device, "vkGetSwapchainTimeDomainPropertiesEXT");
 #endif // defined(VK_EXT_present_timing)
+#if defined(VK_EXT_primitive_restart_index)
+	pfn_vkCmdSetPrimitiveRestartIndexEXT = (PFN_vkCmdSetPrimitiveRestartIndexEXT)vkGetDeviceProcAddr(device, "vkCmdSetPrimitiveRestartIndexEXT");
+#endif // defined(VK_EXT_primitive_restart_index)
 #if defined(VK_EXT_private_data)
 	pfn_vkDestroyPrivateDataSlotEXT = (PFN_vkDestroyPrivateDataSlotEXT)vkGetDeviceProcAddr(device, "vkDestroyPrivateDataSlotEXT");
 	pfn_vkSetPrivateDataEXT = (PFN_vkSetPrivateDataEXT)vkGetDeviceProcAddr(device, "vkSetPrivateDataEXT");
@@ -10961,9 +11036,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetShaderModuleIdentifierEXT = (PFN_vkGetShaderModuleIdentifierEXT)vkGetDeviceProcAddr(device, "vkGetShaderModuleIdentifierEXT");
 #endif // defined(VK_EXT_shader_module_identifier)
 #if defined(VK_EXT_shader_object)
-	pfn_vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vkGetDeviceProcAddr(device, "vkDestroyShaderEXT");
 	pfn_vkGetShaderBinaryDataEXT = (PFN_vkGetShaderBinaryDataEXT)vkGetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
 	pfn_vkCreateShadersEXT = (PFN_vkCreateShadersEXT)vkGetDeviceProcAddr(device, "vkCreateShadersEXT");
+	pfn_vkDestroyShaderEXT = (PFN_vkDestroyShaderEXT)vkGetDeviceProcAddr(device, "vkDestroyShaderEXT");
 	pfn_vkCmdBindShadersEXT = (PFN_vkCmdBindShadersEXT)vkGetDeviceProcAddr(device, "vkCmdBindShadersEXT");
 #endif // defined(VK_EXT_shader_object)
 #if defined(VK_EXT_shader_object) || defined(VK_EXT_vertex_input_dynamic_state)
@@ -11440,6 +11515,9 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vkGetDeviceProcAddr(device, "vkGetNativeBufferPropertiesOHOS");
 	pfn_vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vkGetDeviceProcAddr(device, "vkGetMemoryNativeBufferOHOS");
 #endif // defined(VK_OHOS_external_memory)
+#if defined(VK_QCOM_queue_perf_hint)
+	pfn_vkQueueSetPerfHintQCOM = (PFN_vkQueueSetPerfHintQCOM)vkGetDeviceProcAddr(device, "vkQueueSetPerfHintQCOM");
+#endif // defined(VK_QCOM_queue_perf_hint)
 #if defined(VK_QCOM_tile_memory_heap)
 	pfn_vkCmdBindTileMemoryQCOM = (PFN_vkCmdBindTileMemoryQCOM)vkGetDeviceProcAddr(device, "vkCmdBindTileMemoryQCOM");
 #endif // defined(VK_QCOM_tile_memory_heap)
