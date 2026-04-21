@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 348 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 349 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -453,9 +453,12 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
 	vk->vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
-#if defined(VK_ARM_data_graph_instruction_set_tosa)
+#if defined(VK_ARM_data_graph_instruction_set_tosa) || defined(VK_ARM_data_graph_optical_flow)
 	vk->vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM");
-#endif // defined(VK_ARM_data_graph_instruction_set_tosa)
+#endif // defined(VK_ARM_data_graph_instruction_set_tosa) || defined(VK_ARM_data_graph_optical_flow)
+#if defined(VK_ARM_data_graph_optical_flow)
+	vk->vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM");
+#endif // defined(VK_ARM_data_graph_optical_flow)
 #if defined(VK_ARM_performance_counters_by_region)
 	vk->vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)vk->vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
 #endif // defined(VK_ARM_performance_counters_by_region)
@@ -4636,7 +4639,7 @@ VKAPI_ATTR void vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertie
 	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(physicalDevice, pQueueFamilyDataGraphProcessingEngineInfo, pQueueFamilyDataGraphProcessingEngineProperties);
 }
 #endif // defined(VK_ARM_data_graph)
-#if defined(VK_ARM_data_graph_instruction_set_tosa)
+#if defined(VK_ARM_data_graph_instruction_set_tosa) || defined(VK_ARM_data_graph_optical_flow)
 
 static PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM pfn_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM;
 VKAPI_ATTR VkResult vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, const VkQueueFamilyDataGraphPropertiesARM * pQueueFamilyDataGraphProperties, VkBaseOutStructure * pProperties)
@@ -4644,7 +4647,16 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationProper
 	assert(pfn_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM);
 	return pfn_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM(physicalDevice, queueFamilyIndex, pQueueFamilyDataGraphProperties, pProperties);
 }
-#endif // defined(VK_ARM_data_graph_instruction_set_tosa)
+#endif // defined(VK_ARM_data_graph_instruction_set_tosa) || defined(VK_ARM_data_graph_optical_flow)
+#if defined(VK_ARM_data_graph_optical_flow)
+
+static PFN_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM pfn_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, const VkQueueFamilyDataGraphPropertiesARM * pQueueFamilyDataGraphProperties, const VkDataGraphOpticalFlowImageFormatInfoARM * pOpticalFlowImageFormatInfo, uint32_t * pFormatCount, VkDataGraphOpticalFlowImageFormatPropertiesARM * pImageFormatProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM);
+	return pfn_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM(physicalDevice, queueFamilyIndex, pQueueFamilyDataGraphProperties, pOpticalFlowImageFormatInfo, pFormatCount, pImageFormatProperties);
+}
+#endif // defined(VK_ARM_data_graph_optical_flow)
 #if defined(VK_ARM_performance_counters_by_region)
 
 static PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM;
@@ -9458,9 +9470,12 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM");
 	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM");
 #endif // defined(VK_ARM_data_graph)
-#if defined(VK_ARM_data_graph_instruction_set_tosa)
+#if defined(VK_ARM_data_graph_instruction_set_tosa) || defined(VK_ARM_data_graph_optical_flow)
 	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphEngineOperationPropertiesARM");
-#endif // defined(VK_ARM_data_graph_instruction_set_tosa)
+#endif // defined(VK_ARM_data_graph_instruction_set_tosa) || defined(VK_ARM_data_graph_optical_flow)
+#if defined(VK_ARM_data_graph_optical_flow)
+	pfn_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM = (PFN_vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyDataGraphOpticalFlowImageFormatsARM");
+#endif // defined(VK_ARM_data_graph_optical_flow)
 #if defined(VK_ARM_performance_counters_by_region)
 	pfn_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM = (PFN_vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM)vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceCountersByRegionARM");
 #endif // defined(VK_ARM_performance_counters_by_region)
