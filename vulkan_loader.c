@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 350 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 351 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -433,6 +433,20 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdDrawIndirectCountAMD = (PFN_vkCmdDrawIndirectCountAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndirectCountAMD");
 	vk->vkCmdDrawIndexedIndirectCountAMD = (PFN_vkCmdDrawIndexedIndirectCountAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdDrawIndexedIndirectCountAMD");
 #endif // defined(VK_AMD_draw_indirect_count)
+#if defined(VK_AMD_gpa_interface)
+	vk->vkCmdEndGpaSampleAMD = (PFN_vkCmdEndGpaSampleAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdEndGpaSampleAMD");
+	vk->vkGetGpaDeviceClockInfoAMD = (PFN_vkGetGpaDeviceClockInfoAMD)vk->vkGetInstanceProcAddr(instance, "vkGetGpaDeviceClockInfoAMD");
+	vk->vkGetGpaSessionStatusAMD = (PFN_vkGetGpaSessionStatusAMD)vk->vkGetInstanceProcAddr(instance, "vkGetGpaSessionStatusAMD");
+	vk->vkSetGpaDeviceClockModeAMD = (PFN_vkSetGpaDeviceClockModeAMD)vk->vkGetInstanceProcAddr(instance, "vkSetGpaDeviceClockModeAMD");
+	vk->vkCreateGpaSessionAMD = (PFN_vkCreateGpaSessionAMD)vk->vkGetInstanceProcAddr(instance, "vkCreateGpaSessionAMD");
+	vk->vkDestroyGpaSessionAMD = (PFN_vkDestroyGpaSessionAMD)vk->vkGetInstanceProcAddr(instance, "vkDestroyGpaSessionAMD");
+	vk->vkCmdBeginGpaSessionAMD = (PFN_vkCmdBeginGpaSessionAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginGpaSessionAMD");
+	vk->vkCmdEndGpaSessionAMD = (PFN_vkCmdEndGpaSessionAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdEndGpaSessionAMD");
+	vk->vkCmdBeginGpaSampleAMD = (PFN_vkCmdBeginGpaSampleAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginGpaSampleAMD");
+	vk->vkGetGpaSessionResultsAMD = (PFN_vkGetGpaSessionResultsAMD)vk->vkGetInstanceProcAddr(instance, "vkGetGpaSessionResultsAMD");
+	vk->vkResetGpaSessionAMD = (PFN_vkResetGpaSessionAMD)vk->vkGetInstanceProcAddr(instance, "vkResetGpaSessionAMD");
+	vk->vkCmdCopyGpaSessionResultsAMD = (PFN_vkCmdCopyGpaSessionResultsAMD)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyGpaSessionResultsAMD");
+#endif // defined(VK_AMD_gpa_interface)
 #if defined(VK_AMD_shader_info)
 	vk->vkGetShaderInfoAMD = (PFN_vkGetShaderInfoAMD)vk->vkGetInstanceProcAddr(instance, "vkGetShaderInfoAMD");
 #endif // defined(VK_AMD_shader_info)
@@ -1245,16 +1259,16 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
 #endif // defined(VK_NV_coverage_reduction_mode)
 #if defined(VK_NV_cuda_kernel_launch)
+	vk->vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vk->vkGetInstanceProcAddr(instance, "vkCreateCudaModuleNV");
 	vk->vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vk->vkGetInstanceProcAddr(instance, "vkGetCudaModuleCacheNV");
 	vk->vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vk->vkGetInstanceProcAddr(instance, "vkCreateCudaFunctionNV");
-	vk->vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vk->vkGetInstanceProcAddr(instance, "vkCreateCudaModuleNV");
 	vk->vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyCudaModuleNV");
 	vk->vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vk->vkGetInstanceProcAddr(instance, "vkDestroyCudaFunctionNV");
 	vk->vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vk->vkGetInstanceProcAddr(instance, "vkCmdCudaLaunchKernelNV");
 #endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
-	vk->vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointDataNV");
 	vk->vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCheckpointNV");
+	vk->vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointDataNV");
 	vk->vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
@@ -1290,8 +1304,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryWin32HandleNV");
 #endif // defined(VK_NV_external_memory_win32)
 #if defined(VK_NV_external_sci_sync)
-	vk->vkGetSemaphoreSciSyncObjNV = (PFN_vkGetSemaphoreSciSyncObjNV)vk->vkGetInstanceProcAddr(instance, "vkGetSemaphoreSciSyncObjNV");
 	vk->vkImportSemaphoreSciSyncObjNV = (PFN_vkImportSemaphoreSciSyncObjNV)vk->vkGetInstanceProcAddr(instance, "vkImportSemaphoreSciSyncObjNV");
+	vk->vkGetSemaphoreSciSyncObjNV = (PFN_vkGetSemaphoreSciSyncObjNV)vk->vkGetInstanceProcAddr(instance, "vkGetSemaphoreSciSyncObjNV");
 #endif // defined(VK_NV_external_sci_sync)
 #if defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 	vk->vkImportFenceSciSyncFenceNV = (PFN_vkImportFenceSciSyncFenceNV)vk->vkGetInstanceProcAddr(instance, "vkImportFenceSciSyncFenceNV");
@@ -1358,8 +1372,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
 #if defined(VK_OHOS_external_memory)
-	vk->vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vk->vkGetInstanceProcAddr(instance, "vkGetNativeBufferPropertiesOHOS");
 	vk->vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vk->vkGetInstanceProcAddr(instance, "vkGetMemoryNativeBufferOHOS");
+	vk->vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vk->vkGetInstanceProcAddr(instance, "vkGetNativeBufferPropertiesOHOS");
 #endif // defined(VK_OHOS_external_memory)
 #if defined(VK_OHOS_surface)
 	vk->vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS)vk->vkGetInstanceProcAddr(instance, "vkCreateSurfaceOHOS");
@@ -1387,8 +1401,8 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vk->vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
 #endif // defined(VK_QNX_screen_surface)
 #if defined(VK_SEC_ubm_surface)
-	vk->vkGetPhysicalDeviceUbmPresentationSupportSEC = (PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceUbmPresentationSupportSEC");
 	vk->vkCreateUbmSurfaceSEC = (PFN_vkCreateUbmSurfaceSEC)vk->vkGetInstanceProcAddr(instance, "vkCreateUbmSurfaceSEC");
+	vk->vkGetPhysicalDeviceUbmPresentationSupportSEC = (PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceUbmPresentationSupportSEC");
 #endif // defined(VK_SEC_ubm_surface)
 #if defined(VK_VALVE_descriptor_set_host_mapping)
 	vk->vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vk->vkGetInstanceProcAddr(instance, "vkGetDescriptorSetHostMappingVALVE");
@@ -1751,6 +1765,20 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdDrawIndirectCountAMD = (PFN_vkCmdDrawIndirectCountAMD)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCountAMD");
 	vk->vkCmdDrawIndexedIndirectCountAMD = (PFN_vkCmdDrawIndexedIndirectCountAMD)vk->vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCountAMD");
 #endif // defined(VK_AMD_draw_indirect_count)
+#if defined(VK_AMD_gpa_interface)
+	vk->vkCmdEndGpaSampleAMD = (PFN_vkCmdEndGpaSampleAMD)vk->vkGetDeviceProcAddr(device, "vkCmdEndGpaSampleAMD");
+	vk->vkGetGpaDeviceClockInfoAMD = (PFN_vkGetGpaDeviceClockInfoAMD)vk->vkGetDeviceProcAddr(device, "vkGetGpaDeviceClockInfoAMD");
+	vk->vkGetGpaSessionStatusAMD = (PFN_vkGetGpaSessionStatusAMD)vk->vkGetDeviceProcAddr(device, "vkGetGpaSessionStatusAMD");
+	vk->vkSetGpaDeviceClockModeAMD = (PFN_vkSetGpaDeviceClockModeAMD)vk->vkGetDeviceProcAddr(device, "vkSetGpaDeviceClockModeAMD");
+	vk->vkCreateGpaSessionAMD = (PFN_vkCreateGpaSessionAMD)vk->vkGetDeviceProcAddr(device, "vkCreateGpaSessionAMD");
+	vk->vkDestroyGpaSessionAMD = (PFN_vkDestroyGpaSessionAMD)vk->vkGetDeviceProcAddr(device, "vkDestroyGpaSessionAMD");
+	vk->vkCmdBeginGpaSessionAMD = (PFN_vkCmdBeginGpaSessionAMD)vk->vkGetDeviceProcAddr(device, "vkCmdBeginGpaSessionAMD");
+	vk->vkCmdEndGpaSessionAMD = (PFN_vkCmdEndGpaSessionAMD)vk->vkGetDeviceProcAddr(device, "vkCmdEndGpaSessionAMD");
+	vk->vkCmdBeginGpaSampleAMD = (PFN_vkCmdBeginGpaSampleAMD)vk->vkGetDeviceProcAddr(device, "vkCmdBeginGpaSampleAMD");
+	vk->vkGetGpaSessionResultsAMD = (PFN_vkGetGpaSessionResultsAMD)vk->vkGetDeviceProcAddr(device, "vkGetGpaSessionResultsAMD");
+	vk->vkResetGpaSessionAMD = (PFN_vkResetGpaSessionAMD)vk->vkGetDeviceProcAddr(device, "vkResetGpaSessionAMD");
+	vk->vkCmdCopyGpaSessionResultsAMD = (PFN_vkCmdCopyGpaSessionResultsAMD)vk->vkGetDeviceProcAddr(device, "vkCmdCopyGpaSessionResultsAMD");
+#endif // defined(VK_AMD_gpa_interface)
 #if defined(VK_AMD_shader_info)
 	vk->vkGetShaderInfoAMD = (PFN_vkGetShaderInfoAMD)vk->vkGetDeviceProcAddr(device, "vkGetShaderInfoAMD");
 #endif // defined(VK_AMD_shader_info)
@@ -2404,16 +2432,16 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vk->vkGetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
 #endif // defined(VK_NV_copy_memory_indirect)
 #if defined(VK_NV_cuda_kernel_launch)
+	vk->vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vk->vkGetDeviceProcAddr(device, "vkCreateCudaModuleNV");
 	vk->vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vk->vkGetDeviceProcAddr(device, "vkGetCudaModuleCacheNV");
 	vk->vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vk->vkGetDeviceProcAddr(device, "vkCreateCudaFunctionNV");
-	vk->vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vk->vkGetDeviceProcAddr(device, "vkCreateCudaModuleNV");
 	vk->vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vk->vkGetDeviceProcAddr(device, "vkDestroyCudaModuleNV");
 	vk->vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vk->vkGetDeviceProcAddr(device, "vkDestroyCudaFunctionNV");
 	vk->vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vk->vkGetDeviceProcAddr(device, "vkCmdCudaLaunchKernelNV");
 #endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
-	vk->vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vk->vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 	vk->vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
+	vk->vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vk->vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 	vk->vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vk->vkGetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
@@ -2444,8 +2472,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)vk->vkGetDeviceProcAddr(device, "vkGetMemoryWin32HandleNV");
 #endif // defined(VK_NV_external_memory_win32)
 #if defined(VK_NV_external_sci_sync)
-	vk->vkGetSemaphoreSciSyncObjNV = (PFN_vkGetSemaphoreSciSyncObjNV)vk->vkGetDeviceProcAddr(device, "vkGetSemaphoreSciSyncObjNV");
 	vk->vkImportSemaphoreSciSyncObjNV = (PFN_vkImportSemaphoreSciSyncObjNV)vk->vkGetDeviceProcAddr(device, "vkImportSemaphoreSciSyncObjNV");
+	vk->vkGetSemaphoreSciSyncObjNV = (PFN_vkGetSemaphoreSciSyncObjNV)vk->vkGetDeviceProcAddr(device, "vkGetSemaphoreSciSyncObjNV");
 #endif // defined(VK_NV_external_sci_sync)
 #if defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 	vk->vkImportFenceSciSyncFenceNV = (PFN_vkImportFenceSciSyncFenceNV)vk->vkGetDeviceProcAddr(device, "vkImportFenceSciSyncFenceNV");
@@ -2510,8 +2538,8 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
 #if defined(VK_OHOS_external_memory)
-	vk->vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vk->vkGetDeviceProcAddr(device, "vkGetNativeBufferPropertiesOHOS");
 	vk->vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vk->vkGetDeviceProcAddr(device, "vkGetMemoryNativeBufferOHOS");
+	vk->vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vk->vkGetDeviceProcAddr(device, "vkGetNativeBufferPropertiesOHOS");
 #endif // defined(VK_OHOS_external_memory)
 #if defined(VK_QCOM_queue_perf_hint)
 	vk->vkQueueSetPerfHintQCOM = (PFN_vkQueueSetPerfHintQCOM)vk->vkGetDeviceProcAddr(device, "vkQueueSetPerfHintQCOM");
@@ -4535,6 +4563,92 @@ VKAPI_ATTR void vkCmdDrawIndexedIndirectCountAMD(VkCommandBuffer commandBuffer, 
 	pfn_vkCmdDrawIndexedIndirectCountAMD(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
 }
 #endif // defined(VK_AMD_draw_indirect_count)
+#if defined(VK_AMD_gpa_interface)
+
+static PFN_vkCmdEndGpaSampleAMD pfn_vkCmdEndGpaSampleAMD;
+VKAPI_ATTR void vkCmdEndGpaSampleAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession, uint32_t sampleID)
+{
+	assert(pfn_vkCmdEndGpaSampleAMD);
+	pfn_vkCmdEndGpaSampleAMD(commandBuffer, gpaSession, sampleID);
+}
+
+static PFN_vkGetGpaDeviceClockInfoAMD pfn_vkGetGpaDeviceClockInfoAMD;
+VKAPI_ATTR VkResult vkGetGpaDeviceClockInfoAMD(VkDevice device, VkGpaDeviceGetClockInfoAMD * pInfo)
+{
+	assert(pfn_vkGetGpaDeviceClockInfoAMD);
+	return pfn_vkGetGpaDeviceClockInfoAMD(device, pInfo);
+}
+
+static PFN_vkGetGpaSessionStatusAMD pfn_vkGetGpaSessionStatusAMD;
+VKAPI_ATTR VkResult vkGetGpaSessionStatusAMD(VkDevice device, VkGpaSessionAMD gpaSession)
+{
+	assert(pfn_vkGetGpaSessionStatusAMD);
+	return pfn_vkGetGpaSessionStatusAMD(device, gpaSession);
+}
+
+static PFN_vkSetGpaDeviceClockModeAMD pfn_vkSetGpaDeviceClockModeAMD;
+VKAPI_ATTR VkResult vkSetGpaDeviceClockModeAMD(VkDevice device, VkGpaDeviceClockModeInfoAMD * pInfo)
+{
+	assert(pfn_vkSetGpaDeviceClockModeAMD);
+	return pfn_vkSetGpaDeviceClockModeAMD(device, pInfo);
+}
+
+static PFN_vkCreateGpaSessionAMD pfn_vkCreateGpaSessionAMD;
+VKAPI_ATTR VkResult vkCreateGpaSessionAMD(VkDevice device, const VkGpaSessionCreateInfoAMD * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkGpaSessionAMD * pGpaSession)
+{
+	assert(pfn_vkCreateGpaSessionAMD);
+	return pfn_vkCreateGpaSessionAMD(device, pCreateInfo, pAllocator, pGpaSession);
+}
+
+static PFN_vkDestroyGpaSessionAMD pfn_vkDestroyGpaSessionAMD;
+VKAPI_ATTR void vkDestroyGpaSessionAMD(VkDevice device, VkGpaSessionAMD gpaSession, const VkAllocationCallbacks * pAllocator)
+{
+	assert(pfn_vkDestroyGpaSessionAMD);
+	pfn_vkDestroyGpaSessionAMD(device, gpaSession, pAllocator);
+}
+
+static PFN_vkCmdBeginGpaSessionAMD pfn_vkCmdBeginGpaSessionAMD;
+VKAPI_ATTR VkResult vkCmdBeginGpaSessionAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession)
+{
+	assert(pfn_vkCmdBeginGpaSessionAMD);
+	return pfn_vkCmdBeginGpaSessionAMD(commandBuffer, gpaSession);
+}
+
+static PFN_vkCmdEndGpaSessionAMD pfn_vkCmdEndGpaSessionAMD;
+VKAPI_ATTR VkResult vkCmdEndGpaSessionAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession)
+{
+	assert(pfn_vkCmdEndGpaSessionAMD);
+	return pfn_vkCmdEndGpaSessionAMD(commandBuffer, gpaSession);
+}
+
+static PFN_vkCmdBeginGpaSampleAMD pfn_vkCmdBeginGpaSampleAMD;
+VKAPI_ATTR VkResult vkCmdBeginGpaSampleAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession, const VkGpaSampleBeginInfoAMD * pGpaSampleBeginInfo, uint32_t * pSampleID)
+{
+	assert(pfn_vkCmdBeginGpaSampleAMD);
+	return pfn_vkCmdBeginGpaSampleAMD(commandBuffer, gpaSession, pGpaSampleBeginInfo, pSampleID);
+}
+
+static PFN_vkGetGpaSessionResultsAMD pfn_vkGetGpaSessionResultsAMD;
+VKAPI_ATTR VkResult vkGetGpaSessionResultsAMD(VkDevice device, VkGpaSessionAMD gpaSession, uint32_t sampleID, size_t * pSizeInBytes, void * pData)
+{
+	assert(pfn_vkGetGpaSessionResultsAMD);
+	return pfn_vkGetGpaSessionResultsAMD(device, gpaSession, sampleID, pSizeInBytes, pData);
+}
+
+static PFN_vkResetGpaSessionAMD pfn_vkResetGpaSessionAMD;
+VKAPI_ATTR VkResult vkResetGpaSessionAMD(VkDevice device, VkGpaSessionAMD gpaSession)
+{
+	assert(pfn_vkResetGpaSessionAMD);
+	return pfn_vkResetGpaSessionAMD(device, gpaSession);
+}
+
+static PFN_vkCmdCopyGpaSessionResultsAMD pfn_vkCmdCopyGpaSessionResultsAMD;
+VKAPI_ATTR void vkCmdCopyGpaSessionResultsAMD(VkCommandBuffer commandBuffer, VkGpaSessionAMD gpaSession)
+{
+	assert(pfn_vkCmdCopyGpaSessionResultsAMD);
+	pfn_vkCmdCopyGpaSessionResultsAMD(commandBuffer, gpaSession);
+}
+#endif // defined(VK_AMD_gpa_interface)
 #if defined(VK_AMD_shader_info)
 
 static PFN_vkGetShaderInfoAMD pfn_vkGetShaderInfoAMD;
@@ -8354,6 +8468,13 @@ VKAPI_ATTR VkResult vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinati
 #endif // defined(VK_NV_coverage_reduction_mode)
 #if defined(VK_NV_cuda_kernel_launch)
 
+static PFN_vkCreateCudaModuleNV pfn_vkCreateCudaModuleNV;
+VKAPI_ATTR VkResult vkCreateCudaModuleNV(VkDevice device, const VkCudaModuleCreateInfoNV * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkCudaModuleNV * pModule)
+{
+	assert(pfn_vkCreateCudaModuleNV);
+	return pfn_vkCreateCudaModuleNV(device, pCreateInfo, pAllocator, pModule);
+}
+
 static PFN_vkGetCudaModuleCacheNV pfn_vkGetCudaModuleCacheNV;
 VKAPI_ATTR VkResult vkGetCudaModuleCacheNV(VkDevice device, VkCudaModuleNV module, size_t * pCacheSize, void * pCacheData)
 {
@@ -8366,13 +8487,6 @@ VKAPI_ATTR VkResult vkCreateCudaFunctionNV(VkDevice device, const VkCudaFunction
 {
 	assert(pfn_vkCreateCudaFunctionNV);
 	return pfn_vkCreateCudaFunctionNV(device, pCreateInfo, pAllocator, pFunction);
-}
-
-static PFN_vkCreateCudaModuleNV pfn_vkCreateCudaModuleNV;
-VKAPI_ATTR VkResult vkCreateCudaModuleNV(VkDevice device, const VkCudaModuleCreateInfoNV * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkCudaModuleNV * pModule)
-{
-	assert(pfn_vkCreateCudaModuleNV);
-	return pfn_vkCreateCudaModuleNV(device, pCreateInfo, pAllocator, pModule);
 }
 
 static PFN_vkDestroyCudaModuleNV pfn_vkDestroyCudaModuleNV;
@@ -8398,18 +8512,18 @@ VKAPI_ATTR void vkCmdCudaLaunchKernelNV(VkCommandBuffer commandBuffer, const VkC
 #endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
 
-static PFN_vkGetQueueCheckpointDataNV pfn_vkGetQueueCheckpointDataNV;
-VKAPI_ATTR void vkGetQueueCheckpointDataNV(VkQueue queue, uint32_t * pCheckpointDataCount, VkCheckpointDataNV * pCheckpointData)
-{
-	assert(pfn_vkGetQueueCheckpointDataNV);
-	pfn_vkGetQueueCheckpointDataNV(queue, pCheckpointDataCount, pCheckpointData);
-}
-
 static PFN_vkCmdSetCheckpointNV pfn_vkCmdSetCheckpointNV;
 VKAPI_ATTR void vkCmdSetCheckpointNV(VkCommandBuffer commandBuffer, const void * pCheckpointMarker)
 {
 	assert(pfn_vkCmdSetCheckpointNV);
 	pfn_vkCmdSetCheckpointNV(commandBuffer, pCheckpointMarker);
+}
+
+static PFN_vkGetQueueCheckpointDataNV pfn_vkGetQueueCheckpointDataNV;
+VKAPI_ATTR void vkGetQueueCheckpointDataNV(VkQueue queue, uint32_t * pCheckpointDataCount, VkCheckpointDataNV * pCheckpointData)
+{
+	assert(pfn_vkGetQueueCheckpointDataNV);
+	pfn_vkGetQueueCheckpointDataNV(queue, pCheckpointDataCount, pCheckpointData);
 }
 
 static PFN_vkGetQueueCheckpointData2NV pfn_vkGetQueueCheckpointData2NV;
@@ -8561,18 +8675,18 @@ VKAPI_ATTR VkResult vkGetMemoryWin32HandleNV(VkDevice device, VkDeviceMemory mem
 #endif // defined(VK_NV_external_memory_win32)
 #if defined(VK_NV_external_sci_sync)
 
-static PFN_vkGetSemaphoreSciSyncObjNV pfn_vkGetSemaphoreSciSyncObjNV;
-VKAPI_ATTR VkResult vkGetSemaphoreSciSyncObjNV(VkDevice device, const VkSemaphoreGetSciSyncInfoNV * pGetSciSyncInfo, void * pHandle)
-{
-	assert(pfn_vkGetSemaphoreSciSyncObjNV);
-	return pfn_vkGetSemaphoreSciSyncObjNV(device, pGetSciSyncInfo, pHandle);
-}
-
 static PFN_vkImportSemaphoreSciSyncObjNV pfn_vkImportSemaphoreSciSyncObjNV;
 VKAPI_ATTR VkResult vkImportSemaphoreSciSyncObjNV(VkDevice device, const VkImportSemaphoreSciSyncInfoNV * pImportSemaphoreSciSyncInfo)
 {
 	assert(pfn_vkImportSemaphoreSciSyncObjNV);
 	return pfn_vkImportSemaphoreSciSyncObjNV(device, pImportSemaphoreSciSyncInfo);
+}
+
+static PFN_vkGetSemaphoreSciSyncObjNV pfn_vkGetSemaphoreSciSyncObjNV;
+VKAPI_ATTR VkResult vkGetSemaphoreSciSyncObjNV(VkDevice device, const VkSemaphoreGetSciSyncInfoNV * pGetSciSyncInfo, void * pHandle)
+{
+	assert(pfn_vkGetSemaphoreSciSyncObjNV);
+	return pfn_vkGetSemaphoreSciSyncObjNV(device, pGetSciSyncInfo, pHandle);
 }
 #endif // defined(VK_NV_external_sci_sync)
 #if defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
@@ -8893,18 +9007,18 @@ VKAPI_ATTR void vkCmdSetCoarseSampleOrderNV(VkCommandBuffer commandBuffer, VkCoa
 #endif // defined(VK_NV_shading_rate_image)
 #if defined(VK_OHOS_external_memory)
 
-static PFN_vkGetNativeBufferPropertiesOHOS pfn_vkGetNativeBufferPropertiesOHOS;
-VKAPI_ATTR VkResult vkGetNativeBufferPropertiesOHOS(VkDevice device, const struct OH_NativeBuffer * buffer, VkNativeBufferPropertiesOHOS * pProperties)
-{
-	assert(pfn_vkGetNativeBufferPropertiesOHOS);
-	return pfn_vkGetNativeBufferPropertiesOHOS(device, buffer, pProperties);
-}
-
 static PFN_vkGetMemoryNativeBufferOHOS pfn_vkGetMemoryNativeBufferOHOS;
 VKAPI_ATTR VkResult vkGetMemoryNativeBufferOHOS(VkDevice device, const VkMemoryGetNativeBufferInfoOHOS * pInfo, struct OH_NativeBuffer ** pBuffer)
 {
 	assert(pfn_vkGetMemoryNativeBufferOHOS);
 	return pfn_vkGetMemoryNativeBufferOHOS(device, pInfo, pBuffer);
+}
+
+static PFN_vkGetNativeBufferPropertiesOHOS pfn_vkGetNativeBufferPropertiesOHOS;
+VKAPI_ATTR VkResult vkGetNativeBufferPropertiesOHOS(VkDevice device, const struct OH_NativeBuffer * buffer, VkNativeBufferPropertiesOHOS * pProperties)
+{
+	assert(pfn_vkGetNativeBufferPropertiesOHOS);
+	return pfn_vkGetNativeBufferPropertiesOHOS(device, buffer, pProperties);
 }
 #endif // defined(VK_OHOS_external_memory)
 #if defined(VK_OHOS_surface)
@@ -9000,18 +9114,18 @@ VKAPI_ATTR VkResult vkCreateScreenSurfaceQNX(VkInstance instance, const VkScreen
 #endif // defined(VK_QNX_screen_surface)
 #if defined(VK_SEC_ubm_surface)
 
-static PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC;
-VKAPI_ATTR VkBool32 vkGetPhysicalDeviceUbmPresentationSupportSEC(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, struct ubm_device * device)
-{
-	assert(pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC);
-	return pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC(physicalDevice, queueFamilyIndex, device);
-}
-
 static PFN_vkCreateUbmSurfaceSEC pfn_vkCreateUbmSurfaceSEC;
 VKAPI_ATTR VkResult vkCreateUbmSurfaceSEC(VkInstance instance, const VkUbmSurfaceCreateInfoSEC * pCreateInfo, const VkAllocationCallbacks * pAllocator, VkSurfaceKHR * pSurface)
 {
 	assert(pfn_vkCreateUbmSurfaceSEC);
 	return pfn_vkCreateUbmSurfaceSEC(instance, pCreateInfo, pAllocator, pSurface);
+}
+
+static PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC;
+VKAPI_ATTR VkBool32 vkGetPhysicalDeviceUbmPresentationSupportSEC(VkPhysicalDevice physicalDevice, uint32_t queueFamilyIndex, struct ubm_device * device)
+{
+	assert(pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC);
+	return pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC(physicalDevice, queueFamilyIndex, device);
 }
 #endif // defined(VK_SEC_ubm_surface)
 #if defined(VK_VALVE_descriptor_set_host_mapping)
@@ -9450,6 +9564,20 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdDrawIndirectCountAMD = (PFN_vkCmdDrawIndirectCountAMD)vkGetInstanceProcAddr(instance, "vkCmdDrawIndirectCountAMD");
 	pfn_vkCmdDrawIndexedIndirectCountAMD = (PFN_vkCmdDrawIndexedIndirectCountAMD)vkGetInstanceProcAddr(instance, "vkCmdDrawIndexedIndirectCountAMD");
 #endif // defined(VK_AMD_draw_indirect_count)
+#if defined(VK_AMD_gpa_interface)
+	pfn_vkCmdEndGpaSampleAMD = (PFN_vkCmdEndGpaSampleAMD)vkGetInstanceProcAddr(instance, "vkCmdEndGpaSampleAMD");
+	pfn_vkGetGpaDeviceClockInfoAMD = (PFN_vkGetGpaDeviceClockInfoAMD)vkGetInstanceProcAddr(instance, "vkGetGpaDeviceClockInfoAMD");
+	pfn_vkGetGpaSessionStatusAMD = (PFN_vkGetGpaSessionStatusAMD)vkGetInstanceProcAddr(instance, "vkGetGpaSessionStatusAMD");
+	pfn_vkSetGpaDeviceClockModeAMD = (PFN_vkSetGpaDeviceClockModeAMD)vkGetInstanceProcAddr(instance, "vkSetGpaDeviceClockModeAMD");
+	pfn_vkCreateGpaSessionAMD = (PFN_vkCreateGpaSessionAMD)vkGetInstanceProcAddr(instance, "vkCreateGpaSessionAMD");
+	pfn_vkDestroyGpaSessionAMD = (PFN_vkDestroyGpaSessionAMD)vkGetInstanceProcAddr(instance, "vkDestroyGpaSessionAMD");
+	pfn_vkCmdBeginGpaSessionAMD = (PFN_vkCmdBeginGpaSessionAMD)vkGetInstanceProcAddr(instance, "vkCmdBeginGpaSessionAMD");
+	pfn_vkCmdEndGpaSessionAMD = (PFN_vkCmdEndGpaSessionAMD)vkGetInstanceProcAddr(instance, "vkCmdEndGpaSessionAMD");
+	pfn_vkCmdBeginGpaSampleAMD = (PFN_vkCmdBeginGpaSampleAMD)vkGetInstanceProcAddr(instance, "vkCmdBeginGpaSampleAMD");
+	pfn_vkGetGpaSessionResultsAMD = (PFN_vkGetGpaSessionResultsAMD)vkGetInstanceProcAddr(instance, "vkGetGpaSessionResultsAMD");
+	pfn_vkResetGpaSessionAMD = (PFN_vkResetGpaSessionAMD)vkGetInstanceProcAddr(instance, "vkResetGpaSessionAMD");
+	pfn_vkCmdCopyGpaSessionResultsAMD = (PFN_vkCmdCopyGpaSessionResultsAMD)vkGetInstanceProcAddr(instance, "vkCmdCopyGpaSessionResultsAMD");
+#endif // defined(VK_AMD_gpa_interface)
 #if defined(VK_AMD_shader_info)
 	pfn_vkGetShaderInfoAMD = (PFN_vkGetShaderInfoAMD)vkGetInstanceProcAddr(instance, "vkGetShaderInfoAMD");
 #endif // defined(VK_AMD_shader_info)
@@ -10262,16 +10390,16 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (PFN_vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
 #endif // defined(VK_NV_coverage_reduction_mode)
 #if defined(VK_NV_cuda_kernel_launch)
+	pfn_vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vkGetInstanceProcAddr(instance, "vkCreateCudaModuleNV");
 	pfn_vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vkGetInstanceProcAddr(instance, "vkGetCudaModuleCacheNV");
 	pfn_vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vkGetInstanceProcAddr(instance, "vkCreateCudaFunctionNV");
-	pfn_vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vkGetInstanceProcAddr(instance, "vkCreateCudaModuleNV");
 	pfn_vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vkGetInstanceProcAddr(instance, "vkDestroyCudaModuleNV");
 	pfn_vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vkGetInstanceProcAddr(instance, "vkDestroyCudaFunctionNV");
 	pfn_vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vkGetInstanceProcAddr(instance, "vkCmdCudaLaunchKernelNV");
 #endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
-	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointDataNV");
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetInstanceProcAddr(instance, "vkCmdSetCheckpointNV");
+	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointDataNV");
 	pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vkGetInstanceProcAddr(instance, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
@@ -10307,8 +10435,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)vkGetInstanceProcAddr(instance, "vkGetMemoryWin32HandleNV");
 #endif // defined(VK_NV_external_memory_win32)
 #if defined(VK_NV_external_sci_sync)
-	pfn_vkGetSemaphoreSciSyncObjNV = (PFN_vkGetSemaphoreSciSyncObjNV)vkGetInstanceProcAddr(instance, "vkGetSemaphoreSciSyncObjNV");
 	pfn_vkImportSemaphoreSciSyncObjNV = (PFN_vkImportSemaphoreSciSyncObjNV)vkGetInstanceProcAddr(instance, "vkImportSemaphoreSciSyncObjNV");
+	pfn_vkGetSemaphoreSciSyncObjNV = (PFN_vkGetSemaphoreSciSyncObjNV)vkGetInstanceProcAddr(instance, "vkGetSemaphoreSciSyncObjNV");
 #endif // defined(VK_NV_external_sci_sync)
 #if defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 	pfn_vkImportFenceSciSyncFenceNV = (PFN_vkImportFenceSciSyncFenceNV)vkGetInstanceProcAddr(instance, "vkImportFenceSciSyncFenceNV");
@@ -10375,8 +10503,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetInstanceProcAddr(instance, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
 #if defined(VK_OHOS_external_memory)
-	pfn_vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vkGetInstanceProcAddr(instance, "vkGetNativeBufferPropertiesOHOS");
 	pfn_vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vkGetInstanceProcAddr(instance, "vkGetMemoryNativeBufferOHOS");
+	pfn_vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vkGetInstanceProcAddr(instance, "vkGetNativeBufferPropertiesOHOS");
 #endif // defined(VK_OHOS_external_memory)
 #if defined(VK_OHOS_surface)
 	pfn_vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS)vkGetInstanceProcAddr(instance, "vkCreateSurfaceOHOS");
@@ -10404,8 +10532,8 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCreateScreenSurfaceQNX = (PFN_vkCreateScreenSurfaceQNX)vkGetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
 #endif // defined(VK_QNX_screen_surface)
 #if defined(VK_SEC_ubm_surface)
-	pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC = (PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceUbmPresentationSupportSEC");
 	pfn_vkCreateUbmSurfaceSEC = (PFN_vkCreateUbmSurfaceSEC)vkGetInstanceProcAddr(instance, "vkCreateUbmSurfaceSEC");
+	pfn_vkGetPhysicalDeviceUbmPresentationSupportSEC = (PFN_vkGetPhysicalDeviceUbmPresentationSupportSEC)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceUbmPresentationSupportSEC");
 #endif // defined(VK_SEC_ubm_surface)
 #if defined(VK_VALVE_descriptor_set_host_mapping)
 	pfn_vkGetDescriptorSetHostMappingVALVE = (PFN_vkGetDescriptorSetHostMappingVALVE)vkGetInstanceProcAddr(instance, "vkGetDescriptorSetHostMappingVALVE");
@@ -10768,6 +10896,20 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdDrawIndirectCountAMD = (PFN_vkCmdDrawIndirectCountAMD)vkGetDeviceProcAddr(device, "vkCmdDrawIndirectCountAMD");
 	pfn_vkCmdDrawIndexedIndirectCountAMD = (PFN_vkCmdDrawIndexedIndirectCountAMD)vkGetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCountAMD");
 #endif // defined(VK_AMD_draw_indirect_count)
+#if defined(VK_AMD_gpa_interface)
+	pfn_vkCmdEndGpaSampleAMD = (PFN_vkCmdEndGpaSampleAMD)vkGetDeviceProcAddr(device, "vkCmdEndGpaSampleAMD");
+	pfn_vkGetGpaDeviceClockInfoAMD = (PFN_vkGetGpaDeviceClockInfoAMD)vkGetDeviceProcAddr(device, "vkGetGpaDeviceClockInfoAMD");
+	pfn_vkGetGpaSessionStatusAMD = (PFN_vkGetGpaSessionStatusAMD)vkGetDeviceProcAddr(device, "vkGetGpaSessionStatusAMD");
+	pfn_vkSetGpaDeviceClockModeAMD = (PFN_vkSetGpaDeviceClockModeAMD)vkGetDeviceProcAddr(device, "vkSetGpaDeviceClockModeAMD");
+	pfn_vkCreateGpaSessionAMD = (PFN_vkCreateGpaSessionAMD)vkGetDeviceProcAddr(device, "vkCreateGpaSessionAMD");
+	pfn_vkDestroyGpaSessionAMD = (PFN_vkDestroyGpaSessionAMD)vkGetDeviceProcAddr(device, "vkDestroyGpaSessionAMD");
+	pfn_vkCmdBeginGpaSessionAMD = (PFN_vkCmdBeginGpaSessionAMD)vkGetDeviceProcAddr(device, "vkCmdBeginGpaSessionAMD");
+	pfn_vkCmdEndGpaSessionAMD = (PFN_vkCmdEndGpaSessionAMD)vkGetDeviceProcAddr(device, "vkCmdEndGpaSessionAMD");
+	pfn_vkCmdBeginGpaSampleAMD = (PFN_vkCmdBeginGpaSampleAMD)vkGetDeviceProcAddr(device, "vkCmdBeginGpaSampleAMD");
+	pfn_vkGetGpaSessionResultsAMD = (PFN_vkGetGpaSessionResultsAMD)vkGetDeviceProcAddr(device, "vkGetGpaSessionResultsAMD");
+	pfn_vkResetGpaSessionAMD = (PFN_vkResetGpaSessionAMD)vkGetDeviceProcAddr(device, "vkResetGpaSessionAMD");
+	pfn_vkCmdCopyGpaSessionResultsAMD = (PFN_vkCmdCopyGpaSessionResultsAMD)vkGetDeviceProcAddr(device, "vkCmdCopyGpaSessionResultsAMD");
+#endif // defined(VK_AMD_gpa_interface)
 #if defined(VK_AMD_shader_info)
 	pfn_vkGetShaderInfoAMD = (PFN_vkGetShaderInfoAMD)vkGetDeviceProcAddr(device, "vkGetShaderInfoAMD");
 #endif // defined(VK_AMD_shader_info)
@@ -11421,16 +11563,16 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdCopyMemoryIndirectNV = (PFN_vkCmdCopyMemoryIndirectNV)vkGetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
 #endif // defined(VK_NV_copy_memory_indirect)
 #if defined(VK_NV_cuda_kernel_launch)
+	pfn_vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vkGetDeviceProcAddr(device, "vkCreateCudaModuleNV");
 	pfn_vkGetCudaModuleCacheNV = (PFN_vkGetCudaModuleCacheNV)vkGetDeviceProcAddr(device, "vkGetCudaModuleCacheNV");
 	pfn_vkCreateCudaFunctionNV = (PFN_vkCreateCudaFunctionNV)vkGetDeviceProcAddr(device, "vkCreateCudaFunctionNV");
-	pfn_vkCreateCudaModuleNV = (PFN_vkCreateCudaModuleNV)vkGetDeviceProcAddr(device, "vkCreateCudaModuleNV");
 	pfn_vkDestroyCudaModuleNV = (PFN_vkDestroyCudaModuleNV)vkGetDeviceProcAddr(device, "vkDestroyCudaModuleNV");
 	pfn_vkDestroyCudaFunctionNV = (PFN_vkDestroyCudaFunctionNV)vkGetDeviceProcAddr(device, "vkDestroyCudaFunctionNV");
 	pfn_vkCmdCudaLaunchKernelNV = (PFN_vkCmdCudaLaunchKernelNV)vkGetDeviceProcAddr(device, "vkCmdCudaLaunchKernelNV");
 #endif // defined(VK_NV_cuda_kernel_launch)
 #if defined(VK_NV_device_diagnostic_checkpoints)
-	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 	pfn_vkCmdSetCheckpointNV = (PFN_vkCmdSetCheckpointNV)vkGetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
+	pfn_vkGetQueueCheckpointDataNV = (PFN_vkGetQueueCheckpointDataNV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");
 	pfn_vkGetQueueCheckpointData2NV = (PFN_vkGetQueueCheckpointData2NV)vkGetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
 #endif // defined(VK_NV_device_diagnostic_checkpoints)
 #if defined(VK_NV_device_generated_commands)
@@ -11461,8 +11603,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkGetMemoryWin32HandleNV = (PFN_vkGetMemoryWin32HandleNV)vkGetDeviceProcAddr(device, "vkGetMemoryWin32HandleNV");
 #endif // defined(VK_NV_external_memory_win32)
 #if defined(VK_NV_external_sci_sync)
-	pfn_vkGetSemaphoreSciSyncObjNV = (PFN_vkGetSemaphoreSciSyncObjNV)vkGetDeviceProcAddr(device, "vkGetSemaphoreSciSyncObjNV");
 	pfn_vkImportSemaphoreSciSyncObjNV = (PFN_vkImportSemaphoreSciSyncObjNV)vkGetDeviceProcAddr(device, "vkImportSemaphoreSciSyncObjNV");
+	pfn_vkGetSemaphoreSciSyncObjNV = (PFN_vkGetSemaphoreSciSyncObjNV)vkGetDeviceProcAddr(device, "vkGetSemaphoreSciSyncObjNV");
 #endif // defined(VK_NV_external_sci_sync)
 #if defined(VK_NV_external_sci_sync) || defined(VK_NV_external_sci_sync2)
 	pfn_vkImportFenceSciSyncFenceNV = (PFN_vkImportFenceSciSyncFenceNV)vkGetDeviceProcAddr(device, "vkImportFenceSciSyncFenceNV");
@@ -11527,8 +11669,8 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkCmdSetCoarseSampleOrderNV = (PFN_vkCmdSetCoarseSampleOrderNV)vkGetDeviceProcAddr(device, "vkCmdSetCoarseSampleOrderNV");
 #endif // defined(VK_NV_shading_rate_image)
 #if defined(VK_OHOS_external_memory)
-	pfn_vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vkGetDeviceProcAddr(device, "vkGetNativeBufferPropertiesOHOS");
 	pfn_vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS)vkGetDeviceProcAddr(device, "vkGetMemoryNativeBufferOHOS");
+	pfn_vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS)vkGetDeviceProcAddr(device, "vkGetNativeBufferPropertiesOHOS");
 #endif // defined(VK_OHOS_external_memory)
 #if defined(VK_QCOM_queue_perf_hint)
 	pfn_vkQueueSetPerfHintQCOM = (PFN_vkQueueSetPerfHintQCOM)vkGetDeviceProcAddr(device, "vkQueueSetPerfHintQCOM");
