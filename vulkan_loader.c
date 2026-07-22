@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 356 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 357 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -495,11 +495,11 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vk->vkGetInstanceProcAddr(instance, "vkBindTensorMemoryARM");
 	vk->vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorMemoryRequirementsARM");
 	vk->vkGetPhysicalDeviceExternalTensorPropertiesARM = (PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM");
-	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
-	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
 	vk->vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkDestroyTensorViewARM");
 	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
+	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
 	vk->vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vk->vkGetInstanceProcAddr(instance, "vkCmdCopyTensorARM");
+	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
 	vk->vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)vk->vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
@@ -1321,6 +1321,15 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency)
+	vk->vkQueueNotifyOutOfBandLegacyNV = (PFN_vkQueueNotifyOutOfBandLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandLegacyNV");
+	vk->vkSetLatencyMarkerLegacyNV = (PFN_vkSetLatencyMarkerLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkSetLatencyMarkerLegacyNV");
+	vk->vkShutdownLatencyDeviceLegacyNV = (PFN_vkShutdownLatencyDeviceLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkShutdownLatencyDeviceLegacyNV");
+	vk->vkLatencySleepLegacyNV = (PFN_vkLatencySleepLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkLatencySleepLegacyNV");
+	vk->vkGetLatencyTimingsLegacyNV = (PFN_vkGetLatencyTimingsLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkGetLatencyTimingsLegacyNV");
+	vk->vkSetLatencySleepModeLegacyNV = (PFN_vkSetLatencySleepModeLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkSetLatencySleepModeLegacyNV");
+	vk->vkGetSleepStatusLegacyNV = (PFN_vkGetSleepStatusLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkGetSleepStatusLegacyNV");
+#endif // defined(VK_NV_low_latency)
 #if defined(VK_NV_low_latency2)
 	vk->vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vk->vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandNV");
 	vk->vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vk->vkGetInstanceProcAddr(instance, "vkSetLatencySleepModeNV");
@@ -1814,11 +1823,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 	vk->vkDestroyTensorARM = (PFN_vkDestroyTensorARM)vk->vkGetDeviceProcAddr(device, "vkDestroyTensorARM");
 	vk->vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vk->vkGetDeviceProcAddr(device, "vkBindTensorMemoryARM");
 	vk->vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorMemoryRequirementsARM");
-	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
-	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
 	vk->vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkDestroyTensorViewARM");
 	vk->vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vk->vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
+	vk->vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vk->vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
 	vk->vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vk->vkGetDeviceProcAddr(device, "vkCmdCopyTensorARM");
+	vk->vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vk->vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 	vk->vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vk->vkGetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
@@ -2488,6 +2497,15 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency)
+	vk->vkQueueNotifyOutOfBandLegacyNV = (PFN_vkQueueNotifyOutOfBandLegacyNV)vk->vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandLegacyNV");
+	vk->vkSetLatencyMarkerLegacyNV = (PFN_vkSetLatencyMarkerLegacyNV)vk->vkGetDeviceProcAddr(device, "vkSetLatencyMarkerLegacyNV");
+	vk->vkShutdownLatencyDeviceLegacyNV = (PFN_vkShutdownLatencyDeviceLegacyNV)vk->vkGetDeviceProcAddr(device, "vkShutdownLatencyDeviceLegacyNV");
+	vk->vkLatencySleepLegacyNV = (PFN_vkLatencySleepLegacyNV)vk->vkGetDeviceProcAddr(device, "vkLatencySleepLegacyNV");
+	vk->vkGetLatencyTimingsLegacyNV = (PFN_vkGetLatencyTimingsLegacyNV)vk->vkGetDeviceProcAddr(device, "vkGetLatencyTimingsLegacyNV");
+	vk->vkSetLatencySleepModeLegacyNV = (PFN_vkSetLatencySleepModeLegacyNV)vk->vkGetDeviceProcAddr(device, "vkSetLatencySleepModeLegacyNV");
+	vk->vkGetSleepStatusLegacyNV = (PFN_vkGetSleepStatusLegacyNV)vk->vkGetDeviceProcAddr(device, "vkGetSleepStatusLegacyNV");
+#endif // defined(VK_NV_low_latency)
 #if defined(VK_NV_low_latency2)
 	vk->vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vk->vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandNV");
 	vk->vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vk->vkGetDeviceProcAddr(device, "vkSetLatencySleepModeNV");
@@ -4884,20 +4902,6 @@ VKAPI_ATTR void vkGetPhysicalDeviceExternalTensorPropertiesARM(VkPhysicalDevice 
 	pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM(physicalDevice, pExternalTensorInfo, pExternalTensorProperties);
 }
 
-static PFN_vkGetTensorOpaqueCaptureDescriptorDataARM pfn_vkGetTensorOpaqueCaptureDescriptorDataARM;
-VKAPI_ATTR VkResult vkGetTensorOpaqueCaptureDescriptorDataARM(VkDevice device, const VkTensorCaptureDescriptorDataInfoARM * pInfo, void * pData)
-{
-	assert(pfn_vkGetTensorOpaqueCaptureDescriptorDataARM);
-	return pfn_vkGetTensorOpaqueCaptureDescriptorDataARM(device, pInfo, pData);
-}
-
-static PFN_vkGetDeviceTensorMemoryRequirementsARM pfn_vkGetDeviceTensorMemoryRequirementsARM;
-VKAPI_ATTR void vkGetDeviceTensorMemoryRequirementsARM(VkDevice device, const VkDeviceTensorMemoryRequirementsARM * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
-{
-	assert(pfn_vkGetDeviceTensorMemoryRequirementsARM);
-	pfn_vkGetDeviceTensorMemoryRequirementsARM(device, pInfo, pMemoryRequirements);
-}
-
 static PFN_vkDestroyTensorViewARM pfn_vkDestroyTensorViewARM;
 VKAPI_ATTR void vkDestroyTensorViewARM(VkDevice device, VkTensorViewARM tensorView, const VkAllocationCallbacks * pAllocator)
 {
@@ -4912,11 +4916,25 @@ VKAPI_ATTR VkResult vkCreateTensorViewARM(VkDevice device, const VkTensorViewCre
 	return pfn_vkCreateTensorViewARM(device, pCreateInfo, pAllocator, pView);
 }
 
+static PFN_vkGetDeviceTensorMemoryRequirementsARM pfn_vkGetDeviceTensorMemoryRequirementsARM;
+VKAPI_ATTR void vkGetDeviceTensorMemoryRequirementsARM(VkDevice device, const VkDeviceTensorMemoryRequirementsARM * pInfo, VkMemoryRequirements2 * pMemoryRequirements)
+{
+	assert(pfn_vkGetDeviceTensorMemoryRequirementsARM);
+	pfn_vkGetDeviceTensorMemoryRequirementsARM(device, pInfo, pMemoryRequirements);
+}
+
 static PFN_vkCmdCopyTensorARM pfn_vkCmdCopyTensorARM;
 VKAPI_ATTR void vkCmdCopyTensorARM(VkCommandBuffer commandBuffer, const VkCopyTensorInfoARM * pCopyTensorInfo)
 {
 	assert(pfn_vkCmdCopyTensorARM);
 	pfn_vkCmdCopyTensorARM(commandBuffer, pCopyTensorInfo);
+}
+
+static PFN_vkGetTensorOpaqueCaptureDescriptorDataARM pfn_vkGetTensorOpaqueCaptureDescriptorDataARM;
+VKAPI_ATTR VkResult vkGetTensorOpaqueCaptureDescriptorDataARM(VkDevice device, const VkTensorCaptureDescriptorDataInfoARM * pInfo, void * pData)
+{
+	assert(pfn_vkGetTensorOpaqueCaptureDescriptorDataARM);
+	return pfn_vkGetTensorOpaqueCaptureDescriptorDataARM(device, pInfo, pData);
 }
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
@@ -8751,6 +8769,57 @@ VKAPI_ATTR void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer,
 	pfn_vkCmdSetFragmentShadingRateEnumNV(commandBuffer, shadingRate, combinerOps);
 }
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency)
+
+static PFN_vkQueueNotifyOutOfBandLegacyNV pfn_vkQueueNotifyOutOfBandLegacyNV;
+VKAPI_ATTR void vkQueueNotifyOutOfBandLegacyNV(VkQueue queue, uint32_t queueType)
+{
+	assert(pfn_vkQueueNotifyOutOfBandLegacyNV);
+	pfn_vkQueueNotifyOutOfBandLegacyNV(queue, queueType);
+}
+
+static PFN_vkSetLatencyMarkerLegacyNV pfn_vkSetLatencyMarkerLegacyNV;
+VKAPI_ATTR void vkSetLatencyMarkerLegacyNV(VkDevice device, uint64_t frameID, uint32_t marker)
+{
+	assert(pfn_vkSetLatencyMarkerLegacyNV);
+	pfn_vkSetLatencyMarkerLegacyNV(device, frameID, marker);
+}
+
+static PFN_vkShutdownLatencyDeviceLegacyNV pfn_vkShutdownLatencyDeviceLegacyNV;
+VKAPI_ATTR void vkShutdownLatencyDeviceLegacyNV(VkDevice device)
+{
+	assert(pfn_vkShutdownLatencyDeviceLegacyNV);
+	pfn_vkShutdownLatencyDeviceLegacyNV(device);
+}
+
+static PFN_vkLatencySleepLegacyNV pfn_vkLatencySleepLegacyNV;
+VKAPI_ATTR void vkLatencySleepLegacyNV(VkDevice device, VkSemaphore signalSemaphore, uint64_t value)
+{
+	assert(pfn_vkLatencySleepLegacyNV);
+	pfn_vkLatencySleepLegacyNV(device, signalSemaphore, value);
+}
+
+static PFN_vkGetLatencyTimingsLegacyNV pfn_vkGetLatencyTimingsLegacyNV;
+VKAPI_ATTR void vkGetLatencyTimingsLegacyNV(VkDevice device, void * pTimings)
+{
+	assert(pfn_vkGetLatencyTimingsLegacyNV);
+	pfn_vkGetLatencyTimingsLegacyNV(device, pTimings);
+}
+
+static PFN_vkSetLatencySleepModeLegacyNV pfn_vkSetLatencySleepModeLegacyNV;
+VKAPI_ATTR void vkSetLatencySleepModeLegacyNV(VkDevice device, VkBool32 lowLatencyMode, VkBool32 lowLatencyBoost, uint32_t minimumIntervalUs)
+{
+	assert(pfn_vkSetLatencySleepModeLegacyNV);
+	pfn_vkSetLatencySleepModeLegacyNV(device, lowLatencyMode, lowLatencyBoost, minimumIntervalUs);
+}
+
+static PFN_vkGetSleepStatusLegacyNV pfn_vkGetSleepStatusLegacyNV;
+VKAPI_ATTR void vkGetSleepStatusLegacyNV(VkDevice device, VkBool32 * pLowLatencyMode)
+{
+	assert(pfn_vkGetSleepStatusLegacyNV);
+	pfn_vkGetSleepStatusLegacyNV(device, pLowLatencyMode);
+}
+#endif // defined(VK_NV_low_latency)
 #if defined(VK_NV_low_latency2)
 
 static PFN_vkQueueNotifyOutOfBandNV pfn_vkQueueNotifyOutOfBandNV;
@@ -9626,11 +9695,11 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vkGetInstanceProcAddr(instance, "vkBindTensorMemoryARM");
 	pfn_vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetTensorMemoryRequirementsARM");
 	pfn_vkGetPhysicalDeviceExternalTensorPropertiesARM = (PFN_vkGetPhysicalDeviceExternalTensorPropertiesARM)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalTensorPropertiesARM");
-	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
-	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
 	pfn_vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vkGetInstanceProcAddr(instance, "vkDestroyTensorViewARM");
 	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetInstanceProcAddr(instance, "vkCreateTensorViewARM");
+	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetInstanceProcAddr(instance, "vkGetDeviceTensorMemoryRequirementsARM");
 	pfn_vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vkGetInstanceProcAddr(instance, "vkCmdCopyTensorARM");
+	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetInstanceProcAddr(instance, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_acquire_drm_display)
 	pfn_vkAcquireDrmDisplayEXT = (PFN_vkAcquireDrmDisplayEXT)vkGetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
@@ -10452,6 +10521,15 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency)
+	pfn_vkQueueNotifyOutOfBandLegacyNV = (PFN_vkQueueNotifyOutOfBandLegacyNV)vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandLegacyNV");
+	pfn_vkSetLatencyMarkerLegacyNV = (PFN_vkSetLatencyMarkerLegacyNV)vkGetInstanceProcAddr(instance, "vkSetLatencyMarkerLegacyNV");
+	pfn_vkShutdownLatencyDeviceLegacyNV = (PFN_vkShutdownLatencyDeviceLegacyNV)vkGetInstanceProcAddr(instance, "vkShutdownLatencyDeviceLegacyNV");
+	pfn_vkLatencySleepLegacyNV = (PFN_vkLatencySleepLegacyNV)vkGetInstanceProcAddr(instance, "vkLatencySleepLegacyNV");
+	pfn_vkGetLatencyTimingsLegacyNV = (PFN_vkGetLatencyTimingsLegacyNV)vkGetInstanceProcAddr(instance, "vkGetLatencyTimingsLegacyNV");
+	pfn_vkSetLatencySleepModeLegacyNV = (PFN_vkSetLatencySleepModeLegacyNV)vkGetInstanceProcAddr(instance, "vkSetLatencySleepModeLegacyNV");
+	pfn_vkGetSleepStatusLegacyNV = (PFN_vkGetSleepStatusLegacyNV)vkGetInstanceProcAddr(instance, "vkGetSleepStatusLegacyNV");
+#endif // defined(VK_NV_low_latency)
 #if defined(VK_NV_low_latency2)
 	pfn_vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandNV");
 	pfn_vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vkGetInstanceProcAddr(instance, "vkSetLatencySleepModeNV");
@@ -10945,11 +11023,11 @@ void vgen_load_device_procs(VkDevice device)
 	pfn_vkDestroyTensorARM = (PFN_vkDestroyTensorARM)vkGetDeviceProcAddr(device, "vkDestroyTensorARM");
 	pfn_vkBindTensorMemoryARM = (PFN_vkBindTensorMemoryARM)vkGetDeviceProcAddr(device, "vkBindTensorMemoryARM");
 	pfn_vkGetTensorMemoryRequirementsARM = (PFN_vkGetTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetTensorMemoryRequirementsARM");
-	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
-	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
 	pfn_vkDestroyTensorViewARM = (PFN_vkDestroyTensorViewARM)vkGetDeviceProcAddr(device, "vkDestroyTensorViewARM");
 	pfn_vkCreateTensorViewARM = (PFN_vkCreateTensorViewARM)vkGetDeviceProcAddr(device, "vkCreateTensorViewARM");
+	pfn_vkGetDeviceTensorMemoryRequirementsARM = (PFN_vkGetDeviceTensorMemoryRequirementsARM)vkGetDeviceProcAddr(device, "vkGetDeviceTensorMemoryRequirementsARM");
 	pfn_vkCmdCopyTensorARM = (PFN_vkCmdCopyTensorARM)vkGetDeviceProcAddr(device, "vkCmdCopyTensorARM");
+	pfn_vkGetTensorOpaqueCaptureDescriptorDataARM = (PFN_vkGetTensorOpaqueCaptureDescriptorDataARM)vkGetDeviceProcAddr(device, "vkGetTensorOpaqueCaptureDescriptorDataARM");
 #endif // defined(VK_ARM_tensors)
 #if defined(VK_EXT_attachment_feedback_loop_dynamic_state)
 	pfn_vkCmdSetAttachmentFeedbackLoopEnableEXT = (PFN_vkCmdSetAttachmentFeedbackLoopEnableEXT)vkGetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
@@ -11619,6 +11697,15 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_low_latency)
+	pfn_vkQueueNotifyOutOfBandLegacyNV = (PFN_vkQueueNotifyOutOfBandLegacyNV)vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandLegacyNV");
+	pfn_vkSetLatencyMarkerLegacyNV = (PFN_vkSetLatencyMarkerLegacyNV)vkGetDeviceProcAddr(device, "vkSetLatencyMarkerLegacyNV");
+	pfn_vkShutdownLatencyDeviceLegacyNV = (PFN_vkShutdownLatencyDeviceLegacyNV)vkGetDeviceProcAddr(device, "vkShutdownLatencyDeviceLegacyNV");
+	pfn_vkLatencySleepLegacyNV = (PFN_vkLatencySleepLegacyNV)vkGetDeviceProcAddr(device, "vkLatencySleepLegacyNV");
+	pfn_vkGetLatencyTimingsLegacyNV = (PFN_vkGetLatencyTimingsLegacyNV)vkGetDeviceProcAddr(device, "vkGetLatencyTimingsLegacyNV");
+	pfn_vkSetLatencySleepModeLegacyNV = (PFN_vkSetLatencySleepModeLegacyNV)vkGetDeviceProcAddr(device, "vkSetLatencySleepModeLegacyNV");
+	pfn_vkGetSleepStatusLegacyNV = (PFN_vkGetSleepStatusLegacyNV)vkGetDeviceProcAddr(device, "vkGetSleepStatusLegacyNV");
+#endif // defined(VK_NV_low_latency)
 #if defined(VK_NV_low_latency2)
 	pfn_vkQueueNotifyOutOfBandNV = (PFN_vkQueueNotifyOutOfBandNV)vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandNV");
 	pfn_vkSetLatencySleepModeNV = (PFN_vkSetLatencySleepModeNV)vkGetDeviceProcAddr(device, "vkSetLatencySleepModeNV");
