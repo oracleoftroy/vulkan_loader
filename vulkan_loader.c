@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 358 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 359 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -526,6 +526,9 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 	vk->vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginConditionalRenderingEXT");
 	vk->vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
+#if defined(VK_EXT_cooperative_matrix_maintenance1)
+	vk->vkGetPhysicalDeviceCooperativeMatrixProperties2EXT = (PFN_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixProperties2EXT");
+#endif // defined(VK_EXT_cooperative_matrix_maintenance1)
 #if defined(VK_EXT_custom_resolve)
 	vk->vkCmdBeginCustomResolveEXT = (PFN_vkCmdBeginCustomResolveEXT)vk->vkGetInstanceProcAddr(instance, "vkCmdBeginCustomResolveEXT");
 #endif // defined(VK_EXT_custom_resolve)
@@ -5028,6 +5031,15 @@ VKAPI_ATTR void vkCmdEndConditionalRenderingEXT(VkCommandBuffer commandBuffer)
 	pfn_vkCmdEndConditionalRenderingEXT(commandBuffer);
 }
 #endif // defined(VK_EXT_conditional_rendering)
+#if defined(VK_EXT_cooperative_matrix_maintenance1)
+
+static PFN_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT pfn_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT;
+VKAPI_ATTR VkResult vkGetPhysicalDeviceCooperativeMatrixProperties2EXT(VkPhysicalDevice physicalDevice, const VkPhysicalDeviceCooperativeMatrixInfo2EXT * pCooperativeMatrixInfo, uint32_t * pPropertyCount, VkCooperativeMatrixProperties2EXT * pProperties)
+{
+	assert(pfn_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT);
+	return pfn_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT(physicalDevice, pCooperativeMatrixInfo, pPropertyCount, pProperties);
+}
+#endif // defined(VK_EXT_cooperative_matrix_maintenance1)
 #if defined(VK_EXT_custom_resolve)
 
 static PFN_vkCmdBeginCustomResolveEXT pfn_vkCmdBeginCustomResolveEXT;
@@ -9726,6 +9738,9 @@ void vgen_load_instance_procs(VkInstance instance)
 	pfn_vkCmdBeginConditionalRenderingEXT = (PFN_vkCmdBeginConditionalRenderingEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginConditionalRenderingEXT");
 	pfn_vkCmdEndConditionalRenderingEXT = (PFN_vkCmdEndConditionalRenderingEXT)vkGetInstanceProcAddr(instance, "vkCmdEndConditionalRenderingEXT");
 #endif // defined(VK_EXT_conditional_rendering)
+#if defined(VK_EXT_cooperative_matrix_maintenance1)
+	pfn_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT = (PFN_vkGetPhysicalDeviceCooperativeMatrixProperties2EXT)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceCooperativeMatrixProperties2EXT");
+#endif // defined(VK_EXT_cooperative_matrix_maintenance1)
 #if defined(VK_EXT_custom_resolve)
 	pfn_vkCmdBeginCustomResolveEXT = (PFN_vkCmdBeginCustomResolveEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginCustomResolveEXT");
 #endif // defined(VK_EXT_custom_resolve)
