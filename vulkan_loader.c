@@ -5,7 +5,7 @@
 	#define VKLG_ASSERT_MACRO assert;
 #endif
 
-#if VK_HEADER_VERSION > 367 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
+#if VK_HEADER_VERSION > 368 && !defined(VK_NO_PROTOTYPES) && !defined(VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK)
 // If you get an error here, the version of vulkan.h you are using is newer than this generator was expecting. Things should mostly work, but newer functions will not have definitions created and will cause linking errors.
 // Please check for a newer version of vulkan_loader at https://github.com/oracleoftroy/vulkan_loader
 // define VK_NO_PROTOTYPES for a purely dynamic interface or disable this check by defining VGEN_VULKAN_LOADER_DISABLE_VERSION_CHECK.
@@ -1324,6 +1324,12 @@ void vgen_load_instance_procs(VkInstance instance, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_internal_handle)
+	vk->vkGetDeviceInternalHandleNV = (PFN_vkGetDeviceInternalHandleNV)vk->vkGetInstanceProcAddr(instance, "vkGetDeviceInternalHandleNV");
+	vk->vkGetCommandBufferInternalHandleNV = (PFN_vkGetCommandBufferInternalHandleNV)vk->vkGetInstanceProcAddr(instance, "vkGetCommandBufferInternalHandleNV");
+	vk->vkGetPhysicalDeviceInternalHandleNV = (PFN_vkGetPhysicalDeviceInternalHandleNV)vk->vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceInternalHandleNV");
+	vk->vkGetQueueInternalHandleNV = (PFN_vkGetQueueInternalHandleNV)vk->vkGetInstanceProcAddr(instance, "vkGetQueueInternalHandleNV");
+#endif // defined(VK_NV_internal_handle)
 #if defined(VK_NV_low_latency)
 	vk->vkQueueNotifyOutOfBandLegacyNV = (PFN_vkQueueNotifyOutOfBandLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandLegacyNV");
 	vk->vkSetLatencyMarkerLegacyNV = (PFN_vkSetLatencyMarkerLegacyNV)vk->vkGetInstanceProcAddr(instance, "vkSetLatencyMarkerLegacyNV");
@@ -2500,6 +2506,11 @@ void vgen_load_device_procs(VkDevice device, struct vgen_vulkan_api *vk)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	vk->vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vk->vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_internal_handle)
+	vk->vkGetDeviceInternalHandleNV = (PFN_vkGetDeviceInternalHandleNV)vk->vkGetDeviceProcAddr(device, "vkGetDeviceInternalHandleNV");
+	vk->vkGetCommandBufferInternalHandleNV = (PFN_vkGetCommandBufferInternalHandleNV)vk->vkGetDeviceProcAddr(device, "vkGetCommandBufferInternalHandleNV");
+	vk->vkGetQueueInternalHandleNV = (PFN_vkGetQueueInternalHandleNV)vk->vkGetDeviceProcAddr(device, "vkGetQueueInternalHandleNV");
+#endif // defined(VK_NV_internal_handle)
 #if defined(VK_NV_low_latency)
 	vk->vkQueueNotifyOutOfBandLegacyNV = (PFN_vkQueueNotifyOutOfBandLegacyNV)vk->vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandLegacyNV");
 	vk->vkSetLatencyMarkerLegacyNV = (PFN_vkSetLatencyMarkerLegacyNV)vk->vkGetDeviceProcAddr(device, "vkSetLatencyMarkerLegacyNV");
@@ -8781,6 +8792,36 @@ VKAPI_ATTR void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer,
 	pfn_vkCmdSetFragmentShadingRateEnumNV(commandBuffer, shadingRate, combinerOps);
 }
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_internal_handle)
+
+static PFN_vkGetDeviceInternalHandleNV pfn_vkGetDeviceInternalHandleNV;
+VKAPI_ATTR void vkGetDeviceInternalHandleNV(VkDevice device, VkInternalHandleNV * pHandle)
+{
+	assert(pfn_vkGetDeviceInternalHandleNV);
+	pfn_vkGetDeviceInternalHandleNV(device, pHandle);
+}
+
+static PFN_vkGetCommandBufferInternalHandleNV pfn_vkGetCommandBufferInternalHandleNV;
+VKAPI_ATTR void vkGetCommandBufferInternalHandleNV(VkCommandBuffer commandBuffer, VkInternalHandleNV * pHandle)
+{
+	assert(pfn_vkGetCommandBufferInternalHandleNV);
+	pfn_vkGetCommandBufferInternalHandleNV(commandBuffer, pHandle);
+}
+
+static PFN_vkGetPhysicalDeviceInternalHandleNV pfn_vkGetPhysicalDeviceInternalHandleNV;
+VKAPI_ATTR void vkGetPhysicalDeviceInternalHandleNV(VkPhysicalDevice physicalDevice, VkInternalHandleNV * pHandle)
+{
+	assert(pfn_vkGetPhysicalDeviceInternalHandleNV);
+	pfn_vkGetPhysicalDeviceInternalHandleNV(physicalDevice, pHandle);
+}
+
+static PFN_vkGetQueueInternalHandleNV pfn_vkGetQueueInternalHandleNV;
+VKAPI_ATTR void vkGetQueueInternalHandleNV(VkQueue queue, VkInternalHandleNV * pHandle)
+{
+	assert(pfn_vkGetQueueInternalHandleNV);
+	pfn_vkGetQueueInternalHandleNV(queue, pHandle);
+}
+#endif // defined(VK_NV_internal_handle)
 #if defined(VK_NV_low_latency)
 
 static PFN_vkQueueNotifyOutOfBandLegacyNV pfn_vkQueueNotifyOutOfBandLegacyNV;
@@ -10536,6 +10577,12 @@ void vgen_load_instance_procs(VkInstance instance)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetInstanceProcAddr(instance, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_internal_handle)
+	pfn_vkGetDeviceInternalHandleNV = (PFN_vkGetDeviceInternalHandleNV)vkGetInstanceProcAddr(instance, "vkGetDeviceInternalHandleNV");
+	pfn_vkGetCommandBufferInternalHandleNV = (PFN_vkGetCommandBufferInternalHandleNV)vkGetInstanceProcAddr(instance, "vkGetCommandBufferInternalHandleNV");
+	pfn_vkGetPhysicalDeviceInternalHandleNV = (PFN_vkGetPhysicalDeviceInternalHandleNV)vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceInternalHandleNV");
+	pfn_vkGetQueueInternalHandleNV = (PFN_vkGetQueueInternalHandleNV)vkGetInstanceProcAddr(instance, "vkGetQueueInternalHandleNV");
+#endif // defined(VK_NV_internal_handle)
 #if defined(VK_NV_low_latency)
 	pfn_vkQueueNotifyOutOfBandLegacyNV = (PFN_vkQueueNotifyOutOfBandLegacyNV)vkGetInstanceProcAddr(instance, "vkQueueNotifyOutOfBandLegacyNV");
 	pfn_vkSetLatencyMarkerLegacyNV = (PFN_vkSetLatencyMarkerLegacyNV)vkGetInstanceProcAddr(instance, "vkSetLatencyMarkerLegacyNV");
@@ -11712,6 +11759,11 @@ void vgen_load_device_procs(VkDevice device)
 #if defined(VK_NV_fragment_shading_rate_enums)
 	pfn_vkCmdSetFragmentShadingRateEnumNV = (PFN_vkCmdSetFragmentShadingRateEnumNV)vkGetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
 #endif // defined(VK_NV_fragment_shading_rate_enums)
+#if defined(VK_NV_internal_handle)
+	pfn_vkGetDeviceInternalHandleNV = (PFN_vkGetDeviceInternalHandleNV)vkGetDeviceProcAddr(device, "vkGetDeviceInternalHandleNV");
+	pfn_vkGetCommandBufferInternalHandleNV = (PFN_vkGetCommandBufferInternalHandleNV)vkGetDeviceProcAddr(device, "vkGetCommandBufferInternalHandleNV");
+	pfn_vkGetQueueInternalHandleNV = (PFN_vkGetQueueInternalHandleNV)vkGetDeviceProcAddr(device, "vkGetQueueInternalHandleNV");
+#endif // defined(VK_NV_internal_handle)
 #if defined(VK_NV_low_latency)
 	pfn_vkQueueNotifyOutOfBandLegacyNV = (PFN_vkQueueNotifyOutOfBandLegacyNV)vkGetDeviceProcAddr(device, "vkQueueNotifyOutOfBandLegacyNV");
 	pfn_vkSetLatencyMarkerLegacyNV = (PFN_vkSetLatencyMarkerLegacyNV)vkGetDeviceProcAddr(device, "vkSetLatencyMarkerLegacyNV");
